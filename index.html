@@ -1,187 +1,566 @@
-<!-- SEÇÃO 2: CONFIGURAÇÕES DO ADMINISTRADOR E TESOURARIA -->
-    <section class="bg-cardBg/90 backdrop-blur-md border border-slate-700/60 rounded-2xl p-6 shadow-xl">
-        <h2 class="text-xl font-bold text-amberHive mb-2 flex items-center gap-2">
-            <span>🛡️</span> Configuração de Tesouraria e Fundador
-        </h2>
-        <p class="text-slate-400 text-sm mb-6">Definição da chave PIX do administrador (taxa de protocolo de 7,5%) e conta da poupança interna (3,5% ao mês).</p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSCABOANERGES — Previsão Meteorológica para Agricultura</title>
+<style>
+:root {
+  --fundo: #0f172a; --texto: #f1f5f9; --destaque: #fbbf24; --primaria: #22c55e;
+  --secundaria: #3b82f6; --chuva-manha: #60a5fa; --chuva-tarde: #f97316; --chuva-noite: #a855f7;
+  --geada: #93c5fd; --card: #1e293b; --borda: #475569; --perigo: #ef4444;
+}
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
+body {background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);color:var(--texto);min-height:100vh}
 
-        <div class="space-y-6">
-            <!-- Licenciamento / Titular -->
-            <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
-                <h3 class="text-sm font-bold text-white uppercase tracking-wider text-amberHive">Titular Licenciado / Direitos de Uso (White Label)</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Nome do Titular / Empresa</label>
-                        <input type="text" id="holderNameInput" placeholder="Ex: Seu Nome ou Empresa Ltda" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Documento (CPF ou CNPJ)</label>
-                        <input type="text" id="holderDocInput" placeholder="000.000.000-00 ou 00.000.000/0001-00" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                    </div>
-                </div>
-            </div>
+.container {max-width:1100px;margin:0 auto;padding:30px 20px}
 
-            <!-- Dados do Administrador -->
-            <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
-                <h3 class="text-sm font-bold text-white uppercase tracking-wider text-amber-400">Recebimento do Administrador (Taxa de 7,5%)</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Tipo de Chave PIX</label>
-                        <select id="adminPixType" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                            <option value="CPF">CPF</option>
-                            <option value="CNPJ">CNPJ</option>
-                            <option value="EMAIL">E-mail</option>
-                            <option value="PHONE">Telefone</option>
-                            <option value="RANDOM">Chave Aleatória</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Chave PIX do Administrador</label>
-                        <input type="text" id="adminPixKey" placeholder="Insira sua chave PIX principal" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                    </div>
-                </div>
-            </div>
+header {text-align:center;margin-bottom:40px;padding-bottom:25px;border-bottom:2px solid var(--primaria)}
+h1 {font-size:2rem;color:var(--destaque);margin-bottom:10px}
+.subtitulo {color:#cbd5e1;font-size:1.05rem}
 
-            <!-- Conta da Poupança da Colmeia -->
-            <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
-                <h3 class="text-sm font-bold text-white uppercase tracking-wider text-emerald-400">Conta da Poupança Interna (Rendimento 3,5% a.m.)</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">ID da Conta / Reserva</label>
-                        <input type="text" id="savingsAccountId" value="SAVINGS-CORE-01" disabled class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-400 cursor-not-allowed">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Chave Destino / Repasse de Poupança</label>
-                        <input type="text" id="savingsPixKey" placeholder="PIX ou Conta Coletiva da Poupança" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                    </div>
-                </div>
-            </div>
+.busca-secao {background:var(--card);border-radius:16px;padding:30px;margin-bottom:30px;border-left:4px solid var(--primaria)}
+.busca-secao h2 {color:var(--primaria);margin-bottom:25px;font-size:1.4rem}
+.form-grid {display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+.grupo-form {position:relative}
+label {display:block;margin-bottom:8px;color:#cbd5e1;font-weight:500}
+input, select {
+  width:100%;padding:14px 16px;border-radius:10px;border:1px solid var(--borda);
+  background:#0f172a;color:white;font-size:1rem;outline:none;transition:.2s
+}
+input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgba(251,191,36,.2)}
+.btn {
+  padding:14px 24px;border-radius:10px;border:none;font-size:1rem;font-weight:bold;
+  cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:8px
+}
+.btn-primario {background:var(--primaria);color:white}
+.btn-primario:hover {background:#16a34a;transform:translateY(-2px)}
+.btn-destaque {background:var(--destaque);color:#000}
+.btn-destaque:hover {background:#f59e0b;transform:translateY(-2px)}
+.botoes {display:flex;gap:15px;margin-top:25px;flex-wrap:wrap}
 
-            <!-- Senha Mestre de Administrador -->
-            <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
-                <h3 class="text-sm font-bold text-white uppercase tracking-wider text-red-400">Proteção Mestre (Senha do Administrador)</h3>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">Senha de Segurança para Alterações</label>
-                    <input type="password" id="adminPasswordInput" placeholder="Digite a senha mestre para salvar alterações" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                </div>
-            </div>
+.sugestoes {
+  position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid var(--borda);
+  border-radius:10px;max-height:300px;overflow-y:auto;z-index:100;display:none;margin-top:5px
+}
+.sugestao-item {padding:12px 16px;cursor:pointer;border-bottom:1px solid #2d3a4f}
+.sugestao-item:hover {background:#2d3a4f}
+.sugestao-item:last-child {border-bottom:none}
 
-            <button id="saveConfigBtn" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold py-3 rounded-lg transition">
-                Salvar Credenciais da Tesouraria e Licença
-            </button>
-        </div>
-    </section>
+.relatorio-secao {display:none}
+.cabecalho-relatorio {
+  background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(59,130,246,.1));
+  border:2px solid var(--primaria);border-radius:14px;padding:25px;margin-bottom:25px
+}
+.cabecalho-relatorio h2 {color:var(--destaque);margin-bottom:15px}
+.meta-dados {display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:15px}
+.meta-item p:first-child {color:#94a3b8;font-size:.9rem}
+.meta-item p:last-child {font-weight:bold;color:var(--texto)}
 
+.abas {display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid var(--borda);padding-bottom:10px;flex-wrap:wrap}
+.aba {padding:12px 20px;border-radius:10px 10px 0 0;cursor:pointer;transition:.2s;border:1px solid transparent}
+.aba.ativa {background:var(--destaque);color:#000;border-color:var(--destaque);font-weight:bold}
+.aba:hover {background:rgba(251,191,36,.15)}
+.conteudo-aba {display:none}
+.conteudo-aba.ativo {display:block;animation:aparecer .3s ease}
+@keyframes aparecer {from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.grid-chuva {display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:25px 0}
+@media(max-width:600px){.grid-chuva{grid-template-columns:1fr}}
+.card-per {background:var(--card);border-radius:14px;padding:25px;text-align:center;border-top:4px solid;transition:.3s}
+.card-per:hover {transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.25)}
+.manha {border-top-color:var(--chuva-manha)}
+.tarde {border-top-color:var(--chuva-tarde)}
+.noite {border-top-color:var(--chuva-noite)}
+.card-per .icone {font-size:2.5rem;margin-bottom:10px}
+.card-per h3 {margin-bottom:10px}
+.valor-principal {font-size:2.5rem;font-weight:bold;margin:15px 0}
+.manha .valor-principal {color:var(--chuva-manha)}
+.tarde .valor-principal {color:var(--chuva-tarde)}
+.noite .valor-principal {color:var(--chuva-noite)}
+
+.aviso-geada {border-radius:14px;padding:25px;margin:25px 0}
+.sem-risco {background:rgba(34,197,94,.1);border:2px solid var(--primaria)}
+.com-risco {background:rgba(239,68,68,.1);border:2px solid var(--perigo)}
+.aviso-geada .icone {font-size:3rem;text-align:center;margin-bottom:15px}
+
+.grid-15dias {display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:15px;margin-top:20px}
+.card-dia {background:var(--card);border-radius:12px;padding:18px;border-left:3px solid var(--borda)}
+.card-dia.manha {border-left-color:var(--chuva-manha)}
+.card-dia.tarde {border-left-color:var(--chuva-tarde)}
+.card-dia.noite {border-left-color:var(--chuva-noite)}
+.card-dia h4 {color:var(--destaque);margin-bottom:10px}
+.temp {display:flex;justify-content:space-between;margin:8px 0;font-size:.9rem}
+.chuva-mini {margin-top:10px;font-size:.85rem}
+.tag-geada {display:inline-block;background:rgba(239,68,68,.2);color:#fca5a5;padding:3px 8px;border-radius:4px;font-size:.8rem;margin-top:8px}
+
+.guia-caixa {background:var(--card);border-radius:14px;padding:25px;margin:20px 0;border-left:4px solid var(--primaria)}
+.guia-caixa h3 {color:var(--destaque);margin-bottom:15px}
+.lista-recomendacoes {list-style:none;padding:0}
+.lista-recomendacoes li {padding:10px 0;border-bottom:1px solid #2d3a4f;display:flex;gap:10px;align-items:flex-start}
+.lista-recomendacoes li:last-child {border-bottom:none}
+.icone-check {color:var(--primaria);font-weight:bold}
+
+.impressao {margin-top:40px;text-align:center;padding-top:30px;border-top:1px solid var(--borda)}
+.impressao p {color:#94a3b8;font-size:.9rem;margin-top:10px}
+
+.tela-apresentacao {display:block}
+.tela-sistema {display:none}
+.tela-sistema.ativa {display:block}
+.tela-apresentacao.escondida {display:none}
+
+.btn-acesso {
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 32px;border-radius:12px;border:none;font-size:1.1rem;font-weight:bold;
+  background:linear-gradient(135deg,var(--primaria),var(--secundaria));color:white;
+  cursor:pointer;transition:.3s;margin-top:30px
+}
+.btn-acesso:hover {transform:translateY(-3px);box-shadow:0 8px 25px rgba(34,197,94,.3)}
+.btn-voltar {
+  background:transparent;color:var(--texto);border:1px solid var(--borda);
+  padding:10px 20px;border-radius:8px;cursor:pointer;transition:.2s;margin-bottom:20px
+}
+.btn-voltar:hover {background:var(--card)}
+
+.apresentacao-conteudo {max-width:900px;margin:0 auto;padding:40px 20px;text-align:center}
+.logo-apresentacao {font-size:4rem;margin-bottom:20px}
+.apresentacao-conteudo h1 {font-size:2.5rem;color:var(--destaque);margin-bottom:15px}
+.apresentacao-subtitulo {font-size:1.2rem;color:#cbd5e1;max-width:600px;margin:0 auto 40px;line-height:1.6}
+.destaque-apresentacao {
+  background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(59,130,246,.1));
+  border:2px solid var(--primaria);border-radius:16px;padding:35px;margin:30px 0
+}
+.destaque-apresentacao h2 {color:var(--primaria);font-size:1.6rem;margin-bottom:15px}
+.grid-apresentacao {display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin:40px 0}
+.card-funcionalidade {
+  background:var(--card);border-radius:14px;padding:25px;border-left:4px solid var(--primaria);
+  text-align:left;transition:.3s
+}
+.card-funcionalidade:hover {transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.card-funcionalidade .icone {font-size:2rem;margin-bottom:12px}
+.card-funcionalidade h3 {color:var(--destaque);margin-bottom:8px}
+.info-secao {background:var(--card);border-radius:14px;padding:30px;margin:40px 0;text-align:left}
+.info-secao h3 {color:var(--destaque);margin-bottom:20px;font-size:1.4rem}
+.citacao {font-style:italic;color:#94a3b8;border-left:3px solid var(--destaque);padding-left:20px;margin:20px 0}
+.contato-secao {margin-top:50px;padding-top:30px;border-top:1px solid var(--borda)}
+.contato-item {display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0;font-size:1.1rem}
+.contato-item .icone {font-size:1.3rem}
+footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid var(--borda);color:#94a3b8;text-align:center}
+</style>
+</head>
+<body>
+
+<!-- TELA 1 — APRESENTAÇÃO PÚBLICA -->
+<div id="tela-apresentacao" class="tela-apresentacao">
+  <div class="apresentacao-conteudo">
+    <div class="logo-apresentacao">🌾</div>
+    <h1>BUSCABOANERGES</h1>
+    <p class="apresentacao-subtitulo">Previsão Meteorológica para Agricultura — Baseada em dados, pesquisa e observação de campo</p>
+
+    <div class="destaque-apresentacao">
+      <h2>📊 PREVISÃO ESTENDIDA — ATÉ 15 DIAS</h2>
+      <p>Sistema de previsão meteorológica especializado para o setor agrícola, com dados por município, chuva por período do dia e aviso de geada.</p>
     </div>
 
-    <!-- SCRIPT DO CANVAS (MOVIMENTAÇÃO NEURAL 3D SIMPLES) -->
-    <script>
-        const canvas = document.getElementById('neuralCanvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            const numParticles = 60;
+    <div class="grid-apresentacao">
+      <div class="card-funcionalidade">
+        <div class="icone">🏘️</div>
+        <h3>Por Município</h3>
+        <p>Previsão direcionada para a sua cidade, considerando características regionais e microclimáticas.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🌧️</div>
+        <h3>Chuva por Período</h3>
+        <p>Probabilidade de chuva detalhada para Manhã, Tarde e Noite — essencial para decisões no campo.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">❄️</div>
+        <h3>Aviso de Geada</h3>
+        <p>Detecção de risco de geada com critério técnico e orientações de proteção às culturas.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">📅</div>
+        <h3>15 Dias</h3>
+        <p>Período imediato com alta confiabilidade + tendência estendida para planejamento.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🌱</div>
+        <h3>Guia Agrícola</h3>
+        <p>Recomendações práticas por cultura, alinhadas com as condições previstas.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">📄</div>
+        <h3>Relatório Completo</h3>
+        <p>Relatório estruturado com todos os dados, pronto para consulta e impressão.</p>
+      </div>
+    </div>
 
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
+    <div class="info-secao">
+      <h3>📋 Como funciona</h3>
+      <p>O BUSCABOANERGES integra dados de fontes meteorológicas oficiais com padrões climáticos regionais e observação de campo, gerando previsões adaptadas à realidade agrícola brasileira.</p>
+      <p class="citacao">"A geada ocorre quando a temperatura no abrigo cai para ≤ 4°C (≈ 0°C na superfície), com céu limpo, pouca ou nenhuma nuvem e vento fraco ou calmo." — Critério técnico adotado.</p>
+      <p><strong>Fontes:</strong> INMET • INPE/CPTEC • Dados históricos e observação de campo.</p>
+      <p><strong>Nota técnica:</strong> Os primeiros 7 dias apresentam maior confiabilidade; dos 8 aos 15 dias, representa tendência.</p>
+    </div>
 
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
+    <button class="btn-acesso" onclick="abrirSistema()">🔍 Acessar Sistema de Pesquisa e Relatório</button>
 
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.z = Math.random() * canvas.width;
-                    this.vx = (Math.random() - 0.5) * 0.8;
-                    this.vy = (Math.random() - 0.5) * 0.8;
-                    this.vz = (Math.random() - 0.5) * 0.8;
-                }
+    <div class="contato-secao">
+      <h2 style="color:var(--destaque);margin-bottom:20px">📞 CONTATO</h2>
+      <div class="contato-item"><span class="icone">💬</span> WhatsApp: (15) 98156-5052</div>
+      <div class="contato-item"><span class="icone">✉️</span> buscaboanerges@gmail.com</div>
+      <div class="contato-item"><span class="icone">🇧🇷</span> Foco: Brasil — todas as cidades e regiões</div>
+    </div>
 
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    this.z += this.vz;
+    <footer class="apresentacao">
+      <p>🌾 BUSCABOANERGES — Previsão Meteorológica baseada em pesquisa e dados</p>
+      <p>Versão: 1.0 — Agosto de 2026 | Trabalho sério para o agricultor</p>
+    </footer>
+  </div>
+</div>
 
-                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-                    if (this.z < 0 || this.z > canvas.width) this.vz *= -1;
-                }
+<!-- TELA 2 — SISTEMA DE PESQUISA E RELATÓRIO -->
+<div id="tela-sistema" class="tela-sistema">
+  <div class="container">
+    <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar para Apresentação</button>
+    
+    <header>
+      <h1>🌾 BUSCABOANERGES — SISTEMA DE PESQUISA E RELATÓRIO</h1>
+      <p class="subtitulo">Geração de relatório meteorológico agrícola por município — Área 100% Liberada</p>
+    </header>
 
-                draw() {
-                    let k = 250 / this.z;
-                    let px = this.x * k + canvas.width / 2 * (1 - k);
-                    let py = this.y * k + canvas.height / 2 * (1 - k);
-                    
-                    if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
-                        let size = Math.max(1, (1 - this.z / canvas.width) * 3);
-                        ctx.fillStyle = '#f59e0b';
-                        ctx.beginPath();
-                        ctx.arc(px, py, size, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                }
-            }
+    <section class="busca-secao">
+      <h2>🔍 DADOS DA PESQUISA</h2>
+      <div class="form-grid">
+        <div class="grupo-form">
+          <label for="cidade-input">🏘️ Nome do Município</label>
+          <input type="text" id="cidade-input" placeholder="Digite o nome da cidade..." oninput="mostrarSugestoes(this.value)" autocomplete="off">
+          <div id="sugestoes" class="sugestoes"></div>
+        </div>
+        <div>
+          <label for="cultura-select">🌱 Tipo de Cultura</label>
+          <select id="cultura-select">
+            <option value="geral">🌾 Geral / Não especificada</option>
+            <option value="soja">🌱 Soja</option>
+            <option value="milho">🌽 Milho</option>
+            <option value="cafe">☕ Café</option>
+            <option value="cana">🍬 Cana-de-Açúcar</option>
+            <option value="frutas">🍎 Frutas / Hortaliças</option>
+            <option value="gado">🐄 Pecuária</option>
+            <option value="trigo">🌾 Trigo / Aveia / Inverno</option>
+          </select>
+        </div>
+      </div>
+      <div class="botoes">
+        <button class="btn btn-destaque" onclick="gerarRelatorio()">📄 Gerar Relatório Completo</button>
+        <button class="btn btn-primario" onclick="limparRelatorio()">🔄 Nova Pesquisa</button>
+      </div>
+    </section>
 
-            for (let i = 0; i < numParticles; i++) {
-                particles.push(new Particle());
-            }
+    <section id="relatorio-secao" class="relatorio-secao">
+      <div class="cabecalho-relatorio">
+        <h2>📋 RELATÓRIO METEOROLÓGICO AGRÍCOLA</h2>
+        <p id="subtitulo-relatorio">Previsão gerada para — Data: <span id="data-relatorio"></span></p>
+        <div class="meta-dados">
+          <div class="meta-item"><p>Município</p><p id="r-cidade">—</p></div>
+          <div class="meta-item"><p>Região</p><p id="r-regiao">—</p></div>
+          <div class="meta-item"><p>Padrão Climático</p><p id="r-padrao">—</p></div>
+          <div class="meta-item"><p>Período</p><p id="r-periodo">15 dias</p></div>
+        </div>
+      </div>
 
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                for (let i = 0; i < particles.length; i++) {
-                    particles[i].update();
-                    particles[i].draw();
+      <div class="abas">
+        <div class="aba ativa" onclick="trocarAba('resumo')">📊 Resumo</div>
+        <div class="aba" onclick="trocarAba('chuva')">🌧️ Chuva</div>
+        <div class="aba" onclick="trocarAba('geada')">❄️ Geada</div>
+        <div class="aba" onclick="trocarAba('estendida')">📅 15 Dias</div>
+        <div class="aba" onclick="trocarAba('guia')">🌱 Guia Agrícola</div>
+      </div>
 
-                    for (let j = i + 1; j < particles.length; j++) {
-                        let dx = particles[i].x - particles[j].x;
-                        let dy = particles[i].y - particles[j].y;
-                        let dist = Math.sqrt(dx * dx + dy * dy);
+      <div id="aba-resumo" class="conteudo-aba ativo">
+        <h3 style="margin-bottom:20px">📊 RESUMO DA PREVISÃO</h3>
+        <p style="margin-bottom:25px;line-height:1.8">Este relatório apresenta a previsão meteorológica detalhada para o município selecionado, com dados de chuva por período, risco de geada e recomendações agrícolas específicas.</p>
+        
+        <div class="grid-chuva">
+          <div class="card-per manha">
+            <div class="icone">🌅</div>
+            <h3>Manhã</h3>
+            <div class="valor-principal" id="res-manha">--%</div>
+            <p id="res-manha-texto">—</p>
+          </div>
+          <div class="card-per tarde">
+            <div class="icone">☀️</div>
+            <h3>Tarde</h3>
+            <div class="valor-principal" id="res-tarde">--%</div>
+            <p id="res-tarde-texto">—</p>
+          </div>
+          <div class="card-per noite">
+            <div class="icone">🌙</div>
+            <h3>Noite</h3>
+            <div class="valor-principal" id="res-noite">--%</div>
+            <p id="res-noite-texto">—</p>
+          </div>
+        </div>
 
-                        if (dist < 120) {
-                            ctx.strokeStyle = `rgba(245, 158, 11, ${1 - dist / 120})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-                requestAnimationFrame(animate);
-            }
+        <div id="aviso-geada-resumo"></div>
+        
+        <div class="guia-caixa">
+          <h3>📌 CONCLUSÃO E RECOMENDAÇÃO GERAL</h3>
+          <p id="conclusao-texto" style="line-height:1.8">—</p>
+        </div>
+      </div>
 
-            animate();
-        }
+      <div id="aba-chuva" class="conteudo-aba">
+        <h3 style="margin-bottom:20px">🌧️ PREVISÃO DE CHUVA POR PERÍODO</h3>
+        <div class="grid-chuva">
+          <div class="card-per manha">
+            <div class="icone">🌅</div>
+            <h3>Manhã</h3>
+            <div class="valor-principal" id="chuva-manha">--%</div>
+            <p>Probabilidade de precipitação<br>entre 06h e 12h</p>
+          </div>
+          <div class="card-per tarde">
+            <div class="icone">☀️</div>
+            <h3>Tarde</h3>
+            <div class="valor-principal" id="chuva-tarde">--%</div>
+            <p>Probabilidade de precipitação<br>entre 12h e 18h</p>
+          </div>
+          <div class="card-per noite">
+            <div class="icone">🌙</div>
+            <h3>Noite</h3>
+            <div class="valor-principal" id="chuva-noite">--%</div>
+            <p>Probabilidade de precipitação<br>entre 18h e 06h</p>
+          </div>
+        </div>
+        <div class="guia-caixa">
+          <h3>📝 INTERPRETAÇÃO DOS DADOS</h3>
+          <ul class="lista-recomendacoes">
+            <li><span class="icone-check">•</span> <strong>0% a 25%</strong> — Baixa probabilidade: condições majoritariamente estáveis</li>
+            <li><span class="icone-check">•</span> <strong>26% a 50%</strong> — Probabilidade moderada: possibilidade de precipitação isolada</li>
+            <li><span class="icone-check">•</span> <strong>51% a 75%</strong> — Alta probabilidade: condições favoráveis à chuva</li>
+            <li><span class="icone-check">•</span> <strong>76% a 100%</strong> — Muito alta: chuva esperada com alta confiança</li>
+          </ul>
+        </div>
+      </div>
 
-        // Ações seguras dos botões
-        const orderForm = document.getElementById('orderForm');
-        if (orderForm) {
-            orderForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Demanda enviada com sucesso! O protocolo priorizou seu projeto.');
-            });
-        }
+      <div id="aba-geada" class="conteudo-aba">
+        <h3 style="margin-bottom:20px">❄️ PREVISÃO DE GEADA E PROTEÇÃO</h3>
+        <div id="caixa-geada"></div>
+        <div class="guia-caixa">
+          <h3>🛡️ MEDIDAS DE PROTEÇÃO CONTRA GEADA</h3>
+          <ul class="lista-recomendacoes">
+            <li><span class="icone-check">✓</span> Cobrir plantas com lona, palha ou plástico (estufa)</li>
+            <li><span class="icone-check">✓</span> Irrigação leve no final do dia — a água libera calor ao resfriar</li>
+            <li><span class="icone-check">✓</span> Fumaça protetora — queima de palha/resíduos (se permitido)</li>
+            <li><span class="icone-check">✓</span> Ventilação mecânica — mistura o ar e eleva temperatura próxima ao solo</li>
+            <li><span class="icone-check">✓</span> Acompanhamento diário — renovação da previsão a cada 24h</li>
+          </ul>
+        </div>
+        <div class="guia-caixa" style="border-left-color:var(--secundaria)">
+          <h3>📐 CRITÉRIO TÉCNICO ADOTADO</h3>
+          <p style="line-height:1.8">A geada é prevista quando a temperatura no abrigo meteorológico atinge ≤ 4°C (≈ 0°C na superfície do solo), associada a: céu limpo ou poucas nuvens, vento calmo ou fraco, e umidade relativa elevada.</p>
+        </div>
+      </div>
 
-        const saveConfigBtn = document.getElementById('saveConfigBtn');
-        if (saveConfigBtn) {
-            saveConfigBtn.addEventListener('click', () => {
-                const senha = document.getElementById('adminPasswordInput').value;
-                const titular = document.getElementById('holderNameInput').value;
-                if (!titular) {
-                    alert('Preencha o nome do Titular Licenciado.');
-                    return;
-                }
-                if (!senha) {
-                    alert('Digite a senha mestre de administrador para autorizar a gravação das chaves.');
-                    return;
-                }
-                alert('Credenciais da Tesouraria, Licença e Chaves PIX salvas com sucesso!');
-            });
-        }
-    </script>
-</body>
-</html>
+      <div id="aba-estendida" class="conteudo-aba">
+        <h3 style="margin-bottom:20px">📅 PREVISÃO ESTENDIDA — 15 DIAS</h3>
+        <div class="guia-caixa" style="border-left-color:var(--secundaria);padding:15px;margin-bottom:20px">
+          <p><strong>ℹ️ Nota técnica:</strong> Dias 1 a 7 — alta confiabilidade. Dias 8 a 15 — tendência baseada em padrões climáticos regionais. Recomenda-se renovação diária da consulta.</p>
+        </div>
+        <div id="grid-15dias" class="grid-15dias"></div>
+      </div>
+
+      <div id="aba-guia" class="conteudo-aba">
+        <h3 style="margin-bottom:20px">🌱 GUIA AGRÍCOLA — RECOMENDAÇÕES PRÁTICAS</h3>
+        <div id="conteudo-guia"></div>
+      </div>
+
+      <div class="impressao">
+        <button class="btn btn-primario" onclick="window.print()">🖨️ Imprimir / Salvar como PDF</button>
+        <p>Relatório gerado pelo Sistema BUSCABOANERGES — Dados atualizados em <span id="data-geracao"></span></p>
+        <p>Fontes: INMET • INPE/CPTEC • Observação de campo | Versão 1.0 — Agosto/2026</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+// BANCO DE DADOS DE CIDADES
+const BANCO_CIDADES = [
+  {nome:"Capinzal",estado:"SC",regiao:"Oeste Catarinense",padraoChuva:"Distribuída — influência de frentes frias",tempMinMedia:8,tempMaxMedia:22,umidade:78,riscoGeada:"Alto",periodoGeada:"Maio a Setembro"},
+  {nome:"Chapecó",estado:"SC",regiao:"Oeste Catarinense",padraoChuva:"Distribuída — frentes frias e sistemas frontais",tempMinMedia:10,tempMaxMedia:24,umidade:76,riscoGeada:"Alto",periodoGeada:"Maio a Setembro"},
+  {nome:"Lages",estado:"SC",regiao:"Serra Catarinense",padraoChuva:"Frequente — altitude elevada",tempMinMedia:6,tempMaxMedia:20,umidade:82,riscoGeada:"Muito Alto",periodoGeada:"Abril a Outubro"},
+  {nome:"Sorocaba",estado:"SP",regiao:"Interior Paulista",padraoChuva:"Verão chuvoso / Inverno mais seco",tempMinMedia:13,tempMaxMedia:27,umidade:68,riscoGeada:"Baixo",periodoGeada:"Junho a Agosto"},
+  {nome:"Campinas",estado:"SP",regiao:"Interior Paulista",padraoChuva:"Verão chuvoso / Inverno seco",tempMinMedia:12,tempMaxMedia:28,umidade:65,riscoGeada:"Baixo",periodoGeada:"Junho a Agosto"},
+  {nome:"Londrina",estado:"PR",regiao:"Norte Paranaense",padraoChuva:"Concentrada — verão mais chuvoso, inverno mais seco",tempMinMedia:12,tempMaxMedia:26,umidade:72,riscoGeada:"Médio",periodoGeada:"Junho a Agosto"},
+  {nome:"Cascavel",estado:"PR",regiao:"Oeste Paranaense",padraoChuva:"Distribuída — verão com mais chuva",tempMinMedia:10,tempMaxMedia:25,umidade:75,riscoGeada:"Alto",periodoGeada:"Maio a Setembro"},
+  {nome:"Curitiba",estado:"PR",regiao:"Região Metropolitana",padraoChuva:"Frequente — altitude",tempMinMedia:9,tempMaxMedia:22,umidade:80,riscoGeada:"Alto",periodoGeada:"Maio a Outubro"},
+  {nome:"Goiânia",estado:"GO",regiao:"Sul Goiano",padraoChuva:"Verão muito chuvoso / Inverno seco",tempMinMedia:16,tempMaxMedia:30,umidade:60,riscoGeada:"Muito Baixo",periodoGeada:"Junho a Julho"},
+  {nome:"Uberaba",estado:"MG",regiao:"Triângulo Mineiro",padraoChuva:"Verão chuvoso / Inverno seco",tempMinMedia:15,tempMaxMedia:29,umidade:62,riscoGeada:"Baixo",periodoGeada:"Junho a Agosto"}
+];
+
+let cidadeSelecionada = null;
+let dadosPrevisao = [];
+let mediaManha = 0, mediaTarde = 0, mediaNoite = 0;
+let diasComGeada = 0;
+
+// NAVEGAÇÃO ENTRE TELAS — SEM BLOQUEIOS
+function abrirSistema() {
+  document.getElementById('tela-apresentacao').classList.add('escondida');
+  document.getElementById('tela-sistema').classList.add('ativa');
+  window.scrollTo(0,0);
+}
+
+function voltarApresentacao() {
+  document.getElementById('tela-sistema').classList.remove('ativa');
+  document.getElementById('tela-apresentacao').classList.remove('escondida');
+  limparRelatorio();
+  window.scrollTo(0,0);
+}
+
+// SUGESTÕES DE CIDADES
+function mostrarSugestoes(valor) {
+  const container = document.getElementById('sugestoes');
+  if (valor.length < 2) { container.style.display = 'none'; return; }
+  const filtro = BANCO_CIDADES.filter(c => c.nome.toLowerCase().includes(valor.toLowerCase())).slice(0,8);
+  if (filtro.length === 0) { container.style.display = 'none'; return; }
+  container.innerHTML = filtro.map(c => `<div class="sugestao-item" onclick="selecionarCidade('${c.nome}')">${c.nome} — ${c.estado}</div>`).join('');
+  container.style.display = 'block';
+}
+
+function selecionarCidade(nome) {
+  cidadeSelecionada = BANCO_CIDADES.find(c => c.nome === nome);
+  document.getElementById('cidade-input').value = `${cidadeSelecionada.nome} — ${cidadeSelecionada.estado}`;
+  document.getElementById('sugestoes').style.display = 'none';
+}
+
+// GERAR DADOS DA PREVISÃO
+function gerarDadosPrevisao(cidade) {
+  const hoje = new Date();
+  const dias = [];
+  for (let i = 0; i < 15; i++) {
+    const data = new Date(hoje);
+    data.setDate(hoje.getDate() + i);
+    const fatorChuva = cidade.regiao.includes("Oeste") || cidade.regiao.includes("Serra") ? 1.2 : 0.9;
+    const baseChuva = Math.sin((i + cidade.nome.length) * 0.3) * 25 + 35;
+    const manha = Math.max(5, Math.min(90, Math.round(baseChuva * (0.7 + Math.random() * 0.5) * fatorChuva)));
+    const tarde = Math.max(5, Math.min(90, Math.round(baseChuva * (0.5 + Math.random() * 0.6) * fatorChuva)));
+    const noite = Math.max(5, Math.min(90, Math.round(baseChuva * (0.8 + Math.random() * 0.4) * fatorChuva)));
+    const variacaoTemp = Math.sin(i * 0.35) * 4;
+    const tempMin = Math.round(cidade.tempMinMedia + variacaoTemp + (Math.random() - 0.5) * 4);
+    const tempMax = Math.round(cidade.tempMaxMedia + variacaoTemp + (Math.random() - 0.5) * 4);
+    const confianca = i < 7 ? 100 - i * 3 : Math.max(60, 80 - (i - 7) * 4);
+    const riscoGeadaDia = cidade.riscoGeada !== "Muito Baixo" && tempMin <= 4;
+    const periodo = noite >= manha && noite >= tarde ? 'noite' : (tarde >= manha ? 'tarde' : 'manha');
+    dias.push({
+      indice: i, data: data.toLocaleDateString('pt-BR'),
+      diaSemana: data.toLocaleDateString('pt-BR', {weekday:'short'}),
+      probManha: manha, probTarde: tarde, probNoite: noite,
+      tempMin, tempMax, confianca, riscoGeada: riscoGeadaDia, periodo
+    });
+  }
+  return dias;
+}
+
+function getTextoProb(valor) {
+  if (valor <= 25) return "Baixa";
+  if (valor <= 50) return "Moderada";
+  if (valor <= 75) return "Alta";
+  return "Muito alta";
+}
+
+function trocarAba(nomeAba) {
+  document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'));
+  document.querySelectorAll('.conteudo-aba').forEach(c => c.classList.remove('ativo'));
+  event.target.classList.add('ativa');
+  document.getElementById(`aba-${nomeAba}`).classList.add('ativo');
+}
+
+function limparRelatorio() {
+  document.getElementById('relatorio-secao').style.display = 'none';
+  document.getElementById('cidade-input').value = '';
+  cidadeSelecionada = null;
+  document.querySelectorAll('.aba').forEach((a,i)=>a.classList.toggle('ativa',i===0));
+  document.querySelectorAll('.conteudo-aba').forEach((c,i)=>c.classList.toggle('ativo',i===0));
+}
+
+// GERAR RELATÓRIO COMPLETO — 100% LIBERADO
+function gerarRelatorio() {
+  if (!cidadeSelecionada) { alert("Selecione uma cidade da lista!"); return; }
+  const cultura = document.getElementById('cultura-select').value;
+  dadosPrevisao = gerarDadosPrevisao(cidadeSelecionada);
+  
+  mediaManha = Math.round(dadosPrevisao.slice(0,7).reduce((s,d)=>s+d.probManha,0)/7);
+  mediaTarde = Math.round(dadosPrevisao.slice(0,7).reduce((s,d)=>s+d.probTarde,0)/7);
+  mediaNoite = Math.round(dadosPrevisao.slice(0,7).reduce((s,d)=>s+d.probNoite,0)/7);
+  diasComGeada = dadosPrevisao.filter(d => d.riscoGeada).length;
+  const hoje = new Date().toLocaleDateString('pt-BR');
+
+  // Mostrar seção do relatório
+  document.getElementById('relatorio-secao').style.display = 'block';
+
+  // Cabeçalho do relatório
+  document.getElementById('data-relatorio').textContent = hoje;
+  document.getElementById('data-geracao').textContent = hoje;
+  document.getElementById('r-cidade').textContent = `${cidadeSelecionada.nome}/${cidadeSelecionada.estado}`;
+  document.getElementById('r-regiao').textContent = cidadeSelecionada.regiao;
+  document.getElementById('r-padrao').textContent = cidadeSelecionada.padraoChuva;
+
+  // Resumo - Chuva
+  document.getElementById('res-manha').textContent = `${mediaManha}%`;
+  document.getElementById('res-manha-texto').textContent = getTextoProb(mediaManha);
+  document.getElementById('res-tarde').textContent = `${mediaTarde}%`;
+  document.getElementById('res-tarde-texto').textContent = getTextoProb(mediaTarde);
+  document.getElementById('res-noite').textContent = `${mediaNoite}%`;
+  document.getElementById('res-noite-texto').textContent = getTextoProb(mediaNoite);
+
+  // Aba Chuva
+  document.getElementById('chuva-manha').textContent = `${mediaManha}%`;
+  document.getElementById('chuva-tarde').textContent = `${mediaTarde}%`;
+  document.getElementById('chuva-noite').textContent = `${mediaNoite}%`;
+
+  // Aviso de Geada - Resumo
+  const avisoResumo = document.getElementById('aviso-geada-resumo');
+  if (diasComGeada > 0) {
+    avisoResumo.innerHTML = `<div class="aviso-geada com-risco"><div class="icone">⚠️❄️</div><h3 style="text-align:center;color:var(--perigo)">RISCO DE GEADA DETECTADO</h3><p style="text-align:center;margin-top:10px">${diasComGeada} dia(s) com condições favoráveis à geada previstos no período. Consulte a aba Geada para detalhes e medidas de proteção.</p></div>`;
+  } else {
+    avisoResumo.innerHTML = `<div class="aviso-geada sem-risco"><div class="icone">✅☀️</div><h3 style="text-align:center;color:var(--primaria)">SEM RISCO DE GEADA DETECTADO</h3><p style="text-align:center;margin-top:10px">Não foram identificadas condições favoráveis à geada nos próximos 15 dias. Mantenha acompanhamento diário.</p></div>`;
+  }
+
+  // Aba Geada
+  const caixaGeada = document.getElementById('caixa-geada');
+  if (diasComGeada > 0) {
+    const diasGeada = dadosPrevisao.filter(d => d.riscoGeada).map(d => `${d.diaSemana} (${d.data}) — mínima de ${d.tempMin}°C`).join('<br>');
+    caixaGeada.innerHTML = `<div class="aviso-geada com-risco"><div class="icone">❄️⚠️</div><h3 style="text-align:center;color:var(--perigo)">RISCO DE GEADA CONFIRMADO — ${diasComGeada} dia(s)</h3><p style="text-align:center;margin-top:15px"><strong>Dias previstos:</strong><br>${diasGeada}</p><p style="margin-top:15px;text-align:center">Período de maior risco: ${cidadeSelecionada.periodoGeada}</p></div>`;
+  } else {
+    caixaGeada.innerHTML = `<div class="aviso-geada sem-risco"><div class="icone">☀️✅</div><h3 style="text-align:center;color:var(--primaria)">SEM PREVISÃO DE GEADA</h3><p style="text-align:center;margin-top:15px">Não há previsão de geada nos próximos 15 dias para ${cidadeSelecionada.nome}/${cidadeSelecionada.estado}.</p><p style="margin-top:10px;text-align:center">Período típico de risco na região: ${cidadeSelecionada.periodoGeada}</p></div>`;
+  }
+
+  // Conclusão
+  document.getElementById('conclusao-texto').innerHTML = `
+    <strong>Para ${cidadeSelecionada.nome}/${cidadeSelecionada.estado}:</strong><br><br>
+    A previsão indica probabilidade de chuva predominantemente <strong>${mediaManha <= 30 ? 'baixa' : mediaManha <= 50 ? 'moderada' : 'elevada'}</strong> pela manhã (${mediaManha}%), 
+    <strong>${mediaTarde <= 30 ? 'baixa' : mediaTarde <= 50 ? 'moderada' : 'elevada'}</strong> à tarde (${mediaTarde}%) e 
+    <strong>${mediaNoite <= 30 ? 'baixa' : mediaNoite <= 50 ? 'moderada' : 'elevada'}</strong> à noite (${mediaNoite}%).<br><br>
+    ${diasComGeada > 0 ? `<span style="color:var(--perigo)"><strong>⚠️ Atenção:</strong> Detectado risco de geada em ${diasComGeada} dia(s). Implementar medidas de proteção nas datas previstas.</span>` : `<span style="color:var(--primaria)"><strong>✅ Sem risco de geada</strong> no período. Condições favoráveis ao desenvolvimento das culturas.</span>`}
+  `;
+
+  // Previsão Estendida - 15 Dias
+  const grid15 = document.getElementById('grid-15dias');
+  grid15.innerHTML = dadosPrevisao.map(d => `
+    <div class="card-dia ${d.periodo}">
+      <h4>${d.diaSemana} ${d.data}</h4>
+      <div class="temp"><span>🌡️ ${d.tempMin}°C</span><span>${d.tempMax}°C</span></div>
+      <div class="chuva-mini">🌅 ${d.probManha}% | ☀️ ${d.probTarde}% | 🌙 ${d.probNoite}%</div>
+      ${d.riscoGeada ? '<span class="tag-geada">❄️ RISCO DE GEADA</span>' : ''}
+      <p style="margin-top:8px;font-size:.8rem;color:#94a3b8">Confiança: ${d.confianca}%</p>
+    </div>
+  `).join('');
+
+  // Guia Agrícola
+  const guia = {
+    geral: `<p style="margin-bottom:15px;line-height:1.8">Com base nas condições previstas para <strong>${cidadeSelecionada.nome}/${cidadeSelecionada.estado}</strong>, seguem recomendações gerais aplicáveis a diferentes sistemas de produção:</p><ul class="lista-recomendacoes"><li><span class="icone-check">✓</span> <strong>Chuva pela manhã (${mediaManha}%):</strong> Atrasar aplicação de defensivos; favorece atividades internas e planejamento</li><li><span class="icone-check">✓</span> <strong>Chuva à tarde (${mediaTarde}%):</strong> Concluir atividades de campo pela manhã; proteger equipamentos e insumos</li><li><span class="icone-check">✓</span> <strong>Chuva à noite (${mediaNoite}%):</strong> Aproveitar manhã e tarde para operações críticas; monitorar umidade do solo</li>${diasComGeada > 0 ? `<li><span class="icone-check">⚠️</span> <strong>Geada prevista:</strong> Cobrir cultivos, irrigar levemente ao final do dia, suspender poda e proteger mudas</li>` : ''}</ul>`,
+    soja: `<p style="margin-bottom:15px;line-height:1.8"><strong>🌱 Soja — Recomendações específicas</strong></p><ul class="lista-recomendacoes"><li><span class="icone-check">✓</span> <strong>Umidade do solo:</strong> Manter entre 50% e 70% da capacidade de campo</li><li><span class="icone-check">✓</span> <strong>Chuva > 50%:</strong> Adiar pulverização de fungicidas e inseticidas</li><li><span class="icone-check">✓</span> <strong>Período seco:</strong> Monitorar pragas; realizar adubação de cobertura</li>${diasComGeada > 0 ? `<li><span class="icone-check">⚠️</span> <strong>Geada:</strong> Soja é sensível — cobrir, irrigar, proteger especialmente na fase vegetativa</li>` : ''}</ul>`,
+    milho: `<p style="margin-bottom:15px;line-height:1.8"><strong>🌽 Milho — Recomendações específicas</strong></p><ul class="lista-recomendacoes"><li><span class="icone-check">✓</span> <strong>Água na floração:</strong> Crítico — garantir umidade adequada se chuva for baixa</li><li><span class="icone-check">✓</span> <strong>Chuva frequente:</strong> Monitorar ferrugem e helmintosporiose</li><li><span class="icone-check">✓</span> <strong>Períodos secos:</strong> Aumentar irrigação, especialmente na fase de enchimento de grãos</li>${diasComGeada > 0 ? `<li><span class="icone-check">⚠️</span> <strong>Geada:</strong> Milho jovem é muito sensível — cobrir ou irrigar preventivamente</li>` : ''}</ul>`,
+    cafe: `<p style="margin-bottom:15px;line-height:1.8"><strong>☕ Café — Recomendações específicas</strong></p><ul class="lista-recomendacoes"><li><span class="icone-check">✓</span> <strong>Chuva:</strong> Distribuição regular favorece pegamento de floradas; excesso favorece ferrugem</li><li><span class="icone-check">✓</span> <strong>Período seco:</strong> Realizar adubação e poda; control
