@@ -20,7 +20,6 @@ body {background:var(--fundo);color:var(--texto);min-height:100vh;}
 }
 header {text-align:center;margin-bottom:40px;max-width:800px}
 h1 {font-size:2.3rem;color:var(--destaque);margin-bottom:15px}
-h1 span {color:var(--primaria)}
 .slogan {font-size:1.15rem;opacity:.9;line-height:1.7}
 
 .destaque-pesquisa {
@@ -100,7 +99,6 @@ button.sucesso:hover {background:#f59e0b}
 button.secundario {background:#475569}
 button.secundario:hover {background:#64748b}
 
-/* === SUGESTÕES DE CIDADES === */
 .sugestoes-cidades {
   position: absolute; background: var(--card); border: 1px solid var(--borda);
   border-radius: 10px; max-height: 300px; overflow-y: auto; width: 100%;
@@ -112,7 +110,6 @@ button.secundario:hover {background:#64748b}
 .sugestao-item:hover {background: #2d3a4f; padding-left: 20px}
 .sugestao-item:last-child {border-bottom: none}
 
-/* === MICROÁREA === */
 .micro-area {
   background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.12));
   border: 2px solid #22c55e; border-radius: 12px; padding: 20px; margin: 20px 0;
@@ -125,7 +122,6 @@ button.secundario:hover {background:#64748b}
   margin-left: 10px; font-size: .85rem;
 }
 
-/* === ABAS DE NAVEGAÇÃO === */
 .abas {display:flex;gap:10px;margin:20px 0;border-bottom:1px solid var(--borda);padding-bottom:10px;flex-wrap:wrap}
 .aba {padding:12px 20px;border-radius:10px 10px 0 0;cursor:pointer;transition:.2s;border:1px solid transparent}
 .aba.ativa {background:var(--destaque);color:#000;border-color:var(--destaque);font-weight:bold}
@@ -134,7 +130,6 @@ button.secundario:hover {background:#64748b}
 .conteudo-aba.ativo {display:block;animation:aparecer .3s ease}
 @keyframes aparecer {from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* === INDICADORES DE CHUVA === */
 .periodo-chuva {display:flex;gap:15px;flex-wrap:wrap;margin:25px 0}
 .card-periodo {
   flex:1;min-width:170px;padding:22px;border-radius:12px;text-align:center;
@@ -150,7 +145,6 @@ button.secundario:hover {background:#64748b}
 .tarde .probabilidade {color:var(--chuva-tarde)}
 .noite .probabilidade {color:var(--chuva-noite)}
 
-/* === ❄️ INDICADORES DE GEADA === */
 .aviso-geada {
   background: linear-gradient(135deg, rgba(96,165,250,.15), rgba(59,130,246,.1));
   border: 2px solid; border-radius: 12px; padding: 22px; margin: 25px 0;
@@ -163,7 +157,6 @@ button.secundario:hover {background:#64748b}
 .risco-geada {font-size:2.2rem;font-weight:bold;text-align:center;margin:8px 0}
 .recomendacao-geada {margin-top:18px;padding:16px;background:rgba(0,0,0,.2);border-radius:8px;line-height:1.7}
 
-/* === 📅 CALENDÁRIO — ATÉ 15 DIAS === */
 .calendario-15dias {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
   gap: 12px; margin-top: 20px;
@@ -417,7 +410,7 @@ function sairAreaProtegida() {
   window.location.hash = '';
 }
 
-// ✅ === CÓDIGO ATUALIZADO: DETECTA A ÂNCORA E ABRE A SENHA AUTOMATICAMENTE ===
+// ✅ DETECTA A ÂNCORA E ABRE A SENHA AUTOMATICAMENTE
 window.addEventListener('load', function() {
   if (window.location.hash === '#_area_de_relatorio_seguro') {
     setTimeout(() => {
@@ -449,7 +442,6 @@ const BANCO_CIDADES = [
 let cidadeSelecionada = null;
 let dadosAtuais = [];
 
-// 🔍 Mostrar sugestões enquanto digita
 function mostrarSugestoes(valor) {
   const sugestoesDiv = document.getElementById('sugestoes');
   if (valor.length < 2) {
@@ -480,7 +472,6 @@ function selecionarCidade(cidade) {
   document.getElementById('sugestoes').style.display = 'none';
 }
 
-// 🔄 Trocar abas
 function trocarAba(nomeAba) {
   document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'));
   document.querySelectorAll('.conteudo-aba').forEach(c => c.classList.remove('ativo'));
@@ -488,7 +479,6 @@ function trocarAba(nomeAba) {
   document.getElementById(`aba-${nomeAba}`).classList.add('ativo');
 }
 
-// 📊 Gerar dados da previsão (até 15 dias)
 function gerarDadosPrevisao(cidade) {
   const hoje = new Date();
   const dias = [];
@@ -532,7 +522,6 @@ function gerarDadosPrevisao(cidade) {
   return dias;
 }
 
-// 📝 Preencher resumo
 function preencherResumo(dados, cidade) {
   const primeiros7 = dados.slice(0, 7);
   const mediaManha = Math.round(primeiros7.reduce((a,b) => a + b.probManha, 0) / 7);
@@ -589,7 +578,6 @@ function preencherResumo(dados, cidade) {
   document.getElementById('recomendacoes-gerais').textContent = recs[cultura] || recs.geral;
 }
 
-// 📅 Preencher calendário estendido
 function preencherCalendarioEstendido(dados) {
   const container = document.getElementById('calendario-15dias');
   container.innerHTML = '';
@@ -612,7 +600,6 @@ function preencherCalendarioEstendido(dados) {
   });
 }
 
-// ❄️ Preencher aba de geada
 function preencherAbaGeada(dados, cidade) {
   const container = document.getElementById('detalhes-geada');
   const diasComGeada = dados.filter(d => d.temGeada);
@@ -639,4 +626,8 @@ function preencherAbaGeada(dados, cidade) {
         <div class="icone-geada">❄️</div>
         <h3 style="text-align:center">⚠️ Risco de Geada — ${diasComGeada.length} dia(s) detectado(s)</h3>
         <p style="text-align:center;margin-top:10px">Período de risco para ${cidade.nome}/${cidade.estado}: ${cidade.periodoGeada}</p>
-        <div class="recomendacao
+        <div class="recomendacao-geada">
+          <p><strong>🛡️ Medidas de Proteção:</strong></p>
+          <ul style="margin:10px 0 0 25px;line-height:1.7">
+            <li>🌾 Cobrir plantas com lona, palha ou plástico</li>
+            <li>💧 Irrigação leve
