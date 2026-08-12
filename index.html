@@ -23,7 +23,6 @@ h1 {font-size:2.3rem;color:var(--destaque);margin-bottom:15px}
 h1 span {color:var(--primaria)}
 .slogan {font-size:1.15rem;opacity:.9;line-height:1.7}
 
-/* === DESTAQUE PRINCIPAL === */
 .destaque-pesquisa {
   background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.12));
   border: 2px solid #22c55e; border-radius: 14px; padding: 22px; margin: 25px 0;
@@ -35,7 +34,6 @@ h1 span {color:var(--primaria)}
 .card {background:var(--card);border-radius:14px;padding:30px;margin:15px 0;width:100%;max-width:650px;border-left:4px solid var(--primaria);box-shadow:0 8px 25px rgba(0,0,0,.2)}
 h2 {color:var(--primaria);margin-bottom:18px;font-size:1.35rem}
 .descricao {font-size:1.05rem;line-height:1.8;margin-bottom:25px}
-.destaque-texto {color:var(--destaque);font-weight:600}
 .contato {display:flex;flex-direction:column;gap:12px;margin-top:22px}
 .btn {display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:1rem;transition:.3s;border:none;cursor:pointer}
 .btn-whatsapp {background:#22c55e;color:white}
@@ -101,9 +99,6 @@ button.sucesso {background:var(--destaque);color:#000}
 button.sucesso:hover {background:#f59e0b}
 button.secundario {background:#475569}
 button.secundario:hover {background:#64748b}
-.relatorio {background:#0f202a;border:1px solid #22c55e;border-radius:12px;padding:25px;margin-top:20px;display:none}
-.relatorio.visivel {display:block;animation:aparecer .3s ease}
-@keyframes aparecer {from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* === SUGESTÕES DE CIDADES === */
 .sugestoes-cidades {
@@ -137,6 +132,7 @@ button.secundario:hover {background:#64748b}
 .aba:hover {background:rgba(251,191,36,.15)}
 .conteudo-aba {display:none}
 .conteudo-aba.ativo {display:block;animation:aparecer .3s ease}
+@keyframes aparecer {from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* === INDICADORES DE CHUVA === */
 .periodo-chuva {display:flex;gap:15px;flex-wrap:wrap;margin:25px 0}
@@ -148,13 +144,11 @@ button.secundario:hover {background:#64748b}
 .manha {background:rgba(96,165,250,.12);border-top-color:var(--chuva-manha)}
 .tarde {background:rgba(249,115,22,.12);border-top-color:var(--chuva-tarde)}
 .noite {background:rgba(168,85,247,.12);border-top-color:var(--chuva-noite)}
-.seco {background:rgba(34,197,94,.12);border-top-color:var(--seco)}
 .icones-periodo {font-size:2.2rem;margin-bottom:8px}
 .probabilidade {font-size:2rem;font-weight:bold;margin:8px 0}
 .manha .probabilidade {color:var(--chuva-manha)}
 .tarde .probabilidade {color:var(--chuva-tarde)}
 .noite .probabilidade {color:var(--chuva-noite)}
-.seco .probabilidade {color:var(--seco)}
 
 /* === ❄️ INDICADORES DE GEADA === */
 .aviso-geada {
@@ -164,7 +158,6 @@ button.secundario:hover {background:#64748b}
 .geada-fraca {border-color:var(--geada-fraca)}
 .geada-moderada {border-color:var(--geada-moderada)}
 .geada-forte {border-color:var(--geada-forte)}
-.geada-extrema {border-color:var(--geada-extrema);background:linear-gradient(135deg,rgba(29,78,216,.15),rgba(59,130,246,.1))}
 .sem-geada {border-color:var(--seco);background:rgba(34,197,94,.1)}
 .icone-geada {font-size:3rem;margin-bottom:10px;text-align:center}
 .risco-geada {font-size:2.2rem;font-weight:bold;text-align:center;margin:8px 0}
@@ -208,7 +201,6 @@ button.secundario:hover {background:#64748b}
     <h1>🌾 BUSCA<span>BOANERGES</span></h1>
     <p class="slogan">Previsão Meteorológica para Agricultura — Baseada em dados, pesquisa e observação de campo</p>
     
-    <!-- 🔬 DESTAQUE: PREVISÃO ESTENDIDA -->
     <div class="destaque-pesquisa">
       <h3>📊 PREVISÃO ESTENDIDA — ACIMA DE 7 DIAS</h3>
       <p>Somos trabalhadores e pesquisadores. Apresentamos a previsão estendida para <strong>até 15 dias</strong>, baseada em dados meteorológicos, padrões climáticos regionais e observação de campo — com chuva por período do dia e aviso de geada, sempre referenciada à sua cidade.</p>
@@ -291,7 +283,7 @@ button.secundario:hover {background:#64748b}
     <button class="btn secundario" style="margin-top:15px;max-width:200px;margin-left:auto;margin-right:auto" onclick="sairAreaProtegida()">↩️ Sair / Voltar</button>
   </header>
 
-  <h2 class="h2-relatorio">🔍 Previsão — Digite sua Cidade</h2>
+  <h2>🔍 Previsão — Digite sua Cidade</h2>
   <div class="card" style="background:var(--card);border-radius:12px;padding:25px;margin:15px 0;border-left:4px solid #22c55e">
     <div class="busca" style="position:relative">
       <div class="campo-busca" style="position:relative">
@@ -316,14 +308,12 @@ button.secundario:hover {background:#64748b}
     </div>
   </div>
 
-  <!-- 📍 ÁREA DE MICROÁREA -->
   <div id="bloco-microarea" style="display:none">
     <div class="micro-area">
       <h3>📍 Previsão para: <span id="nome-cidade-exibicao"></span> <span class="badge-pesquisa">até 15 dias</span></h3>
       <p style="font-size:1rem;line-height:1.7;margin-top:10px">Região: <span id="regiao-cidade"></span> • Padrão climático: <span id="padrao-cidade"></span></p>
     </div>
 
-    <!-- 📊 ABAS DE NAVEGAÇÃO -->
     <div class="abas">
       <div class="aba ativa" onclick="trocarAba('resumo')">📊 Resumo</div>
       <div class="aba" onclick="trocarAba('estendida')">📅 Previsão Estendida</div>
@@ -331,11 +321,9 @@ button.secundario:hover {background:#64748b}
       <div class="aba" onclick="trocarAba('agricola')">🌱 Guia Agrícola</div>
     </div>
 
-    <!-- 📊 ABA: RESUMO -->
     <div id="aba-resumo" class="conteudo-aba ativo">
       <h3 style="margin:20px 0 15px">📊 Resumo da Previsão</h3>
       
-      <!-- 🌧️ CHUVA POR PERÍODO -->
       <h4 style="margin:25px 0 15px;font-size:1.1rem">🌧️ Previsão de Chuva por Período</h4>
       <div class="periodo-chuva">
         <div class="card-periodo manha">
@@ -358,17 +346,14 @@ button.secundario:hover {background:#64748b}
         </div>
       </div>
 
-      <!-- ❄️ GEADA - RESUMO -->
       <div id="aviso-geada-container"></div>
 
-      <!-- 💡 RECOMENDAÇÕES -->
       <div class="aviso-importante">
         <h4>💡 Recomendações Práticas</h4>
         <p id="recomendacoes-gerais" style="margin-top:10px">Carregando...</p>
       </div>
     </div>
 
-    <!-- 📅 ABA: PREVISÃO ESTENDIDA (acima de 7 dias, até 15) -->
     <div id="aba-estendida" class="conteudo-aba">
       <h3 style="margin:20px 0 15px">📅 Previsão Estendida — até 15 dias</h3>
       <div class="limite-tecnico">
@@ -377,13 +362,11 @@ button.secundario:hover {background:#64748b}
       <div id="calendario-15dias" class="calendario-15dias"></div>
     </div>
 
-    <!-- ❄️ ABA: GEADA -->
     <div id="aba-geada" class="conteudo-aba">
       <h3 style="margin:20px 0 15px">❄️ Previsão de Geada e Proteção</h3>
       <div id="detalhes-geada"></div>
     </div>
 
-    <!-- 🌱 ABA: GUIA AGRÍCOLA -->
     <div id="aba-agricola" class="conteudo-aba">
       <h3 style="margin:20px 0 15px">🌱 Guia Agrícola — Orientações Práticas</h3>
       <div id="guia-agricola"></div>
@@ -499,28 +482,6 @@ function trocarAba(nomeAba) {
   document.getElementById(`aba-${nomeAba}`).classList.add('ativa');
 }
 
-// 🎯 Gerar previsão completa
-function gerarPrevisaoCidade() {
-  if (!cidadeSelecionada) {
-    alert('⚠️ Digite e selecione uma cidade da lista!');
-    return;
-  }
-
-  document.getElementById('bloco-microarea').style.display = 'block';
-  document.getElementById('nome-cidade-exibicao').textContent = `${cidadeSelecionada.nome} / ${cidadeSelecionada.estado}`;
-  document.getElementById('regiao-cidade').textContent = cidadeSelecionada.regiao;
-  document.getElementById('padrao-cidade').textContent = cidadeSelecionada.padraoChuva;
-
-  dadosAtuais = gerarDadosPrevisao(cidadeSelecionada);
-  
-  preencherResumo(dadosAtuais, cidadeSelecionada);
-  preencherCalendarioEstendido(dadosAtuais);
-  preencherAbaGeada(dadosAtuais, cidadeSelecionada);
-  preencherGuiaAgricola(dadosAtuais, cidadeSelecionada);
-
-  document.getElementById('bloco-microarea').scrollIntoView({behavior: 'smooth'});
-}
-
 // 📊 Gerar dados da previsão (até 15 dias)
 function gerarDadosPrevisao(cidade) {
   const hoje = new Date();
@@ -570,7 +531,6 @@ function gerarDadosPrevisao(cidade) {
                        probTarde >= probManha && probTarde >= probNoite ? 'tarde' : 'manha'
     });
   }
-  
   return dias;
 }
 
@@ -583,4 +543,44 @@ function preencherResumo(dados, cidade) {
   const mediaNoite = Math.round(primeiros7.reduce((a,b) => a + b.probNoite, 0) / 7);
   
   document.getElementById('prob-manha').textContent = `${mediaManha}%`;
-  document.getElementById('prob-t
+  document.getElementById('prob-tarde').textContent = `${mediaTarde}%`;
+  document.getElementById('prob-noite').textContent = `${mediaNoite}%`;
+  
+  const getTexto = (valor, periodo) => {
+    if (valor < 25) return `Pouca chuva — período favorável para atividades`;
+    if (valor < 45) return `Chuva leve e isolada — atenção na ${periodo}`;
+    if (valor < 65) return `Chuva frequente — planeje-se com antecedência`;
+    return `Chuva provável — evite atividades durante a ${periodo}`;
+  };
+  
+  document.getElementById('texto-manha').textContent = getTexto(mediaManha, 'manhã');
+  document.getElementById('texto-tarde').textContent = getTexto(mediaTarde, 'tarde');
+  document.getElementById('texto-noite').textContent = getTexto(mediaNoite, 'noite');
+  
+  // Aviso de geada no resumo
+  const diasComGeada = dados.filter(d => d.temGeada).length;
+  const container = document.getElementById('aviso-geada-container');
+  
+  if (diasComGeada > 0) {
+    container.innerHTML = `
+      <div class="aviso-geada geada-fraca">
+        <div class="icone-geada">❄️</div>
+        <h4 style="text-align:center">⚠️ Atenção — Risco de Geada Detectado</h4>
+        <p style="text-align:center;margin-top:10px">Em ${diasComGeada} dos próximos 15 dias há condições favoráveis à formação de geada. Consulte a aba "Geada" para detalhes e orientações de proteção.</p>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <div class="aviso-geada sem-geada">
+        <div class="icone-geada">☀️</div>
+        <h4 style="text-align:center">✅ Sem previsão de geada</h4>
+        <p style="text-align:center;margin-top:10px">Não foram identificadas condições favoráveis à formação de geada nos próximos 15 dias.</p>
+      </div>
+    `;
+  }
+  
+  // Recomendações gerais
+  const cultura = document.getElementById('cultura').value;
+  const recs = {
+    geral: "🌾 Planejamento geral: Aproveite os períodos de menor probabilidade de chuva para atividades de campo, plantio e colheita. Mantenha o acompanhamento diário das condições climáticas.",
+    soja: "🌱 Soja: Fases críticas exigem atenção à umidade do solo. Chuva moderada é benéfica, mas períodos chuvosos prolongados podem favorecer doenças fúngicas.",
