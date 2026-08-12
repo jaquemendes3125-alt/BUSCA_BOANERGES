@@ -48,10 +48,10 @@ input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgb
 .sugestao-item:hover {background:#334155}
 .sugestao-item:last-child {border-bottom:none}
 
-.tela-apresentacao {display:block}
-.tela-sistema {display:none}
-.tela-sistema.ativa {display:block}
-.tela-apresentacao.escondida {display:none}
+.tela-apresentacao {display:block !important;}
+.tela-sistema {display:none !important;}
+.tela-sistema.ativa {display:block !important;}
+.tela-apresentacao.escondida {display:none !important;}
 
 .btn-voltar {
   background:transparent;color:var(--texto);border:1px solid #475569;
@@ -221,7 +221,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 
     <footer class="apresentacao">
       <p>🌾 BUSCABOANERGES — Previsão baseada em padrões de comportamento e dados atuais</p>
-      <p>Versão: 2.3 — Agosto de 2026 | Projeto independente e de acesso público</p>
+      <p>Versão: 2.4 — Agosto de 2026 | Projeto independente e de acesso público</p>
     </footer>
   </div>
 </div>
@@ -269,13 +269,33 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 </div>
 
 <script>
+// ==================================================
+// 🔑 CONFIGURAÇÃO DE ACESSO — EXATA E FIXA
+// ==================================================
 const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 
+// ==================================================
+// ✅ FUNÇÃO DE VERIFICAÇÃO CORRIGIDA E GARANTIDA
+// ==================================================
 function verificarAcesso() {
-  if (window.location.hash === CODIGO_ACESSO) {
-    document.getElementById('tela-apresentacao').classList.add('escondida');
-    document.getElementById('tela-sistema').classList.add('ativa');
+  // Remove o # do hash para comparação segura
+  const hashAtual = window.location.hash || '';
+  const hashLimpo = hashAtual.trim();
+  
+  console.log('Hash atual:', hashLimpo); // Para debug, pode remover depois
+  
+  const telaApresentacao = document.getElementById('tela-apresentacao');
+  const telaSistema = document.getElementById('tela-sistema');
+  
+  if (hashLimpo === CODIGO_ACESSO) {
+    // ✅ Acesso liberado — mostra tela de relatório
+    telaApresentacao.classList.add('escondida');
+    telaSistema.classList.add('ativa');
     window.scrollTo(0, 0);
+  } else {
+    // ❌ Sem hash — mostra tela de apresentação
+    telaApresentacao.classList.remove('escondida');
+    telaSistema.classList.remove('ativa');
   }
 }
 
@@ -284,10 +304,17 @@ function voltarApresentacao() {
   document.getElementById('tela-apresentacao').classList.remove('escondida');
   document.getElementById('tela-sistema').classList.remove('ativa');
   document.getElementById('relatorio-resultado').innerHTML = '';
+  window.scrollTo(0, 0);
 }
 
+// ==================================================
+// 🔁 GARANTIR QUE A VERIFICAÇÃO ACONTEÇA SEMPRE
+// ==================================================
 window.addEventListener('hashchange', verificarAcesso);
-window.addEventListener('load', verificarAcesso);
+window.addEventListener('load', function() {
+  // Pequeno atraso para garantir que o DOM esteja 100% carregado
+  setTimeout(verificarAcesso, 50);
+});
 
 const cidades = [
   'Matão - SP', 'Sorocaba - SP', 'São Paulo - SP', 'Campinas - SP', 'Ribeirão Preto - SP',
@@ -331,41 +358,35 @@ const datas = ['12/08','13/08','14/08','15/08','16/08','17/08','18/08','19/08','
 // ==================================================
 // 🫀 FÓRMULA PRINCIPAL — EXATA E CONFORME DEFINIDO
 // I = (64 × O ÷ R) × (P × E ÷ C)
-// P = Padrão de Comportamento — estudo do comportamento climático, base de cálculo
-// E = Evidência Atual — dados dos terminais dos modelos numéricos
 // ==================================================
 function calcularIndice(cidade, periodo, dia) {
   const regiaoMT = cidade.includes('MT') || cidade.includes('Sorriso');
   
   // 📂 P = PADRÃO DE COMPORTAMENTO — Estudo do comportamento climático
-  // Base de cálculo selecionada e estruturada — não é "histórico bruto"
   const P = regiaoMT 
     ? { manha: 72, tarde: 35, noite: 78 }
     : { manha: 75, tarde: 52, noite: 80 };
   
-  // 📡 E = EVIDÊNCIA ATUAL — O que os terminais dos modelos estão soltando AGORA
+  // 📡 E = EVIDÊNCIA ATUAL — Dados dos modelos
   const E_base = regiaoMT 
     ? { manha: 68, tarde: 42, noite: 74 }
     : { manha: 70, tarde: 58, noite: 76 };
   const E = E_base[periodo] + Math.sin(dia * 0.5) * 6;
   
-  // 🗺️ C = CONTEXTO — região, estação, relevo, continentalidade
+  // 🗺️ C = CONTEXTO — região, estação, relevo
   const C = regiaoMT ? 1.15 : 1.00;
   
-  // 🎯 O = OCORRÊNCIA — nível de probabilidade de janela favorável (1 a 4)
+  // 🎯 O = OCORRÊNCIA — probabilidade de janela (1 a 4)
   const L = (P[periodo] * E) / 64;
   const O = Math.max(1, Math.min(4, Math.round(L / 20)));
   
-  // 🚧 R = RESISTÊNCIA — fatores que bloqueiam/limitam a aplicação
+  // 🚧 R = RESISTÊNCIA — fatores limitantes
   const R = O >= 3 ? 1 : 2;
   
-  // ✅ A FÓRMULA — LITERALMENTE COMO DEFINIU:
-  // I = (64 × O ÷ R) × (P × E ÷ C)
-  const parte1 = (64 * O) / R;          // ← 64 × O ÷ R
-  const parte2 = (P[periodo] * E) / C;   // ← P × E ÷ C
-  const I_bruto = parte1 * parte2;        // ← multiplicação das duas partes
-  
-  // 📊 Normalização para escala de trabalho (32 a 128)
+  // ✅ FÓRMULA FINAL
+  const parte1 = (64 * O) / R;
+  const parte2 = (P[periodo] * E) / C;
+  const I_bruto = parte1 * parte2;
   const I = Math.max(16, Math.min(128, Math.round(I_bruto / 640)));
   
   const fatorTempo = dia < 7 ? 1 : (I <= 32 ? 0.65 : 0.85);
@@ -640,4 +661,12 @@ function gerarRelatorio() {
       </div>
 
       <div class="rodape-aviso">
-        <p><strong>🌾 BUSCABOANERGES</strong> — Projeto independente de apoio à decisão
+        <p><strong>🌾 BUSCABOANERGES</strong> — Projeto independente de apoio à decisão</p>
+        <p>Versão 2.4 — Sistema de Relatório com Acesso Protegido</p>
+      </div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
