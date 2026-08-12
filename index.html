@@ -35,11 +35,7 @@ h2 {color:var(--primaria);margin-bottom:20px;font-size:1.4rem}
 .info p {margin:8px 0;line-height:1.6}
 footer {margin-top:50px;text-align:center;color:#94a3b8;font-size:.9rem;padding-top:20px;border-top:1px solid var(--borda);width:100%;max-width:600px}
 .emoji {font-size:1.3rem}
-/* ✅ AVISO CORRIGIDO — SEM REVELAR O CÓDIGO DO LINK */
-.aviso-seguro {
-  background:rgba(251,191,36,.1);border:1px solid var(--destaque);border-radius:12px;padding:15px;margin-top:20px;text-align:center;
-  color:var(--destaque);font-weight:500;
-}
+.aviso-seguro {background:rgba(251,191,36,.1);border:1px solid var(--destaque);border-radius:12px;padding:15px;margin-top:20px;text-align:center}
 
 /* === ÁREA PROTEGIDA — RELATÓRIOS === */
 #_area_de_relatorio_seguro {display:none;padding:20px;max-width:1100px;margin:0 auto}
@@ -84,15 +80,14 @@ label {display:block;margin-bottom:5px;color:#94a3b8}
       O <span class="destaque-texto">BUSCABOANERGES</span> é um sistema especializado que <strong>cruza dados climáticos</strong> desde 1300 a.C. até os dias atuais — combinando <strong>relatos históricos, registros de poetas e cronistas</strong> com <strong>fontes oficiais gratuitas</strong> (INMET, INPE, NOAA, Copernicus) para <strong>detectar padrões climáticos</strong>, gerar relatórios precisos por região e período e identificar tendências, secas, chuvas, temperaturas e eventos extremos com alto grau de confiança.
     </p>
 
-    <!-- ✅ AVISO ALTERADO — SEM REVELAR O CÓDIGO DO LINK -->
     <div class="aviso-seguro">
-      🔒 Área de Relatórios Protegida — Acesso exclusivo e restrito a usuários autorizados
+      🔒 <strong>Área de Relatórios Protegida</strong> — Acesso exclusivo pelo link completo com <code>#_area_de_relatorio_seguro</code>
     </div>
 
     <h2 style="margin-top:30px">📞 Entre em Contato</h2>
     <div class="contato">
       <a href="https://wa.me/5515981565052" target="_blank" class="btn btn-whatsapp">
-        <span class="emoji">💬</span> WhatsApp: (15) 98156-5052
+        <span class="emoji">💬</span> WhatsApp: (015) 98156-5052
       </a>
       <a href="mailto:buscaboa nerges@gmail.com" class="btn btn-email">
         <span class="emoji">✉️</span> buscaboanerges@gmail.com
@@ -115,7 +110,7 @@ label {display:block;margin-bottom:5px;color:#94a3b8}
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════
-  🔒 ÁREA PROTEGIDA — SÓ APARECE COM O LINK EXCLUSIVO
+  🔒 ÁREA PROTEGIDA — SÓ APARECE COM #_area_de_relatorio_seguro
   Link: jaquemendes3125-alt.github.io/BUSCA_BOANERGES/#_area_de_relatorio_seguro
 ═══════════════════════════════════════════════════════════════ -->
 <div id="_area_de_relatorio_seguro">
@@ -324,7 +319,7 @@ function _D(){const t=document.getElementById('\x64\x61\x74\x61\x45\x76\x65\x6E\
 window.buscarPadroes=_F;window.adicionarAoBanco=_D;window.limparRelatorio=_L;window.exportarDados=_K;
 
 // ═══════════════════════════════════════════════════════════════
-// 🔒 CONTROLE DE ACESSO POR HASH NO LINK — FUNCIONA EM SILÊNCIO
+// 🔒 CONTROLE DE ACESSO POR HASH NO LINK
 // ═══════════════════════════════════════════════════════════════
 function verificarAreaProtegida(){
   const hash=window.location.hash;
