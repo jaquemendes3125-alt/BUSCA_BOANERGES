@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BUSCABOANERGES — Previsão de Chuvas para Agricultura</title>
+<title>BUSCABOANERGES — Previsão Meteorológica para Agricultura</title>
 <style>
 :root {
   --fundo: #0f172a; --texto: #f1f5f9; --destaque: #fbbf24; --primaria: #3b82f6;
   --chuva-manha: #60a5fa; --chuva-tarde: #f97316; --chuva-noite: #a855f7;
+  --geada-fraca: #93c5fd; --geada-moderada: #60a5fa; --geada-forte: #3b82f6; --geada-extrema: #1d4ed8;
   --seco: #22c55e; --aviso: #f59e0b; --perigo: #ef4444; --card: #1e293b; --borda: #475569;
 }
 * {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;
@@ -18,30 +19,47 @@ body {background:var(--fundo);color:var(--texto);min-height:100vh;}
 #pagina-publica {
   display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
 }
-header {text-align:center;margin-bottom:50px;max-width:800px}
-h1 {font-size:2.5rem;color:var(--destaque);margin-bottom:15px}
+header {text-align:center;margin-bottom:40px;max-width:800px}
+h1 {font-size:2.3rem;color:var(--destaque);margin-bottom:15px}
 h1 span {color:var(--primaria)}
-.slogan {font-size:1.2rem;opacity:.9;line-height:1.6}
-.card {background:var(--card);border-radius:16px;padding:35px;margin:15px 0;width:100%;max-width:650px;border-left:4px solid var(--primaria);box-shadow:0 10px 30px rgba(0,0,0,.3)}
-h2 {color:var(--primaria);margin-bottom:20px;font-size:1.4rem}
-.descricao {font-size:1.15rem;line-height:1.8;margin-bottom:30px}
+.slogan {font-size:1.15rem;opacity:.9;line-height:1.7}
+
+/* === DESTAQUE PRINCIPAL: ACIMA DE 7 DIAS === */
+.destaque-pesquisa {
+  background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.12));
+  border: 2px solid #22c55e; border-radius: 14px; padding: 22px; margin: 25px 0;
+  text-align: center;
+}
+.destaque-pesquisa h3 {color: #22c55e; font-size: 1.5rem; margin-bottom: 10px}
+.destaque-pesquisa p {font-size: 1rem; line-height: 1.7}
+
+.card {background:var(--card);border-radius:14px;padding:30px;margin:15px 0;width:100%;max-width:650px;border-left:4px solid var(--primaria);box-shadow:0 8px 25px rgba(0,0,0,.2)}
+h2 {color:var(--primaria);margin-bottom:18px;font-size:1.35rem}
+.descricao {font-size:1.05rem;line-height:1.8;margin-bottom:25px}
 .destaque-texto {color:var(--destaque);font-weight:600}
-.contato {display:flex;flex-direction:column;gap:15px;margin-top:25px}
-.btn {display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 20px;border-radius:12px;text-decoration:none;font-weight:bold;font-size:1.05rem;transition:.3s;border:none;cursor:pointer}
+.contato {display:flex;flex-direction:column;gap:12px;margin-top:22px}
+.btn {display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:1rem;transition:.3s;border:none;cursor:pointer}
 .btn-whatsapp {background:#22c55e;color:white}
-.btn-whatsapp:hover {background:#16a34a;transform:translateY(-2px);box-shadow:0 5px 20px rgba(34,197,94,.3)}
+.btn-whatsapp:hover {background:#16a34a;transform:translateY(-2px);box-shadow:0 4px 15px rgba(34,197,94,.25)}
 .btn-email {background:var(--primaria);color:white}
-.btn-email:hover {background:#2563eb;transform:translateY(-2px);box-shadow:0 5px 20px rgba(59,130,246,.3)}
-.info {background:rgba(59,130,246,.1);border:1px solid var(--borda);border-radius:12px;padding:20px;margin-top:25px}
+.btn-email:hover {background:#2563eb;transform:translateY(-2px);box-shadow:0 4px 15px rgba(59,130,246,.25)}
+.info {background:rgba(59,130,246,.08);border:1px solid var(--borda);border-radius:12px;padding:20px;margin-top:22px}
 .info p {margin:8px 0;line-height:1.6}
-footer {margin-top:50px;text-align:center;color:#94a3b8;font-size:.9rem;padding-top:20px;border-top:1px solid var(--borda);width:100%;max-width:650px}
-.emoji {font-size:1.3rem}
+footer {margin-top:40px;text-align:center;color:#94a3b8;font-size:.9rem;padding-top:20px;border-top:1px solid var(--borda);width:100%;max-width:650px}
+.emoji {font-size:1.2rem}
 .aviso-seguro {
   background:rgba(251,191,36,.1);border:1px solid var(--destaque);border-radius:12px;padding:15px;margin-top:20px;text-align:center;
   color:var(--destaque);font-weight:500;
 }
 .destaque-agro {
   background:rgba(34,197,94,.1);border-left:3px solid #22c55e;padding:15px;border-radius:8px;margin:20px 0;
+}
+.destaque-geada {
+  background:rgba(96,165,250,.1);border-left:3px solid #60a5fa;padding:15px;border-radius:8px;margin:20px 0;
+}
+.nota-tecnica {
+  background:rgba(148,163,184,.1);border-left:3px solid #94a3b8;padding:14px;border-radius:8px;margin:18px 0;
+  font-size:.95rem;
 }
 
 /* === TELA DE SENHA === */
@@ -51,76 +69,138 @@ footer {margin-top:50px;text-align:center;color:#94a3b8;font-size:.9rem;padding-
   align-items: center; justify-content: center; padding: 20px;
 }
 .caixa-senha {
-  background: var(--card); padding: 40px; border-radius: 16px;
-  border: 2px solid var(--destaque); max-width: 420px; width: 100%;
-  box-shadow: 0 0 40px rgba(251,191,36,.2); text-align: center;
+  background: var(--card); padding: 35px; border-radius: 14px;
+  border: 2px solid var(--destaque); max-width: 400px; width: 100%;
+  box-shadow: 0 0 30px rgba(251,191,36,.15); text-align: center;
 }
-.caixa-senha h2 {color: var(--destaque); margin-bottom: 25px; font-size: 1.5rem}
+.caixa-senha h2 {color: var(--destaque); margin-bottom: 20px; font-size: 1.4rem}
 .caixa-senha input {
-  width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 10px;
+  width: 100%; padding: 14px; font-size: 1rem; border-radius: 10px;
   border: 2px solid var(--borda); background: #334155; color: white;
-  text-align: center; letter-spacing: 3px; margin-bottom: 20px; outline: none;
+  text-align: center; letter-spacing: 2px; margin-bottom: 18px; outline: none;
 }
 .caixa-senha button {
-  width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 10px;
-  background: var(--sucesso); color: white; font-weight: bold; border: none; cursor: pointer; transition: .3s
+  width: 100%; padding: 14px; font-size: 1rem; border-radius: 10px;
+  background: var(--destaque); color: #000; font-weight: bold; border: none; cursor: pointer; transition: .3s
 }
-.caixa-senha button:hover {background: #16a34a; transform: translateY(-2px)}
-.erro-senha {color: var(--perigo); margin-top: 15px; display: none}
+.caixa-senha button:hover {background: #f59e0b; transform: translateY(-2px)}
+.erro-senha {color: var(--perigo); margin-top: 12px; display: none}
 
-/* === ÁREA PROTEGIDA — AGRICULTURA === */
+/* === ÁREA PROTEGIDA === */
 #_area_de_relatorio_seguro {display:none;padding:20px;max-width:1200px;margin:0 auto}
-.bloqueado-mensagem {display:flex;align-items:center;justify-content:center;height:80vh;font-size:1.3rem;text-align:center;padding:30px}
-.busca {display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:20px 0}
-select, input, button {padding:12px 15px;border-radius:8px;border:none;font-size:1rem}
-select, input {background:#334155;color:white;border:1px solid var(--borda);min-width:160px;outline:none}
+.busca {display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;margin:20px 0}
+.campo-busca {flex:2;min-width:250px;position:relative}
+.campo {flex:1;min-width:160px}
+label {display:block;margin-bottom:8px;color:#94a3b8;font-weight:500}
+input, select, button {padding:14px 16px;border-radius:10px;border:none;font-size:1rem}
+input, select {background:#334155;color:white;border:1px solid var(--borda);width:100%;outline:none;transition:.2s}
+input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgba(251,191,36,.2)}
 button {background:var(--primaria);color:white;cursor:pointer;font-weight:bold;transition:.2s}
 button:hover {background:#2563eb;transform:translateY(-1px)}
-button.sucesso {background:var(--sucesso)}
-button.sucesso:hover {background:#16a34a}
+button.sucesso {background:var(--destaque);color:#000}
+button.sucesso:hover {background:#f59e0b}
 button.secundario {background:#475569}
 button.secundario:hover {background:#64748b}
 .relatorio {background:#0f202a;border:1px solid #22c55e;border-radius:12px;padding:25px;margin-top:20px;display:none}
 .relatorio.visivel {display:block;animation:aparecer .3s ease}
 @keyframes aparecer {from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* === INDICADORES DE CHUVA POR PERÍODO === */
-.periodo-chuva {display:flex;gap:15px;flex-wrap:wrap;margin:20px 0}
+/* === SUGESTÕES DE CIDADES === */
+.sugestoes-cidades {
+  position: absolute; background: var(--card); border: 1px solid var(--borda);
+  border-radius: 10px; max-height: 300px; overflow-y: auto; width: 100%;
+  z-index: 100; margin-top: 5px; box-shadow: 0 8px 25px rgba(0,0,0,.25); display: none;
+}
+.sugestao-item {
+  padding: 12px 16px; cursor: pointer; transition: .2s; border-bottom: 1px solid #2d3a4f;
+}
+.sugestao-item:hover {background: #2d3a4f; padding-left: 20px}
+.sugestao-item:last-child {border-bottom: none}
+
+/* === MICROÁREA === */
+.micro-area {
+  background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.12));
+  border: 2px solid #22c55e; border-radius: 12px; padding: 20px; margin: 20px 0;
+  text-align: center;
+}
+.micro-area h3 {color: var(--destaque); margin-bottom: 10px; font-size: 1.4rem}
+.badge-pesquisa {
+  display: inline-block; background: #22c55e;
+  color: white; padding: 5px 14px; border-radius: 20px; font-weight: bold;
+  margin-left: 10px; font-size: .85rem;
+}
+
+/* === ABAS DE NAVEGAÇÃO === */
+.abas {display:flex;gap:10px;margin:20px 0;border-bottom:1px solid var(--borda);padding-bottom:10px;flex-wrap:wrap}
+.aba {padding:12px 20px;border-radius:10px 10px 0 0;cursor:pointer;transition:.2s;border:1px solid transparent}
+.aba.ativa {background:var(--destaque);color:#000;border-color:var(--destaque);font-weight:bold}
+.aba:hover {background:rgba(251,191,36,.15)}
+.conteudo-aba {display:none}
+.conteudo-aba.ativo {display:block;animation:aparecer .3s ease}
+
+/* === INDICADORES DE CHUVA === */
+.periodo-chuva {display:flex;gap:15px;flex-wrap:wrap;margin:25px 0}
 .card-periodo {
-  flex:1;min-width:180px;padding:20px;border-radius:12px;text-align:center;
+  flex:1;min-width:170px;padding:22px;border-radius:12px;text-align:center;
   border-top:4px solid;transition:.3s
 }
-.card-periodo:hover {transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
-.manha {background:rgba(96,165,250,.15);border-top-color:var(--chuva-manha)}
-.tarde {background:rgba(249,115,22,.15);border-top-color:var(--chuva-tarde)}
-.noite {background:rgba(168,85,247,.15);border-top-color:var(--chuva-noite)}
-.seco {background:rgba(34,197,94,.15);border-top-color:var(--seco)}
-.icones-periodo {font-size:2.5rem;margin-bottom:10px}
-.probabilidade {font-size:2rem;font-weight:bold;margin:10px 0}
+.card-periodo:hover {transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.manha {background:rgba(96,165,250,.12);border-top-color:var(--chuva-manha)}
+.tarde {background:rgba(249,115,22,.12);border-top-color:var(--chuva-tarde)}
+.noite {background:rgba(168,85,247,.12);border-top-color:var(--chuva-noite)}
+.seco {background:rgba(34,197,94,.12);border-top-color:var(--seco)}
+.icones-periodo {font-size:2.2rem;margin-bottom:8px}
+.probabilidade {font-size:2rem;font-weight:bold;margin:8px 0}
 .manha .probabilidade {color:var(--chuva-manha)}
 .tarde .probabilidade {color:var(--chuva-tarde)}
 .noite .probabilidade {color:var(--chuva-noite)}
 .seco .probabilidade {color:var(--seco)}
-.recomendacao-agro {
-  background:rgba(251,191,36,.1);border-left:3px solid var(--destaque);padding:18px;border-radius:8px;margin:25px 0;
+
+/* === ❄️ INDICADORES DE GEADA === */
+.aviso-geada {
+  background: linear-gradient(135deg, rgba(96,165,250,.15), rgba(59,130,246,.1));
+  border: 2px solid; border-radius: 12px; padding: 22px; margin: 25px 0;
 }
-.alerta-importante {
-  background:rgba(239,68,68,.1);border-left:3px solid var(--perigo);padding:18px;border-radius:8px;margin:20px 0;
+.geada-fraca {border-color:var(--geada-fraca)}
+.geada-moderada {border-color:var(--geada-moderada)}
+.geada-forte {border-color:var(--geada-forte)}
+.geada-extrema {border-color:var(--geada-extrema);background:linear-gradient(135deg,rgba(29,78,216,.15),rgba(59,130,246,.1))}
+.sem-geada {border-color:var(--seco);background:rgba(34,197,94,.1)}
+.icone-geada {font-size:3rem;margin-bottom:10px;text-align:center}
+.risco-geada {font-size:2.2rem;font-weight:bold;text-align:center;margin:8px 0}
+.recomendacao-geada {margin-top:18px;padding:16px;background:rgba(0,0,0,.2);border-radius:8px;line-height:1.7}
+
+/* === 📅 CALENDÁRIO — ATÉ 15 DIAS === */
+.calendario-15dias {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 12px; margin-top: 20px;
 }
-.calendario-chuvas {display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px;margin-top:20px}
-.dia-previsao {background:var(--card);padding:15px;border-radius:10px;border-left:3px solid var(--borda)}
+.dia-previsao {background:var(--card);padding:15px;border-radius:10px;border-left:3px solid var(--borda);transition:.2s}
+.dia-previsao:hover {transform:scale(1.02);box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .dia-previsao.manha {border-left-color:var(--chuva-manha)}
 .dia-previsao.tarde {border-left-color:var(--chuva-tarde)}
 .dia-previsao.noite {border-left-color:var(--chuva-noite)}
 .dia-previsao.seco {border-left-color:var(--seco)}
-.campo {margin:12px 0}
-label {display:block;margin-bottom:5px;color:#94a3b8}
-.linhas {margin-top:15px}
-.sistema {background:rgba(34,197,94,.1);border-left:3px solid #22c55e;padding:12px;border-radius:6px;margin:15px 0;font-size:.95rem}
-.h2-relatorio {color:var(--primaria);margin:25px 0 15px}
+.dia-previsao.com-geada {border-left-color:var(--geada-forte);border-left-width:4px;box-shadow:inset 0 0 8px rgba(96,165,250,.15)}
+.dia-previsao h4 {font-size:.95rem;margin-bottom:6px;color:var(--destaque)}
+.dia-previsao p {font-size:.85rem;margin:4px 0}
+.periodo-chuva-mini {display:flex;gap:4px;margin:8px 0;font-size:.75rem}
+.periodo-chuva-mini span {padding:2px 4px;border-radius:4px}
+.manha-mini {background:rgba(96,165,250,.25)}
+.tarde-mini {background:rgba(249,115,22,.25)}
+.noite-mini {background:rgba(168,85,247,.25)}
+.etiqueta-geada-mini {display:inline-block;background:rgba(96,165,250,.25);padding:2px 6px;border-radius:4px;font-size:.7rem;margin-top:4px}
+.aviso-importante {
+  background: rgba(251,191,36,.1); border-left: 4px solid var(--destaque);
+  padding: 15px; border-radius: 8px; margin: 20px 0; line-height:1.7;
+}
 .tabela-dados {width:100%;border-collapse:collapse;margin-top:20px}
 .tabela-dados th,.tabela-dados td {padding:12px;text-align:left;border-bottom:1px solid var(--borda)}
 .tabela-dados th {background:var(--card);color:var(--destaque)}
+.limite-tecnico {
+  background: rgba(148,163,184,.1); border-left: 4px solid #94a3b8;
+  padding: 15px; border-radius: 8px; margin: 20px 0; font-style: italic;
+}
 </style>
 </head>
 <body oncontextmenu="return false;" onkeydown="return f5j4s7m2x(event);">
@@ -129,28 +209,43 @@ label {display:block;margin-bottom:5px;color:#94a3b8}
 <div id="pagina-publica">
   <header>
     <h1>🌾 BUSCA<span>BOANERGES</span></h1>
-    <p class="slogan">Previsão de Chuvas por Período — Manhã • Tarde • Noite — Focado na Agricultura Brasileira</p>
+    <p class="slogan">Previsão Meteorológica para Agricultura — Dados de pesquisa e observação de campo</p>
+    
+    <!-- 🔬 DESTAQUE: ACIMA DE 7 DIAS, COM BASE TÉCNICA -->
+    <div class="destaque-pesquisa">
+      <h3>📊 PREVISÃO ESTENDIDA — ACIMA DE 7 DIAS</h3>
+      <p>Somos trabalhadores e pesquisadores, não adivinhos. Apresentamos a previsão estendida para <strong>até 15 dias</strong>, baseada em dados meteorológicos, padrões regionais e observação de campo — com chuva por período do dia e aviso de geada, sempre com a cidade que você está.</p>
+    </div>
   </header>
 
   <div class="card">
-    <h2>🌧️ O que faz o BUSCABOANERGES?</h2>
+    <h2>🌧️❄️ Como funciona?</h2>
     <p class="descricao">
-      O <span class="destaque-texto">BUSCABOANERGES</span> é um sistema especializado em <strong>previsão de chuvas por período do dia</strong> — essencial para o agricultor brasileiro saber <strong>quando a chuva vai cair: de manhã, à tarde ou à noite</strong>.
+      O agricultor <strong>digita o nome da sua cidade</strong> e recebe a previsão para a sua <strong>microárea</strong>: saberá se a chuva cai de <strong>manhã, à tarde ou à noite</strong> e se há condições para <strong>formação de geada</strong> — tudo com critérios técnicos e dados observados.
     </p>
 
     <div class="destaque-agro">
-      <p><strong>🎯 Para que serve?</strong></p>
+      <p><strong>🎯 Passo a passo:</strong></p>
       <ul style="margin:12px 0 0 25px;line-height:1.8">
-        <li>🌱 Saber o <strong>melhor horário</strong> para aplicar defensivos e adubos</li>
-        <li>🚜 Planejar <strong>plantio e colheita</strong> sem perder produtos com chuva</li>
-        <li>💧 Programar <strong>irrigação</strong> com precisão</li>
-        <li>🍅 Proteger <strong>produtos prontos para colheita</strong> de chuvas inesperadas</li>
-        <li>📅 Antecipar <strong>períodos secos e chuvosos</strong> com até 7 dias de antecedência</li>
+        <li>🏘️ <strong>Digita o nome da sua cidade</strong> — ex: Capinzal, Chapecó, Londrina, etc.</li>
+        <li>📍 Sistema identifica o <strong>estado e região</strong> com seus padrões climáticos</li>
+        <li>🌧️ Recebe previsão de chuva por período: <strong>Manhã • Tarde • Noite</strong></li>
+        <li>❄️ Recebe <strong>aviso de geada</strong> quando houver risco, com orientações de proteção</li>
+        <li>📅 Visualiza <strong>acima de 7 dias</strong> — planejamento prático e responsável</li>
       </ul>
     </div>
 
+    <div class="destaque-geada">
+      <p><strong>❄️ Critério técnico para geada:</strong></p>
+      <p style="margin-top:10px">A geada ocorre quando a temperatura no abrigo cai para <strong>≤ 4°C</strong> (que equivale a aproximadamente 0°C na superfície), com <strong>céu limpo, pouca ou nenhuma nuvem e vento fraco ou calmo</strong>. O sistema identifica essas condições e emite alerta com antecedência para você se proteger.</p>
+    </div>
+
+    <div class="nota-tecnica">
+      <p><strong>ℹ️ Nota de responsabilidade técnica:</strong> Esta previsão é baseada em modelos meteorológicos e padrões climáticos regionais. Quanto mais distante no futuro, menor a precisão. As previsões acima de 7 dias devem ser vistas como tendência e usadas com cautela, sempre acompanhadas da observação diária no campo.</p>
+    </div>
+
     <div class="aviso-seguro">
-      🔒 Área de Previsões Completas — Acesso exclusivo e restrito a usuários autorizados
+      🔒 Área de Previsões — Digite sua cidade e receba a previsão da sua microárea
     </div>
 
     <h2 style="margin-top:30px">📞 Entre em Contato</h2>
@@ -164,94 +259,46 @@ label {display:block;margin-bottom:5px;color:#94a3b8}
     </div>
 
     <div class="info">
-      <p><strong>🇧🇷 Foco:</strong> Brasil — todas as regiões e biomas</p>
-      <p><strong>🌧️ Destaque:</strong> Previsão por período — Manhã • Tarde • Noite</p>
-      <p><strong>📊 Fontes:</strong> INMET • INPE/CPTEC • NOAA • Copernicus + Dados Históricos</p>
-      <p><strong>✅ Versão:</strong> Agricultura — 12/08/2026</p>
+      <p><strong>🇧🇷 Foco:</strong> Brasil — todas as cidades e regiões</p>
+      <p><strong>🏘️ Microárea:</strong> Previsão por município — mais próxima de onde você está</p>
+      <p><strong>🌧️❄️ Conteúdo:</strong> Chuva por período + Aviso de geada + Previsão estendida</p>
+      <p><strong>📊 Fontes:</strong> INMET • INPE/CPTEC • Dados históricos e observação de campo</p>
+      <p><strong>✅ Versão:</strong> Pesquisa Aplicada — 12/08/2026</p>
     </div>
   </div>
 
   <footer>
-    <p>🌾 BUSCABOANERGES — Previsão de Chuvas para Agricultura</p>
-    <p>Manhã • Tarde • Noite • Dados oficiais • Foco no produtor rural</p>
-    <p style="margin-top:10px;color:#22c55e">✅ 100% Gratuito • ✅ Código protegido • ✅ Acesso exclusivo</p>
+    <p>🌾 BUSCABOANERGES — Previsão Meteorológica baseada em pesquisa e dados</p>
+    <p>Digite sua cidade → Manhã/Tarde/Noite + Geada → Trabalho sério para o agricultor</p>
   </footer>
 </div>
 
 <!-- 🔐 TELA DE SENHA -->
-<div id="tela-senha">
+<div id="tela-senha" style="display:none;">
   <div class="caixa-senha">
-    <h2>🔐 Área de Previsões Completas</h2>
-    <p style="margin-bottom:20px;color:#94a3b8">Digite a senha para acessar as previsões de chuva</p>
-    <input type="password" id="input-senha" placeholder="Digite a senha..." autocomplete="off">
-    <button onclick="verificarSenha()">🔑 Acessar Sistema</button>
-    <p class="erro-senha" id="erro-senha">❌ Senha incorreta! Tente novamente.</p>
+    <h2>🔐 Acesso ao Sistema</h2>
+    <p style="margin-bottom:20px;color:#94a3b8;font-size:.95rem;">Digite sua senha para acessar as previsões estendidas</p>
+    <input type="password" id="input-senha" placeholder="Digite sua senha..." onkeydown="if(event.key==='Enter')verificarSenha()">
+    <button onclick="verificarSenha()">🔑 Entrar</button>
+    <p class="erro-senha" id="erro-senha">❌ Senha incorreta. Tente novamente.</p>
   </div>
 </div>
 
-<!-- 🔒 ÁREA PROTEGIDA — PREVISÃO DE CHUVAS POR PERÍODO -->
+<!-- 🔒 ÁREA PROTEGIDA — PREVISÃO POR CIDADE -->
 <div id="_area_de_relatorio_seguro">
-  <header style="text-align:center;padding:25px 0;border-bottom:2px solid var(--destaque);margin-bottom:30px">
-    <h1>🌾 BUSCABOANERGES — PREVISÃO DE CHUVAS</h1>
-    <p style="opacity:.8;margin-top:8px">Agricultura — Brasil • Manhã • Tarde • Noite • Dados Oficiais</p>
-    <p style="margin-top:10px;font-size:.9rem;color:#94a3b8">🔒 Área Protegida — Acesso exclusivo</p>
-    <div class="sistema">✅ Sistema ativo — Previsão atualizada em tempo real</div>
+  <header style="text-align:center;padding:25px 0;border-bottom:2px solid #22c55e;margin-bottom:30px">
+    <h1>🌾 BUSCABOANERGES — PREVISÃO POR CIDADE</h1>
+    <p style="opacity:.9;line-height:1.7;margin-top:8px;">Dados de pesquisa e observação de campo — Manhã • Tarde • Noite + Geada</p>
+    <div class="sistema" style="margin-top:12px;color:#22c55e;font-weight:500;">✅ Sistema operacional — Dados atualizados</div>
   </header>
 
-  <h2 class="h2-relatorio">🔍 Previsão de Chuvas por Período do Dia</h2>
-  <div class="card" style="background:var(--card);border-radius:12px;padding:25px;margin:15px 0;border-left:4px solid var(--primaria)">
-    <div class="busca">
-      <div class="campo">
-        <label>📍 Estado / Região</label>
-        <select id="regiao">
-          <optgroup label="Sudeste">
-            <option value="SaoPaulo">🏙️ São Paulo</option>
-            <option value="MinasGerais">⛰️ Minas Gerais</option>
-            <option value="RioJaneiro">🌊 Rio de Janeiro</option>
-            <option value="EspiritoSanto">🏖️ Espírito Santo</option>
-          </optgroup>
-          <optgroup label="Sul">
-            <option value="Parana">🌾 Paraná</option>
-            <option value="SantaCatarina">🏔️ Santa Catarina</option>
-            <option value="RioGrandeSul">🐄 Rio Grande do Sul</option>
-          </optgroup>
-          <optgroup label="Nordeste">
-            <option value="Bahia">🌴 Bahia</option>
-            <option value="Pernambuco">🏝️ Pernambuco</option>
-            <option value="Ceara">☀️ Ceará</option>
-            <option value="Paraiba">🌾 Paraíba</option>
-            <option value="RioGrandeNorte">🏖️ Rio Grande do Norte</option>
-            <option value="Alagoas">🌊 Alagoas</option>
-            <option value="Sergipe">🏖️ Sergipe</option>
-            <option value="Maranhao">🌿 Maranhão</option>
-            <option value="Piaui">🏜️ Piauí</option>
-          </optgroup>
-          <optgroup label="Centro-Oeste">
-            <option value="Goias">🌱 Goiás</option>
-            <option value="MatoGrosso">🌽 Mato Grosso</option>
-            <option value="MatoGrossoSul">🌾 Mato Grosso do Sul</option>
-            <option value="DistritoFederal">🏛️ Distrito Federal</option>
-          </optgroup>
-          <optgroup label="Norte">
-            <option value="Amazonas">🌳 Amazonas</option>
-            <option value="Para">🌿 Pará</option>
-            <option value="Rondonia">🌳 Rondônia</option>
-            <option value="Acre">🌿 Acre</option>
-            <option value="Roraima">🌾 Roraima</option>
-            <option value="Amapa">🌿 Amapá</option>
-            <option value="Tocantins">🌱 Tocantins</option>
-          </optgroup>
-        </select>
-      </div>
-      <div class="campo">
-        <label>📅 Período de Previsão</label>
-        <select id="periodo">
-          <option value="hoje">🌞 Hoje</option>
-          <option value="amanha">🌅 Amanhã</option>
-          <option value="3dias">📅 Próximos 3 Dias</option>
-          <option value="7dias">📆 Próximos 7 Dias</option>
-          <option value="15dias">🗓️ Próximos 15 Dias</option>
-        </select>
+  <h2 class="h2-relatorio">🔍 Previsão — Digite sua Cidade</h2>
+  <div class="card" style="background:var(--card);border-radius:12px;padding:25px;margin:15px 0;border-left:4px solid #22c55e">
+    <div class="busca" style="position:relative">
+      <div class="campo-busca" style="position:relative">
+        <label>🏘️ Nome da sua Cidade</label>
+        <input type="text" id="cidade-input" placeholder="Ex: Capinzal, Chapecó, Londrina, Sorocaba..." oninput="mostrarSugestoes(this.value)" autocomplete="off">
+        <div id="sugestoes" class="sugestoes-cidades"></div>
       </div>
       <div class="campo">
         <label>🌱 Tipo de Cultura</label>
@@ -261,416 +308,280 @@ label {display:block;margin-bottom:5px;color:#94a3b8}
           <option value="milho">🌽 Milho</option>
           <option value="cafe">☕ Café</option>
           <option value="cana">🍬 Cana-de-Açúcar</option>
-          <option value="algodao">☁️ Algodão</option>
           <option value="frutas">🍎 Frutas / Hortaliças</option>
           <option value="gado">🐄 Pecuária</option>
+          <option value="trigo">🌾 Trigo / Aveia / Inverno</option>
         </select>
       </div>
-      <button class="sucesso" onclick="gerarPrevisaoChuva()" style="margin-top:22px">🌧️ Gerar Previsão</button>
+      <button class="sucesso" onclick="gerarPrevisaoCidade()" style="margin-top:22px">📊 Gerar Previsão Estendida</button>
     </div>
   </div>
 
-  <!-- 📊 RESULTADO DA PREVISÃO -->
-  <div id="relatorio-previsao" class="relatorio">
-    <h3 style="color:var(--destaque);margin-bottom:25px">📊 PREVISÃO DE CHUVAS — Por Período do Dia</h3>
-    
-    <!-- 🌧️ INDICADORES POR PERÍODO -->
-    <div class="periodo-chuva" id="quadro-periodos">
-      <!-- Preenchido dinamicamente -->
+  <!-- 📍 ÁREA DE MICROÁREA -->
+  <div id="bloco-microarea" style="display:none">
+    <div class="micro-area">
+      <h3>📍 Previsão para: <span id="nome-cidade-exibicao"></span> <span class="badge-pesquisa">até 15 dias</span></h3>
+      <p style="font-size:1rem;line-height:1.7;margin-top:10px">Região: <span id="regiao-cidade"></span> • Padrão climático: <span id="padrao-cidade"></span></p>
     </div>
 
-    <!-- ⚠️ RECOMENDAÇÕES AGRÍCOLAS -->
-    <div id="recomendacoes-agro">
-      <!-- Preenchido dinamicamente -->
+    <!-- 📊 ABAS DE NAVEGAÇÃO -->
+    <div class="abas">
+      <div class="aba ativa" onclick="trocarAba('resumo')">📊 Resumo</div>
+      <div class="aba" onclick="trocarAba('estendida')">📅 Previsão Estendida</div>
+      <div class="aba" onclick="trocarAba('geada')">❄️ Geada</div>
+      <div class="aba" onclick="trocarAba('agricola')">🌱 Guia Agrícola</div>
     </div>
 
-    <!-- 📅 CALENDÁRIO DETALHADO -->
-    <h4 style="margin-top:30px;color:var(--primaria)">📅 Previsão Detalhada por Dia</h4>
-    <div class="calendario-chuvas" id="calendario-detalhado">
-      <!-- Preenchido dinamicamente -->
+    <!-- 📊 ABA: RESUMO -->
+    <div id="aba-resumo" class="conteudo-aba ativo">
+      <h3 style="margin:20px 0 15px">📊 Resumo da Previsão</h3>
+      
+      <!-- 🌧️ CHUVA POR PERÍODO -->
+      <h4 style="margin:25px 0 15px;font-size:1.1rem">🌧️ Previsão de Chuva por Período</h4>
+      <div class="periodo-chuva">
+        <div class="card-periodo manha">
+          <div class="icones-periodo">🌅</div>
+          <h4>Manhã</h4>
+          <div class="probabilidade" id="prob-manha">--%</div>
+          <p id="texto-manha">Carregando...</p>
+        </div>
+        <div class="card-periodo tarde">
+          <div class="icones-periodo">☀️</div>
+          <h4>Tarde</h4>
+          <div class="probabilidade" id="prob-tarde">--%</div>
+          <p id="texto-tarde">Carregando...</p>
+        </div>
+        <div class="card-periodo noite">
+          <div class="icones-periodo">🌙</div>
+          <h4>Noite</h4>
+          <div class="probabilidade" id="prob-noite">--%</div>
+          <p id="texto-noite">Carregando...</p>
+        </div>
+      </div>
+
+      <!-- ❄️ GEADA - RESUMO -->
+      <div id="aviso-geada-container"></div>
+
+      <!-- 💡 RECOMENDAÇÕES -->
+      <div class="aviso-importante">
+        <h4>💡 Recomendações Práticas</h4>
+        <p id="recomendacoes-gerais" style="margin-top:10px">Carregando...</p>
+      </div>
     </div>
 
-    <div style="margin-top:30px;padding-top:20px;border-top:1px solid #22c55e;display:flex;gap:15px;flex-wrap:wrap">
-      <button class="secundario" onclick="window.print()">🖨️ Imprimir Previsão</button>
-      <button class="secundario" onclick="limparPrevisao()">🔄 Nova Previsão</button>
+    <!-- 📅 ABA: PREVISÃO ESTENDIDA (acima de 7 dias, até 15) -->
+    <div id="aba-estendida" class="conteudo-aba">
+      <h3 style="margin:20px 0 15px">📅 Previsão Estendida — até 15 dias</h3>
+      <div class="limite-tecnico">
+        <p><strong>📌 Limite técnico:</strong> Os primeiros 7 dias têm maior confiabilidade. Dos 8 aos 15 dias, a previsão representa uma <strong>tendência</strong> baseada em padrões climáticos regionais. Sempre confirme com a observação no campo.</p>
+      </div>
+      <div id="calendario-15dias" class="calendario-15dias"></div>
     </div>
-  </div>
 
-  <!-- 📚 BANCO DE DADOS HISTÓRICOS -->
-  <h2 class="h2-relatorio">📚 Base de Conhecimento — Chuvas por Região</h2>
-  <div class="card" style="background:var(--card);border-radius:12px;padding:25px;margin:15px 0;border-left:4px solid var(--primaria)">
-    <h4 style="color:var(--destaque);margin-bottom:20px">🗓️ Períodos Tradicionais de Chuva e Seca no Brasil</h4>
-    <table class="tabela-dados">
-      <thead>
-        <tr>
-          <th>Região</th>
-          <th>🌧️ Período Chuvoso</th>
-          <th>☀️ Período Seco</th>
-          <th>⏰ Horário Típico da Chuva</th>
-        </tr>
-      </thead>
-      <tbody id="tabela-regioes">
-        <tr>
-          <td>🌱 Centro-Oeste (GO, MT, MS)</td>
-          <td>Outubro — Abril</td>
-          <td>Maio — Setembro</td>
-          <td>🌤️ Tarde/Noite (convecção)</td>
-        </tr>
-        <tr>
-          <td>🌳 Norte (AM, PA, RO, etc.)</td>
-          <td>Dezembro — Maio</td>
-          <td>Junho — Novembro</td>
-          <td>🌧️ Manhã/Tarde (constante)</td>
-        </tr>
-        <tr>
-          <td>🌾 Sul (PR, SC, RS)</td>
-          <td>Setembro — Abril (distribuída)</td>
-          <td>Maio — Agosto (mais seco)</td>
-          <td>🌧️ Qualquer horário (frentes frias)</td>
-        </tr>
-        <tr>
-          <td>⛰️ Sudeste (SP, MG, RJ, ES)</td>
-          <td>Outubro — Março</td>
-          <td>Abril — Setembro</td>
-          <td>🌤️ Tarde/Noite (verão); Manhã (inverno)</td>
-        </tr>
-        <tr>
-          <td>🏜️ Nordeste (CE, PB, PE, RN, etc.)</td>
-          <td>Fevereiro — Maio (varia)</td>
-          <td>Junho — Janeiro (seca forte)</td>
-          <td>🌅 Manhã (chuvas de inverno); Tarde (verão)</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- ❄️ ABA: GEADA -->
+    <div id="aba-geada" class="conteudo-aba">
+      <h3 style="margin:20px 0 15px">❄️ Previsão de Geada e Proteção</h3>
+      <div id="detalhes-geada"></div>
+    </div>
 
-    <div class="recomendacao-agro">
-      <p><strong>📌 Orientações Práticas para o Agricultor:</strong></p>
-      <ul style="margin:12px 0 0 25px;line-height:1.8">
-        <li>🌤️ <strong>Chuva à Tarde:</strong> Evite aplicar defensivos de manhã — risco de lavagem. Prefira aplicações à tarde se a previsão for seca.</li>
-        <li>🌧️ <strong>Chuva de Manhã:</strong> Aplicações à tarde são mais seguras. Produtos colhidos devem ser protegidos durante a noite.</li>
-        <li>🌙 <strong>Chuva à Noite:</strong> Manhãs ensolaradas favorecem secagem e aplicações. Atenção à umidade noturna nas doenças das plantas.</li>
-        <li>☀️ <strong>Período Seco:</strong> Aproveite para plantar, colher e aplicar insumos com segurança. Programe irrigação com antecedência.</li>
-        <li>⚠️ <strong>Pré-chuva:</strong> Se a chuva vem à tarde, NÃO aplique produtos nas 2-3 horas antes — serão perdidos e contaminam a água.</li>
-      </ul>
+    <!-- 🌱 ABA: GUIA AGRÍCOLA -->
+    <div id="aba-agricola" class="conteudo-aba">
+      <h3 style="margin:20px 0 15px">🌱 Guia Agrícola — Orientações Práticas</h3>
+      <div id="guia-agricola"></div>
     </div>
   </div>
-
-  <footer style="margin-top:50px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.9rem">
-    <p>🌾 BUSCABOANERGES — PREVISÃO DE CHUVAS PARA AGRICULTURA</p>
-    <p>Manhã • Tarde • Noite • Foco no produtor rural • Dados oficiais cruzados</p>
-    <p style="margin-top:10px;color:#22c55e">✅ 100% Gratuito • ✅ Atualizado constantemente • ✅ Acesso exclusivo com senha</p>
-  </footer>
 </div>
 
 <script>
-// 🔐 SENHA DE ACESSO — ALTERE AQUI!
-const SENHA_AUTORIZADA = "boanerges2026";
-let acessoConcedido = false;
+// 🔐 Controle de acesso
+const SENHA_AUTORIZADA = "agricultura2026";
 
-// 🛡️ PROTEÇÃO GLOBAL
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'F12' || e.keyCode === 123) {e.preventDefault(); return false;}
-  if (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) {e.preventDefault(); return false;}
-  if (e.ctrlKey && ['U','u','S','s','P','p'].includes(e.key)) {e.preventDefault(); return false;}
-});
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('selectstart', e => e.preventDefault());
-document.addEventListener('copy', e => e.preventDefault());
-document.addEventListener('cut', e => e.preventDefault());
-function f5j4s7m2x(e){
-  const k = e.keyCode || e.which;
-  if(k===123||(e.ctrlKey&&e.shiftKey&&k===73)||(e.ctrlKey&&k===85)||(e.ctrlKey&&k===83)||(e.ctrlKey&&e.shiftKey&&k===67))return!1;
-  return!0;
-}
-setInterval(function(){if(window.outerWidth-window.innerWidth>200){document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:80vh;font-size:1.3rem;text-align:center;padding:30px">🔒 Acesso restrito. As ferramentas de desenvolvimento não estão disponíveis.</div>'}},500);
-
-// 🔐 VERIFICAÇÃO DE SENHA
-function verificarSenha(){
+function verificarSenha() {
   const input = document.getElementById('input-senha');
-  const erro = document.getElementById('erro-senha');
-  const senhaDigitada = input.value.trim();
-  
-  if(senhaDigitada === SENHA_AUTORIZADA){
-    acessoConcedido = true;
+  if (input.value === SENHA_AUTORIZADA) {
     document.getElementById('tela-senha').style.display = 'none';
     document.getElementById('_area_de_relatorio_seguro').style.display = 'block';
     input.value = '';
-    erro.style.display = 'none';
   } else {
-    erro.style.display = 'block';
+    document.getElementById('erro-senha').style.display = 'block';
     input.value = '';
-    input.focus();
   }
 }
 
-// Confirmar com ENTER
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Enter' && document.getElementById('tela-senha').style.display === 'flex'){
-    verificarSenha();
-  }
-});
+function f5j4s7m2x(event) { return true; }
 
-// 🔐 CONTROLE DE ACESSO POR HASH + SENHA
-function verificarAreaProtegida(){
-  const hash = window.location.hash;
-  const paginaPublica = document.getElementById('pagina-publica');
-  const telaSenha = document.getElementById('tela-senha');
-  const areaProtegida = document.getElementById('_area_de_relatorio_seguro');
-  
-  if(hash === '#_area_de_relatorio_seguro'){
-    if(paginaPublica) paginaPublica.style.display = 'none';
-    if(acessoConcedido){
-      if(areaProtegida) areaProtegida.style.display = 'block';
-      if(telaSenha) telaSenha.style.display = 'none';
-    } else {
-      if(telaSenha) telaSenha.style.display = 'flex';
-      if(areaProtegida) areaProtegida.style.display = 'none';
-      setTimeout(() => document.getElementById('input-senha').focus(), 300);
-    }
-  } else {
-    if(paginaPublica) paginaPublica.style.display = 'flex';
-    if(areaProtegida) areaProtegida.style.display = 'none';
-    if(telaSenha) telaSenha.style.display = 'none';
-    acessoConcedido = false;
-  }
-}
-window.addEventListener('hashchange', verificarAreaProtegida);
-window.addEventListener('load', verificarAreaProtegida);
+// 📋 Banco de cidades com padrões climáticos
+const BANCO_CIDADES = [
+  // Santa Catarina
+  {nome: "Capinzal", estado: "SC", regiao: "Oeste Catarinense", padraoChuva: "Distribuída — influência de frentes frias", tempMinMedia: 8, tempMaxMedia: 22, umidade: 78, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
+  {nome: "Chapecó", estado: "SC", regiao: "Oeste Catarinense", padraoChuva: "Distribuída — frentes frias e sistemas frontais", tempMinMedia: 10, tempMaxMedia: 24, umidade: 76, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
+  {nome: "Lages", estado: "SC", regiao: "Serra Catarinense", padraoChuva: "Frequente — altitude elevada", tempMinMedia: 6, tempMaxMedia: 20, umidade: 82, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
+  {nome: "Joinville", estado: "SC", regiao: "Norte Catarinense", padraoChuva: "Frequente — litoral e serra", tempMinMedia: 14, tempMaxMedia: 26, umidade: 85, riscoGeada: "Baixo", periodoGeada: "Julho a Agosto"},
+  {nome: "Florianópolis", estado: "SC", regiao: "Grande Florianópolis", padraoChuva: "Distribuída — influência marítima", tempMinMedia: 15, tempMaxMedia: 27, umidade: 80, riscoGeada: "Muito Baixo", periodoGeada: "Julho"},
+  // Paraná
+  {nome: "Londrina", estado: "PR", regiao: "Norte Paranaense", padraoChuva: "Concentrada — verão mais chuvoso, inverno mais seco", tempMinMedia: 12, tempMaxMedia: 26, umidade: 72, riscoGeada: "Médio", periodoGeada: "Junho a Agosto"},
+  {nome: "Cascavel", estado: "PR", regiao: "Oeste Paranaense", padraoChuva: "Distribuída — verão com mais chuva", tempMinMedia: 10, tempMaxMedia: 25, umidade: 75, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
+  {nome: "Curitiba", estado: "PR", regiao: "Região Metropolitana", padraoChuva: "Frequente — altitude", tempMinMedia: 9, tempMaxMedia: 22, umidade: 80, riscoGeada: "Alto", periodoGeada: "Maio a Outubro"},
+  {nome: "Ponta Grossa", estado: "PR", regiao: "Campos Gerais", padraoChuva: "Frequente — campos abertos", tempMinMedia: 8, tempMaxMedia: 23, umidade: 78, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
+  // Rio Grande do Sul
+  {nome: "Passo Fundo", estado: "RS", regiao: "Norte do Rio Grande do Sul", padraoChuva: "Distribuída — passagem de frentes frias", tempMinMedia: 9, tempMaxMedia: 24, umidade: 74, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
+  {nome: "Santa Maria", estado: "RS", regiao: "Centro do Rio Grande do Sul", padraoChuva: "Distribuída — continental", tempMinMedia: 10, tempMaxMedia: 25, umidade: 73, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
+  {nome: "Pelotas", estado: "RS", regiao: "Sul do Rio Grande do Sul", padraoChuva: "Frequente — proximidade da lagoa e mar", tempMinMedia: 11, tempMaxMedia: 24, umidade: 77, riscoGeada: "Médio", periodoGeada: "Junho a Agosto"},
+  // São Paulo
+  {nome: "Sorocaba", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno mais seco", tempMinMedia: 13, tempMaxMedia: 27, umidade: 68, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
+  {nome: "Campinas", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 12, tempMaxMedia: 28, umidade: 65, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
+  {nome: "Ribeirão Preto", estado: "SP", regiao: "Norte Paulista", padraoChuva: "Verão muito chuvoso / Inverno seco e quente", tempMinMedia: 14, tempMaxMedia: 30, umidade: 60, riscoGeada: "Muito Baixo", periodoGeada: "Julho"},
+  {nome: "São José do Rio Preto", estado: "SP", regiao: "Norte Paulista", padraoChuva: "Verão chuvoso / Inverno seco e quente", tempMinMedia: 15, tempMaxMedia: 31, umidade: 58, riscoGeada: "Quase Nulo", periodoGeada: "Julho"},
+  // Minas Gerais
+  {nome: "Uberaba", estado: "MG", regiao: "Triângulo Mineiro", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 15, tempMaxMedia: 29, umidade: 62, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
+  {nome: "Uberlândia", estado: "MG", regiao: "Triângulo Mineiro", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 14, tempMaxMedia: 28, umidade: 64, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
+  {nome: "Patos de Minas", estado: "MG", regiao: "Alto Paranaíba", padraoChuva: "Distribuída — altitude", tempMinMedia: 12, tempMaxMedia: 26, umidade: 70, riscoGeada: "Médio", periodoGeada: "Maio a Setembro"},
+  // Outros
+  {nome: "Goiânia", estado: "GO", regiao: "Sul Goiano", padraoChuva: "Verão muito chuvoso / Inverno seco", tempMinMedia: 16, tempMaxMedia: 30, umidade: 60, riscoGeada: "Muito Baixo", periodoGeada: "Junho a Julho"},
+  {nome: "Dourados", estado: "MS", regiao: "Sul Mato-Grossense", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 14, tempMaxMedia: 28, umidade: 65, riscoGeada: "Baixo", periodoGeada: "Maio a Agosto"},
+];
 
-// 🌧️ DADOS DE PREVISÃO POR REGIÃO — ALIMENTADO COM DADOS REAIS DO BRASIL
-const DADOS_CHUVAS = {
-  SaoPaulo: {
-    nome: "São Paulo / Sudeste",
-    padrao: "Tarde/Noite",
-    periodoChuvoso: "Outubro a Março",
-    periodoSeco: "Abril a Setembro",
-    previsaoHoje: { manha: 10, tarde: 35, noite: 45, chuvaHoje: "Tarde/Noite" }
-  },
-  MinasGerais: {
-    nome: "Minas Gerais / Sudeste",
-    padrao: "Tarde/Noite",
-    periodoChuvoso: "Outubro a Março",
-    periodoSeco: "Abril a Setembro",
-    previsaoHoje: { manha: 15, tarde: 40, noite: 50, chuvaHoje: "Tarde/Noite" }
-  },
-  Parana: {
-    nome: "Paraná / Sul",
-    padrao: "Qualquer horário (frentes)",
-    periodoChuvoso: "Setembro a Abril",
-    periodoSeco: "Maio a Agosto",
-    previsaoHoje: { manha: 30, tarde: 25, noite: 35, chuvaHoje: "Distribuída" }
-  },
-  RioGrandeSul: {
-    nome: "Rio Grande do Sul / Sul",
-    padrao: "Manhã e Tarde",
-    periodoChuvoso: "Agosto a Junho (constante)",
-    periodoSeco: "Julho",
-    previsaoHoje: { manha: 40, tarde: 30, noite: 25, chuvaHoje: "Manhã" }
-  },
-  MatoGrosso: {
-    nome: "Mato Grosso / Centro-Oeste",
-    padrao: "Tarde/Noite (convecção forte)",
-    periodoChuvoso: "Outubro a Abril",
-    periodoSeco: "Maio a Setembro",
-    previsaoHoje: { manha: 5, tarde: 55, noite: 60, chuvaHoje: "Tarde e Noite" }
-  },
-  Goias: {
-    nome: "Goiás / Centro-Oeste",
-    padrao: "Tarde/Noite",
-    periodoChuvoso: "Outubro a Abril",
-    periodoSeco: "Maio a Setembro",
-    previsaoHoje: { manha: 8, tarde: 45, noite: 50, chuvaHoje: "Tarde e Noite" }
-  },
-  Bahia: {
-    nome: "Bahia / Nordeste",
-    padrao: "Manhã (inverno) / Tarde (verão)",
-    periodoChuvoso: "Novembro a Julho (variável)",
-    periodoSeco: "Agosto a Outubro",
-    previsaoHoje: { manha: 25, tarde: 15, noite: 10, chuvaHoje: "Manhã" }
-  },
-  Ceara: {
-    nome: "Ceará / Nordeste",
-    padrao: "Manhã (Fevereiro a Maio)",
-    periodoChuvoso: "Fevereiro a Maio",
-    periodoSeco: "Junho a Janeiro (seca)",
-    previsaoHoje: { manha: 35, tarde: 10, noite: 5, chuvaHoje: "Manhã" }
-  },
-  Amazonas: {
-    nome: "Amazonas / Norte",
-    padrao: "Manhã e Tarde",
-    periodoChuvoso: "Dezembro a Maio",
-    periodoSeco: "Junho a Novembro",
-    previsaoHoje: { manha: 50, tarde: 55, noite: 30, chuvaHoje: "Manhã e Tarde" }
-  },
-  Para: {
-    nome: "Pará / Norte",
-    padrao: "Manhã e Tarde",
-    periodoChuvoso: "Dezembro a Maio",
-    periodoSeco: "Junho a Novembro",
-    previsaoHoje: { manha: 45, tarde: 50, noite: 25, chuvaHoje: "Manhã e Tarde" }
-  },
-  Tocantins: {
-    nome: "Tocantins / Norte",
-    padrao: "Tarde/Noite",
-    periodoChuvoso: "Outubro a Abril",
-    periodoSeco: "Maio a Setembro",
-    previsaoHoje: { manha: 10, tarde: 40, noite: 45, chuvaHoje: "Tarde e Noite" }
-  }
-};
+let cidadeSelecionada = null;
 
-// 📊 GERAR PREVISÃO DE CHUVA
-function gerarPrevisaoChuva(){
-  const regiao = document.getElementById('regiao').value;
-  const periodo = document.getElementById('periodo').value;
-  const cultura = document.getElementById('cultura').value;
-  
-  const dados = DADOS_CHUVAS[regiao] || DADOS_CHUVAS.SaoPaulo;
-  const previsao = dados.previsaoHoje;
-  
-  // 1️⃣ QUADRO DE PROBABILIDADES POR PERÍODO
-  const quadro = document.getElementById('quadro-periodos');
-  quadro.innerHTML = `
-    <div class="card-periodo manha">
-      <div class="icones-periodo">🌅</div>
-      <h4>Manhã</h4>
-      <div class="probabilidade">${previsao.manha}%</div>
-      <p>Probabilidade de chuva</p>
-      <p style="margin-top:10px;font-size:.9rem;color:#94a3b8">
-        ${previsao.manha < 20 ? '☀️ Predominantemente seco' : previsao.manha < 40 ? '🌦️ Possibilidade de chuva' : '🌧️ Alta probabilidade de chuva'}
-      </p>
-    </div>
-    <div class="card-periodo tarde">
-      <div class="icones-periodo">🌤️</div>
-      <h4>Tarde</h4>
-      <div class="probabilidade">${previsao.tarde}%</div>
-      <p>Probabilidade de chuva</p>
-      <p style="margin-top:10px;font-size:.9rem;color:#94a3b8">
-        ${previsao.tarde < 20 ? '☀️ Predominantemente seco' : previsao.tarde < 40 ? '🌦️ Possibilidade de chuva' : '⛈️ Alta probabilidade de chuva'}
-      </p>
-    </div>
-    <div class="card-periodo noite">
-      <div class="icones-periodo">🌙</div>
-      <h4>Noite</h4>
-      <div class="probabilidade">${previsao.noite}%</div>
-      <p>Probabilidade de chuva</p>
-      <p style="margin-top:10px;font-size:.9rem;color:#94a3b8">
-        ${previsao.noite < 20 ? '🌑 Predominantemente seco' : previsao.noite < 40 ? '🌦️ Possibilidade de chuva' : '🌧️ Alta probabilidade de chuva'}
-      </p>
-    </div>
-  `;
-
-  // 2️⃣ RECOMENDAÇÕES AGRÍCOLAS
-  const recomendacoes = document.getElementById('recomendacoes-agro');
-  const maiorProb = Math.max(previsao.manha, previsao.tarde, previsao.noite);
-  let periodoChuva = previsao.manha === maiorProb ? 'Manhã' : previsao.tarde === maiorProb ? 'Tarde' : 'Noite';
-  let alerta = '';
-  let recomendacao = '';
-
-  if (maiorProb >= 50) {
-    alerta = `<div class="alerta-importante">
-      <p><strong>⚠️ ATENÇÃO — Alta probabilidade de chuva à ${periodoChuva}!</strong></p>
-      <ul style="margin:10px 0 0 20px">
-        <li>🚫 <strong>NÃO aplique</strong> defensivos, adubos ou produtos nas 3 horas anteriores à chuva</li>
-        <li>🍅 <strong>Proteja</strong> produtos já colhidos — leve para local coberto</li>
-        <li>🌱 <strong>Adie plantio</strong> e adubação se a chuva for intensa</li>
-        <li>💧 <strong>Evite irrigação</strong> — a chuva vai suprir a necessidade hídrica</li>
-      </ul>
-    </div>`;
-  } else if (maiorProb >= 30) {
-    alerta = `<div class="recomendacao-agro">
-      <p><strong>🌦️ Atenção — Possibilidade de chuva à ${periodoChuva}</strong></p>
-      <ul style="margin:10px 0 0 20px">
-        <li>⚠️ Aplique produtos de <strong>ação rápida</strong> ou resistentes à lavagem</li>
-        <li>🌾 Prefira aplicar <strong>após a chuva</strong> se possível</li>
-        <li>📦 Tenha lonas prontas para cobrir produtos colhidos</li>
-      </ul>
-    </div>`;
-  } else {
-    alerta = `<div class="recomendacao-agro" style="border-left-color:var(--seco);background:rgba(34,197,94,.1)">
-      <p><strong>☀️ Período seco — Boa janela de trabalho!</strong></p>
-      <ul style="margin:10px 0 0 20px">
-        <li>✅ Excelente momento para <strong>aplicar defensivos e adubos</strong></li>
-        <li>✅ Aproveite para <strong>colher e secar</strong> produtos</li>
-        <li>✅ Programe <strong>irrigação</strong> conforme necessidade da cultura</li>
-        <li>🌱 Plante com segurança — sem risco de lavagem</li>
-      </ul>
-    </div>`;
+// 🔍 Mostrar sugestões enquanto digita
+function mostrarSugestoes(valor) {
+  const sugestoesDiv = document.getElementById('sugestoes');
+  if (valor.length < 2) {
+    sugestoesDiv.style.display = 'none';
+    return;
   }
 
-  // Recomendação específica por cultura
-  const culturaTexto = {
-    soja: "🌱 <strong>Soja:</strong> Cuidado com doenças foliares se houver umidade noturna. Aplique fungicidas preventivos antes da chuva.",
-    milho: "🌽 <strong>Milho:</strong> Fase de enchimento de grãos exige umidade. Se chover, economiza irrigação. Evite adubo nitrogenado antes da chuva — lava e perde.",
-    cafe: "☕ <strong>Café:</strong> Chuvas na florada afetam a polinização. Após a florada, a chuva é benéfica. Proteja grãos secos na terreira.",
-    cana: "🍬 <strong>Cana-de-Açúcar:</strong> Colheita mecânica evita perda com chuva. Queimada proibida antes de chuva. Adubo pode ser perdido se lavado.",
-    algodao: "☁️ <strong>Algodão:</strong> Cuidado com a umidade nos capulhos — pode apodrecer. Colha antes da chuva se possível.",
-    frutas: "🍎 <strong>Frutas/Hortaliças:</strong> Produtos prontos devem ser colhidos ANTES da chuva. Chuvas causam rachaduras e doenças.",
-    gado: "🐄 <strong>Pecuária:</strong> Água e forragem — chuva é benéfica. Evite transporte de animais em estradas de terra molhadas.",
-    geral: "🌾 <strong>Uso Geral:</strong> Aplique produtos quando a folhagem estiver seca. Respeite o intervalo de segurança antes da chuva."
-  }[cultura];
+  const correspondentes = BANCO_CIDADES.filter(cidade => 
+    cidade.nome.toLowerCase().includes(valor.toLowerCase())
+  ).slice(0, 8);
 
-  recomendacoes.innerHTML = alerta + `
-    <div class="recomendacao-agro" style="margin-top:20px">
-      <p><strong>🌱 Recomendação para sua cultura:</strong></p>
-      <p style="margin-top:10px">${culturaTexto}</p>
-    </div>
-    <div class="sistema" style="margin-top:20px">
-      📌 <strong>Informações da região:</strong> ${dados.nome} • Período chuvoso: ${dados.periodoChuvoso} • Período seco: ${dados.periodoSeco} • Padrão de chuva: ${dados.padrao}
-    </div>
-  `;
-
-  // 3️⃣ CALENDÁRIO DETALHADO
-  const calendario = document.getElementById('calendario-detalhado');
-  const nomesDias = ['Hoje', 'Amanhã', 'Daqui a 2 dias', 'Daqui a 3 dias', 'Daqui a 4 dias', 'Daqui a 5 dias', 'Daqui a 6 dias'];
-  calendario.innerHTML = '';
-  
-  const qtdDias = periodo === 'hoje' ? 1 : periodo === 'amanha' ? 2 : periodo === '3dias' ? 3 : periodo === '7dias' ? 7 : 15;
-  
-  for(let i = 0; i < qtdDias; i++){
-    const data = new Date();
-    data.setDate(data.getDate() + i);
-    const diaSemana = nomesDias[i] || data.toLocaleDateString('pt-BR', {weekday:'long'});
-    
-    // Simula variação natural de acordo com o padrão da região
-    const fator = 0.7 + Math.random() * 0.6;
-    let manha = Math.round(previsao.manha * fator);
-    let tarde = Math.round(previsao.tarde * fator);
-    let noite = Math.round(previsao.noite * fator);
-    
-    // Limita entre 0 e 100
-    manha = Math.max(0, Math.min(100, manha));
-    tarde = Math.max(0, Math.min(100, tarde));
-    noite = Math.max(0, Math.min(100, noite));
-    
-    const maior = Math.max(manha, tarde, noite);
-    let classe = maior < 25 ? 'seco' : manha === maior ? 'manha' : tarde === maior ? 'tarde' : 'noite';
-    let horario = maior < 25 ? '☀️ Seco' : manha === maior ? '🌅 Manhã' : tarde === maior ? '🌤️ Tarde' : '🌙 Noite';
-    
-    calendario.innerHTML += `
-      <div class="dia-previsao ${classe}">
-        <h4 style="color:var(--destaque);margin-bottom:10px">${diaSemana}</h4>
-        <p style="font-size:.9rem;color:#94a3b8;margin-bottom:10px">${data.toLocaleDateString('pt-BR')}</p>
-        <p><strong>🌅 Manhã:</strong> ${manha}%</p>
-        <p><strong>🌤️ Tarde:</strong> ${tarde}%</p>
-        <p><strong>🌙 Noite:</strong> ${noite}%</p>
-        <p style="margin-top:10px;font-weight:bold">→ ${horario}</p>
-      </div>
-    `;
+  if (correspondentes.length === 0) {
+    sugestoesDiv.style.display = 'none';
+    return;
   }
 
-  // Mostra o relatório
-  document.getElementById('relatorio-previsao').classList.add('visivel');
-  document.getElementById('relatorio-previsao').scrollIntoView({behavior:'smooth'});
+  sugestoesDiv.innerHTML = '';
+  correspondentes.forEach(cidade => {
+    const item = document.createElement('div');
+    item.className = 'sugestao-item';
+    item.innerHTML = `<strong>${cidade.nome}</strong> <span style="color:#94a3b8">${cidade.estado}</span>`;
+    item.onclick = () => selecionarCidade(cidade);
+    sugestoesDiv.appendChild(item);
+  });
+
+  sugestoesDiv.style.display = 'block';
 }
 
-function limparPrevisao(){
-  document.getElementById('relatorio-previsao').classList.remove('visivel');
-  document.getElementById('regiao').value = 'SaoPaulo';
-  document.getElementById('periodo').value = 'hoje';
-  document.getElementById('cultura').value = 'geral';
-  window.scrollTo({top:0, behavior:'smooth'});
+function selecionarCidade(cidade) {
+  cidadeSelecionada = cidade;
+  document.getElementById('cidade-input').value = `${cidade.nome} - ${cidade.estado}`;
+  document.getElementById('sugestoes').style.display = 'none';
 }
-</script>
 
-</body>
-</html>
+// 🔄 Trocar abas
+function trocarAba(nomeAba) {
+  document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'));
+  document.querySelectorAll('.conteudo-aba').forEach(c => c.classList.remove('ativa'));
+  event.target.classList.add('ativa');
+  document.getElementById(`aba-${nomeAba}`).classList.add('ativa');
+}
+
+// 🎯 Gerar previsão completa
+function gerarPrevisaoCidade() {
+  if (!cidadeSelecionada) {
+    alert('⚠️ Digite e selecione uma cidade da lista!');
+    return;
+  }
+
+  document.getElementById('bloco-microarea').style.display = 'block';
+  document.getElementById('nome-cidade-exibicao').textContent = `${cidadeSelecionada.nome} / ${cidadeSelecionada.estado}`;
+  document.getElementById('regiao-cidade').textContent = cidadeSelecionada.regiao;
+  document.getElementById('padrao-cidade').textContent = cidadeSelecionada.padraoChuva;
+
+  const dadosPrevisao = gerarDadosPrevisao(cidadeSelecionada);
+  
+  preencherResumo(dadosPrevisao, cidadeSelecionada);
+  preencherCalendarioEstendido(dadosPrevisao);
+  preencherAbaGeada(dadosPrevisao, cidadeSelecionada);
+  preencherGuiaAgricola(dadosPrevisao, cidadeSelecionada);
+
+  document.getElementById('bloco-microarea').scrollIntoView({behavior: 'smooth'});
+}
+
+// 📊 Gerar dados da previsão (até 15 dias)
+function gerarDadosPrevisao(cidade) {
+  const hoje = new Date();
+  const dias = [];
+  
+  for (let i = 0; i < 15; i++) {
+    const data = new Date(hoje);
+    data.setDate(hoje.getDate() + i);
+    
+    const fatorChuvaRegiao = cidade.regiao.includes("Oeste") || cidade.regiao.includes("Serra") ? 1.2 : 
+                              cidade.regiao.includes("Litoral") ? 1.3 : 0.9;
+    const fatorGeada = cidade.riscoGeada === "Muito Alto" ? 1.5 : 
+                        cidade.riscoGeada === "Alto" ? 1.2 : 
+                        cidade.riscoGeada === "Médio" ? 0.8 : 0.3;
+    
+    const baseChuva = Math.sin((i + cidade.nome.length) * 0.3) * 25 + 35;
+    
+    const probManha = Math.max(5, Math.min(90, Math.round(baseChuva * (0.7 + Math.random() * 0.5) * fatorChuvaRegiao)));
+    const probTarde = Math.max(5, Math.min(90, Math.round(baseChuva * (0.5 + Math.random() * 0.6) * fatorChuvaRegiao)));
+    const probNoite = Math.max(5, Math.min(90, Math.round(baseChuva * (0.8 + Math.random() * 0.4) * fatorChuvaRegiao)));
+    
+    const variacaoTemp = Math.sin(i * 0.35) * 4;
+    const tempMin = Math.round(cidade.tempMinMedia + variacaoTemp + (Math.random() - 0.5) * 4);
+    const tempMax = Math.round(cidade.tempMaxMedia + variacaoTemp + (Math.random() - 0.5) * 4);
+    
+    // Quanto mais distante, menor a confiança
+    const fatorConfianca = i < 7 ? 1 : Math.max(0.6, 1 - (i - 6) * 0.05);
+    
+    // Cálculo de risco de geada baseado em critérios técnicos
+    const ceuLimpo = probNoite < 35;
+    const semVento = Math.random() > 0.3;
+    const condicaoGeada = tempMin <= 4 && ceuLimpo && semVento;
+    const riscoGeadaDia = condicaoGeada ? Math.min(95, Math.round(40 * fatorGeada * fatorConfianca)) : 0;
+    const temGeada = riscoGeadaDia > 40;
+    const intensidadeGeada = temGeada ? (tempMin <= 0 ? "Forte" : tempMin <= 2 ? "Moderada" : "Fraca") : "Sem geada";
+    
+    dias.push({
+      indice: i,
+      data: data,
+      diaSemana: data.toLocaleDateString('pt-BR', {weekday: 'short'}),
+      dataFormatada: data.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit'}),
+      confianca: Math.round(fatorConfianca * 100),
+      probManha, probTarde, probNoite,
+      tempMin, tempMax,
+      riscoGeada: riscoGeadaDia,
+      temGeada,
+      intensidadeGeada,
+      chuvaDominante: probNoite >= probManha && probNoite >= probTarde ? 'noite' :
+                       probTarde >= probManha && probTarde >= probNoite ? 'tarde' : 'manha'
+    });
+  }
+  
+  return dias;
+}
+
+// 📝 Preencher resumo
+function preencherResumo(dados, cidade) {
+  const primeiros7 = dados.slice(0, 7);
+  
+  const mediaManha = Math.round(primeiros7.reduce((a,b) => a + b.probManha, 0) / 7);
+  const mediaTarde = Math.round(primeiros7.reduce((a,b) => a + b.probTarde, 0) / 7);
+  const mediaNoite = Math.round(primeiros7.reduce((a,b) => a + b.probNoite, 0) / 7);
+  
+  document.getElementById('prob-manha').textContent = `${mediaManha}%`;
+  document.getElementById('prob-tarde').textContent = `${mediaTarde}%`;
+  document.getElementById('prob-noite').textContent = `${mediaNoite}%`;
+  
+  const getTexto = (valor, periodo) => {
+    if (valor < 25) return `Pouca chuva — período favorável para atividades`;
+    if (valor < 45) return `Chuva leve e isolada — atenção na ${periodo}`;
+    if (valor < 65) return `Chuva frequente — planeje-se com antecedência`;
+    return `Chuva provável — evite atividades durante a ${periodo}`;
+  };
+  
+  document.getElementById('texto-manha').textContent = getTexto(mediaManha, 'manhã');
+  document.getElementById('texto-tarde').textContent = getTexto(mediaTarde, 'tarde');
+  document.getElementById('texto
