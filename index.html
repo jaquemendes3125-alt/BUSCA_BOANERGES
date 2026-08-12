@@ -375,12 +375,14 @@ button.secundario:hover {background:#64748b}
 </div>
 
 <script>
-// 🔐 CONTROLE DE ACESSO
+// 🔐 SENHA FIXA
 const SENHA_AUTORIZADA = "agricultura2026";
 
+// 🔐 FUNÇÕES DE CONTROLE DE ACESSO
 function abrirTelaSenha() {
   document.getElementById('tela-senha').style.display = 'flex';
   document.getElementById('pagina-publica').style.filter = 'blur(4px)';
+  document.getElementById('input-senha').focus();
 }
 
 function fecharTelaSenha() {
@@ -388,6 +390,7 @@ function fecharTelaSenha() {
   document.getElementById('pagina-publica').style.filter = 'none';
   document.getElementById('input-senha').value = '';
   document.getElementById('erro-senha').style.display = 'none';
+  window.location.hash = '';
 }
 
 function verificarSenha() {
@@ -397,9 +400,11 @@ function verificarSenha() {
     document.getElementById('pagina-publica').style.display = 'none';
     document.getElementById('_area_de_relatorio_seguro').style.display = 'block';
     input.value = '';
+    window.location.hash = '_area_de_relatorio_seguro';
   } else {
     document.getElementById('erro-senha').style.display = 'block';
     input.value = '';
+    input.focus();
   }
 }
 
@@ -409,7 +414,23 @@ function sairAreaProtegida() {
   document.getElementById('bloco-microarea').style.display = 'none';
   document.getElementById('cidade-input').value = '';
   cidadeSelecionada = null;
+  window.location.hash = '';
 }
+
+// ✅ === CÓDIGO ATUALIZADO: DETECTA A ÂNCORA E ABRE A SENHA AUTOMATICAMENTE ===
+window.addEventListener('load', function() {
+  if (window.location.hash === '#_area_de_relatorio_seguro') {
+    setTimeout(() => {
+      abrirTelaSenha();
+    }, 300);
+  }
+});
+
+window.addEventListener('hashchange', function() {
+  if (window.location.hash === '#_area_de_relatorio_seguro') {
+    abrirTelaSenha();
+  }
+});
 
 // 📋 Banco de cidades com padrões climáticos
 const BANCO_CIDADES = [
@@ -618,22 +639,4 @@ function preencherAbaGeada(dados, cidade) {
         <div class="icone-geada">❄️</div>
         <h3 style="text-align:center">⚠️ Risco de Geada — ${diasComGeada.length} dia(s) detectado(s)</h3>
         <p style="text-align:center;margin-top:10px">Período de risco para ${cidade.nome}/${cidade.estado}: ${cidade.periodoGeada}</p>
-        <div class="recomendacao-geada">
-          <p><strong>🛡️ Medidas de Proteção:</strong></p>
-          <ul style="margin:10px 0 0 25px;line-height:1.7">
-            <li>🌾 Cobrir plantas com lona, palha ou plástico</li>
-            <li>💧 Irrigação leve à noite ajuda a manter temperatura</li>
-            <li>🔥 Uso de queimadores/fogueiras no pomar/viveiro</li>
-            <li>🌫️ Criar névoa ou fumaça retém calor próximo ao solo</li>
-            <li>⏰ Ações mais eficazes iniciam-se 2h antes do esperado</li>
-          </ul>
-        </div>
-      </div>
-    `;
-  }
-}
-
-// 🌱 Preencher guia agrícola
-function preencherGuiaAgricola(dados, cidade) {
-  const container = document.getElementById('guia-agricola');
-  const cultura = document.getElementById('cultura').value;
+        <div class="recomendacao
