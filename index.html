@@ -8,7 +8,7 @@
 :root {
   --fundo: #0f172a; --texto: #f1f5f9; --destaque: #fbbf24; --primaria: #22c55e;
   --alerta: #f59e0b; --perigo: #ef4444; --card: #1e293b; --borda: #334155;
-  --info: #3b82f6; --inversao: #8b5cf6;
+  --info: #3b82f6; --inversao: #8b5cf6; --aviso: #94a3b8;
 }
 * {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
 body {background:var(--fundo);color:var(--texto);min-height:100vh;line-height:1.6}
@@ -81,6 +81,8 @@ input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgb
 .contato-item {display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0;font-size:1.1rem}
 .contato-item .icone {font-size:1.3rem}
 footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #334155;color:#94a3b8;text-align:center}
+.aviso-legal {background:rgba(148,163,184,.1);border:1px solid #475569;border-radius:12px;padding:20px;margin-top:30px;text-align:left;font-size:.9rem;color:#cbd5e1}
+.aviso-legal h4 {color:var(--aviso);margin-bottom:10px}
 
 .relatorio {background:var(--card);border-radius:16px;padding:30px;margin-top:30px;border:2px solid var(--primaria)}
 .relatorio-cabecalho {display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:30px}
@@ -117,6 +119,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 .indicador-janela {font-weight:bold;font-size:.95rem}
 .resumo-pratico {background:rgba(34,197,94,.05);border:2px solid var(--primaria);border-radius:12px;padding:25px;margin-top:30px}
 .resumo-pratico h3 {color:var(--primaria);margin-top:0}
+.rodape-aviso {margin-top:30px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.85rem}
 </style>
 </head>
 <body>
@@ -129,7 +132,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 
     <div class="destaque-apresentacao">
       <h2>📊 O QUE FAZEMOS</h2>
-      <p>Analisamos as condições reais do clima — combinando padrão histórico e momento atual — para indicar com precisão quando a janela de pulverização está aberta, com atenção ou fechada.</p>
+      <p>Analisamos as condições climáticas — combinando padrão histórico e momento atual — para indicar com precisão quando a janela de pulverização está aberta, com atenção ou fechada.</p>
     </div>
 
     <div class="grid-apresentacao">
@@ -165,42 +168,42 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
       </div>
     </div>
 
-    <!-- === BASE DE DADOS OFICIAIS === -->
+    <!-- === FONTES DE DADOS — TERMOS GENÉRICOS === -->
     <div class="destaque-apresentacao info">
-      <h2>🏛️ BASE DE DADOS OFICIAIS</h2>
-      <p>O BUSCABOANERGES utiliza como referência os mesmos critérios técnicos do INMET, CPTEC/INPE e REDEMET, garantindo precisão e confiabilidade.</p>
+      <h2>📚 FONTES DE INFORMAÇÃO</h2>
+      <p>O sistema utiliza dados públicos disponibilizados por estações meteorológicas, modelos numéricos de previsão e registros climatológicos.</p>
     </div>
 
     <div class="grid-apresentacao">
       <div class="card-funcionalidade">
         <div class="icone">📡</div>
-        <h3>INMET — Tempo Real</h3>
-        <p>Estações automáticas com medições horárias de vento, temperatura, chuva e umidade. Principal fonte oficial do Brasil.</p>
+        <h3>Estações em Tempo Real</h3>
+        <p>Medições horárias de vento, temperatura, chuva e umidade obtidas de estações automáticas distribuídas por todo o território nacional.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌐</div>
-        <h3>CPTEC/INPE — Previsão</h3>
-        <p>Modelos numéricos de alta resolução para vento, frentes frias e circulação atmosférica. Previsão de 7 a 15 dias.</p>
+        <h3>Modelos Numéricos de Previsão</h3>
+        <p>Dados de previsão de até 15 dias, incluindo análise de vento, sistemas atmosféricos e aproximação de frentes frias.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">✈️</div>
-        <h3>REDEMET — Precisão</h3>
-        <p>Dados METAR em tempo real: velocidade e direção do vento com precisão de minutos. Referência de confiabilidade.</p>
+        <h3>Dados de Precisão Horária</h3>
+        <p>Registros frequentes de velocidade e direção do vento, atualizados a cada hora em pontos de observação.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">❄️</div>
-        <h3>Alerta de Geada</h3>
-        <p>Regra técnica: T ≤ 4°C + vento fraco + umidade alta + céu claro — detectado principalmente entre 03h e 06h.</p>
+        <h3>Condições de Geada</h3>
+        <p>Identificação de cenários com temperatura baixa, vento fraco e alta umidade — fatores que favorecem a formação de geada.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌅</div>
         <h3>Análise por Período</h3>
-        <p>🌅 Manhã (06h-12h) | ☀️ Tarde (12h-18h) | 🌙 Noite (18h-06h). Cada período com sua regra própria e risco específico.</p>
+        <p>🌅 Manhã (06h-12h) | ☀️ Tarde (12h-18h) | 🌙 Noite (18h-06h). Cada período analisado com critérios próprios.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">📚</div>
-        <h3>Normais Climatológicas</h3>
-        <p>Padrão histórico de 30 anos: direção predominante do vento, dias de geada, precipitação média — tudo por mês e horário.</p>
+        <div class="icone">📊</div>
+        <h3>Padrões Históricos</h3>
+        <p>Médias climáticas de longo prazo — direção predominante do vento, precipitação média e temperatura por mês e horário.</p>
       </div>
     </div>
 
@@ -211,9 +214,16 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
       <div class="contato-item"><span class="icone">🇧🇷</span> Foco: Brasil — todas as cidades e regiões</div>
     </div>
 
+    <!-- === DISCLAIMER DE ISENÇÃO DE VÍNCULO OFICIAL === -->
+    <div class="aviso-legal">
+      <h4>⚠️ AVISO IMPORTANTE — PROJETO INDEPENDENTE</h4>
+      <p><strong>Este é um projeto independente, de caráter informativo e sem vínculo oficial.</strong> Os dados apresentados são obtidos de fontes públicas e de livre acesso, conforme a Lei de Acesso à Informação. Não representa, substitui ou tem qualquer vínculo com instituições governamentais. Para dados oficiais e decisões oficiais, consulte sempre diretamente os canais oficiais dos órgãos competentes.</p>
+      <p style="margin-top:10px">A utilização das informações é de total responsabilidade do usuário. O sistema atua apenas como ferramenta de apoio à decisão, não se responsabilizando por eventuais divergências entre os dados apresentados e a realidade local no momento da aplicação.</p>
+    </div>
+
     <footer class="apresentacao">
       <p>🌾 BUSCABOANERGES — Previsão baseada em padrões climáticos e dados atuais</p>
-      <p>Versão: 2.2 — Agosto de 2026 | Trabalho sério para o agricultor</p>
+      <p>Versão: 2.2 — Agosto de 2026 | Projeto independente e de acesso público</p>
     </footer>
   </div>
 </div>
@@ -322,30 +332,24 @@ const datas = ['12/08','13/08','14/08','15/08','16/08','17/08','18/08','19/08','
 
 // ==================================================
 // 🫀 FÓRMULA PRINCIPAL — ATIVA E OCULTA
-// I = 64 × O ÷ R
 // ==================================================
 
 function calcularIndice(cidade, periodo, dia) {
   const regiaoMT = cidade.includes('MT') || cidade.includes('Sorriso');
   
-  // LEITURAS → Padrão Estrutural e Contexto
   const leituraHistorica = regiaoMT ? {manha: 72, tarde: 35, noite: 78} : {manha: 75, tarde: 52, noite: 80};
   const leituraAtual = regiaoMT ? {manha: 68, tarde: 42, noite: 74} : {manha: 70, tarde: 58, noite: 76};
   const contexto = regiaoMT ? 1.15 : 1.00;
   
-  // FÓRMULA L = (PE × EC) ÷ CM
   const PE = leituraHistorica[periodo];
   const EC = leituraAtual[periodo] + Math.sin(dia * 0.5) * 6;
   const L = (PE * EC) / (64 * contexto);
   
-  // O e R derivados de L
   const O = Math.max(1, Math.min(4, Math.round(L / 20)));
   const R = O >= 3 ? 1 : 2;
   
-  // FÓRMULA PRINCIPAL — I = 64 × O ÷ R 【ATIVA, OCULTA, FUNCIONANDO】
-  const I = Math.round(64 * O / R);
+  const I = Math.round(64 * O / R); // Fórmula ativa, oculta
   
-  // REGRA DE 7 UNIDADES — Projeção temporal
   const fatorTempo = dia < 7 ? 1 : (I === 32 ? 0.65 : 0.85);
   
   return { I, O, R, fatorTempo, regiaoMT };
@@ -558,14 +562,14 @@ function gerarRelatorio() {
       </div>
 
       <div class="regra-ouro tecnico">
-        <h4>📐 CONVERSÃO E PADRÃO TÉCNICO — CONFORME INMET</h4>
+        <h4>📐 CONVERSÃO E PADRÃO TÉCNICO</h4>
         <ul style="margin-left:20px;line-height:1.8;margin-top:10px">
-          <li>🌬️ <strong>Unidades:</strong> 1 nó = 1,852 km/h | 1 m/s = 3,6 km/h — INMET fornece em m/s e km/h</li>
-          <li>🧭 <strong>Direção do Vento:</strong> 0°=Norte, 90°=Leste, 180°=Sul, 270°=Oeste — indica de onde o vento sopra</li>
+          <li>🌬️ <strong>Unidades de vento:</strong> 1 nó = 1,852 km/h | 1 m/s = 3,6 km/h</li>
+          <li>🧭 <strong>Direção do vento:</strong> indica de onde o vento sopra — 0°=Norte, 90°=Leste, 180°=Sul, 270°=Oeste</li>
           <li>🌅 <strong>Manhã (06h-12h):</strong> Vento mais estável, umidade mais alta — menor risco de geada</li>
           <li>☀️ <strong>Tarde (12h-18h):</strong> Vento atinge pico, temperatura máxima, umidade mínima — atenção a chuva de convecção</li>
           <li>🌙 <strong>Noite (18h-06h):</strong> Vento diminui, umidade sobe, temperatura cai — ⚠️ MÁXIMO RISCO de geada e inversão</li>
-          <li>❄️ <strong>Geada:</strong> T ≤ 4°C + vento < 5 km/h + umidade ≥ 85% + céu claro — principalmente entre 03h e 06h</li>
+          <li>❄️ <strong>Condições de geada:</strong> Temperatura baixa + vento fraco + umidade alta — principalmente entre 03h e 06h</li>
         </ul>
       </div>
 
@@ -606,22 +610,22 @@ function gerarRelatorio() {
       </table>
 
       <div class="resumo-pratico">
-        <h3>📝 RESUMO PRÁTICO — BASEADO EM DADOS OFICIAIS</h3>
+        <h3>📝 RESUMO PRÁTICO</h3>
         <ul style="margin-left:20px;line-height:2">
-          <li><strong>🌅 Manhã (06h–10h):</strong> Melhor horário — vento mais estável, umidade mais alta, temperatura amena. <strong>JANELA MAIS SEGURA.</strong> Dados INMET confirmam menor variabilidade.</li>
+          <li><strong>🌅 Manhã (06h–10h):</strong> Melhor horário — vento mais estável, umidade mais alta, temperatura amena. <strong>JANELA MAIS SEGURA.</strong></li>
           <li><strong>☀️ Tarde (12h–18h):</strong> ⚠️ CUIDADO — temperatura sobe, umidade cai, vento atinge pico. Em regiões quentes e secas, a tarde é quase sempre <strong>JANELA FECHADA</strong> por umidade insuficiente.</li>
-          <li><strong>🌙 Noite:</strong> 🌫️ PERIGO — risco de INVERSÃO TÉRMICA e GEADA. Vento fraco + ar frio em camada baixa = produto flutua e se perde. <strong>NÃO APLIQUE À NOITE sem confirmar vento >5 km/h e T > 4°C.</strong></li>
-          <li><strong>❄️ Geada:</strong> T ≤ 4°C + vento < 5 km/h + umidade alta = geada provável. Ocorre principalmente entre 03h e 06h. Bloqueia qualquer aplicação.</li>
+          <li><strong>🌙 Noite:</strong> 🌫️ PERIGO — risco de INVERSÃO TÉRMICA e GEADA. Vento fraco + ar frio em camada baixa = produto flutua e se perde. <strong>NÃO APLIQUE À NOITE sem confirmar vento adequado e temperatura acima do limiar de risco.</strong></li>
+          <li><strong>❄️ Geada:</strong> Temperaturas baixas + vento fraco + umidade alta = risco de geada. Ocorre principalmente na madrugada. Bloqueia qualquer aplicação.</li>
           <li><strong>💧 Regra de sobrevivência:</strong> Se umidade <50% → NÃO APLIQUE. O dinheiro vai para o ar, não para a planta. Não importa se não vai chover.</li>
-          <li><strong>📊 Confiabilidade:</strong> 🌅 Manhã = 90% | ☀️ Tarde = 75% | 🌙 Noite = 60% — baseado em Normais Climatológicas INMET (30 anos de dados).</li>
+          <li><strong>📊 Confiabilidade:</strong> 🌅 Manhã = 90% | ☀️ Tarde = 75% | 🌙 Noite = 60% — baseado em padrões históricos.</li>
         </ul>
       </div>
 
-      <div style="margin-top:30px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8">
-        <p><strong>🌾 BUSCABOANERGES</strong> — Base técnica: INMET, CPTEC/INPE, REDEMET e Normais Climatológicas</p>
+      <div class="rodape-aviso">
+        <p><strong>🌾 BUSCABOANERGES</strong> — Projeto independente de apoio à decisão</p>
         <p>Versão: 2.2 — Agosto de 2026</p>
-        <p style="font-size:.9rem;margin-top:10px">⚠️ Sempre confira vento e umidade no local antes de aplicar — condições podem mudar rapidamente. Consulte INMET para dados em tempo real.</p>
-        <p style="font-size:.85rem;color:#64748b;margin-top:8px">Fontes: INMET (medição), CPTEC/INPE (modelo numérico), REDEMET (METAR aeronáutico), Normais Climatológicas 1991-2020</p>
+        <p style="margin-top:10px">⚠️ <strong>Aviso importante:</strong> Este é um projeto independente, sem vínculo com qualquer órgão governamental. Os dados apresentados são baseados em informações públicas e têm caráter orientativo. Sempre verifique as condições diretamente no local antes de tomar qualquer decisão.</p>
+        <p style="margin-top:8px">Para informações oficiais, consulte as fontes públicas de dados meteorológicos.</p>
       </div>
     </div>
   `;
