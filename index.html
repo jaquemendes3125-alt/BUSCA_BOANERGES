@@ -113,11 +113,6 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 .indicador-janela {font-weight:bold;font-size:.95rem}
 .resumo-pratico {background:rgba(34,197,94,.05);border:2px solid var(--primaria);border-radius:12px;padding:25px;margin-top:30px}
 .resumo-pratico h3 {color:var(--primaria);margin-top:0}
-
-.bloco-formulas {background:rgba(251,191,36,.05);border:2px solid var(--destaque);border-radius:12px;padding:25px;margin:25px 0}
-.bloco-formulas h3 {color:var(--destaque);margin-top:0;margin-bottom:15px}
-.formula-item {font-family:monospace;font-size:1.05rem;padding:10px 0;border-bottom:1px solid #334155}
-.formula-item:last-child {border-bottom:none}
 </style>
 </head>
 <body>
@@ -132,14 +127,6 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
       <h2>📊 O QUE FAZEMOS</h2>
       <p>Analisamos as condições reais do clima — combinando padrão histórico e momento atual — organizando dados de temperatura, chuva e umidade em blocos de dias semelhantes. Classificamos cada período como <strong>Favorável, Atenção ou Desfavorável</strong>, indicando as melhores janelas para preparo de solo, adubação, aplicação de defensivos, plantio e colheita.</p>
       <p style="margin-top:15px;font-size:1.1rem;color:var(--destaque)"><strong>🎯 Confiança de 94% a 95%</strong></p>
-    </div>
-
-    <div class="bloco-formulas">
-      <h3>📐 FÓRMULAS PRÓPRIAS DE CÁLCULO — DESENVOLVIMENTO EXCLUSIVO</h3>
-      <div class="formula-item"><strong>FCA</strong> = ∑(Vi × Pi) ÷ √(Variância × Entropia)</div>
-      <div class="formula-item"><strong>Entropia I</strong> = −∑pi · log₂pi</div>
-      <div class="formula-item"><strong>Resultado Rn</strong> = Mn × (1 − δn)</div>
-      <p style="margin-top:15px;color:#cbd5e1">📖 Banco de dados com exigências climáticas e janelas de plantio por cultura: Soja, Milho, Cana, Café, Algodão, Feijão, Arroz, Laranja, Hortaliças.<br>🔄 Agrupamento automático em blocos + recomendação prática.</p>
     </div>
 
     <div class="grid-apresentacao">
@@ -180,7 +167,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
       <ul style="text-align:left;max-width:600px;margin:0 auto;line-height:1.8">
         <li>📡 <strong>Dados meteorológicos:</strong> Open-Meteo / INMET</li>
         <li>🌱 <strong>Janelas e regras agrícolas:</strong> Embrapa / MAPA-ZARC</li>
-        <li>🧮 <strong>Fórmulas, lógica e recomendações:</strong> Desenvolvimento próprio do autor</li>
+        <li>🧮 <strong>Sistema de cálculo:</strong> Desenvolvimento próprio do autor</li>
       </ul>
     </div>
 
@@ -198,7 +185,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
     <footer class="apresentacao">
       <p>🌾 BUSCABOANERGES — Sistema de Previsão Agroclimática</p>
       <p>Versão: 2.1 — Agosto de 2026 | Trabalho sério para o agricultor</p>
-      <p style="margin-top:10px;color:var(--destaque)">✅ Fórmulas próprias íntegras — Confiança 94%–95%</p>
+      <p style="margin-top:10px;color:var(--destaque)">✅ Sistema de cálculo próprio — Confiança 94%–95%</p>
     </footer>
   </div>
 </div>
@@ -308,10 +295,8 @@ const diasSemana = ['Qua','Qui','Sex','Sáb','Dom','Seg','Ter','Qua','Qui','Sex'
 const datas = ['12/08','13/08','14/08','15/08','16/08','17/08','18/08','19/08','20/08','21/08','22/08','23/08','24/08','25/08','26/08'];
 
 // ==================================================
-// 🫀 NÚCLEO DO SISTEMA — FÓRMULAS PRÓPRIAS INTEGRADAS
-// FCA = ∑(Vi×Pi) ÷ √(Variância × Entropia)
-// Entropia I = −∑pi·log₂pi
-// Resultado Rn = Mn × (1 − δn)
+// 🫀 NÚCLEO DO SISTEMA — FÓRMULAS PRÓPRIAS INTERNAS
+// (mantidas em código, removidas da visualização)
 // ==================================================
 
 function calcularFCA(dados) {
@@ -510,14 +495,6 @@ function gerarRelatorio() {
         </div>
       </div>
 
-      <div class="bloco-formulas">
-        <h3>📐 FÓRMULAS PRÓPRIAS UTILIZADAS NO CÁLCULO</h3>
-        <div class="formula-item"><strong>FCA</strong> = ∑(Vi × Pi) ÷ √(Variância × Entropia)</div>
-        <div class="formula-item"><strong>Entropia I</strong> = −∑pi · log₂pi</div>
-        <div class="formula-item"><strong>Resultado Rn</strong> = Mn × (1 − δn)</div>
-        <p style="margin-top:12px;font-size:.95rem;color:#cbd5e1">🎯 Confiança do sistema: 94% a 95% | Desenvolvimento próprio do autor</p>
-      </div>
-
       <div class="regra-ouro">
         <h4>📐 CRITÉRIOS DE CLASSIFICAÇÃO — FAVORÁVEL / ATENÇÃO / DESFAVORÁVEL</h4>
         <ul style="margin-left:20px;line-height:1.8;margin-top:10px">
@@ -526,13 +503,13 @@ function gerarRelatorio() {
           <li>🌡️ <strong>Temperatura:</strong> ≤ 30°C — acima disso, evaporação acelerada e planta reduz absorção</li>
           <li>🌧️ <strong>Chuva nas horas seguintes:</strong> ≤ 20% — senão o produto é LAVADO antes de fazer efeito</li>
           <li>🌫️ <strong>Inversão Térmica:</strong> AUSENTE — vento fraco à noite + ar frio em camada baixa = produto flutua e se perde</li>
-          <li>📊 <strong>Índice Agroclimático:</strong> quando I=32 (mudança de padrão), aplicar com cautela e observar condições locais</li>
+          <li>📊 <strong>Padrão Climático:</strong> quando o índice indica mudança de condição, aplicar com cautela e observar condições locais</li>
         </ul>
       </div>
 
       ${alertaSeca}
 
-      <h3>🎯 CONDIÇÕES POR PERÍODO — PRIMEIROS 7 DIAS<br><small style="font-weight:normal;color:#94a3b8">Análise baseada em padrão histórico + momento atual — Fórmula FCA aplicada</small></h3>
+      <h3>🎯 CONDIÇÕES POR PERÍODO — PRIMEIROS 7 DIAS<br><small style="font-weight:normal;color:#94a3b8">Análise baseada em padrão histórico + momento atual</small></h3>
       
       <table class="tabela-janela">
         <thead>
@@ -574,14 +551,14 @@ function gerarRelatorio() {
           <li><strong>🌙 Noite:</strong> 🌫️ PERIGO — risco de INVERSÃO TÉRMICA. Vento parado + ar frio em camada baixa = produto flutua como névoa e se perde completamente. <strong>NÃO APLIQUE À NOITE sem confirmar vento >5 km/h.</strong></li>
           <li><strong>💧 Regra de sobrevivência:</strong> Se umidade <50% → NÃO APLIQUE. O dinheiro vai para o ar, não para a planta. Não importa se não vai chover.</li>
           <li><strong>💨 Deriva:</strong> Vento >15 km/h → produto viaja para áreas vizinhas. Vento <3 km/h → produto fica suspenso. A faixa segura é <strong>3 a 10 km/h</strong>.</li>
-          <li><strong>📅 Confiabilidade:</strong> Primeiros 7 dias = maior precisão (94%–95%) com Fórmula FCA aplicada. Do 8º ao 15º dia = tendência — confira vento e umidade no local antes de aplicar.</li>
+          <li><strong>📅 Confiabilidade:</strong> Primeiros 7 dias = maior precisão. Do 8º ao 15º dia = tendência — confira vento e umidade no local antes de aplicar.</li>
         </ul>
       </div>
 
       <div style="margin-top:30px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8">
         <p><strong>🌾 BUSCABOANERGES</strong> — Sistema de Previsão Agroclimática</p>
         <p>📌 Proprietário: Jaqueline Mendes do Nascimento | Criador: Cláudio Neponuceno do Nascimento | Sorocaba — SP — Brasil</p>
-        <p>📚 Fontes: Open-Meteo / INMET | Embrapa / MAPA-ZARC | Fórmulas próprias — desenvolvimento exclusivo</p>
+        <p>📚 Fontes: Open-Meteo / INMET | Embrapa / MAPA-ZARC | Sistema de cálculo — desenvolvimento exclusivo</p>
         <p>Versão: 2.1 — 04 de agosto de 2026 | Confiança: 94% a 95%</p>
         <p style="font-size:.9rem;margin-top:10px">⚠️ Sempre confira vento e umidade no local antes de aplicar — condições podem mudar rapidamente</p>
         <p style="font-size:.9rem">📍 ${cidade} | ${nomeCultura} | Análise Agroclimática</p>
