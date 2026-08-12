@@ -1,648 +1,181 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BUSCABOANERGES — Previsão Meteorológica para Agricultura</title>
-<style>
-:root {
-  --fundo: #0f172a; --texto: #f1f5f9; --destaque: #fbbf24; --primaria: #3b82f6;
-  --chuva-manha: #60a5fa; --chuva-tarde: #f97316; --chuva-noite: #a855f7;
-  --geada-fraca: #93c5fd; --geada-moderada: #60a5fa; --geada-forte: #3b82f6;
-  --seco: #22c55e; --perigo: #ef4444; --card: #1e293b; --borda: #475569;
-}
-* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
-body {background:var(--fundo);color:var(--texto);min-height:100vh;}
+<!-- SEÇÃO 2: CONFIGURAÇÕES DO ADMINISTRADOR E TESOURARIA -->
+    <section class="bg-cardBg/90 backdrop-blur-md border border-slate-700/60 rounded-2xl p-6 shadow-xl">
+            <h2 class="text-xl font-bold text-amberHive mb-2 flex items-center gap-2">
+                <span>🛡️</span> Configuração de Tesouraria e Fundador
+            </h2>
+            <p class="text-slate-400 text-sm mb-6">Definição da chave PIX do administrador (taxa de protocolo de 7,5%) e conta da poupança interna (3,5% ao mês).</p>
 
-/* === PÁGINA PÚBLICA === */
-#pagina-publica {
-  display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
-}
-header {text-align:center;margin-bottom:40px;max-width:800px}
-h1 {font-size:2rem;color:var(--destaque);margin-bottom:15px;line-height:1.3}
-.slogan {font-size:1.15rem;opacity:.9;line-height:1.7}
+            <div class="space-y-6">
+                <!-- Licenciamento / Titular -->
+                <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider text-amberHive">Titular Licenciado / Direitos de Uso (White Label)</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Nome do Titular / Empresa</label>
+                            <input type="text" id="holderNameInput" placeholder="Ex: Seu Nome ou Empresa Ltda" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Documento (CPF ou CNPJ)</label>
+                            <input type="text" id="holderDocInput" placeholder="000.000.000-00 ou 00.000.000/0001-00" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                        </div>
+                    </div>
+                </div>
 
-.destaque-pesquisa {
-  background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.12));
-  border: 2px solid #22c55e; border-radius: 14px; padding: 22px; margin: 25px 0;
-  text-align: center;
-}
-.destaque-pesquisa h3 {color: #22c55e; font-size: 1.4rem; margin-bottom: 10px}
-.destaque-pesquisa p {font-size: 1rem; line-height: 1.7}
+                <!-- Dados do Administrador -->
+                <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider text-amber-400">Recebimento do Administrador (Taxa de 7,5%)</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Tipo de Chave PIX</label>
+                            <select id="adminPixType" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                                <option value="CPF">CPF</option>
+                                <option value="CNPJ">CNPJ</option>
+                                <option value="EMAIL">E-mail</option>
+                                <option value="PHONE">Telefone</option>
+                                <option value="RANDOM">Chave Aleatória</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Chave PIX do Administrador</label>
+                            <input type="text" id="adminPixKey" placeholder="Insira sua chave PIX principal" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                        </div>
+                    </div>
+                </div>
 
-.card {background:var(--card);border-radius:14px;padding:30px;margin:15px 0;width:100%;max-width:650px;border-left:4px solid var(--primaria);box-shadow:0 8px 25px rgba(0,0,0,.2)}
-h2 {color:var(--primaria);margin-bottom:18px;font-size:1.35rem}
-.descricao {font-size:1.05rem;line-height:1.8;margin-bottom:25px}
-.contato {display:flex;flex-direction:column;gap:12px;margin-top:22px}
-.btn {display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:1rem;transition:.3s;border:none;cursor:pointer}
-.btn-whatsapp {background:#22c55e;color:white}
-.btn-whatsapp:hover {background:#16a34a;transform:translateY(-2px)}
-.btn-email {background:var(--primaria);color:white}
-.btn-email:hover {background:#2563eb;transform:translateY(-2px)}
-.info {background:rgba(59,130,246,.08);border:1px solid var(--borda);border-radius:12px;padding:20px;margin-top:22px}
-.info p {margin:8px 0;line-height:1.6}
-footer {margin-top:40px;text-align:center;color:#94a3b8;font-size:.9rem;padding-top:20px;border-top:1px solid var(--borda);width:100%;max-width:650px}
-.emoji {font-size:1.2rem}
-.aviso-seguro {
-  background:rgba(251,191,36,.1);border:1px solid var(--destaque);border-radius:12px;padding:15px;margin-top:20px;text-align:center;
-  color:var(--destaque);font-weight:500;cursor:pointer;transition:.3s
-}
-.aviso-seguro:hover {background:rgba(251,191,36,.2);transform:scale(1.02)}
-.destaque-agro {
-  background:rgba(34,197,94,.1);border-left:3px solid #22c55e;padding:15px;border-radius:8px;margin:20px 0;
-}
-.destaque-geada {
-  background:rgba(96,165,250,.1);border-left:3px solid #60a5fa;padding:15px;border-radius:8px;margin:20px 0;
-}
-.nota-tecnica {
-  background:rgba(148,163,184,.1);border-left:3px solid #94a3b8;padding:14px;border-radius:8px;margin:18px 0;
-  font-size:.95rem;
-}
+                <!-- Conta da Poupança da Colmeia -->
+                <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider text-emerald-400">Conta da Poupança da Colmeia (Rendimento 3,5% a.m.)</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">ID da Conta / Reserva</label>
+                            <input type="text" id="savingsAccountId" value="SAVINGS-COLMEIA-CORE-01" disabled class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-400 cursor-not-allowed">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Chave Destino / Repasse de Poupança</label>
+                            <input type="text" id="savingsPixKey" placeholder="PIX ou Conta Coletiva da Poupança" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                        </div>
+                    </div>
+                </div>
 
-/* === TELA DE SENHA === */
-#tela-senha {
-  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(15,23,42,.98); z-index: 9999;
-  align-items: center; justify-content: center; padding: 20px;
-}
-.caixa-senha {
-  background: var(--card); padding: 35px; border-radius: 14px;
-  border: 2px solid var(--destaque); max-width: 400px; width: 100%;
-  box-shadow: 0 0 30px rgba(251,191,36,.15); text-align: center;
-}
-.caixa-senha h2 {color: var(--destaque); margin-bottom: 20px; font-size: 1.4rem}
-.caixa-senha input {
-  width: 100%; padding: 14px; font-size: 1rem; border-radius: 10px;
-  border: 2px solid var(--borda); background: #334155; color: white;
-  text-align: center; letter-spacing: 2px; margin-bottom: 18px; outline: none;
-}
-.caixa-senha button {
-  width: 100%; padding: 14px; font-size: 1rem; border-radius: 10px;
-  background: var(--destaque); color: #000; font-weight: bold; border: none; cursor: pointer; transition: .3s
-}
-.caixa-senha button:hover {background: #f59e0b; transform: translateY(-2px)}
-.erro-senha {color: var(--perigo); margin-top: 12px; display: none}
+                <!-- Senha Mestre de Administrador -->
+                <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider text-red-400">Proteção Mestre (Senha do Administrador)</h3>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Senha de Segurança para Alterações</label>
+                        <input type="password" id="adminPasswordInput" placeholder="Digite a senha mestre para salvar alterações" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                    </div>
+                </div>
 
-/* === ÁREA PROTEGIDA === */
-#_area_de_relatorio_seguro {display:none;padding:20px;max-width:1200px;margin:0 auto}
-.busca {display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;margin:20px 0}
-.campo-busca {flex:2;min-width:250px;position:relative}
-.campo {flex:1;min-width:160px}
-label {display:block;margin-bottom:8px;color:#94a3b8;font-weight:500}
-input, select, button {padding:14px 16px;border-radius:10px;border:none;font-size:1rem}
-input, select {background:#334155;color:white;border:1px solid var(--borda);width:100%;outline:none;transition:.2s}
-input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgba(251,191,36,.2)}
-button {background:var(--primaria);color:white;cursor:pointer;font-weight:bold;transition:.2s}
-button:hover {background:#2563eb;transform:translateY(-1px)}
-button.sucesso {background:var(--destaque);color:#000}
-button.sucesso:hover {background:#f59e0b}
-button.secundario {background:#475569}
-button.secundario:hover {background:#64748b}
+                <button id="saveConfigBtn" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold py-3 rounded-lg transition">
+                    Salvar Credenciais da Tesouraria e Licença
+                </button>
+            </div>
+        </section>
 
-.sugestoes-cidades {
-  position: absolute; background: var(--card); border: 1px solid var(--borda);
-  border-radius: 10px; max-height: 300px; overflow-y: auto; width: 100%;
-  z-index: 100; margin-top: 5px; box-shadow: 0 8px 25px rgba(0,0,0,.25); display: none;
-}
-.sugestao-item {
-  padding: 12px 16px; cursor: pointer; transition: .2s; border-bottom: 1px solid #2d3a4f;
-}
-.sugestao-item:hover {background: #2d3a4f; padding-left: 20px}
-.sugestao-item:last-child {border-bottom: none}
-
-.micro-area {
-  background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.12));
-  border: 2px solid #22c55e; border-radius: 12px; padding: 20px; margin: 20px 0;
-  text-align: center;
-}
-.micro-area h3 {color: var(--destaque); margin-bottom: 10px; font-size: 1.4rem}
-.badge-pesquisa {
-  display: inline-block; background: #22c55e;
-  color: white; padding: 5px 14px; border-radius: 20px; font-weight: bold;
-  margin-left: 10px; font-size: .85rem;
-}
-
-.abas {display:flex;gap:10px;margin:20px 0;border-bottom:1px solid var(--borda);padding-bottom:10px;flex-wrap:wrap}
-.aba {padding:12px 20px;border-radius:10px 10px 0 0;cursor:pointer;transition:.2s;border:1px solid transparent}
-.aba.ativa {background:var(--destaque);color:#000;border-color:var(--destaque);font-weight:bold}
-.aba:hover {background:rgba(251,191,36,.15)}
-.conteudo-aba {display:none}
-.conteudo-aba.ativo {display:block;animation:aparecer .3s ease}
-@keyframes aparecer {from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-
-.periodo-chuva {display:flex;gap:15px;flex-wrap:wrap;margin:25px 0}
-.card-periodo {
-  flex:1;min-width:170px;padding:22px;border-radius:12px;text-align:center;
-  border-top:4px solid;transition:.3s
-}
-.card-periodo:hover {transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.25)}
-.manha {background:rgba(96,165,250,.12);border-top-color:var(--chuva-manha)}
-.tarde {background:rgba(249,115,22,.12);border-top-color:var(--chuva-tarde)}
-.noite {background:rgba(168,85,247,.12);border-top-color:var(--chuva-noite)}
-.icones-periodo {font-size:2.2rem;margin-bottom:8px}
-.probabilidade {font-size:2rem;font-weight:bold;margin:8px 0}
-.manha .probabilidade {color:var(--chuva-manha)}
-.tarde .probabilidade {color:var(--chuva-tarde)}
-.noite .probabilidade {color:var(--chuva-noite)}
-
-.aviso-geada {
-  background: linear-gradient(135deg, rgba(96,165,250,.15), rgba(59,130,246,.1));
-  border: 2px solid; border-radius: 12px; padding: 22px; margin: 25px 0;
-}
-.geada-fraca {border-color:var(--geada-fraca)}
-.sem-geada {border-color:var(--seco);background:rgba(34,197,94,.1)}
-.icone-geada {font-size:3rem;margin-bottom:10px;text-align:center}
-.recomendacao-geada {margin-top:18px;padding:16px;background:rgba(0,0,0,.2);border-radius:8px;line-height:1.7}
-
-.calendario-15dias {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
-  gap: 12px; margin-top: 20px;
-}
-.dia-previsao {background:var(--card);padding:15px;border-radius:10px;border-left:3px solid var(--borda);transition:.2s}
-.dia-previsao:hover {transform:scale(1.02);box-shadow:0 4px 12px rgba(0,0,0,.2)}
-.dia-previsao.manha {border-left-color:var(--chuva-manha)}
-.dia-previsao.tarde {border-left-color:var(--chuva-tarde)}
-.dia-previsao.noite {border-left-color:var(--chuva-noite)}
-.dia-previsao.seco {border-left-color:var(--seco)}
-.dia-previsao.com-geada {border-left-color:var(--geada-forte);border-left-width:4px;box-shadow:inset 0 0 8px rgba(96,165,250,.15)}
-.dia-previsao h4 {font-size:.95rem;margin-bottom:6px;color:var(--destaque)}
-.dia-previsao p {font-size:.85rem;margin:4px 0}
-.periodo-chuva-mini {display:flex;gap:4px;margin:8px 0;font-size:.75rem}
-.periodo-chuva-mini span {padding:2px 4px;border-radius:4px}
-.manha-mini {background:rgba(96,165,250,.25)}
-.tarde-mini {background:rgba(249,115,22,.25)}
-.noite-mini {background:rgba(168,85,247,.25)}
-.etiqueta-geada-mini {display:inline-block;background:rgba(96,165,250,.25);padding:2px 6px;border-radius:4px;font-size:.7rem;margin-top:4px}
-.aviso-importante {
-  background: rgba(251,191,36,.1); border-left: 4px solid var(--destaque);
-  padding: 15px; border-radius: 8px; margin: 20px 0; line-height:1.7;
-}
-.limite-tecnico {
-  background: rgba(148,163,184,.1); border-left: 4px solid #94a3b8;
-  padding: 15px; border-radius: 8px; margin: 20px 0; font-style: normal;
-}
-</style>
-</head>
-<body>
-
-<!-- 📄 PÁGINA PÚBLICA — VISÍVEL PARA TODOS -->
-<div id="pagina-publica">
-  <header>
-    <h1>🌾 BUSCABOANERGES — Previsão Meteorológica para Agricultura</h1>
-    <p class="slogan">Baseada em dados, pesquisa e observação de campo</p>
-    
-    <div class="destaque-pesquisa">
-      <h3>📊 PREVISÃO ESTENDIDA — ATÉ 15 DIAS</h3>
-      <p>Previsão estendida com chuva por período do dia e aviso de geada, referenciada à sua cidade.</p>
-    </div>
-  </header>
-
-  <div class="card">
-    <h2>🌧️❄️ Como funciona?</h2>
-    <p class="descricao">
-      Digite o nome da sua cidade e receba a previsão para sua microárea: chuva de manhã, à tarde ou à noite, e aviso de geada quando houver risco.
-    </p>
-
-    <div class="destaque-agro">
-      <p><strong>🎯 Passo a passo:</strong></p>
-      <ul style="margin:12px 0 0 25px;line-height:1.8">
-        <li>🏘️ Digite o nome da sua cidade</li>
-        <li>📍 Sistema identifica estado e região</li>
-        <li>🌧️ Chuva por período: Manhã • Tarde • Noite</li>
-        <li>❄️ Aviso de geada com orientações de proteção</li>
-        <li>📅 Previsão estendida para planejamento</li>
-      </ul>
     </div>
 
-    <div class="destaque-geada">
-      <p><strong>❄️ Critério técnico para geada:</strong></p>
-      <p style="margin-top:10px">A geada ocorre quando a temperatura no abrigo cai para ≤ 4°C (≈ 0°C na superfície), com céu limpo, pouca ou nenhuma nuvem e vento fraco ou calmo.</p>
-    </div>
+    <!-- SCRIPT DO CANVAS (MOVIMENTAÇÃO NEURAL 3D SIMPLES) -->
+    <script>
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
 
-    <div class="nota-tecnica">
-      <p><strong>ℹ️ Nota técnica:</strong> Os primeiros 7 dias têm maior confiabilidade; dos 8 aos 15 dias, representa tendência. Acompanhamento diário recomendado.</p>
-    </div>
+        let particles = [];
+        const numParticles = 60;
 
-    <div class="aviso-seguro" onclick="abrirTelaSenha()">
-      🔒 Clique aqui para acessar as Previsões — Digite sua cidade e receba a previsão da sua microárea
-    </div>
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
 
-    <h2 style="margin-top:30px">📞 Entre em Contato</h2>
-    <div class="contato">
-      <a href="https://wa.me/5515981565052" target="_blank" class="btn btn-whatsapp">
-        <span class="emoji">💬</span> WhatsApp: (15) 98156-5052
-      </a>
-      <a href="mailto:buscaboa nerges@gmail.com" class="btn btn-email">
-        <span class="emoji">✉️</span> buscaboanerges@gmail.com
-      </a>
-    </div>
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-    <div class="info">
-      <p><strong>🇧🇷 Foco:</strong> Brasil — todas as cidades e regiões</p>
-      <p><strong>🏘️ Microárea:</strong> Previsão por município</p>
-      <p><strong>🌧️❄️ Conteúdo:</strong> Chuva por período + Aviso de geada + Previsão estendida</p>
-      <p><strong>📊 Fontes:</strong> INMET • INPE/CPTEC • Dados históricos e observação de campo</p>
-      <p><strong>✅ Versão:</strong> Pesquisa Aplicada — 12/08/2026</p>
-    </div>
-  </div>
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.z = Math.random() * canvas.width;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.vz = (Math.random() - 0.5) * 0.8;
+            }
 
-  <footer>
-    <p>🌾 BUSCABOANERGES — Previsão Meteorológica baseada em pesquisa e dados</p>
-    <p>Digite sua cidade → Manhã/Tarde/Noite + Geada → Trabalho sério para o agricultor</p>
-  </footer>
-</div>
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.z += this.vz;
 
-<!-- 🔐 TELA DE SENHA -->
-<div id="tela-senha">
-  <div class="caixa-senha">
-    <h2>🔐 Acesso ao Sistema</h2>
-    <p style="margin-bottom:20px;color:#94a3b8;font-size:.95rem;">Digite sua senha para acessar as previsões estendidas</p>
-    <input type="password" id="input-senha" placeholder="Digite sua senha..." onkeydown="if(event.key==='Enter')verificarSenha()">
-    <button onclick="verificarSenha()">🔑 Entrar</button>
-    <p class="erro-senha" id="erro-senha">❌ Senha incorreta. Tente novamente.</p>
-    <button class="btn secundario" style="margin-top:15px" onclick="fecharTelaSenha()">↩️ Voltar</button>
-  </div>
-</div>
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                if (this.z < 0 || this.z > canvas.width) this.vz *= -1;
+            }
 
-<!-- 🔒 ÁREA PROTEGIDA — PREVISÃO POR CIDADE -->
-<div id="_area_de_relatorio_seguro">
-  <header style="text-align:center;padding:25px 0;border-bottom:2px solid #22c55e;margin-bottom:30px">
-    <h1>🌾 BUSCABOANERGES — PREVISÃO POR CIDADE</h1>
-    <p style="opacity:.9;line-height:1.7;margin-top:8px;">Dados de pesquisa e observação de campo — Manhã • Tarde • Noite + Geada</p>
-    <div class="sistema" style="margin-top:12px;color:#22c55e;font-weight:500;">✅ Sistema operacional — Dados atualizados</div>
-    <button class="btn secundario" style="margin-top:15px;max-width:200px;margin-left:auto;margin-right:auto" onclick="sairAreaProtegida()">↩️ Sair / Voltar</button>
-  </header>
+            draw() {
+                let k = 250 / this.z;
+                let px = this.x * k + canvas.width / 2 * (1 - k);
+                let py = this.y * k + canvas.height / 2 * (1 - k);
+                
+                if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
+                    let size = Math.max(1, (1 - this.z / canvas.width) * 3);
+                    ctx.fillStyle = '#f59e0b';
+                    ctx.beginPath();
+                    ctx.arc(px, py, size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
 
-  <h2>🔍 Previsão — Digite sua Cidade</h2>
-  <div class="card" style="background:var(--card);border-radius:12px;padding:25px;margin:15px 0;border-left:4px solid #22c55e">
-    <div class="busca" style="position:relative">
-      <div class="campo-busca" style="position:relative">
-        <label>🏘️ Nome da sua Cidade</label>
-        <input type="text" id="cidade-input" placeholder="Ex: Capinzal, Chapecó, Londrina, Sorocaba..." oninput="mostrarSugestoes(this.value)" autocomplete="off">
-        <div id="sugestoes" class="sugestoes-cidades"></div>
-      </div>
-      <div class="campo">
-        <label>🌱 Tipo de Cultura</label>
-        <select id="cultura">
-          <option value="geral">🌾 Geral / Não especificada</option>
-          <option value="soja">🌱 Soja</option>
-          <option value="milho">🌽 Milho</option>
-          <option value="cafe">☕ Café</option>
-          <option value="cana">🍬 Cana-de-Açúcar</option>
-          <option value="frutas">🍎 Frutas / Hortaliças</option>
-          <option value="gado">🐄 Pecuária</option>
-          <option value="trigo">🌾 Trigo / Aveia / Inverno</option>
-        </select>
-      </div>
-      <button class="sucesso" onclick="gerarPrevisaoCidade()" style="margin-top:22px">📊 Gerar Previsão Estendida</button>
-    </div>
-  </div>
+        for (let i = 0; i < numParticles; i++) {
+            particles.push(new Particle());
+        }
 
-  <div id="bloco-microarea" style="display:none">
-    <div class="micro-area">
-      <h3>📍 Previsão para: <span id="nome-cidade-exibicao"></span> <span class="badge-pesquisa">até 15 dias</span></h3>
-      <p style="font-size:1rem;line-height:1.7;margin-top:10px">Região: <span id="regiao-cidade"></span> • Padrão climático: <span id="padrao-cidade"></span></p>
-    </div>
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Desenha conexões neurais
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
 
-    <div class="abas">
-      <div class="aba ativa" onclick="trocarAba('resumo')">📊 Resumo</div>
-      <div class="aba" onclick="trocarAba('estendida')">📅 Previsão Estendida</div>
-      <div class="aba" onclick="trocarAba('geada')">❄️ Geada</div>
-      <div class="aba" onclick="trocarAba('agricola')">🌱 Guia Agrícola</div>
-    </div>
+                for (let j = i + 1; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
 
-    <div id="aba-resumo" class="conteudo-aba ativo">
-      <h3 style="margin:20px 0 15px">📊 Resumo da Previsão</h3>
-      
-      <h4 style="margin:25px 0 15px;font-size:1.1rem">🌧️ Previsão de Chuva por Período</h4>
-      <div class="periodo-chuva">
-        <div class="card-periodo manha">
-          <div class="icones-periodo">🌅</div>
-          <h4>Manhã</h4>
-          <div class="probabilidade" id="prob-manha">--%</div>
-          <p id="texto-manha">Carregando...</p>
-        </div>
-        <div class="card-periodo tarde">
-          <div class="icones-periodo">☀️</div>
-          <h4>Tarde</h4>
-          <div class="probabilidade" id="prob-tarde">--%</div>
-          <p id="texto-tarde">Carregando...</p>
-        </div>
-        <div class="card-periodo noite">
-          <div class="icones-periodo">🌙</div>
-          <h4>Noite</h4>
-          <div class="probabilidade" id="prob-noite">--%</div>
-          <p id="texto-noite">Carregando...</p>
-        </div>
-      </div>
+                    if (dist < 120) {
+                        ctx.strokeStyle = `rgba(245, 158, 11, ${1 - dist / 120})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
 
-      <div id="aviso-geada-container"></div>
+        animate();
 
-      <div class="aviso-importante">
-        <h4>💡 Recomendações Práticas</h4>
-        <p id="recomendacoes-gerais" style="margin-top:10px">Carregando...</p>
-      </div>
-    </div>
+        // Ações simuladas dos botões
+        document.getElementById('orderForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Demanda enviada com sucesso para o alvéolo! O protocolo priorizou seu projeto.');
+        });
 
-    <div id="aba-estendida" class="conteudo-aba">
-      <h3 style="margin:20px 0 15px">📅 Previsão Estendida — até 15 dias</h3>
-      <div class="limite-tecnico">
-        <p><strong>📌 Nota técnica:</strong> Os primeiros 7 dias apresentam maior confiabilidade. Dos 8 aos 15 dias, a previsão representa uma tendência baseada em padrões climáticos regionais. Recomenda-se sempre acompanhar a observação diária no campo.</p>
-      </div>
-      <div id="calendario-15dias" class="calendario-15dias"></div>
-    </div>
-
-    <div id="aba-geada" class="conteudo-aba">
-      <h3 style="margin:20px 0 15px">❄️ Previsão de Geada e Proteção</h3>
-      <div id="detalhes-geada"></div>
-    </div>
-
-    <div id="aba-agricola" class="conteudo-aba">
-      <h3 style="margin:20px 0 15px">🌱 Guia Agrícola — Orientações Práticas</h3>
-      <div id="guia-agricola"></div>
-    </div>
-  </div>
-</div>
-
-<script>
-// 🔐 SENHA FIXA
-const SENHA_AUTORIZADA = "agricultura2026";
-
-// 🔐 FUNÇÕES DE CONTROLE DE ACESSO
-function abrirTelaSenha() {
-  document.getElementById('tela-senha').style.display = 'flex';
-  document.getElementById('pagina-publica').style.filter = 'blur(4px)';
-  document.getElementById('input-senha').focus();
-}
-
-function fecharTelaSenha() {
-  document.getElementById('tela-senha').style.display = 'none';
-  document.getElementById('pagina-publica').style.filter = 'none';
-  document.getElementById('input-senha').value = '';
-  document.getElementById('erro-senha').style.display = 'none';
-  window.location.hash = '';
-}
-
-function verificarSenha() {
-  const input = document.getElementById('input-senha');
-  if (input.value === SENHA_AUTORIZADA) {
-    document.getElementById('tela-senha').style.display = 'none';
-    document.getElementById('pagina-publica').style.display = 'none';
-    document.getElementById('_area_de_relatorio_seguro').style.display = 'block';
-    input.value = '';
-    window.location.hash = '_area_de_relatorio_seguro';
-  } else {
-    document.getElementById('erro-senha').style.display = 'block';
-    input.value = '';
-    input.focus();
-  }
-}
-
-function sairAreaProtegida() {
-  document.getElementById('_area_de_relatorio_seguro').style.display = 'none';
-  document.getElementById('pagina-publica').style.display = 'flex';
-  document.getElementById('bloco-microarea').style.display = 'none';
-  document.getElementById('cidade-input').value = '';
-  cidadeSelecionada = null;
-  window.location.hash = '';
-}
-
-// ✅ DETECTA A ÂNCORA E ABRE A SENHA AUTOMATICAMENTE
-window.addEventListener('load', function() {
-  if (window.location.hash === '#_area_de_relatorio_seguro') {
-    setTimeout(() => {
-      abrirTelaSenha();
-    }, 300);
-  }
-});
-
-window.addEventListener('hashchange', function() {
-  if (window.location.hash === '#_area_de_relatorio_seguro') {
-    abrirTelaSenha();
-  }
-});
-
-// 📋 Banco de cidades com padrões climáticos
-const BANCO_CIDADES = [
-  {nome: "Capinzal", estado: "SC", regiao: "Oeste Catarinense", padraoChuva: "Distribuída — influência de frentes frias", tempMinMedia: 8, tempMaxMedia: 22, umidade: 78, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
-  {nome: "Chapecó", estado: "SC", regiao: "Oeste Catarinense", padraoChuva: "Distribuída — frentes frias e sistemas frontais", tempMinMedia: 10, tempMaxMedia: 24, umidade: 76, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
-  {nome: "Lages", estado: "SC", regiao: "Serra Catarinense", padraoChuva: "Frequente — altitude elevada", tempMinMedia: 6, tempMaxMedia: 20, umidade: 82, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
-  {nome: "Sorocaba", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno mais seco", tempMinMedia: 13, tempMaxMedia: 27, umidade: 68, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
-  {nome: "Campinas", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 12, tempMaxMedia: 28, umidade: 65, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
-  {nome: "Londrina", estado: "PR", regiao: "Norte Paranaense", padraoChuva: "Concentrada — verão mais chuvoso, inverno mais seco", tempMinMedia: 12, tempMaxMedia: 26, umidade: 72, riscoGeada: "Médio", periodoGeada: "Junho a Agosto"},
-  {nome: "Cascavel", estado: "PR", regiao: "Oeste Paranaense", padraoChuva: "Distribuída — verão com mais chuva", tempMinMedia: 10, tempMaxMedia: 25, umidade: 75, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
-  {nome: "Curitiba", estado: "PR", regiao: "Região Metropolitana", padraoChuva: "Frequente — altitude", tempMinMedia: 9, tempMaxMedia: 22, umidade: 80, riscoGeada: "Alto", periodoGeada: "Maio a Outubro"},
-  {nome: "Goiânia", estado: "GO", regiao: "Sul Goiano", padraoChuva: "Verão muito chuvoso / Inverno seco", tempMinMedia: 16, tempMaxMedia: 30, umidade: 60, riscoGeada: "Muito Baixo", periodoGeada: "Junho a Julho"},
-  {nome: "Uberaba", estado: "MG", regiao: "Triângulo Mineiro", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 15, tempMaxMedia: 29, umidade: 62, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
-];
-
-let cidadeSelecionada = null;
-let dadosAtuais = [];
-
-function mostrarSugestoes(valor) {
-  const sugestoesDiv = document.getElementById('sugestoes');
-  if (valor.length < 2) {
-    sugestoesDiv.style.display = 'none';
-    return;
-  }
-  const correspondentes = BANCO_CIDADES.filter(cidade => 
-    cidade.nome.toLowerCase().includes(valor.toLowerCase())
-  ).slice(0, 8);
-  if (correspondentes.length === 0) {
-    sugestoesDiv.style.display = 'none';
-    return;
-  }
-  sugestoesDiv.innerHTML = '';
-  correspondentes.forEach(cidade => {
-    const item = document.createElement('div');
-    item.className = 'sugestao-item';
-    item.innerHTML = `<strong>${cidade.nome}</strong> <span style="color:#94a3b8">${cidade.estado}</span>`;
-    item.onclick = () => selecionarCidade(cidade);
-    sugestoesDiv.appendChild(item);
-  });
-  sugestoesDiv.style.display = 'block';
-}
-
-function selecionarCidade(cidade) {
-  cidadeSelecionada = cidade;
-  document.getElementById('cidade-input').value = `${cidade.nome} - ${cidade.estado}`;
-  document.getElementById('sugestoes').style.display = 'none';
-}
-
-function trocarAba(nomeAba) {
-  document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'));
-  document.querySelectorAll('.conteudo-aba').forEach(c => c.classList.remove('ativo'));
-  event.target.classList.add('ativa');
-  document.getElementById(`aba-${nomeAba}`).classList.add('ativo');
-}
-
-function gerarDadosPrevisao(cidade) {
-  const hoje = new Date();
-  const dias = [];
-  for (let i = 0; i < 15; i++) {
-    const data = new Date(hoje);
-    data.setDate(hoje.getDate() + i);
-    const fatorChuvaRegiao = cidade.regiao.includes("Oeste") || cidade.regiao.includes("Serra") ? 1.2 : 
-                              cidade.regiao.includes("Litoral") ? 1.3 : 0.9;
-    const fatorGeada = cidade.riscoGeada === "Muito Alto" ? 1.5 : 
-                        cidade.riscoGeada === "Alto" ? 1.2 : 
-                        cidade.riscoGeada === "Médio" ? 0.8 : 0.3;
-    const baseChuva = Math.sin((i + cidade.nome.length) * 0.3) * 25 + 35;
-    const probManha = Math.max(5, Math.min(90, Math.round(baseChuva * (0.7 + Math.random() * 0.5) * fatorChuvaRegiao)));
-    const probTarde = Math.max(5, Math.min(90, Math.round(baseChuva * (0.5 + Math.random() * 0.6) * fatorChuvaRegiao)));
-    const probNoite = Math.max(5, Math.min(90, Math.round(baseChuva * (0.8 + Math.random() * 0.4) * fatorChuvaRegiao)));
-    const variacaoTemp = Math.sin(i * 0.35) * 4;
-    const tempMin = Math.round(cidade.tempMinMedia + variacaoTemp + (Math.random() - 0.5) * 4);
-    const tempMax = Math.round(cidade.tempMaxMedia + variacaoTemp + (Math.random() - 0.5) * 4);
-    const fatorConfianca = i < 7 ? 1 : Math.max(0.6, 1 - (i - 6) * 0.05);
-    const ceuLimpo = probNoite < 35;
-    const semVento = Math.random() > 0.3;
-    const condicaoGeada = tempMin <= 4 && ceuLimpo && semVento;
-    const riscoGeadaDia = condicaoGeada ? Math.min(95, Math.round(40 * fatorGeada * fatorConfianca)) : 0;
-    const temGeada = riscoGeadaDia > 40;
-    const intensidadeGeada = temGeada ? (tempMin <= 0 ? "Forte" : tempMin <= 2 ? "Moderada" : "Fraca") : "Sem geada";
-    dias.push({
-      indice: i,
-      data: data,
-      diaSemana: data.toLocaleDateString('pt-BR', {weekday: 'short'}),
-      dataFormatada: data.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit'}),
-      confianca: Math.round(fatorConfianca * 100),
-      probManha, probTarde, probNoite,
-      tempMin, tempMax,
-      riscoGeada: riscoGeadaDia,
-      temGeada,
-      intensidadeGeada,
-      chuvaDominante: probNoite >= probManha && probNoite >= probTarde ? 'noite' :
-                       probTarde >= probManha && probTarde >= probNoite ? 'tarde' : 'manha'
-    });
-  }
-  return dias;
-}
-
-function preencherResumo(dados, cidade) {
-  const primeiros7 = dados.slice(0, 7);
-  const mediaManha = Math.round(primeiros7.reduce((a,b) => a + b.probManha, 0) / 7);
-  const mediaTarde = Math.round(primeiros7.reduce((a,b) => a + b.probTarde, 0) / 7);
-  const mediaNoite = Math.round(primeiros7.reduce((a,b) => a + b.probNoite, 0) / 7);
-  
-  document.getElementById('prob-manha').textContent = `${mediaManha}%`;
-  document.getElementById('prob-tarde').textContent = `${mediaTarde}%`;
-  document.getElementById('prob-noite').textContent = `${mediaNoite}%`;
-  
-  const getTexto = (valor, periodo) => {
-    if (valor < 25) return `Pouca chuva — período favorável para atividades`;
-    if (valor < 45) return `Chuva leve e isolada — atenção na ${periodo}`;
-    if (valor < 65) return `Chuva frequente — planeje-se com antecedência`;
-    return `Chuva provável — evite atividades durante a ${periodo}`;
-  };
-  
-  document.getElementById('texto-manha').textContent = getTexto(mediaManha, 'manhã');
-  document.getElementById('texto-tarde').textContent = getTexto(mediaTarde, 'tarde');
-  document.getElementById('texto-noite').textContent = getTexto(mediaNoite, 'noite');
-  
-  const diasComGeada = dados.filter(d => d.temGeada).length;
-  const container = document.getElementById('aviso-geada-container');
-  
-  if (diasComGeada > 0) {
-    container.innerHTML = `
-      <div class="aviso-geada geada-fraca">
-        <div class="icone-geada">❄️</div>
-        <h4 style="text-align:center">⚠️ Atenção — Risco de Geada Detectado</h4>
-        <p style="text-align:center;margin-top:10px">Em ${diasComGeada} dos próximos 15 dias há condições favoráveis à formação de geada. Consulte a aba "Geada" para detalhes e orientações de proteção.</p>
-      </div>
-    `;
-  } else {
-    container.innerHTML = `
-      <div class="aviso-geada sem-geada">
-        <div class="icone-geada">☀️</div>
-        <h4 style="text-align:center">✅ Sem previsão de geada</h4>
-        <p style="text-align:center;margin-top:10px">Não foram identificadas condições favoráveis à formação de geada nos próximos 15 dias.</p>
-      </div>
-    `;
-  }
-  
-  const cultura = document.getElementById('cultura').value;
-  const recs = {
-    geral: "🌾 Planejamento geral: Aproveite os períodos de menor probabilidade de chuva para atividades de campo, plantio e colheita. Mantenha o acompanhamento diário das condições climáticas.",
-    soja: "🌱 Soja: Fases críticas exigem atenção à umidade do solo. Chuva moderada é benéfica, mas períodos chuvosos prolongados podem favorecer doenças fúngicas.",
-    milho: "🌽 Milho: Nas fases de crescimento e floração, a chuva é fundamental. Acompanhe a distribuição por período para evitar perdas na polinização.",
-    cafe: "☕ Café: A umidade excessiva pode favorecer doenças nas folhas e frutos. Períodos secos são ideais para a colheita e secagem.",
-    cana: "🍬 Cana-de-Açúcar: A colheita deve coincidir com períodos de menor umidade. Evite operações de campo logo após chuvas intensas.",
-    frutas: "🍎 Frutas e Hortaliças: A geada pode causar perdas severas. Proteja as culturas sensíveis e evite irrigação em horários de risco.",
-    gado: "🐄 Pecuária: Em períodos de chuva intensa, garanta abrigo adequado e pontos de alimentação protegidos. Em épocas de geada, aumente a disponibilidade de água e nutrientes.",
-    trigo: "🌾 Trigo e Inverno: Cultivo de estação fria — atente para o risco de geada nas fases iniciais e de floração. Mantenha o campo drenado."
-  };
-  document.getElementById('recomendacoes-gerais').textContent = recs[cultura] || recs.geral;
-}
-
-function preencherCalendarioEstendido(dados) {
-  const container = document.getElementById('calendario-15dias');
-  container.innerHTML = '';
-  dados.forEach(dia => {
-    const classeChuva = dia.chuvaDominante;
-    const classeGeada = dia.temGeada ? 'com-geada' : '';
-    const card = document.createElement('div');
-    card.className = `dia-previsao ${classeChuva} ${classeGeada}`;
-    card.innerHTML = `
-      <h4>${dia.diaSemana} ${dia.dataFormatada} <span style="font-size:.75rem;opacity:.7">${dia.confianca}% conf.</span></h4>
-      <p>🌡️ ${dia.tempMin}°C → ${dia.tempMax}°C</p>
-      <div class="periodo-chuva-mini">
-        <span class="manha-mini">🌅 ${dia.probManha}%</span>
-        <span class="tarde-mini">☀️ ${dia.probTarde}%</span>
-        <span class="noite-mini">🌙 ${dia.probNoite}%</span>
-      </div>
-      ${dia.temGeada ? `<span class="etiqueta-geada-mini">❄️ ${dia.intensidadeGeada}</span>` : ''}
-    `;
-    container.appendChild(card);
-  });
-}
-
-function preencherAbaGeada(dados, cidade) {
-  const container = document.getElementById('detalhes-geada');
-  const diasComGeada = dados.filter(d => d.temGeada);
-  
-  if (diasComGeada.length === 0) {
-    container.innerHTML = `
-      <div class="aviso-geada sem-geada">
-        <div class="icone-geada">☀️</div>
-        <h3 style="text-align:center">✅ Sem previsão de geada nos próximos 15 dias</h3>
-        <p style="text-align:center;margin-top:15px">Não foram identificadas condições favoráveis à formação de geada para ${cidade.nome}/${cidade.estado} neste período.</p>
-        <div class="recomendacao-geada">
-          <p><strong>💡 Recomendações:</strong></p>
-          <ul style="margin:10px 0 0 25px;line-height:1.7">
-            <li>Aproveite as condições favoráveis para atividades de campo</li>
-            <li>Mantenha o acompanhamento diário das condições climáticas</li>
-            <li>Continue monitorando a previsão conforme a estação avança</li>
-          </ul>
-        </div>
-      </div>
-    `;
-  } else {
-    container.innerHTML = `
-      <div class="aviso-geada geada-fraca">
-        <div class="icone-geada">❄️</div>
-        <h3 style="text-align:center">⚠️ Risco de Geada — ${diasComGeada.length} dia(s) detectado(s)</h3>
-        <p style="text-align:center;margin-top:10px">Período de risco para ${cidade.nome}/${cidade.estado}: ${cidade.periodoGeada}</p>
-        <div class="recomendacao-geada">
-          <p><strong>🛡️ Medidas de Proteção:</strong></p>
-          <ul style="margin:10px 0 0 25px;line-height:1.7">
-            <li>🌾 Cobrir plantas com lona, palha ou plástico</li>
-            <li>💧 Irrigação leve no final do dia</li>
-            <li>🔥 Queima de palha / fumaça protetora (se permitido)</li>
-            <li>🌬️ Ventilação mecânica em pomares e vinhas</li>
-            <li>📱 Acompanhamento diário da previsão</li>
-          </ul>
-        </div>
-      </div>
-    `;
-  }
-}
-
-function preencherGuiaAgricola(cidade) {
-  const container = document.getElementById('guia-agricola');
-  container.innerHTML = `
-    <div class="card" style="border-left-color: #22c55e">
-      <h3>🌱 Guia Agrícola — ${cidade.nome}/${cidade.estado}</h3>
-      <p style="margin:15px 0;line-height:1.8">
-        <strong>📍 Região:</strong> ${cidade.regiao}<br>
-        <strong>🌤️ Padrão de chuva:</strong> ${cidade.padraoChuva}<br
+        document.getElementById('saveConfigBtn').addEventListener('click', () => {
+            const senha = document.getElementById('adminPasswordInput').value;
+            const titular = document.getElementById('holderNameInput').value;
+            if(!titular) {
+                alert('Preencha o nome do Titular Licenciado.');
+                return;
+            }
+            if(!senha) {
+                alert('Digite a senha mestre de administrador para autorizar a gravação das chaves.');
+                return;
+            }
+            alert('Credenciais da Tesouraria, Licença e Chaves PIX protegidas e salvas com sucesso no núcleo de auditoria da Colmeia!');
+        });
+    </script>
+</body>
+</html>
