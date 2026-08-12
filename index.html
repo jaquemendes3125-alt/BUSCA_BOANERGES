@@ -1,181 +1,187 @@
 <!-- SEÇÃO 2: CONFIGURAÇÕES DO ADMINISTRADOR E TESOURARIA -->
     <section class="bg-cardBg/90 backdrop-blur-md border border-slate-700/60 rounded-2xl p-6 shadow-xl">
-            <h2 class="text-xl font-bold text-amberHive mb-2 flex items-center gap-2">
-                <span>🛡️</span> Configuração de Tesouraria e Fundador
-            </h2>
-            <p class="text-slate-400 text-sm mb-6">Definição da chave PIX do administrador (taxa de protocolo de 7,5%) e conta da poupança interna (3,5% ao mês).</p>
+        <h2 class="text-xl font-bold text-amberHive mb-2 flex items-center gap-2">
+            <span>🛡️</span> Configuração de Tesouraria e Fundador
+        </h2>
+        <p class="text-slate-400 text-sm mb-6">Definição da chave PIX do administrador (taxa de protocolo de 7,5%) e conta da poupança interna (3,5% ao mês).</p>
 
-            <div class="space-y-6">
-                <!-- Licenciamento / Titular -->
-                <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider text-amberHive">Titular Licenciado / Direitos de Uso (White Label)</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Nome do Titular / Empresa</label>
-                            <input type="text" id="holderNameInput" placeholder="Ex: Seu Nome ou Empresa Ltda" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Documento (CPF ou CNPJ)</label>
-                            <input type="text" id="holderDocInput" placeholder="000.000.000-00 ou 00.000.000/0001-00" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dados do Administrador -->
-                <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider text-amber-400">Recebimento do Administrador (Taxa de 7,5%)</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Tipo de Chave PIX</label>
-                            <select id="adminPixType" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                                <option value="CPF">CPF</option>
-                                <option value="CNPJ">CNPJ</option>
-                                <option value="EMAIL">E-mail</option>
-                                <option value="PHONE">Telefone</option>
-                                <option value="RANDOM">Chave Aleatória</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Chave PIX do Administrador</label>
-                            <input type="text" id="adminPixKey" placeholder="Insira sua chave PIX principal" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Conta da Poupança da Colmeia -->
-                <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider text-emerald-400">Conta da Poupança da Colmeia (Rendimento 3,5% a.m.)</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">ID da Conta / Reserva</label>
-                            <input type="text" id="savingsAccountId" value="SAVINGS-COLMEIA-CORE-01" disabled class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-400 cursor-not-allowed">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Chave Destino / Repasse de Poupança</label>
-                            <input type="text" id="savingsPixKey" placeholder="PIX ou Conta Coletiva da Poupança" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Senha Mestre de Administrador -->
-                <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider text-red-400">Proteção Mestre (Senha do Administrador)</h3>
+        <div class="space-y-6">
+            <!-- Licenciamento / Titular -->
+            <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
+                <h3 class="text-sm font-bold text-white uppercase tracking-wider text-amberHive">Titular Licenciado / Direitos de Uso (White Label)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-1">Senha de Segurança para Alterações</label>
-                        <input type="password" id="adminPasswordInput" placeholder="Digite a senha mestre para salvar alterações" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Nome do Titular / Empresa</label>
+                        <input type="text" id="holderNameInput" placeholder="Ex: Seu Nome ou Empresa Ltda" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Documento (CPF ou CNPJ)</label>
+                        <input type="text" id="holderDocInput" placeholder="000.000.000-00 ou 00.000.000/0001-00" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
                     </div>
                 </div>
-
-                <button id="saveConfigBtn" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold py-3 rounded-lg transition">
-                    Salvar Credenciais da Tesouraria e Licença
-                </button>
             </div>
-        </section>
+
+            <!-- Dados do Administrador -->
+            <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
+                <h3 class="text-sm font-bold text-white uppercase tracking-wider text-amber-400">Recebimento do Administrador (Taxa de 7,5%)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Tipo de Chave PIX</label>
+                        <select id="adminPixType" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                            <option value="CPF">CPF</option>
+                            <option value="CNPJ">CNPJ</option>
+                            <option value="EMAIL">E-mail</option>
+                            <option value="PHONE">Telefone</option>
+                            <option value="RANDOM">Chave Aleatória</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Chave PIX do Administrador</label>
+                        <input type="text" id="adminPixKey" placeholder="Insira sua chave PIX principal" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conta da Poupança da Colmeia -->
+            <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
+                <h3 class="text-sm font-bold text-white uppercase tracking-wider text-emerald-400">Conta da Poupança Interna (Rendimento 3,5% a.m.)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">ID da Conta / Reserva</label>
+                        <input type="text" id="savingsAccountId" value="SAVINGS-CORE-01" disabled class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-400 cursor-not-allowed">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Chave Destino / Repasse de Poupança</label>
+                        <input type="text" id="savingsPixKey" placeholder="PIX ou Conta Coletiva da Poupança" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Senha Mestre de Administrador -->
+            <div class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-4">
+                <h3 class="text-sm font-bold text-white uppercase tracking-wider text-red-400">Proteção Mestre (Senha do Administrador)</h3>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Senha de Segurança para Alterações</label>
+                    <input type="password" id="adminPasswordInput" placeholder="Digite a senha mestre para salvar alterações" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amberHive">
+                </div>
+            </div>
+
+            <button id="saveConfigBtn" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold py-3 rounded-lg transition">
+                Salvar Credenciais da Tesouraria e Licença
+            </button>
+        </div>
+    </section>
 
     </div>
 
     <!-- SCRIPT DO CANVAS (MOVIMENTAÇÃO NEURAL 3D SIMPLES) -->
     <script>
         const canvas = document.getElementById('neuralCanvas');
-        const ctx = canvas.getContext('2d');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const numParticles = 60;
 
-        let particles = [];
-        const numParticles = 60;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.z = Math.random() * canvas.width;
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.5) * 0.8;
-                this.vz = (Math.random() - 0.5) * 0.8;
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
             }
 
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.z += this.vz;
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
 
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-                if (this.z < 0 || this.z > canvas.width) this.vz *= -1;
-            }
-
-            draw() {
-                let k = 250 / this.z;
-                let px = this.x * k + canvas.width / 2 * (1 - k);
-                let py = this.y * k + canvas.height / 2 * (1 - k);
-                
-                if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
-                    let size = Math.max(1, (1 - this.z / canvas.width) * 3);
-                    ctx.fillStyle = '#f59e0b';
-                    ctx.beginPath();
-                    ctx.arc(px, py, size, 0, Math.PI * 2);
-                    ctx.fill();
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.z = Math.random() * canvas.width;
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                    this.vz = (Math.random() - 0.5) * 0.8;
                 }
-            }
-        }
 
-        for (let i = 0; i < numParticles; i++) {
-            particles.push(new Particle());
-        }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.z += this.vz;
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Desenha conexões neurais
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                    if (this.z < 0 || this.z > canvas.width) this.vz *= -1;
+                }
 
-                for (let j = i + 1; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 120) {
-                        ctx.strokeStyle = `rgba(245, 158, 11, ${1 - dist / 120})`;
-                        ctx.lineWidth = 0.5;
+                draw() {
+                    let k = 250 / this.z;
+                    let px = this.x * k + canvas.width / 2 * (1 - k);
+                    let py = this.y * k + canvas.height / 2 * (1 - k);
+                    
+                    if (px >= 0 && px <= canvas.width && py >= 0 && py <= canvas.height) {
+                        let size = Math.max(1, (1 - this.z / canvas.width) * 3);
+                        ctx.fillStyle = '#f59e0b';
                         ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
+                        ctx.arc(px, py, size, 0, Math.PI * 2);
+                        ctx.fill();
                     }
                 }
             }
-            requestAnimationFrame(animate);
+
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        let dx = particles[i].x - particles[j].x;
+                        let dy = particles[i].y - particles[j].y;
+                        let dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 120) {
+                            ctx.strokeStyle = `rgba(245, 158, 11, ${1 - dist / 120})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+
+            animate();
         }
 
-        animate();
+        // Ações seguras dos botões
+        const orderForm = document.getElementById('orderForm');
+        if (orderForm) {
+            orderForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Demanda enviada com sucesso! O protocolo priorizou seu projeto.');
+            });
+        }
 
-        // Ações simuladas dos botões
-        document.getElementById('orderForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Demanda enviada com sucesso para o alvéolo! O protocolo priorizou seu projeto.');
-        });
-
-        document.getElementById('saveConfigBtn').addEventListener('click', () => {
-            const senha = document.getElementById('adminPasswordInput').value;
-            const titular = document.getElementById('holderNameInput').value;
-            if(!titular) {
-                alert('Preencha o nome do Titular Licenciado.');
-                return;
-            }
-            if(!senha) {
-                alert('Digite a senha mestre de administrador para autorizar a gravação das chaves.');
-                return;
-            }
-            alert('Credenciais da Tesouraria, Licença e Chaves PIX protegidas e salvas com sucesso no núcleo de auditoria da Colmeia!');
-        });
+        const saveConfigBtn = document.getElementById('saveConfigBtn');
+        if (saveConfigBtn) {
+            saveConfigBtn.addEventListener('click', () => {
+                const senha = document.getElementById('adminPasswordInput').value;
+                const titular = document.getElementById('holderNameInput').value;
+                if (!titular) {
+                    alert('Preencha o nome do Titular Licenciado.');
+                    return;
+                }
+                if (!senha) {
+                    alert('Digite a senha mestre de administrador para autorizar a gravação das chaves.');
+                    return;
+                }
+                alert('Credenciais da Tesouraria, Licença e Chaves PIX salvas com sucesso!');
+            });
+        }
     </script>
 </body>
 </html>
