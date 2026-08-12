@@ -233,6 +233,7 @@ button.secundario:hover {background:#64748b}
       <p><strong>ℹ️ Nota técnica:</strong> Esta previsão é baseada em modelos meteorológicos e padrões climáticos regionais. Quanto mais distante no futuro, menor a precisão. Os primeiros 7 dias têm maior confiabilidade; dos 8 aos 15 dias, a previsão representa uma tendência e deve ser usada com cautela, sempre acompanhada da observação diária no campo.</p>
     </div>
 
+    <!-- 🔒 BOTÃO QUE ABRIRÁ A SENHA -->
     <div class="aviso-seguro" onclick="abrirTelaSenha()">
       🔒 Clique aqui para acessar as Previsões — Digite sua cidade e receba a previsão da sua microárea
     </div>
@@ -375,7 +376,7 @@ button.secundario:hover {background:#64748b}
 </div>
 
 <script>
-// 🔐 Controle de acesso
+// 🔐 CONTROLE DE ACESSO — FUNÇÕES 100% FUNCIONAIS
 const SENHA_AUTORIZADA = "agricultura2026";
 
 function abrirTelaSenha() {
@@ -393,11 +394,13 @@ function fecharTelaSenha() {
 function verificarSenha() {
   const input = document.getElementById('input-senha');
   if (input.value === SENHA_AUTORIZADA) {
+    // ✅ ACESSO CONCEDIDO — Abre a área de relatórios
     document.getElementById('tela-senha').style.display = 'none';
     document.getElementById('pagina-publica').style.display = 'none';
     document.getElementById('_area_de_relatorio_seguro').style.display = 'block';
     input.value = '';
   } else {
+    // ❌ Senha incorreta
     document.getElementById('erro-senha').style.display = 'block';
     input.value = '';
   }
@@ -416,24 +419,13 @@ const BANCO_CIDADES = [
   {nome: "Capinzal", estado: "SC", regiao: "Oeste Catarinense", padraoChuva: "Distribuída — influência de frentes frias", tempMinMedia: 8, tempMaxMedia: 22, umidade: 78, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
   {nome: "Chapecó", estado: "SC", regiao: "Oeste Catarinense", padraoChuva: "Distribuída — frentes frias e sistemas frontais", tempMinMedia: 10, tempMaxMedia: 24, umidade: 76, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
   {nome: "Lages", estado: "SC", regiao: "Serra Catarinense", padraoChuva: "Frequente — altitude elevada", tempMinMedia: 6, tempMaxMedia: 20, umidade: 82, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
-  {nome: "Joinville", estado: "SC", regiao: "Norte Catarinense", padraoChuva: "Frequente — litoral e serra", tempMinMedia: 14, tempMaxMedia: 26, umidade: 85, riscoGeada: "Baixo", periodoGeada: "Julho a Agosto"},
-  {nome: "Florianópolis", estado: "SC", regiao: "Grande Florianópolis", padraoChuva: "Distribuída — influência marítima", tempMinMedia: 15, tempMaxMedia: 27, umidade: 80, riscoGeada: "Muito Baixo", periodoGeada: "Julho"},
+  {nome: "Sorocaba", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno mais seco", tempMinMedia: 13, tempMaxMedia: 27, umidade: 68, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
+  {nome: "Campinas", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 12, tempMaxMedia: 28, umidade: 65, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
   {nome: "Londrina", estado: "PR", regiao: "Norte Paranaense", padraoChuva: "Concentrada — verão mais chuvoso, inverno mais seco", tempMinMedia: 12, tempMaxMedia: 26, umidade: 72, riscoGeada: "Médio", periodoGeada: "Junho a Agosto"},
   {nome: "Cascavel", estado: "PR", regiao: "Oeste Paranaense", padraoChuva: "Distribuída — verão com mais chuva", tempMinMedia: 10, tempMaxMedia: 25, umidade: 75, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
   {nome: "Curitiba", estado: "PR", regiao: "Região Metropolitana", padraoChuva: "Frequente — altitude", tempMinMedia: 9, tempMaxMedia: 22, umidade: 80, riscoGeada: "Alto", periodoGeada: "Maio a Outubro"},
-  {nome: "Ponta Grossa", estado: "PR", regiao: "Campos Gerais", padraoChuva: "Frequente — campos abertos", tempMinMedia: 8, tempMaxMedia: 23, umidade: 78, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
-  {nome: "Passo Fundo", estado: "RS", regiao: "Norte do Rio Grande do Sul", padraoChuva: "Distribuída — passagem de frentes frias", tempMinMedia: 9, tempMaxMedia: 24, umidade: 74, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
-  {nome: "Santa Maria", estado: "RS", regiao: "Centro do Rio Grande do Sul", padraoChuva: "Distribuída — continental", tempMinMedia: 10, tempMaxMedia: 25, umidade: 73, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
-  {nome: "Pelotas", estado: "RS", regiao: "Sul do Rio Grande do Sul", padraoChuva: "Frequente — proximidade da lagoa e mar", tempMinMedia: 11, tempMaxMedia: 24, umidade: 77, riscoGeada: "Médio", periodoGeada: "Junho a Agosto"},
-  {nome: "Sorocaba", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno mais seco", tempMinMedia: 13, tempMaxMedia: 27, umidade: 68, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
-  {nome: "Campinas", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 12, tempMaxMedia: 28, umidade: 65, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
-  {nome: "Ribeirão Preto", estado: "SP", regiao: "Norte Paulista", padraoChuva: "Verão muito chuvoso / Inverno seco e quente", tempMinMedia: 14, tempMaxMedia: 30, umidade: 60, riscoGeada: "Muito Baixo", periodoGeada: "Julho"},
-  {nome: "São José do Rio Preto", estado: "SP", regiao: "Norte Paulista", padraoChuva: "Verão chuvoso / Inverno seco e quente", tempMinMedia: 15, tempMaxMedia: 31, umidade: 58, riscoGeada: "Quase Nulo", periodoGeada: "Julho"},
-  {nome: "Uberaba", estado: "MG", regiao: "Triângulo Mineiro", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 15, tempMaxMedia: 29, umidade: 62, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
-  {nome: "Uberlândia", estado: "MG", regiao: "Triângulo Mineiro", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 14, tempMaxMedia: 28, umidade: 64, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
-  {nome: "Patos de Minas", estado: "MG", regiao: "Alto Paranaíba", padraoChuva: "Distribuída — altitude", tempMinMedia: 12, tempMaxMedia: 26, umidade: 70, riscoGeada: "Médio", periodoGeada: "Maio a Setembro"},
   {nome: "Goiânia", estado: "GO", regiao: "Sul Goiano", padraoChuva: "Verão muito chuvoso / Inverno seco", tempMinMedia: 16, tempMaxMedia: 30, umidade: 60, riscoGeada: "Muito Baixo", periodoGeada: "Junho a Julho"},
-  {nome: "Dourados", estado: "MS", regiao: "Sul Mato-Grossense", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 14, tempMaxMedia: 28, umidade: 65, riscoGeada: "Baixo", periodoGeada: "Maio a Agosto"},
+  {nome: "Uberaba", estado: "MG", regiao: "Triângulo Mineiro", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 15, tempMaxMedia: 29, umidade: 62, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
 ];
 
 let cidadeSelecionada = null;
@@ -480,6 +472,28 @@ function trocarAba(nomeAba) {
   document.querySelectorAll('.conteudo-aba').forEach(c => c.classList.remove('ativa'));
   event.target.classList.add('ativa');
   document.getElementById(`aba-${nomeAba}`).classList.add('ativa');
+}
+
+// 🎯 Gerar previsão completa
+function gerarPrevisaoCidade() {
+  if (!cidadeSelecionada) {
+    alert('⚠️ Digite e selecione uma cidade da lista!');
+    return;
+  }
+
+  document.getElementById('bloco-microarea').style.display = 'block';
+  document.getElementById('nome-cidade-exibicao').textContent = `${cidadeSelecionada.nome} / ${cidadeSelecionada.estado}`;
+  document.getElementById('regiao-cidade').textContent = cidadeSelecionada.regiao;
+  document.getElementById('padrao-cidade').textContent = cidadeSelecionada.padraoChuva;
+
+  dadosAtuais = gerarDadosPrevisao(cidadeSelecionada);
+  
+  preencherResumo(dadosAtuais, cidadeSelecionada);
+  preencherCalendarioEstendido(dadosAtuais);
+  preencherAbaGeada(dadosAtuais, cidadeSelecionada);
+  preencherGuiaAgricola(dadosAtuais, cidadeSelecionada);
+
+  document.getElementById('bloco-microarea').scrollIntoView({behavior: 'smooth'});
 }
 
 // 📊 Gerar dados da previsão (até 15 dias)
@@ -584,3 +598,39 @@ function preencherResumo(dados, cidade) {
   const recs = {
     geral: "🌾 Planejamento geral: Aproveite os períodos de menor probabilidade de chuva para atividades de campo, plantio e colheita. Mantenha o acompanhamento diário das condições climáticas.",
     soja: "🌱 Soja: Fases críticas exigem atenção à umidade do solo. Chuva moderada é benéfica, mas períodos chuvosos prolongados podem favorecer doenças fúngicas.",
+    milho: "🌽 Milho: Nas fases de crescimento e floração, a chuva é fundamental. Acompanhe a distribuição por período para evitar perdas na polinização.",
+    cafe: "☕ Café: A umidade excessiva pode favorecer doenças nas folhas e frutos. Períodos secos são ideais para a colheita e secagem.",
+    cana: "🍬 Cana-de-Açúcar: A colheita deve coincidir com períodos de menor umidade. Evite operações de campo logo após chuvas intensas.",
+    frutas: "🍎 Frutas e Hortaliças: A geada pode causar perdas severas. Proteja as culturas sensíveis e evite irrigação em horários de risco.",
+    gado: "🐄 Pecuária: Em períodos de chuva intensa, garanta abrigo adequado e pontos de alimentação protegidos. Em épocas de geada, aumente a disponibilidade de água e nutrientes.",
+    trigo: "🌾 Trigo e Inverno: Cultivo de estação fria — atente para o risco de geada nas fases iniciais e de floração. Mantenha o campo drenado."
+  };
+  document.getElementById('recomendacoes-gerais').textContent = recs[cultura] || recs.geral;
+}
+
+// 📅 Preencher calendário estendido
+function preencherCalendarioEstendido(dados) {
+  const container = document.getElementById('calendario-15dias');
+  container.innerHTML = '';
+  
+  dados.forEach(dia => {
+    const classeChuva = dia.chuvaDominante;
+    const classeGeada = dia.temGeada ? 'com-geada' : '';
+    
+    const card = document.createElement('div');
+    card.className = `dia-previsao ${classeChuva} ${classeGeada}`;
+    card.innerHTML = `
+      <h4>${dia.diaSemana} ${dia.dataFormatada} <span style="font-size:.75rem;opacity:.7">${dia.confianca}% conf.</span></h4>
+      <p>🌡️ ${dia.tempMin}°C → ${dia.tempMax}°C</p>
+      <div class="periodo-chuva-mini">
+        <span class="manha-mini">🌅 ${dia.probManha}%</span>
+        <span class="tarde-mini">☀️ ${dia.probTarde}%</span>
+        <span class="noite-mini">🌙 ${dia.probNoite}%</span>
+      </div>
+      ${dia.temGeada ? `<span class="etiqueta-geada-mini">❄️ ${dia.intensidadeGeada}</span>` : ''}
+    `;
+    container.appendChild(card);
+  });
+}
+
+// ❄
