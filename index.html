@@ -233,7 +233,6 @@ button.secundario:hover {background:#64748b}
       <p><strong>ℹ️ Nota técnica:</strong> Esta previsão é baseada em modelos meteorológicos e padrões climáticos regionais. Quanto mais distante no futuro, menor a precisão. Os primeiros 7 dias têm maior confiabilidade; dos 8 aos 15 dias, a previsão representa uma tendência e deve ser usada com cautela, sempre acompanhada da observação diária no campo.</p>
     </div>
 
-    <!-- 🔒 BOTÃO QUE ABRIRÁ A SENHA -->
     <div class="aviso-seguro" onclick="abrirTelaSenha()">
       🔒 Clique aqui para acessar as Previsões — Digite sua cidade e receba a previsão da sua microárea
     </div>
@@ -394,13 +393,11 @@ function fecharTelaSenha() {
 function verificarSenha() {
   const input = document.getElementById('input-senha');
   if (input.value === SENHA_AUTORIZADA) {
-    // ✅ ACESSO CONCEDIDO — Abre a área de relatórios
     document.getElementById('tela-senha').style.display = 'none';
     document.getElementById('pagina-publica').style.display = 'none';
     document.getElementById('_area_de_relatorio_seguro').style.display = 'block';
     input.value = '';
   } else {
-    // ❌ Senha incorreta
     document.getElementById('erro-senha').style.display = 'block';
     input.value = '';
   }
@@ -472,28 +469,6 @@ function trocarAba(nomeAba) {
   document.querySelectorAll('.conteudo-aba').forEach(c => c.classList.remove('ativa'));
   event.target.classList.add('ativa');
   document.getElementById(`aba-${nomeAba}`).classList.add('ativa');
-}
-
-// 🎯 Gerar previsão completa
-function gerarPrevisaoCidade() {
-  if (!cidadeSelecionada) {
-    alert('⚠️ Digite e selecione uma cidade da lista!');
-    return;
-  }
-
-  document.getElementById('bloco-microarea').style.display = 'block';
-  document.getElementById('nome-cidade-exibicao').textContent = `${cidadeSelecionada.nome} / ${cidadeSelecionada.estado}`;
-  document.getElementById('regiao-cidade').textContent = cidadeSelecionada.regiao;
-  document.getElementById('padrao-cidade').textContent = cidadeSelecionada.padraoChuva;
-
-  dadosAtuais = gerarDadosPrevisao(cidadeSelecionada);
-  
-  preencherResumo(dadosAtuais, cidadeSelecionada);
-  preencherCalendarioEstendido(dadosAtuais);
-  preencherAbaGeada(dadosAtuais, cidadeSelecionada);
-  preencherGuiaAgricola(dadosAtuais, cidadeSelecionada);
-
-  document.getElementById('bloco-microarea').scrollIntoView({behavior: 'smooth'});
 }
 
 // 📊 Gerar dados da previsão (até 15 dias)
@@ -633,4 +608,23 @@ function preencherCalendarioEstendido(dados) {
   });
 }
 
-// ❄
+// ❄️ Preencher aba de geada
+function preencherAbaGeada(dados, cidade) {
+  const container = document.getElementById('detalhes-geada');
+  const diasComGeada = dados.filter(d => d.temGeada);
+  
+  if (diasComGeada.length === 0) {
+    container.innerHTML = `
+      <div class="aviso-geada sem-geada">
+        <div class="icone-geada">☀️</div>
+        <h3 style="text-align:center">✅ Sem previsão de geada nos próximos 15 dias</h3>
+        <p style="text-align:center;margin-top:15px">Não foram identificadas condições favoráveis à formação de geada para ${cidade.nome}/${cidade.estado} neste período.</p>
+        <div class="recomendacao-geada">
+          <p><strong>💡 Recomendações:</strong></p>
+          <ul style="margin:10px 0 0 25px;line-height:1.7">
+            <li>Aproveite as condições favoráveis para atividades de campo</li>
+            <li>Mantenha o acompanhamento diário das condições climáticas</li>
+            <li>Continue monitorando a previsão conforme a estação avança</li>
+          </ul>
+        </div>
+      </div
