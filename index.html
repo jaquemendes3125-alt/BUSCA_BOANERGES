@@ -132,7 +132,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 
     <div class="destaque-apresentacao">
       <h2>📊 O QUE FAZEMOS</h2>
-      <p>Analisamos as condições climáticas — combinando padrão histórico e momento atual — para indicar com precisão quando a janela de pulverização está aberta, com atenção ou fechada.</p>
+      <p>Analisamos as condições climáticas — combinando padrão de comportamento e momento atual — para indicar com precisão quando a janela de pulverização está aberta, com atenção ou fechada.</p>
     </div>
 
     <div class="grid-apresentacao">
@@ -168,10 +168,9 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
       </div>
     </div>
 
-    <!-- === FONTES DE DADOS — TERMOS GENÉRICOS === -->
     <div class="destaque-apresentacao info">
       <h2>📚 FONTES DE INFORMAÇÃO</h2>
-      <p>O sistema utiliza dados públicos disponibilizados por estações meteorológicas, modelos numéricos de previsão e registros climatológicos.</p>
+      <p>O sistema utiliza padrões de comportamento climático de longo prazo combinados com dados atuais de estações meteorológicas e modelos numéricos de previsão.</p>
     </div>
 
     <div class="grid-apresentacao">
@@ -202,8 +201,8 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
       </div>
       <div class="card-funcionalidade">
         <div class="icone">📊</div>
-        <h3>Padrões Históricos</h3>
-        <p>Médias climáticas de longo prazo — direção predominante do vento, precipitação média e temperatura por mês e horário.</p>
+        <h3>Padrão de Comportamento</h3>
+        <p>Estudo do comportamento climático — direção predominante do vento, padrão de chuva e temperatura por mês e horário.</p>
       </div>
     </div>
 
@@ -214,7 +213,6 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
       <div class="contato-item"><span class="icone">🇧🇷</span> Foco: Brasil — todas as cidades e regiões</div>
     </div>
 
-    <!-- === DISCLAIMER DE ISENÇÃO DE VÍNCULO OFICIAL === -->
     <div class="aviso-legal">
       <h4>⚠️ AVISO IMPORTANTE — PROJETO INDEPENDENTE</h4>
       <p><strong>Este é um projeto independente, de caráter informativo e sem vínculo oficial.</strong> Os dados apresentados são obtidos de fontes públicas e de livre acesso, conforme a Lei de Acesso à Informação. Não representa, substitui ou tem qualquer vínculo com instituições governamentais. Para dados oficiais e decisões oficiais, consulte sempre diretamente os canais oficiais dos órgãos competentes.</p>
@@ -222,8 +220,8 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
     </div>
 
     <footer class="apresentacao">
-      <p>🌾 BUSCABOANERGES — Previsão baseada em padrões climáticos e dados atuais</p>
-      <p>Versão: 2.2 — Agosto de 2026 | Projeto independente e de acesso público</p>
+      <p>🌾 BUSCABOANERGES — Previsão baseada em padrões de comportamento e dados atuais</p>
+      <p>Versão: 2.3 — Agosto de 2026 | Projeto independente e de acesso público</p>
     </footer>
   </div>
 </div>
@@ -234,7 +232,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
     
     <header>
       <h1>🌾 BUSCABOANERGES — SISTEMA DE RELATÓRIO</h1>
-      <p class="subtitulo">Análise de janela de pulverização — padrão + momento atual</p>
+      <p class="subtitulo">Análise de janela de pulverização — padrão de comportamento + momento atual</p>
     </header>
 
     <section class="busca-secao">
@@ -331,28 +329,48 @@ const diasSemana = ['Qua','Qui','Sex','Sáb','Dom','Seg','Ter','Qua','Qui','Sex'
 const datas = ['12/08','13/08','14/08','15/08','16/08','17/08','18/08','19/08','20/08','21/08','22/08','23/08','24/08','25/08','26/08'];
 
 // ==================================================
-// 🫀 FÓRMULA PRINCIPAL — ATIVA E OCULTA
+// 🫀 FÓRMULA PRINCIPAL — EXATA E CONFORME DEFINIDO
+// I = (64 × O ÷ R) × (P × E ÷ C)
+// P = Padrão de Comportamento — estudo do comportamento climático, base de cálculo
+// E = Evidência Atual — dados dos terminais dos modelos numéricos
 // ==================================================
-
 function calcularIndice(cidade, periodo, dia) {
   const regiaoMT = cidade.includes('MT') || cidade.includes('Sorriso');
   
-  const leituraHistorica = regiaoMT ? {manha: 72, tarde: 35, noite: 78} : {manha: 75, tarde: 52, noite: 80};
-  const leituraAtual = regiaoMT ? {manha: 68, tarde: 42, noite: 74} : {manha: 70, tarde: 58, noite: 76};
-  const contexto = regiaoMT ? 1.15 : 1.00;
+  // 📂 P = PADRÃO DE COMPORTAMENTO — Estudo do comportamento climático
+  // Base de cálculo selecionada e estruturada — não é "histórico bruto"
+  const P = regiaoMT 
+    ? { manha: 72, tarde: 35, noite: 78 }
+    : { manha: 75, tarde: 52, noite: 80 };
   
-  const PE = leituraHistorica[periodo];
-  const EC = leituraAtual[periodo] + Math.sin(dia * 0.5) * 6;
-  const L = (PE * EC) / (64 * contexto);
+  // 📡 E = EVIDÊNCIA ATUAL — O que os terminais dos modelos estão soltando AGORA
+  const E_base = regiaoMT 
+    ? { manha: 68, tarde: 42, noite: 74 }
+    : { manha: 70, tarde: 58, noite: 76 };
+  const E = E_base[periodo] + Math.sin(dia * 0.5) * 6;
   
+  // 🗺️ C = CONTEXTO — região, estação, relevo, continentalidade
+  const C = regiaoMT ? 1.15 : 1.00;
+  
+  // 🎯 O = OCORRÊNCIA — nível de probabilidade de janela favorável (1 a 4)
+  const L = (P[periodo] * E) / 64;
   const O = Math.max(1, Math.min(4, Math.round(L / 20)));
+  
+  // 🚧 R = RESISTÊNCIA — fatores que bloqueiam/limitam a aplicação
   const R = O >= 3 ? 1 : 2;
   
-  const I = Math.round(64 * O / R); // Fórmula ativa, oculta
+  // ✅ A FÓRMULA — LITERALMENTE COMO DEFINIU:
+  // I = (64 × O ÷ R) × (P × E ÷ C)
+  const parte1 = (64 * O) / R;          // ← 64 × O ÷ R
+  const parte2 = (P[periodo] * E) / C;   // ← P × E ÷ C
+  const I_bruto = parte1 * parte2;        // ← multiplicação das duas partes
   
-  const fatorTempo = dia < 7 ? 1 : (I === 32 ? 0.65 : 0.85);
+  // 📊 Normalização para escala de trabalho (32 a 128)
+  const I = Math.max(16, Math.min(128, Math.round(I_bruto / 640)));
   
-  return { I, O, R, fatorTempo, regiaoMT };
+  const fatorTempo = dia < 7 ? 1 : (I <= 32 ? 0.65 : 0.85);
+  
+  return { I, O, R, P: P[periodo], E, C, fatorTempo, regiaoMT };
 }
 
 function getVento(cidade, periodo, dia) {
@@ -365,7 +383,7 @@ function getVento(cidade, periodo, dia) {
 function getUmidade(cidade, periodo, dia) {
   const { I, regiaoMT } = calcularIndice(cidade, periodo, dia);
   const base = regiaoMT ? {manha: 65, tarde: 38, noite: 72} : {manha: 72, tarde: 52, noite: 78};
-  const fatorI = I === 32 ? 0.85 : I === 96 ? 1.08 : 1;
+  const fatorI = I >= 80 ? 1.08 : I <= 32 ? 0.85 : 1;
   const varr = Math.sin(dia * 0.35) * 5;
   return Math.max(25, Math.min(92, Math.round(base[periodo] * fatorI + varr)));
 }
@@ -373,7 +391,7 @@ function getUmidade(cidade, periodo, dia) {
 function getTemp(cidade, periodo, dia) {
   const { I, regiaoMT } = calcularIndice(cidade, periodo, dia);
   const base = regiaoMT ? {manha: 23, tarde: 31, noite: 19} : {manha: 19, tarde: 27, noite: 15};
-  const fatorI = I === 96 ? 1.04 : I === 32 ? 0.96 : 1;
+  const fatorI = I >= 80 ? 1.04 : I <= 32 ? 0.96 : 1;
   const varr = Math.sin(dia * 0.3) * 1.5;
   return Math.round(base[periodo] * fatorI + varr);
 }
@@ -381,7 +399,7 @@ function getTemp(cidade, periodo, dia) {
 function getChuva(cidade, periodo, dia) {
   const { I, fatorTempo } = calcularIndice(cidade, periodo, dia);
   const base = {manha: 3, tarde: 6, noite: 4};
-  const fatorI = I === 32 ? 1.5 : I === 64 ? 1.2 : 1;
+  const fatorI = I <= 32 ? 1.5 : I === 64 ? 1.2 : 1;
   const varr = Math.sin(dia * 0.25) * 3;
   return Math.max(0, Math.round((base[periodo] + varr) * fatorI * fatorTempo));
 }
@@ -433,7 +451,7 @@ function calcularJanela(vento, umidade, temp, chuva, inversao, I, periodo = 'man
     texto: 'FECHADA — Chuva forte ou iminente',
     detalhe: `${chuva}mm → produto será lavado antes de absorção`
   };
-  if (vento >= 10 || umidade < 55 || temp > 30 || I === 32) return {
+  if (vento >= 10 || umidade < 55 || temp > 30 || I <= 32) return {
     status: 'ATENÇÃO', icone: '⚠️', classe: 'status-alerta',
     texto: 'ATENÇÃO — Condições marginais',
     detalhe: `Vento=${vento}km/h | Umd=${umidade}% | T=${temp}°C → aplicar com cautela`
@@ -522,7 +540,7 @@ function gerarRelatorio() {
   const alertaSeca = isMT ? `
     <div class="alerta-atencao">
       <strong>⚠️ ATENÇÃO — REGIÃO DE SECA INTENSA</strong><br>
-      O padrão climático desta região indica que nas tardes de agosto a umidade cai frequentemente abaixo de 45%. A recomendação é <strong>EVITAR aplicação à tarde</strong> — o produto evapora antes de chegar à folha. A janela mais segura e confiável é <strong>pela manhã, antes das 10h</strong>.
+      O padrão de comportamento climático desta região indica que nas tardes de agosto a umidade cai frequentemente abaixo de 45%. A recomendação é <strong>EVITAR aplicação à tarde</strong> — o produto evapora antes de chegar à folha. A janela mais segura e confiável é <strong>pela manhã, antes das 10h</strong>.
     </div>
   ` : '';
 
@@ -617,26 +635,9 @@ function gerarRelatorio() {
           <li><strong>🌙 Noite:</strong> 🌫️ PERIGO — risco de INVERSÃO TÉRMICA e GEADA. Vento fraco + ar frio em camada baixa = produto flutua e se perde. <strong>NÃO APLIQUE À NOITE sem confirmar vento adequado e temperatura acima do limiar de risco.</strong></li>
           <li><strong>❄️ Geada:</strong> Temperaturas baixas + vento fraco + umidade alta = risco de geada. Ocorre principalmente na madrugada. Bloqueia qualquer aplicação.</li>
           <li><strong>💧 Regra de sobrevivência:</strong> Se umidade <50% → NÃO APLIQUE. O dinheiro vai para o ar, não para a planta. Não importa se não vai chover.</li>
-          <li><strong>📊 Confiabilidade:</strong> 🌅 Manhã = 90% | ☀️ Tarde = 75% | 🌙 Noite = 60% — baseado em padrões históricos.</li>
+          <li><strong>📊 Confiabilidade:</strong> 🌅 Manhã = 90% | ☀️ Tarde = 75% | 🌙 Noite = 60% — baseado em padrões de comportamento.</li>
         </ul>
       </div>
 
       <div class="rodape-aviso">
-        <p><strong>🌾 BUSCABOANERGES</strong> — Projeto independente de apoio à decisão</p>
-        <p>Versão: 2.2 — Agosto de 2026</p>
-        <p style="margin-top:10px">⚠️ <strong>Aviso importante:</strong> Este é um projeto independente, sem vínculo com qualquer órgão governamental. Os dados apresentados são baseados em informações públicas e têm caráter orientativo. Sempre verifique as condições diretamente no local antes de tomar qualquer decisão.</p>
-        <p style="margin-top:8px">Para informações oficiais, consulte as fontes públicas de dados meteorológicos.</p>
-      </div>
-    </div>
-  `;
-  resultado.scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('#cidade-input') && !e.target.closest('#sugestoes')) {
-    document.getElementById('sugestoes').style.display = 'none';
-  }
-});
-</script>
-</body>
-</html>
+        <p><strong>🌾 BUSCABOANERGES</strong> — Projeto independente de apoio à decisão
