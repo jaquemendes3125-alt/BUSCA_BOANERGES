@@ -11,8 +11,7 @@
   --geada-fraca: #93c5fd; --geada-moderada: #60a5fa; --geada-forte: #3b82f6; --geada-extrema: #1d4ed8;
   --seco: #22c55e; --aviso: #f59e0b; --perigo: #ef4444; --card: #1e293b; --borda: #475569;
 }
-* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;
-   -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
 body {background:var(--fundo);color:var(--texto);min-height:100vh;}
 
 /* === PÁGINA PÚBLICA === */
@@ -24,7 +23,7 @@ h1 {font-size:2.3rem;color:var(--destaque);margin-bottom:15px}
 h1 span {color:var(--primaria)}
 .slogan {font-size:1.15rem;opacity:.9;line-height:1.7}
 
-/* === DESTAQUE PRINCIPAL: PREVISÃO ESTENDIDA === */
+/* === DESTAQUE PRINCIPAL === */
 .destaque-pesquisa {
   background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.12));
   border: 2px solid #22c55e; border-radius: 14px; padding: 22px; margin: 25px 0;
@@ -49,8 +48,9 @@ footer {margin-top:40px;text-align:center;color:#94a3b8;font-size:.9rem;padding-
 .emoji {font-size:1.2rem}
 .aviso-seguro {
   background:rgba(251,191,36,.1);border:1px solid var(--destaque);border-radius:12px;padding:15px;margin-top:20px;text-align:center;
-  color:var(--destaque);font-weight:500;
+  color:var(--destaque);font-weight:500;cursor:pointer;transition:.3s
 }
+.aviso-seguro:hover {background:rgba(251,191,36,.2);transform:scale(1.02)}
 .destaque-agro {
   background:rgba(34,197,94,.1);border-left:3px solid #22c55e;padding:15px;border-radius:8px;margin:20px 0;
 }
@@ -194,16 +194,13 @@ button.secundario:hover {background:#64748b}
   background: rgba(251,191,36,.1); border-left: 4px solid var(--destaque);
   padding: 15px; border-radius: 8px; margin: 20px 0; line-height:1.7;
 }
-.tabela-dados {width:100%;border-collapse:collapse;margin-top:20px}
-.tabela-dados th,.tabela-dados td {padding:12px;text-align:left;border-bottom:1px solid var(--borda)}
-.tabela-dados th {background:var(--card);color:var(--destaque)}
 .limite-tecnico {
   background: rgba(148,163,184,.1); border-left: 4px solid #94a3b8;
   padding: 15px; border-radius: 8px; margin: 20px 0; font-style: normal;
 }
 </style>
 </head>
-<body oncontextmenu="return false;" onkeydown="return f5j4s7m2x(event);">
+<body>
 
 <!-- 📄 PÁGINA PÚBLICA -->
 <div id="pagina-publica">
@@ -227,7 +224,7 @@ button.secundario:hover {background:#64748b}
     <div class="destaque-agro">
       <p><strong>🎯 Passo a passo:</strong></p>
       <ul style="margin:12px 0 0 25px;line-height:1.8">
-        <li>🏘️ <strong>Digita o nome da sua cidade</strong> — ex: Capinzal, Chapecó, Londrina, etc.</li>
+        <li>🏘️ <strong>Digita o nome da sua cidade</strong> — ex: Capinzal, Chapecó, Londrina, Sorocaba...</li>
         <li>📍 Sistema identifica o <strong>estado e região</strong> com seus padrões climáticos</li>
         <li>🌧️ Recebe previsão de chuva por período: <strong>Manhã • Tarde • Noite</strong></li>
         <li>❄️ Recebe <strong>aviso de geada</strong> quando houver risco, com orientações de proteção</li>
@@ -244,8 +241,8 @@ button.secundario:hover {background:#64748b}
       <p><strong>ℹ️ Nota técnica:</strong> Esta previsão é baseada em modelos meteorológicos e padrões climáticos regionais. Quanto mais distante no futuro, menor a precisão. Os primeiros 7 dias têm maior confiabilidade; dos 8 aos 15 dias, a previsão representa uma tendência e deve ser usada com cautela, sempre acompanhada da observação diária no campo.</p>
     </div>
 
-    <div class="aviso-seguro">
-      🔒 Área de Previsões — Digite sua cidade e receba a previsão da sua microárea
+    <div class="aviso-seguro" onclick="abrirTelaSenha()">
+      🔒 Clique aqui para acessar as Previsões — Digite sua cidade e receba a previsão da sua microárea
     </div>
 
     <h2 style="margin-top:30px">📞 Entre em Contato</h2>
@@ -274,13 +271,14 @@ button.secundario:hover {background:#64748b}
 </div>
 
 <!-- 🔐 TELA DE SENHA -->
-<div id="tela-senha" style="display:none;">
+<div id="tela-senha">
   <div class="caixa-senha">
     <h2>🔐 Acesso ao Sistema</h2>
     <p style="margin-bottom:20px;color:#94a3b8;font-size:.95rem;">Digite sua senha para acessar as previsões estendidas</p>
     <input type="password" id="input-senha" placeholder="Digite sua senha..." onkeydown="if(event.key==='Enter')verificarSenha()">
     <button onclick="verificarSenha()">🔑 Entrar</button>
     <p class="erro-senha" id="erro-senha">❌ Senha incorreta. Tente novamente.</p>
+    <button class="btn secundario" style="margin-top:15px" onclick="fecharTelaSenha()">↩️ Voltar</button>
   </div>
 </div>
 
@@ -290,6 +288,7 @@ button.secundario:hover {background:#64748b}
     <h1>🌾 BUSCABOANERGES — PREVISÃO POR CIDADE</h1>
     <p style="opacity:.9;line-height:1.7;margin-top:8px;">Dados de pesquisa e observação de campo — Manhã • Tarde • Noite + Geada</p>
     <div class="sistema" style="margin-top:12px;color:#22c55e;font-weight:500;">✅ Sistema operacional — Dados atualizados</div>
+    <button class="btn secundario" style="margin-top:15px;max-width:200px;margin-left:auto;margin-right:auto" onclick="sairAreaProtegida()">↩️ Sair / Voltar</button>
   </header>
 
   <h2 class="h2-relatorio">🔍 Previsão — Digite sua Cidade</h2>
@@ -396,10 +395,23 @@ button.secundario:hover {background:#64748b}
 // 🔐 Controle de acesso
 const SENHA_AUTORIZADA = "agricultura2026";
 
+function abrirTelaSenha() {
+  document.getElementById('tela-senha').style.display = 'flex';
+  document.getElementById('pagina-publica').style.filter = 'blur(4px)';
+}
+
+function fecharTelaSenha() {
+  document.getElementById('tela-senha').style.display = 'none';
+  document.getElementById('pagina-publica').style.filter = 'none';
+  document.getElementById('input-senha').value = '';
+  document.getElementById('erro-senha').style.display = 'none';
+}
+
 function verificarSenha() {
   const input = document.getElementById('input-senha');
   if (input.value === SENHA_AUTORIZADA) {
     document.getElementById('tela-senha').style.display = 'none';
+    document.getElementById('pagina-publica').style.display = 'none';
     document.getElementById('_area_de_relatorio_seguro').style.display = 'block';
     input.value = '';
   } else {
@@ -408,40 +420,41 @@ function verificarSenha() {
   }
 }
 
-function f5j4s7m2x(event) { return true; }
+function sairAreaProtegida() {
+  document.getElementById('_area_de_relatorio_seguro').style.display = 'none';
+  document.getElementById('pagina-publica').style.display = 'flex';
+  document.getElementById('bloco-microarea').style.display = 'none';
+  document.getElementById('cidade-input').value = '';
+  cidadeSelecionada = null;
+}
 
 // 📋 Banco de cidades com padrões climáticos
 const BANCO_CIDADES = [
-  // Santa Catarina
   {nome: "Capinzal", estado: "SC", regiao: "Oeste Catarinense", padraoChuva: "Distribuída — influência de frentes frias", tempMinMedia: 8, tempMaxMedia: 22, umidade: 78, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
   {nome: "Chapecó", estado: "SC", regiao: "Oeste Catarinense", padraoChuva: "Distribuída — frentes frias e sistemas frontais", tempMinMedia: 10, tempMaxMedia: 24, umidade: 76, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
   {nome: "Lages", estado: "SC", regiao: "Serra Catarinense", padraoChuva: "Frequente — altitude elevada", tempMinMedia: 6, tempMaxMedia: 20, umidade: 82, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
   {nome: "Joinville", estado: "SC", regiao: "Norte Catarinense", padraoChuva: "Frequente — litoral e serra", tempMinMedia: 14, tempMaxMedia: 26, umidade: 85, riscoGeada: "Baixo", periodoGeada: "Julho a Agosto"},
   {nome: "Florianópolis", estado: "SC", regiao: "Grande Florianópolis", padraoChuva: "Distribuída — influência marítima", tempMinMedia: 15, tempMaxMedia: 27, umidade: 80, riscoGeada: "Muito Baixo", periodoGeada: "Julho"},
-  // Paraná
   {nome: "Londrina", estado: "PR", regiao: "Norte Paranaense", padraoChuva: "Concentrada — verão mais chuvoso, inverno mais seco", tempMinMedia: 12, tempMaxMedia: 26, umidade: 72, riscoGeada: "Médio", periodoGeada: "Junho a Agosto"},
   {nome: "Cascavel", estado: "PR", regiao: "Oeste Paranaense", padraoChuva: "Distribuída — verão com mais chuva", tempMinMedia: 10, tempMaxMedia: 25, umidade: 75, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
   {nome: "Curitiba", estado: "PR", regiao: "Região Metropolitana", padraoChuva: "Frequente — altitude", tempMinMedia: 9, tempMaxMedia: 22, umidade: 80, riscoGeada: "Alto", periodoGeada: "Maio a Outubro"},
   {nome: "Ponta Grossa", estado: "PR", regiao: "Campos Gerais", padraoChuva: "Frequente — campos abertos", tempMinMedia: 8, tempMaxMedia: 23, umidade: 78, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
-  // Rio Grande do Sul
   {nome: "Passo Fundo", estado: "RS", regiao: "Norte do Rio Grande do Sul", padraoChuva: "Distribuída — passagem de frentes frias", tempMinMedia: 9, tempMaxMedia: 24, umidade: 74, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
   {nome: "Santa Maria", estado: "RS", regiao: "Centro do Rio Grande do Sul", padraoChuva: "Distribuída — continental", tempMinMedia: 10, tempMaxMedia: 25, umidade: 73, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
   {nome: "Pelotas", estado: "RS", regiao: "Sul do Rio Grande do Sul", padraoChuva: "Frequente — proximidade da lagoa e mar", tempMinMedia: 11, tempMaxMedia: 24, umidade: 77, riscoGeada: "Médio", periodoGeada: "Junho a Agosto"},
-  // São Paulo
   {nome: "Sorocaba", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno mais seco", tempMinMedia: 13, tempMaxMedia: 27, umidade: 68, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
   {nome: "Campinas", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 12, tempMaxMedia: 28, umidade: 65, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
   {nome: "Ribeirão Preto", estado: "SP", regiao: "Norte Paulista", padraoChuva: "Verão muito chuvoso / Inverno seco e quente", tempMinMedia: 14, tempMaxMedia: 30, umidade: 60, riscoGeada: "Muito Baixo", periodoGeada: "Julho"},
   {nome: "São José do Rio Preto", estado: "SP", regiao: "Norte Paulista", padraoChuva: "Verão chuvoso / Inverno seco e quente", tempMinMedia: 15, tempMaxMedia: 31, umidade: 58, riscoGeada: "Quase Nulo", periodoGeada: "Julho"},
-  // Minas Gerais
   {nome: "Uberaba", estado: "MG", regiao: "Triângulo Mineiro", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 15, tempMaxMedia: 29, umidade: 62, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
   {nome: "Uberlândia", estado: "MG", regiao: "Triângulo Mineiro", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 14, tempMaxMedia: 28, umidade: 64, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
   {nome: "Patos de Minas", estado: "MG", regiao: "Alto Paranaíba", padraoChuva: "Distribuída — altitude", tempMinMedia: 12, tempMaxMedia: 26, umidade: 70, riscoGeada: "Médio", periodoGeada: "Maio a Setembro"},
-  // Outros
   {nome: "Goiânia", estado: "GO", regiao: "Sul Goiano", padraoChuva: "Verão muito chuvoso / Inverno seco", tempMinMedia: 16, tempMaxMedia: 30, umidade: 60, riscoGeada: "Muito Baixo", periodoGeada: "Junho a Julho"},
   {nome: "Dourados", estado: "MS", regiao: "Sul Mato-Grossense", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 14, tempMaxMedia: 28, umidade: 65, riscoGeada: "Baixo", periodoGeada: "Maio a Agosto"},
 ];
 
 let cidadeSelecionada = null;
+let dadosAtuais = [];
 
 // 🔍 Mostrar sugestões enquanto digita
 function mostrarSugestoes(valor) {
@@ -498,12 +511,12 @@ function gerarPrevisaoCidade() {
   document.getElementById('regiao-cidade').textContent = cidadeSelecionada.regiao;
   document.getElementById('padrao-cidade').textContent = cidadeSelecionada.padraoChuva;
 
-  const dadosPrevisao = gerarDadosPrevisao(cidadeSelecionada);
+  dadosAtuais = gerarDadosPrevisao(cidadeSelecionada);
   
-  preencherResumo(dadosPrevisao, cidadeSelecionada);
-  preencherCalendarioEstendido(dadosPrevisao);
-  preencherAbaGeada(dadosPrevisao, cidadeSelecionada);
-  preencherGuiaAgricola(dadosPrevisao, cidadeSelecionada);
+  preencherResumo(dadosAtuais, cidadeSelecionada);
+  preencherCalendarioEstendido(dadosAtuais);
+  preencherAbaGeada(dadosAtuais, cidadeSelecionada);
+  preencherGuiaAgricola(dadosAtuais, cidadeSelecionada);
 
   document.getElementById('bloco-microarea').scrollIntoView({behavior: 'smooth'});
 }
@@ -533,10 +546,8 @@ function gerarDadosPrevisao(cidade) {
     const tempMin = Math.round(cidade.tempMinMedia + variacaoTemp + (Math.random() - 0.5) * 4);
     const tempMax = Math.round(cidade.tempMaxMedia + variacaoTemp + (Math.random() - 0.5) * 4);
     
-    // Quanto mais distante, menor a confiança
     const fatorConfianca = i < 7 ? 1 : Math.max(0.6, 1 - (i - 6) * 0.05);
     
-    // Cálculo de risco de geada baseado em critérios técnicos
     const ceuLimpo = probNoite < 35;
     const semVento = Math.random() > 0.3;
     const condicaoGeada = tempMin <= 4 && ceuLimpo && semVento;
@@ -572,19 +583,4 @@ function preencherResumo(dados, cidade) {
   const mediaNoite = Math.round(primeiros7.reduce((a,b) => a + b.probNoite, 0) / 7);
   
   document.getElementById('prob-manha').textContent = `${mediaManha}%`;
-  document.getElementById('prob-tarde').textContent = `${mediaTarde}%`;
-  document.getElementById('prob-noite').textContent = `${mediaNoite}%`;
-  
-  const getTexto = (valor, periodo) => {
-    if (valor < 25) return `Pouca chuva — período favorável para atividades`;
-    if (valor < 45) return `Chuva leve e isolada — atenção na ${periodo}`;
-    if (valor < 65) return `Chuva frequente — planeje-se com antecedência`;
-    return `Chuva provável — evite atividades durante a ${periodo}`;
-  };
-  
-  document.getElementById('texto-manha').textContent = getTexto(mediaManha, 'manhã');
-  document.getElementById('texto-tarde').textContent = getTexto(mediaTarde, 'tarde');
-  document.getElementById('texto-noite').textContent = getTexto(mediaNoite, 'noite');
-  
-  // Recomendações gerais
-  const cultura = document.getElementById('cultura').value;
+  document.getElementById('prob-t
