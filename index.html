@@ -24,7 +24,7 @@ h1 {font-size:2.3rem;color:var(--destaque);margin-bottom:15px}
 h1 span {color:var(--primaria)}
 .slogan {font-size:1.15rem;opacity:.9;line-height:1.7}
 
-/* === DESTAQUE PRINCIPAL: ACIMA DE 7 DIAS === */
+/* === DESTAQUE PRINCIPAL: PREVISÃO ESTENDIDA === */
 .destaque-pesquisa {
   background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.12));
   border: 2px solid #22c55e; border-radius: 14px; padding: 22px; margin: 25px 0;
@@ -199,7 +199,7 @@ button.secundario:hover {background:#64748b}
 .tabela-dados th {background:var(--card);color:var(--destaque)}
 .limite-tecnico {
   background: rgba(148,163,184,.1); border-left: 4px solid #94a3b8;
-  padding: 15px; border-radius: 8px; margin: 20px 0; font-style: italic;
+  padding: 15px; border-radius: 8px; margin: 20px 0; font-style: normal;
 }
 </style>
 </head>
@@ -209,12 +209,12 @@ button.secundario:hover {background:#64748b}
 <div id="pagina-publica">
   <header>
     <h1>🌾 BUSCA<span>BOANERGES</span></h1>
-    <p class="slogan">Previsão Meteorológica para Agricultura — Dados de pesquisa e observação de campo</p>
+    <p class="slogan">Previsão Meteorológica para Agricultura — Baseada em dados, pesquisa e observação de campo</p>
     
-    <!-- 🔬 DESTAQUE: ACIMA DE 7 DIAS, COM BASE TÉCNICA -->
+    <!-- 🔬 DESTAQUE: PREVISÃO ESTENDIDA -->
     <div class="destaque-pesquisa">
       <h3>📊 PREVISÃO ESTENDIDA — ACIMA DE 7 DIAS</h3>
-      <p>Somos trabalhadores e pesquisadores, não adivinhos. Apresentamos a previsão estendida para <strong>até 15 dias</strong>, baseada em dados meteorológicos, padrões regionais e observação de campo — com chuva por período do dia e aviso de geada, sempre com a cidade que você está.</p>
+      <p>Somos trabalhadores e pesquisadores. Apresentamos a previsão estendida para <strong>até 15 dias</strong>, baseada em dados meteorológicos, padrões climáticos regionais e observação de campo — com chuva por período do dia e aviso de geada, sempre referenciada à sua cidade.</p>
     </div>
   </header>
 
@@ -231,7 +231,7 @@ button.secundario:hover {background:#64748b}
         <li>📍 Sistema identifica o <strong>estado e região</strong> com seus padrões climáticos</li>
         <li>🌧️ Recebe previsão de chuva por período: <strong>Manhã • Tarde • Noite</strong></li>
         <li>❄️ Recebe <strong>aviso de geada</strong> quando houver risco, com orientações de proteção</li>
-        <li>📅 Visualiza <strong>acima de 7 dias</strong> — planejamento prático e responsável</li>
+        <li>📅 Visualiza <strong>previsão estendida</strong> — planejamento prático e responsável</li>
       </ul>
     </div>
 
@@ -241,7 +241,7 @@ button.secundario:hover {background:#64748b}
     </div>
 
     <div class="nota-tecnica">
-      <p><strong>ℹ️ Nota de responsabilidade técnica:</strong> Esta previsão é baseada em modelos meteorológicos e padrões climáticos regionais. Quanto mais distante no futuro, menor a precisão. As previsões acima de 7 dias devem ser vistas como tendência e usadas com cautela, sempre acompanhadas da observação diária no campo.</p>
+      <p><strong>ℹ️ Nota técnica:</strong> Esta previsão é baseada em modelos meteorológicos e padrões climáticos regionais. Quanto mais distante no futuro, menor a precisão. Os primeiros 7 dias têm maior confiabilidade; dos 8 aos 15 dias, a previsão representa uma tendência e deve ser usada com cautela, sempre acompanhada da observação diária no campo.</p>
     </div>
 
     <div class="aviso-seguro">
@@ -373,7 +373,7 @@ button.secundario:hover {background:#64748b}
     <div id="aba-estendida" class="conteudo-aba">
       <h3 style="margin:20px 0 15px">📅 Previsão Estendida — até 15 dias</h3>
       <div class="limite-tecnico">
-        <p><strong>📌 Limite técnico:</strong> Os primeiros 7 dias têm maior confiabilidade. Dos 8 aos 15 dias, a previsão representa uma <strong>tendência</strong> baseada em padrões climáticos regionais. Sempre confirme com a observação no campo.</p>
+        <p><strong>📌 Nota técnica:</strong> Os primeiros 7 dias apresentam maior confiabilidade. Dos 8 aos 15 dias, a previsão representa uma <strong>tendência</strong> baseada em padrões climáticos regionais. Recomenda-se sempre acompanhar a observação diária no campo.</p>
       </div>
       <div id="calendario-15dias" class="calendario-15dias"></div>
     </div>
@@ -584,4 +584,7 @@ function preencherResumo(dados, cidade) {
   
   document.getElementById('texto-manha').textContent = getTexto(mediaManha, 'manhã');
   document.getElementById('texto-tarde').textContent = getTexto(mediaTarde, 'tarde');
-  document.getElementById('texto
+  document.getElementById('texto-noite').textContent = getTexto(mediaNoite, 'noite');
+  
+  // Recomendações gerais
+  const cultura = document.getElementById('cultura').value;
