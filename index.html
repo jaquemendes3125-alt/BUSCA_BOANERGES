@@ -13,7 +13,7 @@
    -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
 body {background:var(--fundo);color:var(--texto);min-height:100vh;}
 
-/* === PÁGINA PÚBLICA — CLIENTES === */
+/* === PÁGINA PÚBLICA === */
 #pagina-publica {
   display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
 }
@@ -35,11 +35,34 @@ h2 {color:var(--primaria);margin-bottom:20px;font-size:1.4rem}
 .info p {margin:8px 0;line-height:1.6}
 footer {margin-top:50px;text-align:center;color:#94a3b8;font-size:.9rem;padding-top:20px;border-top:1px solid var(--borda);width:100%;max-width:600px}
 .emoji {font-size:1.3rem}
-/* ✅ AVISO CORRIGIDO — SEM REVELAR O CÓDIGO DO LINK */
 .aviso-seguro {
   background:rgba(251,191,36,.1);border:1px solid var(--destaque);border-radius:12px;padding:15px;margin-top:20px;text-align:center;
   color:var(--destaque);font-weight:500;
 }
+
+/* === TELA DE SENHA === */
+#tela-senha {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(15,23,42,.98); z-index: 9999;
+  align-items: center; justify-content: center; padding: 20px;
+}
+.caixa-senha {
+  background: var(--card); padding: 40px; border-radius: 16px;
+  border: 2px solid var(--destaque); max-width: 420px; width: 100%;
+  box-shadow: 0 0 40px rgba(251,191,36,.2); text-align: center;
+}
+.caixa-senha h2 {color: var(--destaque); margin-bottom: 25px; font-size: 1.5rem}
+.caixa-senha input {
+  width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 10px;
+  border: 2px solid var(--borda); background: #334155; color: white;
+  text-align: center; letter-spacing: 3px; margin-bottom: 20px;
+}
+.caixa-senha button {
+  width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 10px;
+  background: var(--sucesso); color: white; font-weight: bold; border: none; cursor: pointer; transition: .3s
+}
+.caixa-senha button:hover {background: #16a34a; transform: translateY(-2px)}
+.erro-senha {color: var(--perigo); margin-top: 15px; display: none}
 
 /* === ÁREA PROTEGIDA — RELATÓRIOS === */
 #_area_de_relatorio_seguro {display:none;padding:20px;max-width:1100px;margin:0 auto}
@@ -68,10 +91,7 @@ label {display:block;margin-bottom:5px;color:#94a3b8}
 </head>
 <body oncontextmenu="return false;" onkeydown="return f5j4s7m2x(event);">
 
-<!-- ═══════════════════════════════════════════════════════════════
-  📄 PÁGINA PÚBLICA — VISÍVEL PARA TODOS
-  Link: jaquemendes3125-alt.github.io/BUSCA_BOANERGES/
-═══════════════════════════════════════════════════════════════ -->
+<!-- 📄 PÁGINA PÚBLICA -->
 <div id="pagina-publica">
   <header>
     <h1>🔥 BUSCA<span>BOANERGES</span></h1>
@@ -84,7 +104,6 @@ label {display:block;margin-bottom:5px;color:#94a3b8}
       O <span class="destaque-texto">BUSCABOANERGES</span> é um sistema especializado que <strong>cruza dados climáticos</strong> desde 1300 a.C. até os dias atuais — combinando <strong>relatos históricos, registros de poetas e cronistas</strong> com <strong>fontes oficiais gratuitas</strong> (INMET, INPE, NOAA, Copernicus) para <strong>detectar padrões climáticos</strong>, gerar relatórios precisos por região e período e identificar tendências, secas, chuvas, temperaturas e eventos extremos com alto grau de confiança.
     </p>
 
-    <!-- ✅ AVISO ALTERADO — SEM REVELAR O CÓDIGO DO LINK -->
     <div class="aviso-seguro">
       🔒 Área de Relatórios Protegida — Acesso exclusivo e restrito a usuários autorizados
     </div>
@@ -114,10 +133,18 @@ label {display:block;margin-bottom:5px;color:#94a3b8}
   </footer>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-  🔒 ÁREA PROTEGIDA — SÓ APARECE COM O LINK EXCLUSIVO
-  Link: jaquemendes3125-alt.github.io/BUSCA_BOANERGES/#_area_de_relatorio_seguro
-═══════════════════════════════════════════════════════════════ -->
+<!-- 🔐 TELA DE SENHA -->
+<div id="tela-senha">
+  <div class="caixa-senha">
+    <h2>🔐 Área de Relatórios Protegida</h2>
+    <p style="margin-bottom:20px;color:#94a3b8">Digite a senha para acessar o sistema</p>
+    <input type="password" id="input-senha" placeholder="Digite a senha..." autocomplete="off">
+    <button onclick="verificarSenha()">🔑 Acessar Sistema</button>
+    <p class="erro-senha" id="erro-senha">❌ Senha incorreta! Tente novamente.</p>
+  </div>
+</div>
+
+<!-- 🔒 ÁREA PROTEGIDA — SÓ APARECE COM SENHA + LINK -->
 <div id="_area_de_relatorio_seguro">
   <header style="text-align:center;padding:25px 0;border-bottom:2px solid var(--destaque);margin-bottom:30px">
     <h1>🔥 BUSCABOANERGES — ÁREA DE RELATÓRIOS</h1>
@@ -269,8 +296,12 @@ label {display:block;margin-bottom:5px;color:#94a3b8}
 
 <script>
 // ═══════════════════════════════════════════════════════════════
-// 🛡️ SISTEMA DE PROTEÇÃO GLOBAL
+// 🔐 CONFIGURAÇÃO DA SENHA — ALTERE AQUI SE QUISER!
 // ═══════════════════════════════════════════════════════════════
+const SENHA_AUTORIZADA = "boanerges2026"; // ← ALTERE AQUI SUA SENHA!
+let acessoConcedido = false;
+
+// 🛡️ SISTEMA DE PROTEÇÃO GLOBAL
 document.addEventListener('keydown', function(e) {
   if (e.key === 'F12' || e.keyCode === 123) {e.preventDefault(); return false;}
   if (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) {e.preventDefault(); return false;}
@@ -286,6 +317,65 @@ function f5j4s7m2x(e){
   return!0;
 }
 setInterval(function(){if(window.outerWidth - window.innerWidth > 200){document.body.innerHTML='<div class="bloqueado-mensagem">🔒 Acesso restrito. As ferramentas de desenvolvimento não estão disponíveis.</div>'}},500);
+
+// ═══════════════════════════════════════════════════════════════
+// 🔐 FUNÇÃO DE VERIFICAÇÃO DE SENHA
+// ═══════════════════════════════════════════════════════════════
+function verificarSenha(){
+  const input = document.getElementById('input-senha');
+  const erro = document.getElementById('erro-senha');
+  const senhaDigitada = input.value.trim();
+  
+  if(senhaDigitada === SENHA_AUTORIZADA){
+    acessoConcedido = true;
+    document.getElementById('tela-senha').style.display = 'none';
+    document.getElementById('_area_de_relatorio_seguro').style.display = 'block';
+    if(typeof _V === 'function') _V();
+    input.value = '';
+    erro.style.display = 'none';
+  } else {
+    erro.style.display = 'block';
+    input.value = '';
+    input.focus();
+  }
+}
+
+// Permitir pressionar ENTER para confirmar senha
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Enter' && document.getElementById('tela-senha').style.display === 'flex'){
+    verificarSenha();
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// 🔐 CONTROLE DE ACESSO POR HASH + SENHA
+// ═══════════════════════════════════════════════════════════════
+function verificarAreaProtegida(){
+  const hash = window.location.hash;
+  const paginaPublica = document.getElementById('pagina-publica');
+  const telaSenha = document.getElementById('tela-senha');
+  const areaProtegida = document.getElementById('_area_de_relatorio_seguro');
+  
+  if(hash === '#_area_de_relatorio_seguro'){
+    if(paginaPublica) paginaPublica.style.display = 'none';
+    if(acessoConcedido){
+      if(areaProtegida) areaProtegida.style.display = 'block';
+      if(telaSenha) telaSenha.style.display = 'none';
+      if(typeof _V === 'function') _V();
+    } else {
+      if(telaSenha) telaSenha.style.display = 'flex';
+      if(areaProtegida) areaProtegida.style.display = 'none';
+      setTimeout(() => document.getElementById('input-senha').focus(), 300);
+    }
+  } else {
+    if(paginaPublica) paginaPublica.style.display = 'flex';
+    if(areaProtegida) areaProtegida.style.display = 'none';
+    if(telaSenha) telaSenha.style.display = 'none';
+    acessoConcedido = false;
+  }
+}
+window.addEventListener('hashchange', verificarAreaProtegida);
+window.addEventListener('load', verificarAreaProtegida);
 
 // ═══════════════════════════════════════════════════════════════
 // 🔐 FÓRMULAS — OFUSCADAS E PROTEGIDAS
@@ -322,26 +412,6 @@ function _F(){const t=document.getElementById('\x72\x65\x67\x69\x61\x6F').value,
 function _G(t,n,e){const i=[];if('semana'===n&&(t.includes('Sorocaba')||'Sudeste'===t)){const o=[{data:'2026-08-12',tipo:'chuva',desc:'Sem chuva — céu limpo',O:4,R:2},{data:'2026-08-13',tipo:'temperatura',desc:'Ensolarado e quente — 17°C a 32°C',O:4,R:2},{data:'2026-08-14',tipo:'chuva',desc:'Sem chuva — baixa probabilidade',O:4,R:2},{data:'2026-08-15',tipo:'temperatura',desc:'Calor crescente — máxima 30°C',O:4,R:2},{data:'2026-08-16',tipo:'temperatura',desc:'Muito quente — máxima 32°C',O:4,R:2},{data:'2026-08-17',tipo:'temperatura',desc:'Pico de calor — máxima 34°C',O:4,R:2},{data:'2026-08-18',tipo:'chuva',desc:'Sem chuva — umidade estável',O:4,R:2}];o.forEach(e=>{i.push({data:e.data,regiao:t.includes('Sorocaba')?'Sorocaba':t,periodo:'semana',tipo:e.tipo,descricao:e.desc,fonte:'inmet',O:e.O,R:e.R})})}return i}
 function _D(){const t=document.getElementById('\x64\x61\x74\x61\x45\x76\x65\x6E\x74\x6F').value,n=document.getElementById('\x6E\x6F\x76\x61\x52\x65\x67\x69\x61\x6F').value,e=document.getElementById('\x6E\x6F\x76\x6F\x54\x69\x70\x6F').value,i=document.getElementById('\x6E\x6F\x76\x61\x46\x6F\x6E\x74\x65').value,o=document.getElementById('\x6E\x6F\x76\x61\x44\x65\x73\x63\x72\x69\xE7\xE3\x6F').value||'Sem descrição';if(!t){alert('⚠️ Preencha a data do evento!');return}const s=parseInt(t.split('-')[0]),l='seca'===e||'vento'===e?0x2:0x3,c=s<0x7CE?0x2:0x1,f={data:t,regiao:n,tipo:e,descricao:o,fonte:i,O:l,R:c,periodo:s<0x70E?'historico':s<0x76C?'historico':s<0x7AA?'historico':'mes'};_M(f)?(_J([f],{regiao:n,tipo:e,periodo:'todos'}),alert('✅ Evento adicionado ao banco com sucesso!')):alert('ℹ️ Este evento já existe no banco — não duplicado.');document.getElementById('\x64\x61\x74\x61\x45\x76\x65\x6E\x74\x6F').value='';document.getElementById('\x6E\x6F\x76\x61\x44\x65\x73\x63\x72\x69\xE7\xE3\x6F').value=''}
 window.buscarPadroes=_F;window.adicionarAoBanco=_D;window.limparRelatorio=_L;window.exportarDados=_K;
-
-// ═══════════════════════════════════════════════════════════════
-// 🔒 CONTROLE DE ACESSO POR HASH NO LINK — FUNCIONA EM SILÊNCIO
-// ═══════════════════════════════════════════════════════════════
-function verificarAreaProtegida(){
-  const hash=window.location.hash;
-  const paginaPublica=document.getElementById('pagina-publica');
-  const areaProtegida=document.getElementById('_area_de_relatorio_seguro');
-  
-  if(hash==='#_area_de_relatorio_seguro'){
-    if(paginaPublica)paginaPublica.style.display='none';
-    if(areaProtegida)areaProtegida.style.display='block';
-    if(typeof _V==='function')_V();
-  }else{
-    if(paginaPublica)paginaPublica.style.display='flex';
-    if(areaProtegida)areaProtegida.style.display='none';
-  }
-}
-window.addEventListener('hashchange',verificarAreaProtegida);
-window.addEventListener('load',verificarAreaProtegida);
 </script>
 
 </body>
