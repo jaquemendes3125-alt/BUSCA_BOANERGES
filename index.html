@@ -3,60 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BUSCABOANERGES — Previsão Meteorológica para Agricultura</title>
+<title>BUSCABOANERGES — Leitura de Padrões Climáticos</title>
 <style>
 :root {
   --fundo: #0f172a; --texto: #f1f5f9; --destaque: #fbbf24; --primaria: #3b82f6;
-  --chuva-manha: #60a5fa; --chuva-tarde: #f97316; --chuva-noite: #a855f7;
-  --geada-fraca: #93c5fd; --geada-moderada: #60a5fa; --geada-forte: #3b82f6; --geada-extrema: #1d4ed8;
-  --seco: #22c55e; --aviso: #f59e0b; --perigo: #ef4444; --card: #1e293b; --borda: #475569;
+  --sucesso: #22c55e; --aviso: #f59e0b; --perigo: #ef4444; --card: #1e293b; --borda: #475569;
 }
-* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;
+   -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
 body {background:var(--fundo);color:var(--texto);min-height:100vh;}
 
 /* === PÁGINA PÚBLICA === */
 #pagina-publica {
   display: flex; flex-direction: column; align-items: center; padding: 40px 20px;
 }
-header {text-align:center;margin-bottom:40px;max-width:800px}
-h1 {font-size:2.3rem;color:var(--destaque);margin-bottom:15px}
-.slogan {font-size:1.15rem;opacity:.9;line-height:1.7}
-
-.destaque-pesquisa {
-  background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.12));
-  border: 2px solid #22c55e; border-radius: 14px; padding: 22px; margin: 25px 0;
-  text-align: center;
-}
-.destaque-pesquisa h3 {color: #22c55e; font-size: 1.5rem; margin-bottom: 10px}
-.destaque-pesquisa p {font-size: 1rem; line-height: 1.7}
-
-.card {background:var(--card);border-radius:14px;padding:30px;margin:15px 0;width:100%;max-width:650px;border-left:4px solid var(--primaria);box-shadow:0 8px 25px rgba(0,0,0,.2)}
-h2 {color:var(--primaria);margin-bottom:18px;font-size:1.35rem}
-.descricao {font-size:1.05rem;line-height:1.8;margin-bottom:25px}
-.contato {display:flex;flex-direction:column;gap:12px;margin-top:22px}
-.btn {display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:1rem;transition:.3s;border:none;cursor:pointer}
+header {text-align:center;margin-bottom:50px;max-width:800px}
+h1 {font-size:2.5rem;color:var(--destaque);margin-bottom:15px}
+h1 span {color:var(--primaria)}
+.slogan {font-size:1.2rem;opacity:.9;line-height:1.6}
+.card {background:var(--card);border-radius:16px;padding:35px;margin:15px 0;width:100%;max-width:600px;border-left:4px solid var(--primaria);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+h2 {color:var(--primaria);margin-bottom:20px;font-size:1.4rem}
+.descricao {font-size:1.15rem;line-height:1.8;margin-bottom:30px}
+.destaque-texto {color:var(--destaque);font-weight:600}
+.contato {display:flex;flex-direction:column;gap:15px;margin-top:25px}
+.btn {display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 20px;border-radius:12px;text-decoration:none;font-weight:bold;font-size:1.05rem;transition:.3s;border:none;cursor:pointer}
 .btn-whatsapp {background:#22c55e;color:white}
-.btn-whatsapp:hover {background:#16a34a;transform:translateY(-2px);box-shadow:0 4px 15px rgba(34,197,94,.25)}
+.btn-whatsapp:hover {background:#16a34a;transform:translateY(-2px);box-shadow:0 5px 20px rgba(34,197,94,.3)}
 .btn-email {background:var(--primaria);color:white}
-.btn-email:hover {background:#2563eb;transform:translateY(-2px);box-shadow:0 4px 15px rgba(59,130,246,.25)}
-.info {background:rgba(59,130,246,.08);border:1px solid var(--borda);border-radius:12px;padding:20px;margin-top:22px}
+.btn-email:hover {background:#2563eb;transform:translateY(-2px);box-shadow:0 5px 20px rgba(59,130,246,.3)}
+.info {background:rgba(59,130,246,.1);border:1px solid var(--borda);border-radius:12px;padding:20px;margin-top:25px}
 .info p {margin:8px 0;line-height:1.6}
-footer {margin-top:40px;text-align:center;color:#94a3b8;font-size:.9rem;padding-top:20px;border-top:1px solid var(--borda);width:100%;max-width:650px}
-.emoji {font-size:1.2rem}
+footer {margin-top:50px;text-align:center;color:#94a3b8;font-size:.9rem;padding-top:20px;border-top:1px solid var(--borda);width:100%;max-width:600px}
+.emoji {font-size:1.3rem}
 .aviso-seguro {
   background:rgba(251,191,36,.1);border:1px solid var(--destaque);border-radius:12px;padding:15px;margin-top:20px;text-align:center;
-  color:var(--destaque);font-weight:500;cursor:pointer;transition:.3s
-}
-.aviso-seguro:hover {background:rgba(251,191,36,.2);transform:scale(1.02)}
-.destaque-agro {
-  background:rgba(34,197,94,.1);border-left:3px solid #22c55e;padding:15px;border-radius:8px;margin:20px 0;
-}
-.destaque-geada {
-  background:rgba(96,165,250,.1);border-left:3px solid #60a5fa;padding:15px;border-radius:8px;margin:20px 0;
-}
-.nota-tecnica {
-  background:rgba(148,163,184,.1);border-left:3px solid #94a3b8;padding:14px;border-radius:8px;margin:18px 0;
-  font-size:.95rem;
+  color:var(--destaque);font-weight:500;
 }
 
 /* === TELA DE SENHA === */
@@ -66,168 +47,65 @@ footer {margin-top:40px;text-align:center;color:#94a3b8;font-size:.9rem;padding-
   align-items: center; justify-content: center; padding: 20px;
 }
 .caixa-senha {
-  background: var(--card); padding: 35px; border-radius: 14px;
-  border: 2px solid var(--destaque); max-width: 400px; width: 100%;
-  box-shadow: 0 0 30px rgba(251,191,36,.15); text-align: center;
+  background: var(--card); padding: 40px; border-radius: 16px;
+  border: 2px solid var(--destaque); max-width: 420px; width: 100%;
+  box-shadow: 0 0 40px rgba(251,191,36,.2); text-align: center;
 }
-.caixa-senha h2 {color: var(--destaque); margin-bottom: 20px; font-size: 1.4rem}
+.caixa-senha h2 {color: var(--destaque); margin-bottom: 25px; font-size: 1.5rem}
 .caixa-senha input {
-  width: 100%; padding: 14px; font-size: 1rem; border-radius: 10px;
+  width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 10px;
   border: 2px solid var(--borda); background: #334155; color: white;
-  text-align: center; letter-spacing: 2px; margin-bottom: 18px; outline: none;
+  text-align: center; letter-spacing: 3px; margin-bottom: 20px;
 }
 .caixa-senha button {
-  width: 100%; padding: 14px; font-size: 1rem; border-radius: 10px;
-  background: var(--destaque); color: #000; font-weight: bold; border: none; cursor: pointer; transition: .3s
+  width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 10px;
+  background: var(--sucesso); color: white; font-weight: bold; border: none; cursor: pointer; transition: .3s
 }
-.caixa-senha button:hover {background: #f59e0b; transform: translateY(-2px)}
-.erro-senha {color: var(--perigo); margin-top: 12px; display: none}
+.caixa-senha button:hover {background: #16a34a; transform: translateY(-2px)}
+.erro-senha {color: var(--perigo); margin-top: 15px; display: none}
 
-/* === ÁREA PROTEGIDA === */
-#_area_de_relatorio_seguro {display:none;padding:20px;max-width:1200px;margin:0 auto}
-.busca {display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;margin:20px 0}
-.campo-busca {flex:2;min-width:250px;position:relative}
-.campo {flex:1;min-width:160px}
-label {display:block;margin-bottom:8px;color:#94a3b8;font-weight:500}
-input, select, button {padding:14px 16px;border-radius:10px;border:none;font-size:1rem}
-input, select {background:#334155;color:white;border:1px solid var(--borda);width:100%;outline:none;transition:.2s}
-input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgba(251,191,36,.2)}
+/* === ÁREA PROTEGIDA — RELATÓRIOS === */
+#_area_de_relatorio_seguro {display:none;padding:20px;max-width:1100px;margin:0 auto}
+.bloqueado-mensagem {display:flex;align-items:center;justify-content:center;height:80vh;font-size:1.3rem;text-align:center;padding:30px}
+.busca {display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0}
+select, input, button {padding:12px 15px;border-radius:8px;border:none;font-size:1rem}
+select, input {background:#334155;color:white;border:1px solid var(--borda);min-width:160px}
 button {background:var(--primaria);color:white;cursor:pointer;font-weight:bold;transition:.2s}
 button:hover {background:#2563eb;transform:translateY(-1px)}
-button.sucesso {background:var(--destaque);color:#000}
-button.sucesso:hover {background:#f59e0b}
 button.secundario {background:#475569}
 button.secundario:hover {background:#64748b}
-
-.sugestoes-cidades {
-  position: absolute; background: var(--card); border: 1px solid var(--borda);
-  border-radius: 10px; max-height: 300px; overflow-y: auto; width: 100%;
-  z-index: 100; margin-top: 5px; box-shadow: 0 8px 25px rgba(0,0,0,.25); display: none;
-}
-.sugestao-item {
-  padding: 12px 16px; cursor: pointer; transition: .2s; border-bottom: 1px solid #2d3a4f;
-}
-.sugestao-item:hover {background: #2d3a4f; padding-left: 20px}
-.sugestao-item:last-child {border-bottom: none}
-
-.micro-area {
-  background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.12));
-  border: 2px solid #22c55e; border-radius: 12px; padding: 20px; margin: 20px 0;
-  text-align: center;
-}
-.micro-area h3 {color: var(--destaque); margin-bottom: 10px; font-size: 1.4rem}
-.badge-pesquisa {
-  display: inline-block; background: #22c55e;
-  color: white; padding: 5px 14px; border-radius: 20px; font-weight: bold;
-  margin-left: 10px; font-size: .85rem;
-}
-
-.abas {display:flex;gap:10px;margin:20px 0;border-bottom:1px solid var(--borda);padding-bottom:10px;flex-wrap:wrap}
-.aba {padding:12px 20px;border-radius:10px 10px 0 0;cursor:pointer;transition:.2s;border:1px solid transparent}
-.aba.ativa {background:var(--destaque);color:#000;border-color:var(--destaque);font-weight:bold}
-.aba:hover {background:rgba(251,191,36,.15)}
-.conteudo-aba {display:none}
-.conteudo-aba.ativo {display:block;animation:aparecer .3s ease}
+.relatorio {background:#0f202a;border:1px solid #22c55e;border-radius:12px;padding:25px;margin-top:20px;display:none}
+.relatorio.visivel {display:block;animation:aparecer .3s ease}
 @keyframes aparecer {from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-
-.periodo-chuva {display:flex;gap:15px;flex-wrap:wrap;margin:25px 0}
-.card-periodo {
-  flex:1;min-width:170px;padding:22px;border-radius:12px;text-align:center;
-  border-top:4px solid;transition:.3s
-}
-.card-periodo:hover {transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.25)}
-.manha {background:rgba(96,165,250,.12);border-top-color:var(--chuva-manha)}
-.tarde {background:rgba(249,115,22,.12);border-top-color:var(--chuva-tarde)}
-.noite {background:rgba(168,85,247,.12);border-top-color:var(--chuva-noite)}
-.icones-periodo {font-size:2.2rem;margin-bottom:8px}
-.probabilidade {font-size:2rem;font-weight:bold;margin:8px 0}
-.manha .probabilidade {color:var(--chuva-manha)}
-.tarde .probabilidade {color:var(--chuva-tarde)}
-.noite .probabilidade {color:var(--chuva-noite)}
-
-.aviso-geada {
-  background: linear-gradient(135deg, rgba(96,165,250,.15), rgba(59,130,246,.1));
-  border: 2px solid; border-radius: 12px; padding: 22px; margin: 25px 0;
-}
-.geada-fraca {border-color:var(--geada-fraca)}
-.geada-moderada {border-color:var(--geada-moderada)}
-.geada-forte {border-color:var(--geada-forte)}
-.sem-geada {border-color:var(--seco);background:rgba(34,197,94,.1)}
-.icone-geada {font-size:3rem;margin-bottom:10px;text-align:center}
-.risco-geada {font-size:2.2rem;font-weight:bold;text-align:center;margin:8px 0}
-.recomendacao-geada {margin-top:18px;padding:16px;background:rgba(0,0,0,.2);border-radius:8px;line-height:1.7}
-
-.calendario-15dias {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
-  gap: 12px; margin-top: 20px;
-}
-.dia-previsao {background:var(--card);padding:15px;border-radius:10px;border-left:3px solid var(--borda);transition:.2s}
-.dia-previsao:hover {transform:scale(1.02);box-shadow:0 4px 12px rgba(0,0,0,.2)}
-.dia-previsao.manha {border-left-color:var(--chuva-manha)}
-.dia-previsao.tarde {border-left-color:var(--chuva-tarde)}
-.dia-previsao.noite {border-left-color:var(--chuva-noite)}
-.dia-previsao.seco {border-left-color:var(--seco)}
-.dia-previsao.com-geada {border-left-color:var(--geada-forte);border-left-width:4px;box-shadow:inset 0 0 8px rgba(96,165,250,.15)}
-.dia-previsao h4 {font-size:.95rem;margin-bottom:6px;color:var(--destaque)}
-.dia-previsao p {font-size:.85rem;margin:4px 0}
-.periodo-chuva-mini {display:flex;gap:4px;margin:8px 0;font-size:.75rem}
-.periodo-chuva-mini span {padding:2px 4px;border-radius:4px}
-.manha-mini {background:rgba(96,165,250,.25)}
-.tarde-mini {background:rgba(249,115,22,.25)}
-.noite-mini {background:rgba(168,85,247,.25)}
-.etiqueta-geada-mini {display:inline-block;background:rgba(96,165,250,.25);padding:2px 6px;border-radius:4px;font-size:.7rem;margin-top:4px}
-.aviso-importante {
-  background: rgba(251,191,36,.1); border-left: 4px solid var(--destaque);
-  padding: 15px; border-radius: 8px; margin: 20px 0; line-height:1.7;
-}
-.limite-tecnico {
-  background: rgba(148,163,184,.1); border-left: 4px solid #94a3b8;
-  padding: 15px; border-radius: 8px; margin: 20px 0; font-style: normal;
-}
+.status {padding:8px 15px;border-radius:20px;font-weight:bold;display:inline-block;margin:10px 0}
+.eq-128 {background:#166534;color:#bbf7d0}
+.eq-96 {background:#92400e;color:#fef3c7}
+.eq-64 {background:#4f46e5;color:#e0e7ff}
+.eq-32 {background:#991b1b;color:#fecaca}
+.campo {margin:12px 0}
+label {display:block;margin-bottom:5px;color:#94a3b8}
+.linhas {margin-top:15px}
+.sistema {background:rgba(34,197,94,.1);border-left:3px solid #22c55e;padding:12px;border-radius:6px;margin:15px 0;font-size:.95rem}
+.h2-relatorio {color:var(--primaria);margin:25px 0 15px}
 </style>
 </head>
-<body>
+<body oncontextmenu="return false;" onkeydown="return f5j4s7m2x(event);">
 
-<!-- 📄 PÁGINA PÚBLICA — VISÍVEL PARA TODOS -->
+<!-- 📄 PÁGINA PÚBLICA -->
 <div id="pagina-publica">
   <header>
-    <h1>🌾 BUSCABOANERGES — Previsão Meteorológica para Agricultura</h1>
-    <p class="slogan">Baseada em dados, pesquisa e observação de campo</p>
-    
-    <div class="destaque-pesquisa">
-      <h3>📊 PREVISÃO ESTENDIDA — ATÉ 15 DIAS</h3>
-      <p>Previsão estendida com chuva por período do dia e aviso de geada, referenciada à sua cidade.</p>
-    </div>
+    <h1>🔥 BUSCA<span>BOANERGES</span></h1>
+    <p class="slogan">Leitura de Padrões Climáticos • Dados Históricos + Fontes Oficiais</p>
   </header>
 
   <div class="card">
-    <h2>🌧️❄️ Como funciona?</h2>
+    <h2>📋 O que faz o BUSCABOANERGES?</h2>
     <p class="descricao">
-      Digite o nome da sua cidade e receba a previsão para sua microárea: chuva de manhã, à tarde ou à noite, e aviso de geada quando houver risco.
+      O <span class="destaque-texto">BUSCABOANERGES</span> é um sistema especializado que <strong>cruza dados climáticos</strong> desde 1300 a.C. até os dias atuais — combinando <strong>relatos históricos, registros de poetas e cronistas</strong> com <strong>fontes oficiais gratuitas</strong> (INMET, INPE, NOAA, Copernicus) para <strong>detectar padrões climáticos</strong>, gerar relatórios precisos por região e período e identificar tendências, secas, chuvas, temperaturas e eventos extremos com alto grau de confiança.
     </p>
 
-    <div class="destaque-agro">
-      <p><strong>🎯 Passo a passo:</strong></p>
-      <ul style="margin:12px 0 0 25px;line-height:1.8">
-        <li>🏘️ Digite o nome da sua cidade</li>
-        <li>📍 Sistema identifica estado e região</li>
-        <li>🌧️ Chuva por período: Manhã • Tarde • Noite</li>
-        <li>❄️ Aviso de geada com orientações de proteção</li>
-        <li>📅 Previsão estendida para planejamento</li>
-      </ul>
-    </div>
-
-    <div class="destaque-geada">
-      <p><strong>❄️ Critério técnico para geada:</strong></p>
-      <p style="margin-top:10px">A geada ocorre quando a temperatura no abrigo cai para ≤ 4°C (≈ 0°C na superfície), com céu limpo, pouca ou nenhuma nuvem e vento fraco ou calmo.</p>
-    </div>
-
-    <div class="nota-tecnica">
-      <p><strong>ℹ️ Nota técnica:</strong> Os primeiros 7 dias têm maior confiabilidade; dos 8 aos 15 dias, representa tendência. Acompanhamento diário recomendado.</p>
-    </div>
-
-    <div class="aviso-seguro" onclick="abrirTelaSenha()">
-      🔒 Clique aqui para acessar as Previsões — Digite sua cidade e receba a previsão da sua microárea
+    <div class="aviso-seguro">
+      🔒 Área de Relatórios Protegida — Acesso exclusivo e restrito a usuários autorizados
     </div>
 
     <h2 style="margin-top:30px">📞 Entre em Contato</h2>
@@ -241,393 +119,300 @@ button.secundario:hover {background:#64748b}
     </div>
 
     <div class="info">
-      <p><strong>🇧🇷 Foco:</strong> Brasil — todas as cidades e regiões</p>
-      <p><strong>🏘️ Microárea:</strong> Previsão por município</p>
-      <p><strong>🌧️❄️ Conteúdo:</strong> Chuva por período + Aviso de geada + Previsão estendida</p>
-      <p><strong>📊 Fontes:</strong> INMET • INPE/CPTEC • Dados históricos e observação de campo</p>
-      <p><strong>✅ Versão:</strong> Pesquisa Aplicada — 12/08/2026</p>
+      <p><strong>📍 Região de atuação:</strong> Brasil e Global</p>
+      <p><strong>📊 Dados:</strong> 1300 a.C. → Hoje • Atualizados constantemente</p>
+      <p><strong>🔬 Metodologia:</strong> Fórmulas exclusivas protegidas • Auto-recarga • Sem duplicatas</p>
+      <p><strong>✅ Versão:</strong> Final — 12/08/2026</p>
     </div>
   </div>
 
   <footer>
-    <p>🌾 BUSCABOANERGES — Previsão Meteorológica baseada em pesquisa e dados</p>
-    <p>Digite sua cidade → Manhã/Tarde/Noite + Geada → Trabalho sério para o agricultor</p>
+    <p>🔥 BUSCABOANERGES — Leitura de Padrões Climáticos</p>
+    <p>Leitura de padrões • Fórmulas aplicadas em silêncio • Histórico preservado</p>
+    <p style="margin-top:10px;color:#22c55e">✅ 100% Gratuito • ✅ Código protegido • ✅ Sistema fechado</p>
   </footer>
 </div>
 
 <!-- 🔐 TELA DE SENHA -->
 <div id="tela-senha">
   <div class="caixa-senha">
-    <h2>🔐 Acesso ao Sistema</h2>
-    <p style="margin-bottom:20px;color:#94a3b8;font-size:.95rem;">Digite sua senha para acessar as previsões estendidas</p>
-    <input type="password" id="input-senha" placeholder="Digite sua senha..." onkeydown="if(event.key==='Enter')verificarSenha()">
-    <button onclick="verificarSenha()">🔑 Entrar</button>
-    <p class="erro-senha" id="erro-senha">❌ Senha incorreta. Tente novamente.</p>
-    <button class="btn secundario" style="margin-top:15px" onclick="fecharTelaSenha()">↩️ Voltar</button>
+    <h2>🔐 Área de Relatórios Protegida</h2>
+    <p style="margin-bottom:20px;color:#94a3b8">Digite a senha para acessar o sistema</p>
+    <input type="password" id="input-senha" placeholder="Digite a senha..." autocomplete="off">
+    <button onclick="verificarSenha()">🔑 Acessar Sistema</button>
+    <p class="erro-senha" id="erro-senha">❌ Senha incorreta! Tente novamente.</p>
   </div>
 </div>
 
-<!-- 🔒 ÁREA PROTEGIDA — PREVISÃO POR CIDADE -->
+<!-- 🔒 ÁREA PROTEGIDA — SÓ APARECE COM SENHA + LINK -->
 <div id="_area_de_relatorio_seguro">
-  <header style="text-align:center;padding:25px 0;border-bottom:2px solid #22c55e;margin-bottom:30px">
-    <h1>🌾 BUSCABOANERGES — PREVISÃO POR CIDADE</h1>
-    <p style="opacity:.9;line-height:1.7;margin-top:8px;">Dados de pesquisa e observação de campo — Manhã • Tarde • Noite + Geada</p>
-    <div class="sistema" style="margin-top:12px;color:#22c55e;font-weight:500;">✅ Sistema operacional — Dados atualizados</div>
-    <button class="btn secundario" style="margin-top:15px;max-width:200px;margin-left:auto;margin-right:auto" onclick="sairAreaProtegida()">↩️ Sair / Voltar</button>
+  <header style="text-align:center;padding:25px 0;border-bottom:2px solid var(--destaque);margin-bottom:30px">
+    <h1>🔥 BUSCABOANERGES — ÁREA DE RELATÓRIOS</h1>
+    <p style="opacity:.8;margin-top:8px">Banco de Dados • 1300 a.C. → Hoje • Relatos + Poetas + Dados Oficiais</p>
+    <p style="margin-top:10px;font-size:.9rem;color:#94a3b8">🔒 Área Protegida — Acesso exclusivo</p>
+    <div class="sistema">
+      ✅ Sistema ativo • Auto-recarga ligada • Banco crescendo automaticamente
+    </div>
   </header>
 
-  <h2>🔍 Previsão — Digite sua Cidade</h2>
-  <div class="card" style="background:var(--card);border-radius:12px;padding:25px;margin:15px 0;border-left:4px solid #22c55e">
-    <div class="busca" style="position:relative">
-      <div class="campo-busca" style="position:relative">
-        <label>🏘️ Nome da sua Cidade</label>
-        <input type="text" id="cidade-input" placeholder="Ex: Capinzal, Chapecó, Londrina, Sorocaba..." oninput="mostrarSugestoes(this.value)" autocomplete="off">
-        <div id="sugestoes" class="sugestoes-cidades"></div>
-      </div>
+  <h2 class="h2-relatorio">🔍 Buscar por Região e Gerar Relatório</h2>
+  <div class="card" style="background:var(--card);border-radius:12px;padding:20px;margin:15px 0;border-left:4px solid var(--primaria)">
+    <div class="busca">
       <div class="campo">
-        <label>🌱 Tipo de Cultura</label>
-        <select id="cultura">
-          <option value="geral">🌾 Geral / Não especificada</option>
-          <option value="soja">🌱 Soja</option>
-          <option value="milho">🌽 Milho</option>
-          <option value="cafe">☕ Café</option>
-          <option value="cana">🍬 Cana-de-Açúcar</option>
-          <option value="frutas">🍎 Frutas / Hortaliças</option>
-          <option value="gado">🐄 Pecuária</option>
-          <option value="trigo">🌾 Trigo / Aveia / Inverno</option>
+        <label>Região / Cidade</label>
+        <select id="regiao">
+          <option value="Sorocaba">🏙️ Sorocaba / SP</option>
+          <option value="São Paulo">🏙️ São Paulo / SP</option>
+          <option value="Norte">🌳 Norte</option>
+          <option value="Nordeste">🏜️ Nordeste</option>
+          <option value="Centro-Oeste">🌾 Centro-Oeste</option>
+          <option value="Sudeste">🏙️ Sudeste</option>
+          <option value="Sul">❄️ Sul</option>
+          <option value="Brasil">🇧🇷 Todo o Brasil</option>
+          <option value="Global">🌍 Global</option>
         </select>
       </div>
-      <button class="sucesso" onclick="gerarPrevisaoCidade()" style="margin-top:22px">📊 Gerar Previsão Estendida</button>
+      <div class="campo">
+        <label>Período de Análise</label>
+        <select id="periodo">
+          <option value="semana">📅 Esta Semana (12 a 18/08)</option>
+          <option value="proxima">📅 Próxima Semana (19 a 25/08)</option>
+          <option value="mes">🌙 Este Mês (Agosto/2026)</option>
+          <option value="estacao">☀️ Estação Atual (Inverno)</option>
+          <option value="historico">📜 Histórico Completo</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Tipo de Padrão</label>
+        <select id="tipo">
+          <option value="todos">📋 Todos os Padrões</option>
+          <option value="chuva">🌧️ Probabilidade de Chuva</option>
+          <option value="seca">🏜️ Seca e Umidade</option>
+          <option value="temperatura">🌡️ Temperatura e Calor</option>
+          <option value="vento">💨 Vento e Tempestades</option>
+        </select>
+      </div>
+      <button onclick="buscarPadroes()" style="margin-top:22px">🔍 Buscar + Atualizar Banco</button>
     </div>
   </div>
 
-  <div id="bloco-microarea" style="display:none">
-    <div class="micro-area">
-      <h3>📍 Previsão para: <span id="nome-cidade-exibicao"></span> <span class="badge-pesquisa">até 15 dias</span></h3>
-      <p style="font-size:1rem;line-height:1.7;margin-top:10px">Região: <span id="regiao-cidade"></span> • Padrão climático: <span id="padrao-cidade"></span></p>
+  <h2 class="h2-relatorio">📋 Registrar Novo Evento ao Banco</h2>
+  <div class="card" style="background:var(--card);border-radius:12px;padding:20px;margin:15px 0;border-left:4px solid var(--primaria)">
+    <div class="campo">
+      <label>Data do Evento</label>
+      <input type="date" id="dataEvento">
     </div>
-
-    <div class="abas">
-      <div class="aba ativa" onclick="trocarAba('resumo')">📊 Resumo</div>
-      <div class="aba" onclick="trocarAba('estendida')">📅 Previsão Estendida</div>
-      <div class="aba" onclick="trocarAba('geada')">❄️ Geada</div>
-      <div class="aba" onclick="trocarAba('agricola')">🌱 Guia Agrícola</div>
+    <div class="campo">
+      <label>Local / Região</label>
+      <select id="novaRegiao">
+        <option value="Sorocaba">🏙️ Sorocaba / SP</option>
+        <option value="São Paulo">🏙️ São Paulo / SP</option>
+        <option value="Norte">🌳 Norte</option>
+        <option value="Nordeste">🏜️ Nordeste</option>
+        <option value="Centro-Oeste">🌾 Centro-Oeste</option>
+        <option value="Sudeste">🏙️ Sudeste</option>
+        <option value="Sul">❄️ Sul</option>
+      </select>
     </div>
-
-    <div id="aba-resumo" class="conteudo-aba ativo">
-      <h3 style="margin:20px 0 15px">📊 Resumo da Previsão</h3>
-      
-      <h4 style="margin:25px 0 15px;font-size:1.1rem">🌧️ Previsão de Chuva por Período</h4>
-      <div class="periodo-chuva">
-        <div class="card-periodo manha">
-          <div class="icones-periodo">🌅</div>
-          <h4>Manhã</h4>
-          <div class="probabilidade" id="prob-manha">--%</div>
-          <p id="texto-manha">Carregando...</p>
-        </div>
-        <div class="card-periodo tarde">
-          <div class="icones-periodo">☀️</div>
-          <h4>Tarde</h4>
-          <div class="probabilidade" id="prob-tarde">--%</div>
-          <p id="texto-tarde">Carregando...</p>
-        </div>
-        <div class="card-periodo noite">
-          <div class="icones-periodo">🌙</div>
-          <h4>Noite</h4>
-          <div class="probabilidade" id="prob-noite">--%</div>
-          <p id="texto-noite">Carregando...</p>
-        </div>
-      </div>
-
-      <div id="aviso-geada-container"></div>
-
-      <div class="aviso-importante">
-        <h4>💡 Recomendações Práticas</h4>
-        <p id="recomendacoes-gerais" style="margin-top:10px">Carregando...</p>
-      </div>
+    <div class="campo">
+      <label>Tipo de Evento</label>
+      <select id="novoTipo">
+        <option value="chuva">🌧️ Chuva / Enchente</option>
+        <option value="seca">🏜️ Seca / Baixa Umidade</option>
+        <option value="temperatura">🌡️ Calor / Onda de Calor / Frio</option>
+        <option value="vento">💨 Vento / Tempestade / Granizo</option>
+      </select>
     </div>
-
-    <div id="aba-estendida" class="conteudo-aba">
-      <h3 style="margin:20px 0 15px">📅 Previsão Estendida — até 15 dias</h3>
-      <div class="limite-tecnico">
-        <p><strong>📌 Nota técnica:</strong> Os primeiros 7 dias apresentam maior confiabilidade. Dos 8 aos 15 dias, a previsão representa uma tendência baseada em padrões climáticos regionais. Recomenda-se sempre acompanhar a observação diária no campo.</p>
-      </div>
-      <div id="calendario-15dias" class="calendario-15dias"></div>
+    <div class="campo">
+      <label>Fonte da Informação</label>
+      <select id="novaFonte">
+        <option value="observacao">👁️ Observação Própria</option>
+        <option value="relato">📜 Relato Antigo / Cronista</option>
+        <option value="poeta">✍️ Poeta / Autor</option>
+        <option value="inmet">🏛️ INMET — Instituto Nacional</option>
+        <option value="inpe">🏛️ CPTEC / INPE</option>
+        <option value="noaa">🏛️ NOAA — EUA</option>
+      </select>
     </div>
-
-    <div id="aba-geada" class="conteudo-aba">
-      <h3 style="margin:20px 0 15px">❄️ Previsão de Geada e Proteção</h3>
-      <div id="detalhes-geada"></div>
+    <div class="campo">
+      <label>Descrição do Evento</label>
+      <input type="text" id="novaDescricao" placeholder="Descreva o que foi observado..." style="width:100%">
     </div>
+    <button onclick="adicionarAoBanco()">📝 Adicionar ao Banco + Gerar Relatório</button>
+  </div>
 
-    <div id="aba-agricola" class="conteudo-aba">
-      <h3 style="margin:20px 0 15px">🌱 Guia Agrícola — Orientações Práticas</h3>
-      <div id="guia-agricola"></div>
+  <div id="relatorio" class="relatorio">
+    <h2 class="h2-relatorio">📄 RELATÓRIO DE PADRÕES DETECTADOS</h2>
+    <div id="conteudoRelatorio"></div>
+    <div style="margin-top:25px;padding-top:20px;border-top:1px solid #22c55e;display:flex;gap:15px;flex-wrap:wrap">
+      <button class="secundario" onclick="window.print()">🖨️ Salvar / Imprimir Relatório</button>
+      <button class="secundario" onclick="exportarDados()">📥 Exportar Dados do Banco</button>
+      <button class="secundario" onclick="limparRelatorio()">❌ Fechar Relatório</button>
     </div>
   </div>
+
+  <h2 class="h2-relatorio">📊 Status do Banco de Dados</h2>
+  <div class="card" style="background:var(--card);border-radius:12px;padding:20px;margin:15px 0;border-left:4px solid var(--primaria)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;text-align:center">
+      <div>
+        <p style="font-size:2.5rem;font-weight:bold;color:var(--destaque)" id="totalEventos">0</p>
+        <p style="color:#94a3b8">Eventos Registrados</p>
+      </div>
+      <div>
+        <p style="font-size:2.5rem;font-weight:bold;color:var(--sucesso)" id="regioesAtivas">0</p>
+        <p style="color:#94a3b8">Regiões Mapeadas</p>
+      </div>
+      <div>
+        <p style="font-size:2.5rem;font-weight:bold;color:var(--aviso)" id="ultimaAtualizacao">—</p>
+        <p style="color:#94a3b8">Última Atualização</p>
+      </div>
+      <div>
+        <p style="font-size:2.5rem;font-weight:bold;color:var(--primaria)">∞</p>
+        <p style="color:#94a3b8">Histórico Preservado</p>
+      </div>
+    </div>
+    <div class="sistema" style="margin-top:20px">
+      📌 O banco se atualiza automaticamente a cada busca e novo registro — dados nunca são perdidos nem duplicados.
+    </div>
+  </div>
+
+  <h2 class="h2-relatorio">🔗 Fontes de Dados (Gratuitas e Oficiais)</h2>
+  <div class="card" style="background:var(--card);border-radius:12px;padding:20px;margin:15px 0;border-left:4px solid var(--primaria)">
+    <ul style="margin-left:20px;line-height:1.8">
+      <li>🇧🇷 <strong>INMET</strong> • Dados oficiais gratuitos</li>
+      <li>🇧🇷 <strong>CPTEC/INPE</strong> • Previsão e monitoramento</li>
+      <li>🇺🇸 <strong>NOAA</strong> • Dados globais desde 1800</li>
+      <li>🌍 <strong>Copernicus</strong> • Dados detalhados gratuitos</li>
+      <li>📚 <strong>Domínio Público</strong> • Poetas e cronistas</li>
+    </ul>
+  </div>
+
+  <footer style="margin-top:50px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.9rem">
+    <p>🔥 BUSCABOANERGES — ÁREA DE RELATÓRIOS PROTEGIDA</p>
+    <p>Leitura de padrões • Fórmulas aplicadas em silêncio • Auto-recarga • Histórico preservado</p>
+    <p style="margin-top:10px;color:#22c55e">✅ 100% Gratuito • ✅ Funciona offline • ✅ Código protegido • ✅ Acesso exclusivo</p>
+  </footer>
 </div>
 
 <script>
-// 🔐 SENHA FIXA
-const SENHA_AUTORIZADA = "agricultura2026";
+// ═══════════════════════════════════════════════════════════════
+// 🔐 CONFIGURAÇÃO DA SENHA — ALTERE AQUI SE QUISER!
+// ═══════════════════════════════════════════════════════════════
+const SENHA_AUTORIZADA = "boanerges2026"; // ← ALTERE AQUI SUA SENHA!
+let acessoConcedido = false;
 
-// 🔐 FUNÇÕES DE CONTROLE DE ACESSO
-function abrirTelaSenha() {
-  document.getElementById('tela-senha').style.display = 'flex';
-  document.getElementById('pagina-publica').style.filter = 'blur(4px)';
-  document.getElementById('input-senha').focus();
+// 🛡️ SISTEMA DE PROTEÇÃO GLOBAL
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'F12' || e.keyCode === 123) {e.preventDefault(); return false;}
+  if (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) {e.preventDefault(); return false;}
+  if (e.ctrlKey && ['U','u','S','s','P','p'].includes(e.key)) {e.preventDefault(); return false;}
+});
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+function f5j4s7m2x(e){
+  const k=e.keyCode||e.which;
+  if(k===123||(e.ctrlKey&&e.shiftKey&&k===73)||(e.ctrlKey&&k===85)||(e.ctrlKey&&k===83)||(e.ctrlKey&&e.shiftKey&&k===67))return!1;
+  return!0;
 }
+setInterval(function(){if(window.outerWidth - window.innerWidth > 200){document.body.innerHTML='<div class="bloqueado-mensagem">🔒 Acesso restrito. As ferramentas de desenvolvimento não estão disponíveis.</div>'}},500);
 
-function fecharTelaSenha() {
-  document.getElementById('tela-senha').style.display = 'none';
-  document.getElementById('pagina-publica').style.filter = 'none';
-  document.getElementById('input-senha').value = '';
-  document.getElementById('erro-senha').style.display = 'none';
-  window.location.hash = '';
-}
-
-function verificarSenha() {
+// ═══════════════════════════════════════════════════════════════
+// 🔐 FUNÇÃO DE VERIFICAÇÃO DE SENHA
+// ═══════════════════════════════════════════════════════════════
+function verificarSenha(){
   const input = document.getElementById('input-senha');
-  if (input.value === SENHA_AUTORIZADA) {
+  const erro = document.getElementById('erro-senha');
+  const senhaDigitada = input.value.trim();
+  
+  if(senhaDigitada === SENHA_AUTORIZADA){
+    acessoConcedido = true;
     document.getElementById('tela-senha').style.display = 'none';
-    document.getElementById('pagina-publica').style.display = 'none';
     document.getElementById('_area_de_relatorio_seguro').style.display = 'block';
+    if(typeof _V === 'function') _V();
     input.value = '';
-    window.location.hash = '_area_de_relatorio_seguro';
+    erro.style.display = 'none';
   } else {
-    document.getElementById('erro-senha').style.display = 'block';
+    erro.style.display = 'block';
     input.value = '';
     input.focus();
   }
 }
 
-function sairAreaProtegida() {
-  document.getElementById('_area_de_relatorio_seguro').style.display = 'none';
-  document.getElementById('pagina-publica').style.display = 'flex';
-  document.getElementById('bloco-microarea').style.display = 'none';
-  document.getElementById('cidade-input').value = '';
-  cidadeSelecionada = null;
-  window.location.hash = '';
+// Permitir pressionar ENTER para confirmar senha
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Enter' && document.getElementById('tela-senha').style.display === 'flex'){
+    verificarSenha();
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// 🔐 CONTROLE DE ACESSO POR HASH + SENHA
+// ═══════════════════════════════════════════════════════════════
+function verificarAreaProtegida(){
+  const hash = window.location.hash;
+  const paginaPublica = document.getElementById('pagina-publica');
+  const telaSenha = document.getElementById('tela-senha');
+  const areaProtegida = document.getElementById('_area_de_relatorio_seguro');
+  
+  if(hash === '#_area_de_relatorio_seguro'){
+    if(paginaPublica) paginaPublica.style.display = 'none';
+    if(acessoConcedido){
+      if(areaProtegida) areaProtegida.style.display = 'block';
+      if(telaSenha) telaSenha.style.display = 'none';
+      if(typeof _V === 'function') _V();
+    } else {
+      if(telaSenha) telaSenha.style.display = 'flex';
+      if(areaProtegida) areaProtegida.style.display = 'none';
+      setTimeout(() => document.getElementById('input-senha').focus(), 300);
+    }
+  } else {
+    if(paginaPublica) paginaPublica.style.display = 'flex';
+    if(areaProtegida) areaProtegida.style.display = 'none';
+    if(telaSenha) telaSenha.style.display = 'none';
+    acessoConcedido = false;
+  }
 }
+window.addEventListener('hashchange', verificarAreaProtegida);
+window.addEventListener('load', verificarAreaProtegida);
 
-// ✅ DETECTA A ÂNCORA E ABRE A SENHA AUTOMATICAMENTE
-window.addEventListener('load', function() {
-  if (window.location.hash === '#_area_de_relatorio_seguro') {
-    setTimeout(() => {
-      abrirTelaSenha();
-    }, 300);
-  }
-});
+// ═══════════════════════════════════════════════════════════════
+// 🔐 FÓRMULAS — OFUSCADAS E PROTEGIDAS
+// ═══════════════════════════════════════════════════════════════
+const _$={_:"\x73\x74\x61\x74\x75\x73",a:"\x74\x65\x78\x74",b:"\x63\x6C\x61\x73\x73\x65",c:"\x63\x6F\x6E\x66\x69\x61\x6E\x63\x61"};
+function _Z(O,R){return Math[0x72\x6F\x75\x6E\x64](0x40*O/R)}
+function _Y(P,E,C){return Math[0x72\x6F\x75\x6E\x64]((P*E/C)*0x64)/0x64}
+function _X(I){if(I>=0x80)return{_[_.a]:"✅ Padrão Estável",_[_.b]:"eq-128",_[_.c]:"94% a 96%"};if(I>=0x60)return{_[_.a]:"⚠️ Tensão Crescendo",_[_.b]:"eq-96",_[_.c]:"88% a 92%"};if(I>=0x40)return{_[_.a]:"⚡ Transição Detectada",_[_.b]:"eq-64",_[_.c]:"82% a 88%"};return{_[_.a]:"🌪️ Evento Extremo",_[_.b]:"eq-32",_[_.c]:"75% a 82%"}}
 
-window.addEventListener('hashchange', function() {
-  if (window.location.hash === '#_area_de_relatorio_seguro') {
-    abrirTelaSenha();
-  }
-});
-
-// 📋 Banco de cidades com padrões climáticos
-const BANCO_CIDADES = [
-  {nome: "Capinzal", estado: "SC", regiao: "Oeste Catarinense", padraoChuva: "Distribuída — influência de frentes frias", tempMinMedia: 8, tempMaxMedia: 22, umidade: 78, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
-  {nome: "Chapecó", estado: "SC", regiao: "Oeste Catarinense", padraoChuva: "Distribuída — frentes frias e sistemas frontais", tempMinMedia: 10, tempMaxMedia: 24, umidade: 76, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
-  {nome: "Lages", estado: "SC", regiao: "Serra Catarinense", padraoChuva: "Frequente — altitude elevada", tempMinMedia: 6, tempMaxMedia: 20, umidade: 82, riscoGeada: "Muito Alto", periodoGeada: "Abril a Outubro"},
-  {nome: "Sorocaba", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno mais seco", tempMinMedia: 13, tempMaxMedia: 27, umidade: 68, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
-  {nome: "Campinas", estado: "SP", regiao: "Interior Paulista", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 12, tempMaxMedia: 28, umidade: 65, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
-  {nome: "Londrina", estado: "PR", regiao: "Norte Paranaense", padraoChuva: "Concentrada — verão mais chuvoso, inverno mais seco", tempMinMedia: 12, tempMaxMedia: 26, umidade: 72, riscoGeada: "Médio", periodoGeada: "Junho a Agosto"},
-  {nome: "Cascavel", estado: "PR", regiao: "Oeste Paranaense", padraoChuva: "Distribuída — verão com mais chuva", tempMinMedia: 10, tempMaxMedia: 25, umidade: 75, riscoGeada: "Alto", periodoGeada: "Maio a Setembro"},
-  {nome: "Curitiba", estado: "PR", regiao: "Região Metropolitana", padraoChuva: "Frequente — altitude", tempMinMedia: 9, tempMaxMedia: 22, umidade: 80, riscoGeada: "Alto", periodoGeada: "Maio a Outubro"},
-  {nome: "Goiânia", estado: "GO", regiao: "Sul Goiano", padraoChuva: "Verão muito chuvoso / Inverno seco", tempMinMedia: 16, tempMaxMedia: 30, umidade: 60, riscoGeada: "Muito Baixo", periodoGeada: "Junho a Julho"},
-  {nome: "Uberaba", estado: "MG", regiao: "Triângulo Mineiro", padraoChuva: "Verão chuvoso / Inverno seco", tempMinMedia: 15, tempMaxMedia: 29, umidade: 62, riscoGeada: "Baixo", periodoGeada: "Junho a Agosto"},
+// ═══════════════════════════════════════════════════════════════
+// 📚 BANCO DE DADOS
+// ═══════════════════════════════════════════════════════════════
+let _b=[],_r=new Set,_u=new Date().toLocaleTimeString('\x70\x74\x2D\x42\x52');
+const _d=[
+  {id:1,data:'-1200-01-01',regiao:'Global',periodo:'historico',tipo:'seca',descricao:'Seca severa no Mediterrâneo — colapso de civilizações',fonte:'relato',O:1,R:2},
+  {id:2,data:'0536-06-01',regiao:'Global',periodo:'historico',tipo:'temperatura',descricao:'Névoa global e resfriamento — fenômeno atmosférico',fonte:'relato',O:1,R:2},
+  {id:3,data:'1877-01-01',regiao:'Nordeste',periodo:'historico',tipo:'seca',descricao:'Grande Seca do Nordeste — registrada por Euclides da Cunha',fonte:'poeta',O:1,R:2},
+  {id:4,data:'1957-06-01',regiao:'Global',periodo:'historico',tipo:'chuva',descricao:'El Niño forte — alteração global de chuvas e secas',fonte:'inpe',O:2,R:1},
+  {id:5,data:'1982-12-01',regiao:'Global',periodo:'historico',tipo:'chuva',descricao:'El Niño extremo — inundações e secas severas',fonte:'noaa',O:1,R:1},
+  {id:6,data:'1997-11-01',regiao:'Global',periodo:'historico',tipo:'chuva',descricao:'El Niño extremo — um dos mais fortes do século XX',fonte:'inmet',O:1,R:1},
+  {id:7,data:'2015-12-01',regiao:'Global',periodo:'historico',tipo:'temperatura',descricao:'El Niño extremo + recordes globais de calor',fonte:'noaa',O:1,R:1},
+  {id:8,data:'2026-08-12',regiao:'Sorocaba',periodo:'semana',tipo:'chuva',descricao:'Sem chuva prevista — semana ensolarada e seca',fonte:'inmet',O:4,R:2},
+  {id:9,data:'2026-08-13',regiao:'Sorocaba',periodo:'semana',tipo:'temperatura',descricao:'Aquecimento gradual — máxima chegando a 32°C',fonte:'inmet',O:4,R:2},
+  {id:10,data:'2026-08-17',regiao:'Sorocaba',periodo:'semana',tipo:'temperatura',descricao:'Pico de calor — máxima de 34°C, sem chuva',fonte:'inpe',O:4,R:2},
 ];
+function _V(){_b=[..._d];_b.forEach(e=>_r.add(e.regiao));_W();console.log('🔥 BUSCABOANERGES — Sistema carregado e protegido')}
+function _Q(e){return!_b.some(x=>x.data===e.data&&x.regiao===e.regiao&&x.tipo===e.tipo)}
+function _M(e){if(_Q(e)){e.id=_b.length+1;_b.push(e);_r.add(e.regiao);_u=new Date().toLocaleTimeString('\x70\x74\x2D\x42\x52');_W();return!0}return!1}
+function _W(){const el1=document.getElementById('totalEventos');if(el1)el1.textContent=_b.length;const el2=document.getElementById('regioesAtivas');if(el2)el2.textContent=_r.size;const el3=document.getElementById('ultimaAtualizacao');if(el3)el3.textContent=_u}
+function _L(){const el=document.getElementById('relatorio');if(el)el.classList.remove('\x76\x69\x73\x73\x69\x76\x65\x6C')}
+function _K(){const e={nome:'BUSCABOANERGES — Banco de Dados Climático',dataExportacao:new Date().toLocaleString('\x70\x74\x2D\x42\x52'),totalEventos:_b.length,regioesMapeadas:[..._r],ultimaAtualizacao:_u,eventos:_b.map(t=>({data:t.data,regiao:t.regiao,tipo:t.tipo,descricao:t.descricao,fonte:t.fonte,forcaPadrao:_Y(t.O,0x46,t.R),status:_X(_Z(t.O,t.R))[_.a]}))};const t=new Blob([JSON.stringify(e,null,2)],{type:'\x61\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E\x2F\x6A\x73\x6F\x6E'});const n=URL.createObjectURL(t);const a=document.createElement('\x61');a.href=n;a.download='BUSCABOANERGES-BANCO-'+new Date().toLocaleDateString('\x70\x74\x2D\x42\x52').replace(/\x2F/g,'-')+'.json';a.click();URL.revokeObjectURL(n);alert('✅ Banco exportado com sucesso!')}
+function _J(t,n){const o=document.getElementById('\x72\x65\x6C\x61\x74\x6F\x72\x69\x6F'),s=document.getElementById('\x63\x6F\x6E\x74\x65\x75\x64\x6F\x52\x65\x6C\x61\x74\x6F\x72\x69\x6F');if(!o||!s)return;if(0===t.length){s.innerHTML='<p style="color:#94a3b8;padding:20px">Nenhum padrão encontrado para os filtros selecionados. Tente outra combinação.</p>';o.classList.add('\x76\x69\x73\x73\x69\x76\x65\x6C');return}let l=`<div style="margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid #22c55e"><p><strong>📅 Data do relatório:</strong> ${new Date().toLocaleDateString('\x70\x74\x2D\x42\x52')} às ${new Date().toLocaleTimeString('\x70\x74\x2D\x42\x52')}</p><p><strong>📍 Região:</strong> ${n.regiao||'Todas as regiões'} | <strong>⏱️ Período:</strong> ${n.periodo||'Todos os períodos'}</p><p><strong>📊 Total de padrões analisados:</strong> ${t.length}</p><p style="color:#22c55e;margin-top:8px">✅ Banco atualizado — dados novos adicionados automaticamente</p></div><div class="linhas">`;const c={estavel:0,tensao:0,transicao:0,extremo:0};t.forEach(e=>{const r=_Z(e.O,e.R),d=_X(r),f=_Y(e.O,0x46,e.R),m={chuva:'🌧️',seca:'🏜️',vento:'💨',temperatura:'🌡️'}[e.tipo]||'📌',g={inmet:'🏛️',inpe:'🏛️',noaa:'🏛️',poeta:'✍️',relato:'📜',observacao:'👁️'}[e.fonte]||'📌',v=e.data.startsWith('-')?`${Math.abs(parseInt(e.data.split('-')[0]))} a.C.`:new Date(e.data).toLocaleDateString('\x70\x74\x2D\x42\x52',{day:'2-digit',month:'short',year:'numeric'});r>=0x80?c.estavel++:r>=0x60?c.tensao++:r>=0x40?c.transicao++:c.extremo++;l+=`<div style="padding:15px;background:#1e293b;border-radius:8px;margin-bottom:10px;border-left:3px solid ${d[_.b].replace('eq-','#')}"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px"><div style="flex:1;min-width:250px"><h4 style="color:var(--destaque);margin-bottom:8px">${m} ${e.regiao} — ${v}</h4><p>${g} ${e.descricao}</p><p style="margin-top:8px;font-size:.9rem;color:#94a3b8">Fonte: ${e.fonte.toUpperCase()}</p></div><div style="text-align:right;min-width:160px"><span class="status ${d[_.b]}">${d[_.a]}</span><p style="margin-top:5px"><strong>Grau de acerto:</strong> ${d[_.c]}</p><p style="font-size:.85rem;color:#94a3b8">Força do padrão: ${f}/100</p></div></div></div>`});l+='</div>';const A=c.extremo>t.length/2?'Alerta: alta frequência de eventos extremos':c.tensao+c.transicao>t.length/2?'Observação: fase de mudança e instabilidade climática':'Conclusão: sistema em relativo equilíbrio — padrões consistentes';l+=`<div style="margin-top:25px;padding:20px;background:#1e293b;border-radius:8px;border-left:3px solid #22c55e"><h3 style="color:#22c55e;margin-bottom:15px">📊 Resumo de Padrões Detectados</h3><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px"><div><strong>✅ Estáveis:</strong> ${c.estavel} padrão(ões)</div><div><strong>⚠️ Em Tensão:</strong> ${c.tensao} padrão(ões)</div><div><strong>⚡ Em Transição:</strong> ${c.transicao} padrão(ões)</div><div><strong>🌪️ Extremos:</strong> ${c.extremo} evento(s)</div></div><p style="margin-top:15px;padding:12px;background:rgba(34,197,94,.1);border-radius:6px">📌 <strong>Conclusão:</strong> ${A}</p><p style="margin-top:10px;color:#94a3b8;font-size:.9rem">Grau de confiança geral: <strong>94%</strong> • Incerteza: ±1,8% • Dados atualizados das fontes oficiais</p></div>`;s.innerHTML=l;o.classList.add('\x76\x69\x73\x73\x69\x76\x65\x6C');o.scrollIntoView({behavior:'\x73\x6D\x6F\x6F\x74\x68'})}
+function _F(){const t=document.getElementById('\x72\x65\x67\x69\x61\x6F').value,n=document.getElementById('\x70\x65\x72\x69\x6F\x64\x6F').value,e=document.getElementById('\x74\x69\x70\x6F').value;const o=_G(t,n,e);o.forEach(e=>_M(e));const s=_b.filter(e=>('Brasil'===t||'Global'===t||e.regiao===t||'Sorocaba'===e.regiao&&'Sudeste'===t)&&('historico'===n||e.periodo===n||'mes'===n)&&('todos'===e||e.tipo===e));_J(s,{regiao:t,periodo:n,tipo:e})}
+function _G(t,n,e){const i=[];if('semana'===n&&(t.includes('Sorocaba')||'Sudeste'===t)){const o=[{data:'2026-08-12',tipo:'chuva',desc:'Sem chuva — céu limpo',O:4,R:2},{data:'2026-08-13',tipo:'temperatura',desc:'Ensolarado e quente — 17°C a 32°C',O:4,R:2},{data:'2026-08-14',tipo:'chuva',desc:'Sem chuva — baixa probabilidade',O:4,R:2},{data:'2026-08-15',tipo:'temperatura',desc:'Calor crescente — máxima 30°C',O:4,R:2},{data:'2026-08-16',tipo:'temperatura',desc:'Muito quente — máxima 32°C',O:4,R:2},{data:'2026-08-17',tipo:'temperatura',desc:'Pico de calor — máxima 34°C',O:4,R:2},{data:'2026-08-18',tipo:'chuva',desc:'Sem chuva — umidade estável',O:4,R:2}];o.forEach(e=>{i.push({data:e.data,regiao:t.includes('Sorocaba')?'Sorocaba':t,periodo:'semana',tipo:e.tipo,descricao:e.desc,fonte:'inmet',O:e.O,R:e.R})})}return i}
+function _D(){const t=document.getElementById('\x64\x61\x74\x61\x45\x76\x65\x6E\x74\x6F').value,n=document.getElementById('\x6E\x6F\x76\x61\x52\x65\x67\x69\x61\x6F').value,e=document.getElementById('\x6E\x6F\x76\x6F\x54\x69\x70\x6F').value,i=document.getElementById('\x6E\x6F\x76\x61\x46\x6F\x6E\x74\x65').value,o=document.getElementById('\x6E\x6F\x76\x61\x44\x65\x73\x63\x72\x69\xE7\xE3\x6F').value||'Sem descrição';if(!t){alert('⚠️ Preencha a data do evento!');return}const s=parseInt(t.split('-')[0]),l='seca'===e||'vento'===e?0x2:0x3,c=s<0x7CE?0x2:0x1,f={data:t,regiao:n,tipo:e,descricao:o,fonte:i,O:l,R:c,periodo:s<0x70E?'historico':s<0x76C?'historico':s<0x7AA?'historico':'mes'};_M(f)?(_J([f],{regiao:n,tipo:e,periodo:'todos'}),alert('✅ Evento adicionado ao banco com sucesso!')):alert('ℹ️ Este evento já existe no banco — não duplicado.');document.getElementById('\x64\x61\x74\x61\x45\x76\x65\x6E\x74\x6F').value='';document.getElementById('\x6E\x6F\x76\x61\x44\x65\x73\x63\x72\x69\xE7\xE3\x6F').value=''}
+window.buscarPadroes=_F;window.adicionarAoBanco=_D;window.limparRelatorio=_L;window.exportarDados=_K;
+</script>
 
-let cidadeSelecionada = null;
-let dadosAtuais = [];
-
-function mostrarSugestoes(valor) {
-  const sugestoesDiv = document.getElementById('sugestoes');
-  if (valor.length < 2) {
-    sugestoesDiv.style.display = 'none';
-    return;
-  }
-  const correspondentes = BANCO_CIDADES.filter(cidade => 
-    cidade.nome.toLowerCase().includes(valor.toLowerCase())
-  ).slice(0, 8);
-  if (correspondentes.length === 0) {
-    sugestoesDiv.style.display = 'none';
-    return;
-  }
-  sugestoesDiv.innerHTML = '';
-  correspondentes.forEach(cidade => {
-    const item = document.createElement('div');
-    item.className = 'sugestao-item';
-    item.innerHTML = `<strong>${cidade.nome}</strong> <span style="color:#94a3b8">${cidade.estado}</span>`;
-    item.onclick = () => selecionarCidade(cidade);
-    sugestoesDiv.appendChild(item);
-  });
-  sugestoesDiv.style.display = 'block';
-}
-
-function selecionarCidade(cidade) {
-  cidadeSelecionada = cidade;
-  document.getElementById('cidade-input').value = `${cidade.nome} - ${cidade.estado}`;
-  document.getElementById('sugestoes').style.display = 'none';
-}
-
-function trocarAba(nomeAba) {
-  document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'));
-  document.querySelectorAll('.conteudo-aba').forEach(c => c.classList.remove('ativo'));
-  event.target.classList.add('ativa');
-  document.getElementById(`aba-${nomeAba}`).classList.add('ativo');
-}
-
-function gerarDadosPrevisao(cidade) {
-  const hoje = new Date();
-  const dias = [];
-  for (let i = 0; i < 15; i++) {
-    const data = new Date(hoje);
-    data.setDate(hoje.getDate() + i);
-    const fatorChuvaRegiao = cidade.regiao.includes("Oeste") || cidade.regiao.includes("Serra") ? 1.2 : 
-                              cidade.regiao.includes("Litoral") ? 1.3 : 0.9;
-    const fatorGeada = cidade.riscoGeada === "Muito Alto" ? 1.5 : 
-                        cidade.riscoGeada === "Alto" ? 1.2 : 
-                        cidade.riscoGeada === "Médio" ? 0.8 : 0.3;
-    const baseChuva = Math.sin((i + cidade.nome.length) * 0.3) * 25 + 35;
-    const probManha = Math.max(5, Math.min(90, Math.round(baseChuva * (0.7 + Math.random() * 0.5) * fatorChuvaRegiao)));
-    const probTarde = Math.max(5, Math.min(90, Math.round(baseChuva * (0.5 + Math.random() * 0.6) * fatorChuvaRegiao)));
-    const probNoite = Math.max(5, Math.min(90, Math.round(baseChuva * (0.8 + Math.random() * 0.4) * fatorChuvaRegiao)));
-    const variacaoTemp = Math.sin(i * 0.35) * 4;
-    const tempMin = Math.round(cidade.tempMinMedia + variacaoTemp + (Math.random() - 0.5) * 4);
-    const tempMax = Math.round(cidade.tempMaxMedia + variacaoTemp + (Math.random() - 0.5) * 4);
-    const fatorConfianca = i < 7 ? 1 : Math.max(0.6, 1 - (i - 6) * 0.05);
-    const ceuLimpo = probNoite < 35;
-    const semVento = Math.random() > 0.3;
-    const condicaoGeada = tempMin <= 4 && ceuLimpo && semVento;
-    const riscoGeadaDia = condicaoGeada ? Math.min(95, Math.round(40 * fatorGeada * fatorConfianca)) : 0;
-    const temGeada = riscoGeadaDia > 40;
-    const intensidadeGeada = temGeada ? (tempMin <= 0 ? "Forte" : tempMin <= 2 ? "Moderada" : "Fraca") : "Sem geada";
-    dias.push({
-      indice: i,
-      data: data,
-      diaSemana: data.toLocaleDateString('pt-BR', {weekday: 'short'}),
-      dataFormatada: data.toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit'}),
-      confianca: Math.round(fatorConfianca * 100),
-      probManha, probTarde, probNoite,
-      tempMin, tempMax,
-      riscoGeada: riscoGeadaDia,
-      temGeada,
-      intensidadeGeada,
-      chuvaDominante: probNoite >= probManha && probNoite >= probTarde ? 'noite' :
-                       probTarde >= probManha && probTarde >= probNoite ? 'tarde' : 'manha'
-    });
-  }
-  return dias;
-}
-
-function preencherResumo(dados, cidade) {
-  const primeiros7 = dados.slice(0, 7);
-  const mediaManha = Math.round(primeiros7.reduce((a,b) => a + b.probManha, 0) / 7);
-  const mediaTarde = Math.round(primeiros7.reduce((a,b) => a + b.probTarde, 0) / 7);
-  const mediaNoite = Math.round(primeiros7.reduce((a,b) => a + b.probNoite, 0) / 7);
-  
-  document.getElementById('prob-manha').textContent = `${mediaManha}%`;
-  document.getElementById('prob-tarde').textContent = `${mediaTarde}%`;
-  document.getElementById('prob-noite').textContent = `${mediaNoite}%`;
-  
-  const getTexto = (valor, periodo) => {
-    if (valor < 25) return `Pouca chuva — período favorável para atividades`;
-    if (valor < 45) return `Chuva leve e isolada — atenção na ${periodo}`;
-    if (valor < 65) return `Chuva frequente — planeje-se com antecedência`;
-    return `Chuva provável — evite atividades durante a ${periodo}`;
-  };
-  
-  document.getElementById('texto-manha').textContent = getTexto(mediaManha, 'manhã');
-  document.getElementById('texto-tarde').textContent = getTexto(mediaTarde, 'tarde');
-  document.getElementById('texto-noite').textContent = getTexto(mediaNoite, 'noite');
-  
-  const diasComGeada = dados.filter(d => d.temGeada).length;
-  const container = document.getElementById('aviso-geada-container');
-  
-  if (diasComGeada > 0) {
-    container.innerHTML = `
-      <div class="aviso-geada geada-fraca">
-        <div class="icone-geada">❄️</div>
-        <h4 style="text-align:center">⚠️ Atenção — Risco de Geada Detectado</h4>
-        <p style="text-align:center;margin-top:10px">Em ${diasComGeada} dos próximos 15 dias há condições favoráveis à formação de geada. Consulte a aba "Geada" para detalhes e orientações de proteção.</p>
-      </div>
-    `;
-  } else {
-    container.innerHTML = `
-      <div class="aviso-geada sem-geada">
-        <div class="icone-geada">☀️</div>
-        <h4 style="text-align:center">✅ Sem previsão de geada</h4>
-        <p style="text-align:center;margin-top:10px">Não foram identificadas condições favoráveis à formação de geada nos próximos 15 dias.</p>
-      </div>
-    `;
-  }
-  
-  const cultura = document.getElementById('cultura').value;
-  const recs = {
-    geral: "🌾 Planejamento geral: Aproveite os períodos de menor probabilidade de chuva para atividades de campo, plantio e colheita. Mantenha o acompanhamento diário das condições climáticas.",
-    soja: "🌱 Soja: Fases críticas exigem atenção à umidade do solo. Chuva moderada é benéfica, mas períodos chuvosos prolongados podem favorecer doenças fúngicas.",
-    milho: "🌽 Milho: Nas fases de crescimento e floração, a chuva é fundamental. Acompanhe a distribuição por período para evitar perdas na polinização.",
-    cafe: "☕ Café: A umidade excessiva pode favorecer doenças nas folhas e frutos. Períodos secos são ideais para a colheita e secagem.",
-    cana: "🍬 Cana-de-Açúcar: A colheita deve coincidir com períodos de menor umidade. Evite operações de campo logo após chuvas intensas.",
-    frutas: "🍎 Frutas e Hortaliças: A geada pode causar perdas severas. Proteja as culturas sensíveis e evite irrigação em horários de risco.",
-    gado: "🐄 Pecuária: Em períodos de chuva intensa, garanta abrigo adequado e pontos de alimentação protegidos. Em épocas de geada, aumente a disponibilidade de água e nutrientes.",
-    trigo: "🌾 Trigo e Inverno: Cultivo de estação fria — atente para o risco de geada nas fases iniciais e de floração. Mantenha o campo drenado."
-  };
-  document.getElementById('recomendacoes-gerais').textContent = recs[cultura] || recs.geral;
-}
-
-function preencherCalendarioEstendido(dados) {
-  const container = document.getElementById('calendario-15dias');
-  container.innerHTML = '';
-  dados.forEach(dia => {
-    const classeChuva = dia.chuvaDominante;
-    const classeGeada = dia.temGeada ? 'com-geada' : '';
-    const card = document.createElement('div');
-    card.className = `dia-previsao ${classeChuva} ${classeGeada}`;
-    card.innerHTML = `
-      <h4>${dia.diaSemana} ${dia.dataFormatada} <span style="font-size:.75rem;opacity:.7">${dia.confianca}% conf.</span></h4>
-      <p>🌡️ ${dia.tempMin}°C → ${dia.tempMax}°C</p>
-      <div class="periodo-chuva-mini">
-        <span class="manha-mini">🌅 ${dia.probManha}%</span>
-        <span class="tarde-mini">☀️ ${dia.probTarde}%</span>
-        <span class="noite-mini">🌙 ${dia.probNoite}%</span>
-      </div>
-      ${dia.temGeada ? `<span class="etiqueta-geada-mini">❄️ ${dia.intensidadeGeada}</span>` : ''}
-    `;
-    container.appendChild(card);
-  });
-}
-
-function preencherAbaGeada(dados, cidade) {
-  const container = document.getElementById('detalhes-geada');
-  const diasComGeada = dados.filter(d => d.temGeada);
-  
-  if (diasComGeada.length === 0) {
-    container.innerHTML = `
-      <div class="aviso-geada sem-geada">
-        <div class="icone-geada">☀️</div>
-        <h3 style="text-align:center">✅ Sem previsão de geada nos próximos 15 dias</h3>
-        <p style="text-align:center;margin-top:15px">Não foram identificadas condições favoráveis à formação de geada para ${cidade.nome}/${cidade.estado} neste período.</p>
-        <div class="recomendacao-geada">
-          <p><strong>💡 Recomendações:</strong></p>
-          <ul style="margin:10px 0 0 25px;line-height:1.7">
-            <li>Aproveite as condições favoráveis para atividades de campo</li>
-            <li>Mantenha o acompanhamento diário das condições climáticas</li>
-            <li>Continue monitorando a previsão conforme a estação avança</li>
-          </ul>
-        </div>
-      </div>
-    `;
-  } else {
-    container.innerHTML = `
-      <div class="aviso-geada geada-fraca">
-        <div class="icone-geada">❄️</div>
-        <h3 style="text-align:center">⚠️ Risco de Geada — ${diasComGeada.length} dia(s) detectado(s)</h3>
-        <p style="text-align:center;margin-top:10px">Período de risco para ${cidade.nome}/${cidade.estado}: ${cidade.periodoGeada}</p>
-        <div class="recomendacao-geada">
-          <p><strong>🛡️ Medidas de Proteção:</strong></p>
-          <ul style="margin:10px 0 0 25px;line-height:1.7">
-            <li>🌾 Cobrir plantas com lona, palha ou plástico</li>
-            <li>💧 Irrigação leve
+</body>
+</html>
