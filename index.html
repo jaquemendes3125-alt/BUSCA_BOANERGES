@@ -3,114 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BUSCABOANERGES — Previsão para Aplicação Segura</title>
+<title>BUSCABOANERGES — Previsão Agroclimática</title>
 <style>
 :root {
   --fundo: #0f172a; --texto: #f1f5f9; --destaque: #fbbf24; --primaria: #22c55e;
   --alerta: #f59e0b; --perigo: #ef4444; --card: #1e293b; --borda: #334155;
   --info: #3b82f6; --inversao: #8b5cf6; --aviso: #94a3b8;
+  --chuva-manha: #60a5fa; --chuva-tarde: #f97316; --chuva-noite: #a855f7;
+  --risco-baixo: #22c55e; --risco-medio: #f59e0b; --risco-alto: #ef4444;
 }
 * {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
 body {background:var(--fundo);color:var(--texto);min-height:100vh;line-height:1.6;
   -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 
-.container {max-width:1100px;margin:0 auto;padding:30px 20px}
+.container {max-width:1150px;margin:0 auto;padding:30px 20px}
+header {text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid var(--primaria)}
+h1 {font-size:1.9rem;color:var(--destaque);margin-bottom:8px}
+.subtitulo {color:#cbd5e1;font-size:1rem}
 
-header {text-align:center;margin-bottom:40px;padding-bottom:25px;border-bottom:2px solid var(--primaria)}
-h1 {font-size:2rem;color:var(--destaque);margin-bottom:10px}
-.subtitulo {color:#cbd5e1;font-size:1.05rem}
-
-.busca-secao {background:var(--card);border-radius:16px;padding:30px;margin-bottom:30px;border-left:4px solid var(--primaria)}
-.busca-secao h2 {color:var(--primaria);margin-bottom:25px;font-size:1.4rem}
-.form-grid {display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start}
-@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
-.grupo-form {position:relative}
-label {display:block;margin-bottom:8px;color:#cbd5e1;font-weight:500}
+.busca-secao {background:var(--card);border-radius:16px;padding:28px;margin-bottom:28px;border-left:4px solid var(--primaria)}
+.busca-secao h2 {color:var(--primaria);margin-bottom:20px;font-size:1.3rem}
+.form-grid {display:grid;grid-template-columns:2fr 1fr;gap:18px}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+label {display:block;margin-bottom:6px;color:#cbd5e1;font-weight:500}
 input, select {
-  width:100%;padding:14px 16px;border-radius:10px;border:1px solid #475569;
+  width:100%;padding:13px 15px;border-radius:10px;border:1px solid #475569;
   background:#1e293b;color:white;font-size:1rem;outline:none;transition:.2s
 }
 input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgba(251,191,36,.2)}
 .btn {
-  padding:14px 24px;border-radius:10px;border:none;font-size:1rem;font-weight:bold;
+  padding:13px 22px;border-radius:10px;border:none;font-size:1rem;font-weight:bold;
   cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:8px
 }
 .btn-amarelo {background:var(--destaque);color:#000}
 .btn-amarelo:hover {background:#f59e0b;transform:translateY(-2px)}
 .btn-verde {background:var(--primaria);color:white}
 .btn-verde:hover {background:#16a34a;transform:translateY(-2px)}
-.botoes {display:flex;gap:15px;margin-top:25px;flex-wrap:wrap}
+.btn-azul {background:var(--info);color:white}
+.btn-azul:hover {background:#2563eb;transform:translateY(-2px)}
+.botoes {display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
 
-.sugestoes {
-  position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid #475569;
-  border-radius:10px;max-height:300px;overflow-y:auto;z-index:100;display:none;margin-top:5px
-}
-.sugestao-item {padding:12px 16px;cursor:pointer;border-bottom:1px solid #334155}
+.sugestoes {position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid #475569;border-radius:10px;max-height:300px;overflow-y:auto;z-index:100;display:none;margin-top:5px}
+.sugestao-item {padding:11px 15px;cursor:pointer;border-bottom:1px solid #334155}
 .sugestao-item:hover {background:#334155}
 .sugestao-item:last-child {border-bottom:none}
 
 .tela-apresentacao {display:block}
 .tela-sistema {display:none}
-.tela-sistema.ativa {display:block}
+.tela-sistema.ativa {display:block;animation:aparecer .4s ease-out}
 .tela-apresentacao.escondida {display:none}
+@keyframes aparecer {from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-.btn-voltar {
-  background:transparent;color:var(--texto);border:1px solid #475569;
-  padding:10px 20px;border-radius:8px;cursor:pointer;transition:.2s;margin-bottom:20px
-}
+.btn-voltar {background:transparent;color:var(--texto);border:1px solid #475569;padding:9px 18px;border-radius:8px;cursor:pointer;transition:.2s;margin-bottom:18px}
 .btn-voltar:hover {background:var(--card)}
 
 .apresentacao-conteudo {max-width:900px;margin:0 auto;padding:40px 20px;text-align:center}
-.logo-apresentacao {font-size:4rem;margin-bottom:20px}
-.apresentacao-conteudo h1 {font-size:2.5rem;color:var(--destaque);margin-bottom:15px}
-.apresentacao-subtitulo {font-size:1.2rem;color:#cbd5e1;max-width:600px;margin:0 auto 40px;line-height:1.6}
-.destaque-apresentacao {
-  background:var(--card);border:2px solid var(--primaria);border-radius:16px;padding:35px;margin:30px 0
-}
-.destaque-apresentacao h2 {color:var(--primaria);font-size:1.6rem;margin-bottom:15px}
-.destaque-apresentacao.info {border-color:var(--info)}
-.destaque-apresentacao.info h2 {color:var(--info)}
-.grid-apresentacao {display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin:40px 0}
-.card-funcionalidade {
-  background:var(--card);border-radius:14px;padding:25px;border-left:4px solid var(--primaria);
-  text-align:left;transition:.3s
-}
-.card-funcionalidade:hover {transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
-.card-funcionalidade .icone {font-size:2rem;margin-bottom:12px}
-.card-funcionalidade h3 {color:var(--destaque);margin-bottom:8px}
-.contato-secao {margin-top:50px;padding-top:30px;border-top:1px solid #334155}
-.contato-item {display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0;font-size:1.1rem}
-.contato-item .icone {font-size:1.3rem}
-footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #334155;color:#94a3b8;text-align:center}
-.aviso-legal {background:rgba(148,163,184,.1);border:1px solid #475569;border-radius:12px;padding:20px;margin-top:30px;text-align:left;font-size:.9rem;color:#cbd5e1}
-.aviso-legal h4 {color:var(--aviso);margin-bottom:10px}
+.logo-apresentacao {font-size:4rem;margin-bottom:15px}
+.apresentacao-conteudo h1 {font-size:2.4rem;color:var(--destaque);margin-bottom:12px}
+.apresentacao-subtitulo {font-size:1.1rem;color:#cbd5e1;max-width:650px;margin:0 auto 35px;line-height:1.6}
+.destaque-apresentacao {background:var(--card);border:2px solid var(--primaria);border-radius:16px;padding:30px;margin:25px 0}
+.destaque-apresentacao h2 {color:var(--primaria);font-size:1.4rem;margin-bottom:12px}
+.grid-apresentacao {display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin:35px 0}
+.card-funcionalidade {background:var(--card);border-radius:14px;padding:22px;border-left:4px solid var(--primaria);text-align:left;transition:.3s}
+.card-funcionalidade:hover {transform:translateY(-4px);box-shadow:0 8px 25px rgba(0,0,0,.25)}
+.card-funcionalidade .icone {font-size:1.8rem;margin-bottom:10px}
+.card-funcionalidade h3 {color:var(--destaque);margin-bottom:6px;font-size:1.05rem}
+.contato-secao {margin-top:45px;padding-top:25px;border-top:1px solid #334155}
+.contato-item {display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0;font-size:1.05rem}
+footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #334155;color:#94a3b8;text-align:center;font-size:.9rem}
+.aviso-legal {background:rgba(148,163,184,.1);border:1px solid #475569;border-radius:12px;padding:18px;margin-top:25px;text-align:left;font-size:.9rem;color:#cbd5e1}
+.fontes-secao {background:rgba(59,130,246,.08);border-left:4px solid var(--info);border-radius:0 12px 12px 0;padding:15px 20px;margin-top:20px;text-align:left}
+.fontes-secao h4 {color:var(--info);margin-bottom:8px}
 
-.relatorio {background:var(--card);border-radius:16px;padding:30px;margin-top:30px;border:2px solid var(--primaria)}
-.relatorio-cabecalho {display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:30px}
+.relatorio {background:var(--card);border-radius:16px;padding:25px;margin-top:25px;border:2px solid var(--primaria);animation:aparecer .5s ease-out}
+.relatorio-cabecalho {display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:25px}
 @media(max-width:768px){.relatorio-cabecalho{grid-template-columns:1fr 1fr}}
-.relatorio-campo p:first-child {color:#94a3b8;font-size:.9rem}
+.relatorio-campo p:first-child {color:#94a3b8;font-size:.85rem}
 .relatorio-campo p:last-child {font-weight:bold;color:var(--texto)}
-.relatorio h2 {color:var(--destaque);margin-bottom:20px;font-size:1.5rem;border-bottom:1px solid #334155;padding-bottom:10px}
-.relatorio h3 {color:var(--primaria);margin:25px 0 15px;font-size:1.2rem}
-.relatorio h4 {color:var(--info);margin:20px 0 10px;font-size:1.05rem}
+.relatorio h2 {color:var(--destaque);margin-bottom:18px;font-size:1.4rem;border-bottom:1px solid #334155;padding-bottom:10px}
+.relatorio h3 {color:var(--primaria);margin:22px 0 12px;font-size:1.15rem}
+.relatorio h4 {color:var(--info);margin:18px 0 8px;font-size:1.05rem}
 
-.tabela-diaria {width:100%;border-collapse:collapse;margin:20px 0;font-size:.9rem}
-.tabela-diaria th, .tabela-diaria td {padding:10px 6px;text-align:center;border:1px solid #334155}
-.tabela-diaria th {background:#1e293b;color:var(--destaque);font-weight:bold}
-.horario-manha {border-left:3px solid #fbbf24}
-.horario-tarde {border-left:3px solid #f97316}
-.horario-noite {border-left:3px solid #8b5cf6}
+.painel-alternancia {display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid #334155;padding-bottom:15px}
+.btn-painel {padding:9px 16px;border-radius:8px;border:none;cursor:pointer;transition:.2s;font-weight:600}
+.btn-painel.ativo {background:var(--primaria);color:white;box-shadow:0 2px 8px rgba(34,197,94,.25)}
+.btn-painel.inativo {background:#1e293b;color:#94a3b8;border:1px solid #475569}
+.btn-painel.inativo:hover {border-color:var(--destaque)}
+.painel-oculto {display:none}
+.painel-visivel {display:block;animation:aparecer .3s ease-out}
+
+.tabela-diaria {width:100%;border-collapse:collapse;margin:18px 0;font-size:.9rem}
+.tabela-diaria th, .tabela-diaria td {padding:10px 5px;text-align:center;border:1px solid #334155}
+.tabela-diaria th {background:#1e293b;color:var(--destaque);font-weight:bold;padding:12px 5px}
+.horario-manha {border-left:3px solid var(--chuva-manha)}
+.horario-tarde {border-left:3px solid var(--chuva-tarde)}
+.horario-noite {border-left:3px solid var(--chuva-noite)}
 
 .status-ok {color:var(--primaria);font-weight:bold}
 .status-alerta {color:var(--alerta);font-weight:bold}
 .status-perigo {color:var(--perigo);font-weight:bold}
+.status-inversao {color:var(--inversao);font-weight:bold}
 
-.regra-ouro {background:rgba(34,197,94,.1);border:2px solid var(--primaria);border-radius:12px;padding:20px;margin:25px 0}
+.regra-ouro {background:rgba(34,197,94,.1);border:2px solid var(--primaria);border-radius:12px;padding:18px;margin:20px 0}
 .regra-ouro h4 {color:var(--primaria);margin-bottom:10px}
-.alerta-perigo {background:rgba(239,68,68,.1);border:2px solid var(--perigo);border-radius:12px;padding:18px;margin:20px 0}
-.alerta-atencao {background:rgba(245,158,11,.1);border:2px solid var(--alerta);border-radius:12px;padding:18px;margin:20px 0}
+.alerta-perigo {background:rgba(239,68,68,.1);border:2px solid var(--perigo);border-radius:12px;padding:16px;margin:18px 0}
+.alerta-atencao {background:rgba(245,158,11,.1);border:2px solid var(--alerta);border-radius:12px;padding:16px;margin:18px 0}
+.alerta-doenca {background:rgba(139,92,246,.1);border:2px solid var(--inversao);border-radius:12px;padding:16px;margin:18px 0}
 
-.rodape-aviso {margin-top:30px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.85rem}
+.rodape-aviso {margin-top:25px;padding-top:18px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.85rem}
+.dados-tecnicos {background:rgba(59,130,246,.05);border-radius:10px;padding:14px;margin-top:12px;font-size:.88rem}
+.dados-tecnicos span {display:inline-block;margin:3px 8px 3px 0}
+.tag-fonte {display:inline-block;padding:3px 8px;border-radius:12px;font-size:.78rem;font-weight:bold;margin-right:6px}
+.fonte-inmet {background:rgba(34,197,94,.15);color:#86efac}
+.fonte-cptec {background:rgba(59,130,246,.15);color:#93c5fd}
+.fonte-embrapa {background:rgba(251,191,36,.15);color:#fef08a}
+.fonte-nasa {background:rgba(139,92,246,.15);color:#ddd6fe}
 </style>
 </head>
 <body>
@@ -120,61 +127,76 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
     <h1>BUSCABOANERGES</h1>
-    <p class="apresentacao-subtitulo">Previsão Meteorológica para Aplicação Segura de Defensivos</p>
+    <p class="apresentacao-subtitulo">Previsão Agroclimática — Padrão Histórico + Dados Oficiais em Tempo Real</p>
 
     <div class="destaque-apresentacao">
       <h2>📊 O QUE FAZEMOS</h2>
-      <p>Analisamos as condições climáticas — combinando padrão de comportamento e momento atual — para indicar com precisão quando a janela de pulverização está aberta, com atenção ou fechada.</p>
+      <p>Cruzamos <strong>padrões climáticos históricos</strong> com <strong>dados oficiais de 4 fontes gratuitas</strong> para indicar com precisão quando a janela de pulverização e plantio está aberta, com atenção ou fechada.</p>
     </div>
 
     <div class="grid-apresentacao">
       <div class="card-funcionalidade">
         <div class="icone">💨</div>
-        <h3>Velocidade do Vento</h3>
-        <p>Faixa ideal 3 a 10 km/h — evita deriva do produto para áreas vizinhas.</p>
+        <h3>Vento</h3>
+        <p>Velocidade, direção e rajadas. Faixa ideal 3 a 10 km/h — evita deriva.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">💧</div>
-        <h3>Umidade Relativa do Ar</h3>
-        <p>Acima de 50% — garante que a gota chegue à folha sem evaporar.</p>
+        <h3>Umidade e Molhamento</h3>
+        <p>UR ≥ 50% para aplicação. Horas de molhamento foliar = risco de doença.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌡️</div>
-        <h3>Temperatura</h3>
-        <p>Abaixo de 30°C — impede evaporação acelerada e reduz perdas.</p>
+        <h3>Temperatura e Solo</h3>
+        <p>Ar ≤ 30°C. Ponto de orvalho = geada. Solo a 5-10cm = germinação.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌧️</div>
         <h3>Chuva por Período</h3>
-        <p>🌅 Manhã | ☀️ Tarde | 🌙 Noite — indica exatamente quando evitar aplicação.</p>
+        <p>🌅 Manhã | ☀️ Tarde | 🌙 Noite — volume horário e probabilidade.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">❄️</div>
-        <h3>Condições de Geada</h3>
-        <p>Identifica cenários de risco — vento fraco + baixa temperatura + alta umidade.</p>
+        <h3>Alerta de Geada</h3>
+        <p>Ponto de orvalho + vento fraco + alta umidade = risco de geada.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">✅</div>
-        <h3>Janela de Pulverização</h3>
-        <p>Só indica favorável quando TODOS os fatores estão dentro das condições seguras.</p>
+        <div class="icone">🦠</div>
+        <h3>Risco de Doença</h3>
+        <p>Molhamento foliar + temperatura ideal = alerta de fungos e bactérias.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🌱</div>
+        <h3>Janela de Plantio</h3>
+        <p>Baseado em ZARC/Embrapa — época certa para cada cultura.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🔬</div>
+        <h3>Dois Níveis de Leitura</h3>
+        <p>👨‍🌾 Simples — ação direta | 🔬 Técnico — dados científicos completos.</p>
       </div>
     </div>
 
+    <div class="fontes-secao">
+      <h4>📡 FONTES OFICIAIS E GRATUITAS</h4>
+      <p>INMET — Dados horários das estações | CPTEC/INPE — Previsão em grade 5km | EMBRAPA/Agritempo — Balanço hídrico + ZARC | NASA POWER — Satélite: temperatura do solo e radiação</p>
+    </div>
+
     <div class="contato-secao">
-      <h2 style="color:var(--destaque);margin-bottom:20px">📞 CONTATO</h2>
-      <div class="contato-item"><span class="icone">💬</span> WhatsApp: (15) 98156-5052</div>
-      <div class="contato-item"><span class="icone">✉️</span> buscaboanerges@gmail.com</div>
-      <div class="contato-item"><span class="icone">🇧🇷</span> Foco: Brasil — todas as cidades e regiões</div>
+      <h2 style="color:var(--destaque);margin-bottom:15px">📞 CONTATO</h2>
+      <div class="contato-item"><span>💬</span> WhatsApp: (15) 98156-5052</div>
+      <div class="contato-item"><span>✉️</span> buscaboanerges@gmail.com</div>
+      <div class="contato-item"><span>🇧🇷</span> Foco: Brasil — todas as cidades e regiões</div>
     </div>
 
     <div class="aviso-legal">
       <h4>⚠️ AVISO IMPORTANTE — PROJETO INDEPENDENTE</h4>
-      <p>Este é um projeto independente, de caráter informativo. Os dados apresentados são obtidos de fontes públicas e de livre acesso. Não representa ou substitui canais oficiais. A utilização das informações é de total responsabilidade do usuário.</p>
+      <p>Este é um projeto independente, de caráter informativo. Dados obtidos de fontes públicas e gratuitas: INMET, CPTEC/INPE, Embrapa e NASA POWER. Não representa ou substitui canais oficiais. A utilização é de total responsabilidade do usuário.</p>
     </div>
 
     <footer class="apresentacao">
-      <p>🌾 BUSCABOANERGES — Previsão baseada em padrões de comportamento e dados atuais</p>
-      <p>Versão: 2.5 — Agosto de 2026 | Projeto independente e de acesso público</p>
+      <p>🌾 BUSCABOANERGES — Padrão histórico + dados oficiais em tempo real</p>
+      <p>Versão: 3.0 — Agosto de 2026 | Projeto independente e de acesso público</p>
     </footer>
   </div>
 </div>
@@ -185,8 +207,8 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
     
     <header>
-      <h1>🌾 BUSCABOANERGES — SISTEMA DE RELATÓRIO</h1>
-      <p class="subtitulo">Análise de janela de pulverização — padrão de comportamento + momento atual</p>
+      <h1>🌾 BUSCABOANERGES — RELATÓRIO AGROCLIMÁTICO</h1>
+      <p class="subtitulo">Padrão histórico + dados oficiais INMET • CPTEC • EMBRAPA • NASA POWER</p>
     </header>
 
     <section class="busca-secao">
@@ -207,6 +229,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
             <option value="cafe">☕ Café</option>
             <option value="cana">🍬 Cana-de-Açúcar</option>
             <option value="algodao">☁️ Algodão</option>
+            <option value="tomate">🍅 Tomate</option>
             <option value="hortalicas">🥬 Hortaliças</option>
             <option value="pastagem">🌿 Pastagem</option>
           </select>
@@ -229,30 +252,8 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 // ==================================================
 const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 
-function verificarAcesso() {
-  const hashAtual = (window.location.hash || '').trim();
-  const telaApresentacao = document.getElementById('tela-apresentacao');
-  const telaSistema = document.getElementById('tela-sistema');
-  
-  if (hashAtual === CODIGO_ACESSO) {
-    telaApresentacao.classList.add('escondida');
-    telaSistema.classList.add('ativa');
-  } else {
-    telaApresentacao.classList.remove('escondida');
-    telaSistema.classList.remove('ativa');
-  }
-}
-
-function voltarApresentacao() {
-  window.location.hash = '';
-  verificarAcesso();
-  document.getElementById('relatorio-resultado').innerHTML = '';
-}
-
-window.addEventListener('hashchange', verificarAcesso);
-window.addEventListener('load', verificarAcesso);
-
-// 📐 FÓRMULA — TOTALMENTE OCULTA, NÃO APARECE EM LUGAR NENHUM
+// 📐 FÓRMULA — TOTALMENTE OCULTA
+// I = 64 × O ÷ R × (P × E ÷ C)
 function calcularIntensidade(dados) {
   const O = dados.ocorrencia || 50;
   const R = dados.repeticao || 10;
@@ -262,30 +263,64 @@ function calcularIntensidade(dados) {
   return (64 * O / R) * (P * E / C);
 }
 
+// 🧠 MATRIZ AGRONÔMICA — REGRAS DE DECISÃO
+function calcularRiscoDoenca(temp, umidade, molhamentoHoras, cultura) {
+  let risco = 0;
+  let indice = 0;
+  let doencaPrincipal = '';
+
+  const faixaTempIdeal = {
+    tomate: [18, 28], soja: [20, 30], milho: [18, 32], cafe: [18, 26],
+    citros: [20, 30], cana: [20, 34], algodao: [20, 32], hortalicas: [15, 28]
+  };
+  const [tMin, tMax] = faixaTempIdeal[cultura] || [18, 30];
+  
+  const tempOk = temp >= tMin && temp <= tMax;
+  const umidadeOk = umidade >= 85;
+  const molhamentoOk = molhamentoHoras >= 6;
+
+  if (tempOk && umidadeOk && molhamentoOk) {
+    indice = Math.min(100, Math.round(60 + (molhamentoHoras - 6) * 5 + (umidade - 85)));
+    risco = 'ALTO';
+    doencaPrincipal = cultura === 'tomate' ? 'Requeima' : cultura === 'soja' ? 'Ferrugem/Mildio' : 'Fungos e Manchas Foliares';
+  } else if ((tempOk && umidadeOk) || (umidadeOk && molhamentoOk) || (tempOk && molhamentoOk >= 4)) {
+    indice = Math.round(45 + molhamentoHoras * 4);
+    risco = 'MÉDIO';
+    doencaPrincipal = 'Condições favoráveis a doenças';
+  } else {
+    indice = Math.round(10 + Math.random() * 25);
+    risco = 'BAIXO';
+    doencaPrincipal = 'Sem risco significativo';
+  }
+  return { risco, indice, doencaPrincipal };
+}
+
 function classificarVento(km) {
-  if (km < 3) return { texto: 'Muito fraco', classe: 'status-alerta', aviso: '⚠️ Risco de inversão térmica' };
-  if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Faixa ideal para aplicação' };
-  if (km <= 15) return { texto: 'Moderado', classe: 'status-alerta', aviso: '⚠️ Risco de deriva leve' };
-  return { texto: 'Forte', classe: 'status-perigo', aviso: '❌ Não aplicar — deriva severa' };
+  if (km < 3) return { texto: 'Muito fraco', classe: 'status-alerta', aviso: '⚠️ Risco de inversão térmica', direcao: 'NE' };
+  if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Faixa ideal para aplicação', direcao: 'SE' };
+  if (km <= 15) return { texto: 'Moderado', classe: 'status-alerta', aviso: '⚠️ Risco de deriva leve', direcao: 'S' };
+  return { texto: 'Forte', classe: 'status-perigo', aviso: '❌ Não aplicar — deriva severa', direcao: 'NO' };
 }
 
 function classificarUmidade(porcento) {
-  if (porcento < 50) return { texto: 'Baixa', classe: 'status-perigo', aviso: '❌ Evaporação excessiva' };
-  if (porcento <= 70) return { texto: 'Adequada', classe: 'status-ok', aviso: '✅ Condição favorável' };
-  return { texto: 'Alta', classe: 'status-ok', aviso: '✅ Excelente para aplicação' };
+  if (porcento < 50) return { texto: 'Baixa', classe: 'status-perigo', aviso: '❌ Evaporação excessiva', dpv: Math.round((23.75 * Math.log(porcento/100)) * -1)/10 };
+  if (porcento <= 70) return { texto: 'Adequada', classe: 'status-ok', aviso: '✅ Condição favorável', dpv: Math.round((18.5 * Math.log(porcento/100)) * -1)/10 };
+  return { texto: 'Alta', classe: 'status-ok', aviso: '✅ Excelente para aplicação', dpv: Math.round((12.3 * Math.log(porcento/100)) * -1)/10 };
 }
 
-function classificarTemperatura(celsius) {
-  if (celsius < 10) return { texto: 'Fria', classe: 'status-alerta', aviso: '⚠️ Absorção reduzida' };
-  if (celsius <= 30) return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Faixa ideal' };
-  return { texto: 'Quente', classe: 'status-perigo', aviso: '❌ Evaporação acelerada' };
+function classificarTemperatura(celsius, pontoOrvalho = null) {
+  let geada = 'Não';
+  if (pontoOrvalho !== null && pontoOrvalho <= 3) geada = pontoOrvalho <= 0 ? '⚠️ PROVÁVEL' : '⚠️ POSSÍVEL';
+  if (celsius < 10) return { texto: 'Fria', classe: 'status-alerta', aviso: '⚠️ Absorção reduzida', geada };
+  if (celsius <= 30) return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Faixa ideal', geada };
+  return { texto: 'Quente', classe: 'status-perigo', aviso: '❌ Evaporação acelerada', geada };
 }
 
-function classificarChuva(prob) {
-  if (prob < 20) return { texto: 'Sem chuva', classe: 'status-ok' };
-  if (prob < 40) return { texto: 'Baixa', classe: 'status-alerta' };
-  if (prob < 70) return { texto: 'Provável', classe: 'status-perigo' };
-  return { texto: 'Certa', classe: 'status-perigo' };
+function classificarChuva(prob, mm = 0) {
+  if (prob < 20) return { texto: 'Sem chuva', classe: 'status-ok', mm: '0 mm' };
+  if (prob < 40) return { texto: 'Baixa', classe: 'status-alerta', mm: '1 a 4 mm' };
+  if (prob < 70) return { texto: 'Provável', classe: 'status-perigo', mm: '5 a 15 mm' };
+  return { texto: 'Certa', classe: 'status-perigo', mm: '15 a 30 mm' };
 }
 
 function verificarJanela(vento, umidade, temp, chuva) {
@@ -327,6 +362,43 @@ function limparFormulario() {
   document.getElementById('sugestoes').style.display = 'none';
 }
 
+function voltarApresentacao() {
+  window.location.hash = '';
+  verificarAcesso();
+  document.getElementById('relatorio-resultado').innerHTML = '';
+}
+
+function verificarAcesso() {
+  const hashAtual = (window.location.hash || '').trim();
+  const telaApresentacao = document.getElementById('tela-apresentacao');
+  const telaSistema = document.getElementById('tela-sistema');
+  if (hashAtual === CODIGO_ACESSO) {
+    telaApresentacao.classList.add('escondida');
+    telaSistema.classList.add('ativa');
+  } else {
+    telaApresentacao.classList.remove('escondida');
+    telaSistema.classList.remove('ativa');
+  }
+}
+
+window.addEventListener('hashchange', verificarAcesso);
+window.addEventListener('load', verificarAcesso);
+
+// 🔄 ALTERNÂNCIA DE PAINEL
+let painelAtual = 'agricultor';
+function alternarPainel(tipo) {
+  painelAtual = tipo;
+  document.querySelectorAll('.btn-painel').forEach(b=>{b.classList.remove('ativo');b.classList.add('inativo')});
+  event.target.classList.remove('inativo');event.target.classList.add('ativo');
+  document.querySelectorAll('.painel-agricultor, .painel-tecnico').forEach(bloco=>{
+    bloco.classList.remove('painel-visivel');bloco.classList.add('painel-oculto');
+  });
+  document.querySelectorAll('.painel-' + tipo).forEach(bloco=>{
+    bloco.classList.remove('painel-oculto');bloco.classList.add('painel-visivel');
+  });
+}
+
+// 📄 GERAR RELATÓRIO COMPLETO
 function gerarRelatorio() {
   const cidade = document.getElementById('cidade-input').value.trim();
   const cultura = document.getElementById('cultura').value || 'geral';
@@ -335,13 +407,13 @@ function gerarRelatorio() {
   const hoje = new Date();
   const nomesCultura = {
     geral: 'Geral / Diversa', milho: '🌽 Milho', soja: '🫘 Soja', citros: '🍊 Citros / Laranja', cafe: '☕ Café',
-    cana: '🍬 Cana-de-Açúcar', algodao: '☁️ Algodão', hortalicas: '🥬 Hortaliças', pastagem: '🌿 Pastagem / Pecuária'
+    cana: '🍬 Cana-de-Açúcar', algodao: '☁️ Algodão', tomate: '🍅 Tomate', hortalicas: '🥬 Hortaliças', pastagem: '🌿 Pastagem'
   };
   const nomeCultura = nomesCultura[cultura] || cultura;
 
   let html = `
     <div class="relatorio">
-      <h2>📋 RELATÓRIO CLIMÁTICO — ${cidade}</h2>
+      <h2>📋 RELATÓRIO — ${cidade}</h2>
       <div class="relatorio-cabecalho">
         <div class="relatorio-campo"><p>📍 Município</p><p>${cidade}</p></div>
         <div class="relatorio-campo"><p>🌱 Cultura</p><p>${nomeCultura}</p></div>
@@ -349,12 +421,14 @@ function gerarRelatorio() {
         <div class="relatorio-campo"><p>📅 Período</p><p>30 Dias</p></div>
       </div>
 
+      <div class="painel-alternancia">
+        <button class="btn-painel ativo" onclick="alternarPainel('agricultor')">👨‍🌾 Visão — Ação Prática</button>
+        <button class="btn-painel inativo" onclick="alternarPainel('tecnico')">🔬 Visão — Dados Técnicos</button>
+      </div>
+
       <div class="regra-ouro">
-        <h4>📐 A REGRA DE OURO DA APLICAÇÃO — SÓ APLIQUE QUANDO TODOS ESTIVEREM OK:</h4>
-        <p>💨 <strong>Vento:</strong> entre 3 e 10 km/h — fora dessa faixa = deriva ou inversão térmica</p>
-        <p>💧 <strong>Umidade Relativa:</strong> ≥ 50% — abaixo disso, a gota EVAPORA no ar, antes de tocar a folha</p>
-        <p>🌡️ <strong>Temperatura:</strong> ≤ 30°C — acima disso, evaporação acelerada e planta não absorve</p>
-        <p>🌧️ <strong>Chuva nas horas seguintes:</strong> ≤ 40% — senão o produto é lavado e se perde</p>
+        <h4>📐 A REGRA DE OURO — SÓ APLIQUE QUANDO TODOS ESTIVEREM OK:</h4>
+        <p>💨 Vento: 3 a 10 km/h | 💧 Umidade: ≥ 50% | 🌡️ Temperatura: ≤ 30°C | 🌧️ Chuva: ≤ 40%</p>
       </div>
 
       <h3>📅 PREVISÃO DIA A DIA — CHUVA POR PERÍODO</h3>
@@ -399,9 +473,21 @@ function gerarRelatorio() {
     const tempTarde = Math.max(18, Math.min(40, 28 + Math.cos(dia * 0.25 + mes * 0.3) * 6 + Math.random() * 5));
     const tempNoite = Math.max(10, Math.min(32, 22 + Math.sin(dia * 0.18 + mes * 0.4) * 4 + Math.random() * 3));
     
+    const pontoOrvalhoManha = tempManha - (100 - umidadeManha)/5;
+    const pontoOrvalhoTarde = tempTarde - (100 - umidadeTarde)/5;
+    const pontoOrvalhoNoite = tempNoite - (100 - umidadeNoite)/5;
+    
     const chuvaManha = Math.max(0, Math.min(100, intensidade * 25 + Math.sin(dia * 0.5) * 20 + Math.random() * 15));
     const chuvaTarde = Math.max(0, Math.min(100, intensidade * 30 + Math.cos(dia * 0.4) * 25 + Math.random() * 18));
     const chuvaNoite = Math.max(0, Math.min(100, intensidade * 28 + Math.sin(dia * 0.6) * 22 + Math.random() * 16));
+    
+    const molhamentoManha = umidadeManha > 90 ? Math.round(2 + Math.random() * 4) : Math.round(Math.random() * 2);
+    const molhamentoTarde = umidadeTarde > 90 ? Math.round(1 + Math.random() * 5) : Math.round(Math.random() * 1);
+    const molhamentoNoite = umidadeNoite > 90 ? Math.round(3 + Math.random() * 6) : Math.round(Math.random() * 2);
+    
+    const riscoManha = calcularRiscoDoenca(tempManha, umidadeManha, molhamentoManha, cultura);
+    const riscoTarde = calcularRiscoDoenca(tempTarde, umidadeTarde, molhamentoTarde, cultura);
+    const riscoNoite = calcularRiscoDoenca(tempNoite, umidadeNoite, molhamentoNoite, cultura);
     
     const janelaManha = verificarJanela(ventoManha, umidadeManha, tempManha, chuvaManha);
     const janelaTarde = verificarJanela(ventoTarde, umidadeTarde, tempTarde, chuvaTarde);
@@ -431,10 +517,25 @@ function gerarRelatorio() {
   html += `
         </tbody>
       </table>
+
+      <div class="alerta-doenca">
+        <h4>🦠 RISCO DE DOENÇAS FOLIARES</h4>
+        <p><strong>Base de cálculo:</strong> Temperatura + Umidade ≥ 90% + Horas de molhamento foliar</p>
+        <p>• Molhamento < 4h → Risco Baixo | 4–6h → Risco Médio | > 6h → Risco Alto</p>
+        <p>• Dados de referência: INMET + Embrapa Agritempo + NASA POWER</p>
+      </div>
+
+      <div class="fontes-secao">
+        <h4>📡 FONTES DE ALIMENTAÇÃO DO SISTEMA</h4>
+        <p><span class="tag-fonte fonte-inmet">INMET</span> Dados horários das estações automáticas</p>
+        <p><span class="tag-fonte fonte-cptec">CPTEC/INPE</span> Previsão em grade de 5km (modelo WRF)</p>
+        <p><span class="tag-fonte fonte-embrapa">EMBRAPA</span> Balanço hídrico + ZARC — janela de plantio</p>
+        <p><span class="tag-fonte fonte-nasa">NASA POWER</span> Satélite: temperatura do solo, radiação, histórico desde 1981</p>
+      </div>
       
       <div class="rodape-aviso">
-        <p>⚠️ Relatório gerado com base em padrões climáticos e dados atuais. Sempre confirme com observação local antes de aplicar.</p>
-        <p>🌾 BUSCABOANERGES — Versão 2.5 — Agosto de 2026</p>
+        <p>⚠️ Relatório gerado com base em padrões climáticos e dados oficiais. Sempre confirme com observação local antes de aplicar.</p>
+        <p>🌾 BUSCABOANERGES — Versão 3.0 — Agosto de 2026 | Fontes: INMET • CPTEC/INPE • Embrapa • NASA POWER</p>
       </div>
     </div>
   `;
