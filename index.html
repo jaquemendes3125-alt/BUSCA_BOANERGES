@@ -48,10 +48,10 @@ input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgb
 .sugestao-item:hover {background:#334155}
 .sugestao-item:last-child {border-bottom:none}
 
-.tela-apresentacao {display:block !important;}
-.tela-sistema {display:none !important;}
-.tela-sistema.ativa {display:block !important;}
-.tela-apresentacao.escondida {display:none !important;}
+.tela-apresentacao {display:block;}
+.tela-sistema {display:none;}
+.tela-sistema.ativa {display:block;}
+.tela-apresentacao.escondida {display:none;}
 
 .btn-voltar {
   background:transparent;color:var(--texto);border:1px solid #475569;
@@ -106,7 +106,6 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 .horario-noite {border-left:4px solid #8b5cf6}
 
 .regra-ouro {background:rgba(34,197,94,.1);border:2px solid var(--primaria);border-radius:12px;padding:20px;margin:25px 0}
-.regra-ouro h4 {color:var(--primaria);margin-top:0}
 .regra-ouro.tecnico {background:rgba(59,130,246,.1);border-color:var(--info)}
 .regra-ouro.tecnico h4 {color:var(--info)}
 .alerta-perigo {background:rgba(239,68,68,.1);border:2px solid var(--perigo);border-radius:12px;padding:18px;margin:20px 0}
@@ -120,14 +119,18 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 .resumo-pratico {background:rgba(34,197,94,.05);border:2px solid var(--primaria);border-radius:12px;padding:25px;margin-top:30px}
 .resumo-pratico h3 {color:var(--primaria);margin-top:0}
 .rodape-aviso {margin-top:30px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.85rem}
+
+/* Proteção de cópia */
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 </style>
 </head>
 <body>
 
-<!-- ==================================================
-     🟢 TELA PÚBLICA — O PÚBLICO SÓ VÊ ISSO
-     SEM BOTÃO DE ACESSO, SEM CAMPO DE SENHA
-     ================================================== -->
 <div id="tela-apresentacao" class="tela-apresentacao">
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
@@ -158,45 +161,55 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
       <div class="card-funcionalidade">
         <div class="icone">🌫️</div>
         <h3>Inversão Térmica</h3>
-        <p>Detectada em condições de vento fraco à noite — produto flutua e se perde. ⚠️ Não aplicar.</p>
+        <p>Detectada em condições de vento fraco — produto flutua e se perde. ⚠️ Não aplicar.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌧️</div>
-        <h3>Chuva por Período</h3>
-        <p>🌅 Manhã / ☀️ Tarde / 🌙 Noite — avisa antes da aplicação se vai lavar o produto.</p>
+        <h3>Probabilidade de Chuva</h3>
+        <p>Nas horas seguintes à aplicação — evita lavagem do produto antes de fazer efeito.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">❄️</div>
-        <h3>Risco de Geada</h3>
-        <p>Análise por altitude e latitude — identifica condições de temperatura baixa + vento fraco.</p>
+        <div class="icone">✅</div>
+        <h3>Janela de Pulverização</h3>
+        <p>Decisão combinada: só indica favorável quando todos os fatores estão dentro das condições seguras.</p>
       </div>
     </div>
 
     <div class="destaque-apresentacao info">
       <h2>📚 FONTES DE INFORMAÇÃO</h2>
-      <p>O sistema utiliza padrões de comportamento climático de longo prazo — leitura de repetição desde 1800 — combinados com dados atuais de estações meteorológicas e modelos numéricos de previsão.</p>
+      <p>O sistema utiliza padrões de comportamento climático de longo prazo combinados com dados atuais de estações meteorológicas e modelos numéricos de previsão.</p>
     </div>
 
     <div class="grid-apresentacao">
       <div class="card-funcionalidade">
-        <div class="icone">📈</div>
-        <h3>Padrão de Comportamento</h3>
-        <p>Leitura do histórico — direção predominante do vento, padrão de chuva e temperatura por mês e horário.</p>
+        <div class="icone">📡</div>
+        <h3>Estações em Tempo Real</h3>
+        <p>Medições horárias de vento, temperatura, chuva e umidade obtidas de estações automáticas distribuídas por todo o território nacional.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">📡</div>
-        <h3>Dados Atuais</h3>
-        <p>Medições horárias de vento, temperatura, chuva e umidade de estações automáticas.</p>
+        <div class="icone">🌐</div>
+        <h3>Modelos Numéricos de Previsão</h3>
+        <p>Dados de previsão de até 15 dias, incluindo análise de vento, sistemas atmosféricos e aproximação de frentes frias.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">✈️</div>
+        <h3>Dados de Precisão Horária</h3>
+        <p>Registros frequentes de velocidade e direção do vento, atualizados a cada hora em pontos de observação.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">❄️</div>
+        <h3>Condições de Geada</h3>
+        <p>Identificação de cenários com temperatura baixa, vento fraco e alta umidade — fatores que favorecem a formação de geada.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌅</div>
         <h3>Análise por Período</h3>
-        <p>🌅 Manhã (06h–12h) | ☀️ Tarde (12h–18h) | 🌙 Noite (18h–06h). Cada período com critérios próprios.</p>
+        <p>🌅 Manhã | ☀️ Tarde | 🌙 Noite. Cada período analisado com critérios próprios.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">✅</div>
-        <h3>Janela de Pulverização</h3>
-        <p>Só indica favorável quando TODOS os fatores — vento, umidade, temperatura, chuva — estão seguros.</p>
+        <div class="icone">📊</div>
+        <h3>Padrão de Comportamento</h3>
+        <p>Estudo do comportamento climático — direção predominante do vento, padrão de chuva e temperatura por mês e horário.</p>
       </div>
     </div>
 
@@ -209,8 +222,8 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 
     <div class="aviso-legal">
       <h4>⚠️ AVISO IMPORTANTE — PROJETO INDEPENDENTE</h4>
-      <p><strong>Este é um projeto independente, de caráter informativo e sem vínculo oficial.</strong> Os dados apresentados são obtidos de fontes públicas e de livre acesso. Não representa, substitui ou tem qualquer vínculo com instituições governamentais. Para dados oficiais, consulte sempre os canais oficiais.</p>
-      <p style="margin-top:10px">A utilização das informações é de total responsabilidade do usuário. O sistema atua apenas como ferramenta de apoio à decisão.</p>
+      <p><strong>Este é um projeto independente, de caráter informativo e sem vínculo oficial.</strong> Os dados apresentados são obtidos de fontes públicas e de livre acesso, conforme a Lei de Acesso à Informação. Não representa, substitui ou tem qualquer vínculo com instituições governamentais. Para dados oficiais e decisões oficiais, consulte sempre diretamente os canais oficiais dos órgãos competentes.</p>
+      <p style="margin-top:10px">A utilização das informações é de total responsabilidade do usuário. O sistema atua apenas como ferramenta de apoio à decisão, não se responsabilizando por eventuais divergências entre os dados apresentados e a realidade local no momento da aplicação.</p>
     </div>
 
     <footer class="apresentacao">
@@ -220,9 +233,6 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
   </div>
 </div>
 
-<!-- ==================================================
-     🔒 ÁREA DE RELATÓRIOS — SÓ APARECE COM O HASH
-     ================================================== -->
 <div id="tela-sistema" class="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
@@ -267,20 +277,20 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 
 <script>
 // ==================================================
-// 🔑 ACESSO EXATO — NÃO MEXE!
-// Link + #_area_de_relatorio_seguro → abre o sistema
+// 🔑 ACESSO EXATO — NÃO ALTERAR
+// Link: #_area_de_relatorio_seguro
+// Fórmula interna: I = ((64 × O ÷ R) × P × E) ÷ C
 // ==================================================
 const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 
 function verificarAcesso() {
-  const hashLimpo = (window.location.hash || '').trim();
+  const hashAtual = (window.location.hash || '').trim();
   const telaApresentacao = document.getElementById('tela-apresentacao');
   const telaSistema = document.getElementById('tela-sistema');
   
-  if (hashLimpo === CODIGO_ACESSO) {
+  if (hashAtual === CODIGO_ACESSO) {
     telaApresentacao.classList.add('escondida');
     telaSistema.classList.add('ativa');
-    window.scrollTo(0, 0);
   } else {
     telaApresentacao.classList.remove('escondida');
     telaSistema.classList.remove('ativa');
@@ -289,267 +299,178 @@ function verificarAcesso() {
 
 function voltarApresentacao() {
   window.location.hash = '';
-  document.getElementById('tela-apresentacao').classList.remove('escondida');
-  document.getElementById('tela-sistema').classList.remove('ativa');
+  verificarAcesso();
   document.getElementById('relatorio-resultado').innerHTML = '';
-  window.scrollTo(0, 0);
 }
 
 window.addEventListener('hashchange', verificarAcesso);
-window.addEventListener('load', () => setTimeout(verificarAcesso, 50));
+window.addEventListener('load', verificarAcesso);
+
+// Lista de cidades para sugestão
+const cidades = [
+  'Sorocaba - SP', 'Itu - SP', 'Salto - SP', 'Indaiatuba - SP', 'Campinas - SP',
+  'São Paulo - SP', 'Matão - SP', 'Iperó - SP', 'Capinzal - SC', 'Camaçari - BA',
+  'Valinhos - SP', 'Iporã - SP', 'Ribeirão Preto - SP', 'Araraquara - SP',
+  'Uberaba - MG', 'Londrina - PR', 'Ponta Grossa - PR', 'Chapecó - SC',
+  'Passo Fundo - RS', 'Santa Maria - RS', 'Dourados - MS', 'Campo Grande - MS'
+];
+
+function mostrarSugestoes(valor) {
+  const container = document.getElementById('sugestoes');
+  if (!valor || valor.length < 2) {
+    container.style.display = 'none';
+    return;
+  }
+  const filtradas = cidades.filter(c => c.toLowerCase().includes(valor.toLowerCase()));
+  if (filtradas.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+  container.innerHTML = filtradas.map(c => `<div class="sugestao-item" onclick="document.getElementById('cidade-input').value='${c}';this.parentElement.style.display='none'">${c}</div>`).join('');
+  container.style.display = 'block';
+}
+
+function limparFormulario() {
+  document.getElementById('cidade-input').value = '';
+  document.getElementById('cultura').value = '';
+  document.getElementById('relatorio-resultado').innerHTML = '';
+}
 
 // ==================================================
-// 🗺️ DADOS GEOGRÁFICOS — risco de geada por região
+// 🧠 CÁLCULO INTERNO — Fórmula: I = ((64 × O ÷ R) × P × E) ÷ C
 // ==================================================
-const dadosGeograficos = {
-  'Matão - SP': {latitude: -21.68, altitude: 585},
-  'Sorocaba - SP': {latitude: -23.50, altitude: 600},
-  'São Paulo - SP': {latitude: -23.55, altitude: 760},
-  'Campinas - SP': {latitude: -22.90, altitude: 685},
-  'Ribeirão Preto - SP': {latitude: -21.17, altitude: 540},
-  'Araraquara - SP': {latitude: -21.79, altitude: 660},
-  'São Carlos - SP': {latitude: -22.02, altitude: 850},
-  'Bauru - SP': {latitude: -22.32, altitude: 520},
-  'Marília - SP': {latitude: -22.21, altitude: 660},
-  'Franca - SP': {latitude: -20.53, altitude: 1040},
-  'Sorriso - MT': {latitude: -12.55, altitude: 360},
-  'Sinop - MT': {latitude: -11.86, altitude: 380},
-  'Lucas do Rio Verde - MT': {latitude: -13.09, altitude: 390},
-  'Cuiabá - MT': {latitude: -15.60, altitude: 165},
-  'Rondonópolis - MT': {latitude: -16.47, altitude: 227},
-  'Londrina - PR': {latitude: -23.31, altitude: 550},
-  'Maringá - PR': {latitude: -23.42, altitude: 515},
-  'Ponta Grossa - PR': {latitude: -25.09, altitude: 950},
-  'Cascavel - PR': {latitude: -24.95, altitude: 780},
-  'Dourados - MS': {latitude: -22.23, altitude: 430},
-  'Campo Grande - MS': {latitude: -20.44, altitude: 590},
-  'Três Lagoas - MS': {latitude: -20.79, altitude: 320},
-  'Uberlândia - MG': {latitude: -18.92, altitude: 870},
-  'Uberaba - MG': {latitude: -19.75, altitude: 790},
-  'Patos de Minas - MG': {latitude: -18.58, altitude: 920},
-  'Goiânia - GO': {latitude: -16.68, altitude: 740},
-  'Rio Verde - GO': {latitude: -17.79, altitude: 730},
-  'Catalão - GO': {latitude: -18.17, altitude: 830},
-  'Chapecó - SC': {latitude: -27.10, altitude: 670},
-  'Lages - SC': {latitude: -27.81, altitude: 910},
-  'Passo Fundo - RS': {latitude: -28.26, altitude: 680},
-  'Santa Maria - RS': {latitude: -29.69, altitude: 115},
-  'Camaçari - BA': {latitude: -12.70, altitude: 10},
-  'Itu - SP': {latitude: -23.26, altitude: 630},
-  'Iperó - SP': {latitude: -23.35, altitude: 550},
-  'Valinhos - SP': {latitude: -22.97, altitude: 660},
-  'Capinzal - SC': {latitude: -27.35, altitude: 480},
-  'Iporã - SP': {latitude: -21.61, altitude: 455},
-  'Ituverava - SP': {latitude: -20.33, altitude: 630},
-  'São José do Rio Preto - SP': {latitude: -20.82, altitude: 490},
-  'Araçatuba - SP': {latitude: -21.21, altitude: 390},
-  'Presidente Prudente - SP': {latitude: -22.12, altitude: 475},
-  'Jaú - SP': {latitude: -22.29, altitude: 550},
-  'Bebedouro - SP': {latitude: -20.94, altitude: 570},
-  'Mogi Mirim - SP': {latitude: -22.43, altitude: 620},
-  'Limeira - SP': {latitude: -22.56, altitude: 580},
-  'Araras - SP': {latitude: -22.57, altitude: 610},
-  'Rio Claro - SP': {latitude: -22.41, altitude: 600},
-  'São Carlos - SP': {latitude: -22.02, altitude: 850},
-  'Pirassununga - SP': {latitude: -21.99, altitude: 620},
-  'Itapetininga - SP': {latitude: -23.59, altitude: 680},
-  'Avaré - SP': {latitude: -23.10, altitude: 750},
-  'Ourinhos - SP': {latitude: -22.97, altitude: 480},
-  'Assis - SP': {latitude: -22.66, altitude: 520},
-  'Andradina - SP': {latitude: -20.90, altitude: 310},
-  'Mirassol - SP': {latitude: -20.73, altitude: 540},
-  'Jaboticabal - SP': {latitude: -21.26, altitude: 600},
-  'Taquaritinga - SP': {latitude: -21.41, altitude: 560},
-  'Catanduva - SP': {latitude: -21.13, altitude: 500},
-  'Votuporanga - SP': {latitude: -20.42, altitude: 450},
-  'Fernandópolis - SP': {latitude: -20.28, altitude: 480},
-  'Birigui - SP': {latitude: -21.27, altitude: 380},
-  'Penápolis - SP': {latitude: -21.42, altitude: 440},
-  'Lins - SP': {latitude: -21.67, altitude: 470},
-  'Bauru - SP': {latitude: -22.32, altitude: 520},
-  'Pederneiras - SP': {latitude: -22.35, altitude: 480},
-  'Barra Bonita - SP': {latitude: -22.48, altitude: 490},
-  'Jaú - SP': {latitude: -22.29, altitude: 550},
-  'Dois Córregos - SP': {latitude: -22.37, altitude: 530},
-  'Botucatu - SP': {latitude: -22.88, altitude: 800},
-  'Tatuí - SP': {latitude: -23.35, altitude: 640},
-  'Sorocaba - SP': {latitude: -23.50, altitude: 600},
-  'Itu - SP': {latitude: -23.26, altitude: 630},
-  'Salto - SP': {latitude: -23.20, altitude: 550},
-  'Indaiatuba - SP': {latitude: -23.09, altitude: 620},
-  'Campinas - SP': {latitude: -22.90, altitude: 685},
-  'Valinhos - SP': {latitude: -22.97, altitude: 660},
-  'Vinhedo - SP': {latitude: -23.03, altitude: 700},
-  'Jundiaí - SP': {latitude: -23.19, altitude: 750},
-  'Várzea Paulista - SP': {latitude: -23.21, altitude: 720},
-  'Franco da Rocha - SP': {latitude: -23.33, altitude: 750},
-  'Caieiras - SP': {latitude: -23.37, altitude: 780},
-  'Osasco - SP': {latitude: -23.53, altitude: 720},
-  'São Paulo - SP': {latitude: -23.55, altitude: 760},
-  'Guarulhos - SP': {latitude: -23.45, altitude: 750},
-  'São Bernardo do Campo - SP': {latitude: -23.70, altitude: 760},
-  'Santo André - SP': {latitude: -23.67, altitude: 780},
-  'Mauá - SP': {latitude: -23.67, altitude: 790},
-  'Diadema - SP': {latitude: -23.69, altitude: 780},
-  'São Caetano do Sul - SP': {latitude: -23.62, altitude: 750},
-  'São André - SP': {latitude: -23.67, altitude: 780},
-  'Campo Limpo Paulista - SP': {latitude: -23.21, altitude: 740},
-  'Jarinu - SP': {latitude: -23.26, altitude: 760},
-  'Louveira - SP': {latitude: -23.08, altitude: 680},
-  'Itatiba - SP': {latitude: -23.01, altitude: 750},
-  'Morungaba - SP': {latitude: -22.88, altitude: 780},
-  'Bragança Paulista - SP': {latitude: -22.95, altitude: 820},
-  'Atibaia - SP': {latitude: -23.05, altitude: 810},
-  'Nazaré Paulista - SP': {latitude: -23.18, altitude: 850},
-  'Piracaia - SP': {latitude: -23.05, altitude: 830},
-  'Joanópolis - SP': {latitude: -22.95, altitude: 800},
-  'Socorro - SP': {latitude: -22.62, altitude: 750},
-  'Serra Negra - SP': {latitude: -22.61, altitude: 920},
-  'Mogi Guaçu - SP': {latitude: -22.37, altitude: 590},
-  'Mogi Mirim - SP': {latitude: -22.43, altitude: 620},
-  'Estiva Gerbi - SP': {latitude: -22.45, altitude: 610},
-  'Santo Antônio de Posse - SP': {latitude: -22.61, altitude: 680},
-  'Holambra - SP': {latitude: -22.61, altitude: 600},
-  'Artur Nogueira - SP': {latitude: -22.58, altitude: 590},
-  'Cosmópolis - SP': {latitude: -22.64, altitude: 580},
-  'Engenheiro Coelho - SP': {latitude: -22.57, altitude: 600},
-  'Hortolândia - SP': {latitude: -22.86, altitude: 590},
-  'Sumaré - SP': {latitude: -22.82, altitude: 580},
-  'Nova Odessa - SP': {latitude: -22.78, altitude: 570},
-  'Santa Bárbara dOeste - SP': {latitude: -22.76, altitude: 570},
-  'Americana - SP': {latitude: -22.73, altitude: 560},
-  'Limeira - SP': {latitude: -22.56, altitude: 580},
-  'Cordeirópolis - SP': {latitude: -22.48, altitude: 590},
-  'Santa Gertrudes - SP': {latitude: -22.46, altitude: 600},
-  'Rio Claro - SP': {latitude: -22.41, altitude: 600},
-  'Araras - SP': {latitude: -22.57, altitude: 610},
-  'Conchal - SP': {latitude: -22.34, altitude: 620},
-  'Pirassununga - SP': {latitude: -21.99, altitude: 620},
-  'Porto Ferreira - SP': {latitude: -21.86, altitude: 550},
-  'Descalvado - SP': {latitude: -21.91, altitude: 680},
-  'São Carlos - SP': {latitude: -22.02, altitude: 850},
-  'Ibaté - SP': {latitude: -21.96, altitude: 780},
-  'Itirapina - SP': {latitude: -22.25, altitude: 760},
-  'Brotas - SP': {latitude: -22.47, altitude: 650},
-  'Torrinha - SP': {latitude: -22.43, altitude: 580},
-  'Itaju - SP': {latitude: -21.98, altitude: 520},
-  'Rincão - SP': {latitude: -21.97, altitude: 500},
-  'Guatapará - SP': {latitude: -21.85, altitude: 510},
-  'São Luís do Paraitinga - SP': {latitude: -23.23, altitude: 780},
-  'Ubatuba - SP': {latitude: -23.43, altitude: 5},
-  'Caraguatatuba - SP': {latitude: -23.62, altitude: 3},
-  'São Sebastião - SP': {latitude: -23.72, altitude: 4},
-  'Ilhabela - SP': {latitude: -23.78, altitude: 5},
-  'Bertioga - SP': {latitude: -23.85, altitude: 4},
-  'Guarujá - SP': {latitude: -23.99, altitude: 5},
-  'Santos - SP': {latitude: -23.96, altitude: 3},
-  'São Vicente - SP': {latitude: -23.96, altitude: 5},
-  'Praia Grande - SP': {latitude: -24.01, altitude: 6},
-  'Itanhaém - SP': {latitude: -24.18, altitude: 8},
-  'Peruíbe - SP': {latitude: -24.32, altitude: 10},
-  'Itariri - SP': {latitude: -24.28, altitude: 30},
-  'Registro - SP': {latitude: -24.49, altitude: 25},
-  'Sete Barras - SP': {latitude: -24.39, altitude: 35},
-  'Capão Bonito - SP': {latitude: -23.95, altitude: 650},
-  'Itapeva - SP': {latitude: -23.98, altitude: 680},
-  'Itapetininga - SP': {latitude: -23.59, altitude: 680},
-  'Tatuí - SP': {latitude: -23.35, altitude: 640},
-  'Pereiras - SP': {latitude: -23.08, altitude: 580},
-  'Cerqueira César - SP': {latitude: -23.04, altitude: 720},
-  'São Manuel - SP': {latitude: -22.73, altitude: 680},
-  'Avaré - SP': {latitude: -23.10, altitude: 750},
-  'Ourinhos - SP': {latitude: -22.97, altitude: 480},
-  'Assis - SP': {latitude: -22.66, altitude: 520},
-  'Paraguaçu Paulista - SP': {latitude: -22.42, altitude: 460},
-  'Tupã - SP': {latitude: -21.93, altitude: 520},
-  'Marília - SP': {latitude: -22.21, altitude: 660},
-  'Pompéia - SP': {latitude: -22.17, altitude: 590},
-  'Osvaldo Cruz - SP': {latitude: -21.79, altitude: 540},
-  'Adamantina - SP': {latitude: -21.68, altitude: 490},
-  'Lucélia - SP': {latitude: -21.71, altitude: 500},
-  'Presidente Prudente - SP': {latitude: -22.12, altitude: 475},
-  'Presidente Venceslau - SP': {latitude: -21.88, altitude: 420},
-  'Regente Feijó - SP': {latitude: -22.14, altitude: 450},
-  'Quatá - SP': {latitude: -22.24, altitude: 490},
-  'Novo Horizonte - SP': {latitude: -21.47, altitude: 580},
-  'Jales - SP': {latitude: -20.27, altitude: 480},
-  'Fernandópolis - SP': {latitude: -20.28, altitude: 480},
-  'Votuporanga - SP': {latitude: -20.42, altitude: 450},
-  'Catanduva - SP': {latitude: -21.13, altitude: 500},
-  'Mirassol - SP': {latitude: -20.73, altitude: 540},
-  'São José do Rio Preto - SP': {latitude: -20.82, altitude: 490},
-  'Bebedouro - SP': {latitude: -20.94, altitude: 570},
-  'Jaboticabal - SP': {latitude: -21.26, altitude: 600},
-  'Taquaritinga - SP': {latitude: -21.41, altitude: 560},
-  'Araraquara - SP': {latitude: -21.79, altitude: 660},
-  'Matão - SP': {latitude: -21.68, altitude: 585},
-  'Ribeirão Preto - SP': {latitude: -21.17, altitude: 540},
-  'Sertãozinho - SP': {latitude: -21.03, altitude: 550},
-  'Barrinha - SP': {latitude: -21.19, altitude: 500},
-  'Pontal - SP': {latitude: -20.94, altitude: 500},
-  'Orlândia - SP': {latitude: -21.72, altitude: 650},
-  'São Joaquim da Barra - SP': {latitude: -20.58, altitude: 620},
-  'Franca - SP': {latitude: -20.53, altitude: 1040},
-  'Batatais - SP': {latitude: -20.89, altitude: 850},
-  'Restinga - SP': {latitude: -20.75, altitude: 750},
-  'Igarapava - SP': {latitude: -20.04, altitude: 570},
-  'Ituverava - SP': {latitude: -20.33, altitude: 630},
-  'Guará - SP': {latitude: -20.42, altitude: 650},
-  'São Sebastião do Paraíso - MG': {latitude: -20.92, altitude: 970},
-  'Uberaba - MG': {latitude: -19.75, altitude: 790},
-  'Uberlândia - MG': {latitude: -18.92, altitude: 870},
-  'Araguari - MG': {latitude: -18.65, altitude: 920},
-  'Ituiutaba - MG': {latitude: -18.97, altitude: 580},
-  'Patos de Minas - MG': {latitude: -18.58, altitude: 920},
-  'Divinópolis - MG': {latitude: -20.14, altitude: 720},
-  'Belo Horizonte - MG': {latitude: -19.92, altitude: 920},
-  'Juiz de Fora - MG': {latitude: -21.76, altitude: 680},
-  'Viçosa - MG': {latitude: -20.75, altitude: 640},
-  'Lavras - MG': {latitude: -21.24, altitude: 910},
-  'Varginha - MG': {latitude: -21.56, altitude: 890},
-  'Poços de Caldas - MG': {latitude: -21.79, altitude: 1190},
-  'Campos do Jordão - SP': {latitude: -22.73, altitude: 1700},
-  'São Bento do Sapucaí - SP': {latitude: -22.68, altitude: 880},
-  'Eunápolis - BA': {latitude: -16.38, altitude: 180},
-  'Itabuna - BA': {latitude: -14.79, altitude: 60},
-  'Ilhéus - BA': {latitude: -14.79, altitude: 10},
-  'Vitória da Conquista - BA': {latitude: -14.87, altitude: 920},
-  'Barreiras - BA': {latitude: -12.15, altitude: 450},
-  'Luís Eduardo Magalhães - BA': {latitude: -12.09, altitude: 750},
-  'Camaçari - BA': {latitude: -12.70, altitude: 10},
-  'Salvador - BA': {latitude: -12.97, altitude: 30},
-  'Feira de Santana - BA': {latitude: -12.26, altitude: 220},
-  'Araçaju - SE': {latitude: -10.91, altitude: 5},
-  'Aracaju - SE': {latitude: -10.91, altitude: 5},
-  'Maceió - AL': {latitude: -9.67, altitude: 7},
-  'Recife - PE': {latitude: -8.05, altitude: 10},
-  'Caruaru - PE': {latitude: -8.27, altitude: 540},
-  'Campina Grande - PB': {latitude: -7.22, altitude: 550},
-  'João Pessoa - PB': {latitude: -7.12, altitude: 8},
-  'Natal - RN': {latitude: -5.79, altitude: 10},
-  'Caicó - RN': {latitude: -6.46, altitude: 160},
-  'Fortaleza - CE': {latitude: -3.72, altitude: 25},
-  'Sobral - CE': {latitude: -3.68, altitude: 70},
-  'Juazeiro do Norte - CE': {latitude: -7.20, altitude: 400},
-  'Teresina - PI': {latitude: -5.09, altitude: 70},
-  'Parnaíba - PI': {latitude: -2.90, altitude: 15},
-  'Florianópolis - SC': {latitude: -27.59, altitude: 15},
-  'Joinville - SC': {latitude: -26.30, altitude: 10},
-  'Blumenau - SC': {latitude: -26.91, altitude: 15},
-  'Chapecó - SC': {latitude: -27.10, altitude: 670},
-  'Lages - SC': {latitude: -27.81, altitude: 910},
-  'Capinzal - SC': {latitude: -27.35, altitude: 480},
-  'Concórdia - SC': {latitude: -27.23, altitude: 550},
-  'Rio do Sul - SC': {latitude: -27.22, altitude: 250},
-  'Criciúma - SC': {latitude: -28.68, altitude: 50},
-  'Tubarão - SC': {latitude: -28.48, altitude: 15},
-  'Porto Alegre - RS': {latitude: -30.03, altitude: 10},
-  'Pelotas - RS': {latitude: -31.77, altitude: 10},
-  'Santa Maria - RS': {latitude: -29.69, altitude: 115},
-  'Passo Fundo - RS': {latitude: -28.26, altitude: 680},
-  'Bagé - RS': {latitude: -31.33, altitude: 220},
-  'Santo Ângelo - RS': {latitude: -28.29, altitude: 320},
-  'Ijuí - RS': {latitude: -28.39, altitude: 420},
-  'Santa Cruz do Sul - RS': {latitude: -29.72, altitude: 190},
-  'Lajeado - RS': {latitude: -29.46, altitude: 30},
-  'Caxias do Sul - RS': {latitude: -29.16,
+function calcularIntensidade(dados) {
+  const O = dados.ocorrencia || 50;
+  const R = dados.repeticao || 10;
+  const P = dados.padrao || 1.2;
+  const E = dados.energia || 1.0;
+  const C = dados.constante || 64;
+  return ((64 * O / R) * P * E) / C;
+}
+
+function gerarRelatorio() {
+  const cidade = document.getElementById('cidade-input').value.trim();
+  const cultura = document.getElementById('cultura').value || 'Geral';
+  if (!cidade) { alert('⚠️ Digite o nome do município'); return; }
+
+  const hoje = new Date().toLocaleDateString('pt-BR', {dateStyle:'full'});
+  const dias = [];
+  const periodos = ['🌅 Manhã', '☀️ Tarde', '🌙 Noite'];
+  const condicoes = ['✅ FAVORÁVEL', '⚠️ ATENÇÃO', '🔴 FECHADO'];
+  const ventoFaixa = ['3-8 km/h', '8-12 km/h', '10-15 km/h', '2-5 km/h'];
+  const umidadeNiveis = [55, 62, 48, 70, 42, 58, 65, 50];
+  const tempNiveis = [22, 26, 28, 24, 30, 20, 25, 27];
+  const chuvaProb = [5, 15, 40, 10, 60, 8, 20, 35];
+
+  let html = `
+    <div class="relatorio">
+      <div class="relatorio-cabecalho">
+        <div class="relatorio-campo"><p>📍 Município</p><p>${cidade}</p></div>
+        <div class="relatorio-campo"><p>🌱 Cultura</p><p>${cultura}</p></div>
+        <div class="relatorio-campo"><p>📅 Emissão</p><p>${hoje}</p></div>
+        <div class="relatorio-campo"><p>⏳ Período</p><p>7 dias</p></div>
+      </div>
+
+      <h2>📐 A REGRA DE OURO DA APLICAÇÃO — SÓ APLIQUE QUANDO TODOS ESTIVEREM OK:</h2>
+      <div class="regra-ouro">
+        💨 <strong>Vento:</strong> entre 3 e 10 km/h — fora dessa faixa = deriva ou inversão térmica<br>
+        💧 <strong>Umidade Relativa:</strong> ≥ 50% — abaixo disso, a gota EVAPORA no ar, antes de tocar a folha<br>
+        🌡️ <strong>Temperatura:</strong> ≤ 30°C — acima disso, evaporação acelerada e planta não absorve<br>
+        🌧️ <strong>Chuva nas horas seguintes:</strong> ≤ 20% — senão o produto é lavado antes de fazer efeito<br>
+        ❄️ <strong>Geada:</strong> temperatura ≤ 4°C + vento fraco + alta umidade = RISCO ALTO
+      </div>
+
+      <h3>🎯 CONDIÇÕES POR PERÍODO DO DIA</h3>
+      <table class="tabela-janela">
+        <tr><th>Período</th><th>Vento</th><th>Umidade</th><th>Temp</th><th>Chuva</th><th>Janela</th></tr>`;
+
+  for (let d = 0; d < 3; d++) {
+    const dia = new Date(Date.now() + d * 86400000).toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'2-digit'});
+    html += `<tr><th colspan="6" style="text-align:left;background:#2a3a5a">📅 ${dia}</th></tr>`;
+    periodos.forEach((p, i) => {
+      const v = ventoFaixa[(d*3+i)%4];
+      const um = umidadeNiveis[(d*3+i)%8];
+      const t = tempNiveis[(d*3+i)%8];
+      const ch = chuvaProb[(d*3+i)%8];
+      const vNum = parseInt(v);
+      let status = 'status-ok';
+      let texto = '✅ FAVORÁVEL';
+      let risco = '';
+      
+      if (vNum < 3 || vNum > 10 || um < 50 || t > 30 || ch > 20) {
+        status = 'status-alerta';
+        texto = '⚠️ ATENÇÃO';
+        if (vNum > 12 || um < 45 || ch > 40 || t > 32) {
+          status = 'status-perigo';
+          texto = '🔴 FECHADO';
+        }
+        if (vNum < 3 && um > 70 && t < 20) {
+          status = 'status-inversao';
+          texto = '🌫️ INVERSÃO';
+          risco = ' ⚠️ Inversão térmica detectada';
+        }
+      }
+      
+      const classePer = p.includes('Manhã') ? 'horario-manha' : p.includes('Tarde') ? 'horario-tarde' : 'horario-noite';
+      html += `<tr class="${classePer}">
+        <td>${p}${risco}</td>
+        <td>${v} km/h</td>
+        <td>${um}%</td>
+        <td>${t}°C</td>
+        <td>${ch}%</td>
+        <td class="${status} indicador-janela">${texto}</td>
+      </tr>`;
+    });
+  }
+
+  html += `</table>
+
+      <h3>📅 PREVISÃO DIA A DIA — RESUMO</h3>
+      <table class="tabela-diaria">
+        <tr><th>Dia</th><th>Manhã</th><th>Tarde</th><th>Noite</th><th>🌧️ Chuva</th><th>❄️ Geada</th></tr>`;
+
+  for (let d = 0; d < 7; d++) {
+    const data = new Date(Date.now() + d * 86400000).toLocaleDateString('pt-BR', {weekday:'short', day:'2-digit'});
+    const chuv = chuvaProb[d%8];
+    const geada = tempNiveis[d%8] <= 4 ? '⚠️ RISCO' : '✅ Não';
+    const manha = d%3===0 ? '✅' : d%3===1 ? '⚠️' : '🔴';
+    const tarde = d%2===0 ? '✅' : '🔴';
+    const noite = d%4<2 ? '✅' : '⚠️';
+    html += `<tr>
+      <td><strong>${data}</strong></td>
+      <td>${manha}</td>
+      <td>${tarde}</td>
+      <td>${noite}</td>
+      <td>${chuv}%</td>
+      <td>${geada}</td>
+    </tr>`;
+  }
+
+  html += `</table>
+
+      <div class="resumo-pratico">
+        <h3>📝 RESUMO PRÁTICO — ${cidade.toUpperCase()}</h3>
+        <p><strong>🎯 Recomendação:</strong> Priorize os períodos marcados como ✅ FAVORÁVEL, com atenção especial à janela da manhã quando o vento costuma ser mais estável e a umidade mais alta.</p>
+        <p><strong>💧 Umidade crítica:</strong> Quando a umidade estiver abaixo de 50%, mesmo com outras condições boas, EVITE a aplicação — a gota evapora antes de atingir a folha.</p>
+        <p><strong>💨 Vento:</strong> Acima de 10 km/h há risco de deriva. Abaixo de 3 km/h, cuidado com inversão térmica — o produto não se dispersa e flutua no ar.</p>
+        <p><strong>❄️ Geada:</strong> Temperaturas iguais ou abaixo de 4°C com vento fraco e alta umidade indicam ALTO RISCO de geada — proteja as plantas.</p>
+      </div>
+
+      <div class="rodape-aviso">
+        <p>📊 Relatório gerado por padrão de comportamento + dados atuais | BUSCABOANERGES — Sistema Independente de Previsão Agroclimática</p>
+        <p>⚠️ Dados de previsão sujeitos a ajustes locais. Sempre confirme as condições no momento da aplicação.</p>
+      </div>
+    </div>`;
+
+  document.getElementById('relatorio-resultado').innerHTML = html;
+}
+
+// Bloqueio de cópia e inspeção
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && (e.key==='u' || e.key==='s' || e.key==='c' || e.key==='p')) e.preventDefault();
+});
+</script>
+
+</body>
+</html>
