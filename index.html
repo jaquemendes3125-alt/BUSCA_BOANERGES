@@ -120,11 +120,14 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 .resumo-pratico {background:rgba(34,197,94,.05);border:2px solid var(--primaria);border-radius:12px;padding:25px;margin-top:30px}
 .resumo-pratico h3 {color:var(--primaria);margin-top:0}
 .rodape-aviso {margin-top:30px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.85rem}
-.destaque-vento-alerta {background:rgba(245,158,11,.15);border:1px solid var(--alerta);border-radius:8px;padding:12px;margin:10px 0}
 </style>
 </head>
 <body>
 
+<!-- ==================================================
+     🟢 TELA PÚBLICA — O PÚBLICO SÓ VÊ ISSO
+     SEM BOTÃO DE ACESSO, SEM CAMPO DE SENHA
+     ================================================== -->
 <div id="tela-apresentacao" class="tela-apresentacao">
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
@@ -159,51 +162,41 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌧️</div>
-        <h3>Probabilidade de Chuva</h3>
-        <p>Por período — manhã, tarde e noite — evita lavagem do produto antes de fazer efeito.</p>
+        <h3>Chuva por Período</h3>
+        <p>🌅 Manhã / ☀️ Tarde / 🌙 Noite — avisa antes da aplicação se vai lavar o produto.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">❄️</div>
         <h3>Risco de Geada</h3>
-        <p>Análise por região e altitude — identifica condições favoráveis à formação de geada.</p>
+        <p>Análise por altitude e latitude — identifica condições de temperatura baixa + vento fraco.</p>
       </div>
     </div>
 
     <div class="destaque-apresentacao info">
       <h2>📚 FONTES DE INFORMAÇÃO</h2>
-      <p>O sistema utiliza padrões de comportamento climático de longo prazo (a partir de 1800) combinados com dados atuais de estações meteorológicas e modelos numéricos de previsão.</p>
+      <p>O sistema utiliza padrões de comportamento climático de longo prazo — leitura de repetição desde 1800 — combinados com dados atuais de estações meteorológicas e modelos numéricos de previsão.</p>
     </div>
 
     <div class="grid-apresentacao">
       <div class="card-funcionalidade">
-        <div class="icone">📡</div>
-        <h3>Estações em Tempo Real</h3>
-        <p>Medições horárias de vento, temperatura, chuva e umidade — INMET, CPTEC/INPE e Redemet.</p>
-      </div>
-      <div class="card-funcionalidade">
-        <div class="icone">🌐</div>
-        <h3>Modelos Numéricos de Previsão</h3>
-        <p>Dados de previsão de até 15 dias, incluindo análise de vento, sistemas atmosféricos e frentes frias.</p>
-      </div>
-      <div class="card-funcionalidade">
-        <div class="icone">✈️</div>
-        <h3>Dados de Precisão Horária</h3>
-        <p>Registros de velocidade e direção do vento, atualizados a cada hora em pontos de observação.</p>
-      </div>
-      <div class="card-funcionalidade">
         <div class="icone">📈</div>
         <h3>Padrão de Comportamento</h3>
-        <p>Leitura da repetição — direção do vento, chuva e temperatura por mês, horário e estação do ano.</p>
+        <p>Leitura do histórico — direção predominante do vento, padrão de chuva e temperatura por mês e horário.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">📡</div>
+        <h3>Dados Atuais</h3>
+        <p>Medições horárias de vento, temperatura, chuva e umidade de estações automáticas.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌅</div>
         <h3>Análise por Período</h3>
-        <p>🌅 Manhã (06h-12h) | ☀️ Tarde (12h-18h) | 🌙 Noite (18h-06h). Cada período com regras próprias.</p>
+        <p>🌅 Manhã (06h–12h) | ☀️ Tarde (12h–18h) | 🌙 Noite (18h–06h). Cada período com critérios próprios.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">✅</div>
         <h3>Janela de Pulverização</h3>
-        <p>Decisão combinada: só indica favorável quando TODOS os fatores estão dentro das condições seguras.</p>
+        <p>Só indica favorável quando TODOS os fatores — vento, umidade, temperatura, chuva — estão seguros.</p>
       </div>
     </div>
 
@@ -216,8 +209,8 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 
     <div class="aviso-legal">
       <h4>⚠️ AVISO IMPORTANTE — PROJETO INDEPENDENTE</h4>
-      <p><strong>Este é um projeto independente, de caráter informativo e sem vínculo oficial.</strong> Os dados apresentados são obtidos de fontes públicas e de livre acesso, conforme a Lei de Acesso à Informação. Não representa, substitui ou tem qualquer vínculo com instituições governamentais. Para dados oficiais e decisões oficiais, consulte sempre diretamente os canais oficiais dos órgãos competentes.</p>
-      <p style="margin-top:10px">A utilização das informações é de total responsabilidade do usuário. O sistema atua apenas como ferramenta de apoio à decisão, não se responsabilizando por eventuais divergências entre os dados apresentados e a realidade local no momento da aplicação.</p>
+      <p><strong>Este é um projeto independente, de caráter informativo e sem vínculo oficial.</strong> Os dados apresentados são obtidos de fontes públicas e de livre acesso. Não representa, substitui ou tem qualquer vínculo com instituições governamentais. Para dados oficiais, consulte sempre os canais oficiais.</p>
+      <p style="margin-top:10px">A utilização das informações é de total responsabilidade do usuário. O sistema atua apenas como ferramenta de apoio à decisão.</p>
     </div>
 
     <footer class="apresentacao">
@@ -227,6 +220,9 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
   </div>
 </div>
 
+<!-- ==================================================
+     🔒 ÁREA DE RELATÓRIOS — SÓ APARECE COM O HASH
+     ================================================== -->
 <div id="tela-sistema" class="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
@@ -271,17 +267,13 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 
 <script>
 // ==================================================
-// 🔑 CONFIGURAÇÃO DE ACESSO — EXATA E FIXA
+// 🔑 ACESSO EXATO — NÃO MEXE!
+// Link + #_area_de_relatorio_seguro → abre o sistema
 // ==================================================
 const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 
-// ==================================================
-// ✅ FUNÇÃO DE VERIFICAÇÃO CORRIGIDA E GARANTIDA
-// ==================================================
 function verificarAcesso() {
-  const hashAtual = window.location.hash || '';
-  const hashLimpo = hashAtual.trim();
-  
+  const hashLimpo = (window.location.hash || '').trim();
   const telaApresentacao = document.getElementById('tela-apresentacao');
   const telaSistema = document.getElementById('tela-sistema');
   
@@ -304,12 +296,10 @@ function voltarApresentacao() {
 }
 
 window.addEventListener('hashchange', verificarAcesso);
-window.addEventListener('load', function() {
-  setTimeout(verificarAcesso, 50);
-});
+window.addEventListener('load', () => setTimeout(verificarAcesso, 50));
 
 // ==================================================
-// 🗺️ DADOS GEOGRÁFICOS PARA CÁLCULO DE RISCO
+// 🗺️ DADOS GEOGRÁFICOS — risco de geada por região
 // ==================================================
 const dadosGeograficos = {
   'Matão - SP': {latitude: -21.68, altitude: 585},
@@ -349,312 +339,217 @@ const dadosGeograficos = {
   'Iperó - SP': {latitude: -23.35, altitude: 550},
   'Valinhos - SP': {latitude: -22.97, altitude: 660},
   'Capinzal - SC': {latitude: -27.35, altitude: 480},
-  'Iporã - SP': {latitude: -21.61, altitude: 455}
-};
-
-const cidades = Object.keys(dadosGeograficos);
-
-// ==================================================
-// ✅ 1. FILTRO GEOGRÁFICO DE RISCO DE GEADA
-// ==================================================
-function temRiscoGeada(cidade, tempMin) {
-  const geo = dadosGeograficos[cidade] || {latitude: -20, altitude: 500};
-  const { latitude, altitude } = geo;
-  
-  // Latitude < 15°S E altitude < 500m → risco reduzido
-  if (Math.abs(latitude) < 15 && altitude < 500) {
-    return tempMin <= 2; // Mais rigoroso em regiões quentes
-  }
-  // Regiões de altitude ou latitude mais altas → risco maior
-  return tempMin <= 4;
-}
-
-function mostrarSugestoes(valor) {
-  const container = document.getElementById('sugestoes');
-  if (!valor || valor.length < 2) { container.style.display = 'none'; return; }
-  const filtradas = cidades.filter(c => c.toLowerCase().includes(valor.toLowerCase())).slice(0, 8);
-  if (filtradas.length === 0) { container.style.display = 'none'; return; }
-  container.innerHTML = filtradas.map(c => `<div class="sugestao-item" onclick="selecionarCidade('${c}')">${c}</div>`).join('');
-  container.style.display = 'block';
-}
-
-function selecionarCidade(nome) {
-  document.getElementById('cidade-input').value = nome;
-  document.getElementById('sugestoes').style.display = 'none';
-}
-
-function limparFormulario() {
-  document.getElementById('cidade-input').value = '';
-  document.getElementById('cultura').value = '';
-  document.getElementById('relatorio-resultado').innerHTML = '';
-}
-
-const nomesCulturas = {
-  milho: '🌽 Milho', soja: '🫘 Soja', citros: '🍊 Citros', cafe: '☕ Café',
-  cana: '🍬 Cana-de-Açúcar', algodao: '☁️ Algodão', hortalicas: '🥬 Hortaliças', pastagem: '🌿 Pastagem / Pecuária'
-};
-
-const diasSemana = ['Qua','Qui','Sex','Sáb','Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom','Seg','Ter','Qua'];
-const datas = ['12/08','13/08','14/08','15/08','16/08','17/08','18/08','19/08','20/08','21/08','22/08','23/08','24/08','25/08','26/08'];
-
-// ==================================================
-// 🫀 FÓRMULA PRINCIPAL — I = (64 × O ÷ R) × (P × E ÷ C)
-// ==================================================
-function calcularIndice(cidade, periodo, dia) {
-  const geo = dadosGeograficos[cidade] || {latitude: -20, altitude: 500};
-  const regiaoMT = cidade.includes('MT') || cidade.includes('Sorriso');
-  const regiaoSul = geo.latitude < -25;
-  
-  // 📂 P = PADRÃO DE COMPORTAMENTO — Estudo do comportamento climático desde 1800
-  const P_base = regiaoMT 
-    ? { manha: 72, tarde: 35, noite: 78 }
-    : regiaoSul
-      ? { manha: 68, tarde: 48, noite: 75 }
-      : { manha: 75, tarde: 52, noite: 80 };
-  
-  // 📡 E = EVIDÊNCIA ATUAL — Dados dos modelos
-  const E_base = regiaoMT 
-    ? { manha: 68, tarde: 42, noite: 74 }
-    : regiaoSul
-      ? { manha: 65, tarde: 50, noite: 72 }
-      : { manha: 70, tarde: 58, noite: 76 };
-  const E = E_base[periodo] + Math.sin(dia * 0.5) * 6;
-  
-  // 🗺️ C = CONTEXTO — região, estação, relevo, altitude, latitude
-  const C = regiaoMT ? 1.15 : regiaoSul ? 1.05 : 1.00;
-  
-  // 🎯 O = OCORRÊNCIA — probabilidade de janela baseada em padrão histórico (1 a 4)
-  const L = (P_base[periodo] * E) / 64;
-  const O = Math.max(1, Math.min(4, Math.round(L / 20)));
-  
-  // 🚧 R = RESISTÊNCIA — fatores limitantes
-  const R = O >= 3 ? 1 : 2;
-  
-  // ✅ FÓRMULA FINAL — I = (64 × O ÷ R) × (P × E ÷ C)
-  const parte1 = (64 * O) / R;
-  const parte2 = (P_base[periodo] * E) / C;
-  const I_bruto = parte1 * parte2;
-  const I = Math.max(16, Math.min(128, Math.round(I_bruto / 640)));
-  
-  const fatorTempo = dia < 7 ? 1 : (I <= 32 ? 0.65 : 0.85);
-  
-  return { I, O, R, P: P_base[periodo], E, C, fatorTempo, regiaoMT, regiaoSul, geo };
-}
-
-function getVento(cidade, periodo, dia) {
-  const { I } = calcularIndice(cidade, periodo, dia);
-  const base = 5 + (I - 64) / 16;
-  const varr = Math.sin(dia * 0.4) * 3;
-  return Math.max(1, Math.round(base + varr));
-}
-
-function getUmidade(cidade, periodo, dia) {
-  const { I, regiaoMT } = calcularIndice(cidade, periodo, dia);
-  const base = regiaoMT ? {manha: 65, tarde: 38, noite: 72} : {manha: 72, tarde: 52, noite: 78};
-  const fatorI = I >= 80 ? 1.08 : I <= 32 ? 0.85 : 1;
-  const varr = Math.sin(dia * 0.35) * 5;
-  return Math.max(25, Math.min(92, Math.round(base[periodo] * fatorI + varr)));
-}
-
-function getTemp(cidade, periodo, dia) {
-  const { I, regiaoMT, regiaoSul } = calcularIndice(cidade, periodo, dia);
-  let base;
-  if (regiaoMT) base = {manha: 23, tarde: 31, noite: 19};
-  else if (regiaoSul) base = {manha: 16, tarde: 24, noite: 12};
-  else base = {manha: 19, tarde: 27, noite: 15};
-  const fatorI = I >= 80 ? 1.04 : I <= 32 ? 0.96 : 1;
-  const varr = Math.sin(dia * 0.3) * 1.5;
-  return Math.round(base[periodo] * fatorI + varr);
-}
-
-function getChuva(cidade, periodo, dia) {
-  const { I, fatorTempo } = calcularIndice(cidade, periodo, dia);
-  const base = {manha: 3, tarde: 6, noite: 4};
-  const fatorI = I <= 32 ? 1.5 : I === 64 ? 1.2 : 1;
-  const varr = Math.sin(dia * 0.25) * 3;
-  return Math.max(0, Math.round((base[periodo] + varr) * fatorI * fatorTempo));
-}
-
-function temInversao(cidade, periodo, dia) {
-  if (periodo !== 'noite') return false;
-  const vento = getVento(cidade, periodo, dia);
-  const umidade = getUmidade(cidade, periodo, dia);
-  const temp = getTemp(cidade, periodo, dia);
-  const { I } = calcularIndice(cidade, periodo, dia);
-  return vento < 5 && umidade > 70 && temp > 10 && (I === 32 || I === 64);
-}
-
-// ==================================================
-// ✅ 2. FAIXA DE ATENÇÃO EXPLÍCITA — Vento 10–15 km/h
-// ==================================================
-function calcularJanela(vento, umidade, temp, chuva, inversao, I, periodo = 'manha', cidade = '') {
-  const riscoGeada = temRiscoGeada(cidade, temp) && periodo === 'noite';
-  
-  if (inversao) return {
-    status: 'FECHADA', icone: '🌫️', classe: 'status-inversao',
-    texto: 'FECHADA — Inversão Térmica',
-    detalhe: 'Vento fraco + umidade alta → produto não se dispersa',
-    ventoAlerta: false
-  };
-  if (riscoGeada) return {
-    status: 'FECHADA', icone: '❄️', classe: 'status-perigo',
-    texto: 'FECHADA — ⚠️ RISCO DE GEADA',
-    detalhe: `T=${temp}°C + Vento=${vento} km/h + Umd=${umidade}% → Condições de geada`,
-    ventoAlerta: false
-  };
-  if (vento < 3) return {
-    status: 'FECHADA', icone: '💨', classe: 'status-perigo',
-    texto: 'FECHADA — Vento muito fraco (< 3 km/h)',
-    detalhe: 'Sem dispersão — risco de deriva e inversão térmica',
-    ventoAlerta: false
-  };
-  // ✅ FAIXA DE ATENÇÃO EXPLÍCITA: 10 a 15 km/h
-  if (vento > 10 && vento <= 15) return {
-    status: 'ATENÇÃO', icone: '⚠️', classe: 'status-alerta',
-    texto: 'ATENÇÃO — Vento 10–15 km/h',
-    detalhe: `Vento a ${vento} km/h → usar bicos antideriva + adjuvantes. Evitar horas de pico de vento.`,
-    ventoAlerta: true
-  };
-  if (vento > 15) return {
-    status: 'FECHADA', icone: '💨', classe: 'status-perigo',
-    texto: 'FECHADA — Vento excessivo (> 15 km/h)',
-    detalhe: `Vento a ${vento} km/h → deriva para áreas vizinhas garantida`,
-    ventoAlerta: false
-  };
-  if (umidade < 50) return {
-    status: 'FECHADA', icone: '💧', classe: 'status-perigo',
-    texto: 'FECHADA — Umidade muito baixa (< 50%)',
-    detalhe: `${umidade}% de umidade → gota evapora antes da folha`,
-    ventoAlerta: false
-  };
-  if (temp > 32) return {
-    status: 'FECHADA', icone: '🌡️', classe: 'status-perigo',
-    texto: 'FECHADA — Temperatura excessiva (> 32°C)',
-    detalhe: `${temp}°C → evaporação acelerada + estresse da planta`,
-    ventoAlerta: false
-  };
-  if (chuva > 20) return {
-    status: 'FECHADA', icone: '🌧️', classe: 'status-perigo',
-    texto: 'FECHADA — Chuva forte ou iminente',
-    detalhe: `${chuva}% de probabilidade → produto será lavado antes de absorção`,
-    ventoAlerta: false
-  };
-  if (vento >= 8 || umidade < 58 || temp > 29 || I <= 40) return {
-    status: 'ATENÇÃO', icone: '⚠️', classe: 'status-alerta',
-    texto: 'ATENÇÃO — Condições marginais',
-    detalhe: `Vento=${vento}km/h | Umd=${umidade}% | T=${temp}°C → aplicar com cautela e volume reduzido`,
-    ventoAlerta: false
-  };
-  return {
-    status: 'ABERTA', icone: '✅', classe: 'status-ok',
-    texto: 'JANELA ABERTA — Condições ideais!',
-    detalhe: `Vento=${vento}km/h | Umd=${umidade}% | T=${temp}°C — Todos os parâmetros dentro da faixa ideal`,
-    ventoAlerta: false
-  };
-}
-
-// ==================================================
-// ✅ 3. RESUMO PRÁTICO DINÂMICO — Baseado nos dados REAIS
-// ==================================================
-function gerarResumoPratico(cidade, dados) {
-  const manhaAberta = dados.filter(d => d.manha && d.manha.status === 'ABERTA').length;
-  const manhaAtencao = dados.filter(d => d.manha && d.manha.status === 'ATENÇÃO').length;
-  const tardeAberta = dados.filter(d => d.tarde && d.tarde.status === 'ABERTA').length;
-  const tardeAtencao = dados.filter(d => d.tarde && d.tarde.status === 'ATENÇÃO').length;
-  const noiteAberta = dados.filter(d => d.noite && d.noite.status === 'ABERTA').length;
-  const noiteRisco = dados.filter(d => d.noite && (d.noite.icone === '🌫️' || d.noite.icone === '❄️')).length;
-  
-  const geo = dadosGeograficos[cidade] || {latitude: -20, altitude: 500};
-  const regiaoQuente = Math.abs(geo.latitude) < 18;
-  const regiaoSul = geo.latitude < -25;
-  const altaAltitude = geo.altitude > 800;
-  
-  let recomendacaoPrincipal = '';
-  let avisosRegiao = '';
-  
-  if (regiaoQuente) {
-    recomendacaoPrincipal = `<strong>🌅 RECOMENDAÇÃO PRINCIPAL (Região Quente):</strong> A manhã é a janela mais segura — ${manhaAberta}/${dados.length} dias abertos. Evite tardes — umidade cai rapidamente e evaporação compromete a aplicação.`;
-  } else if (regiaoSul || altaAltitude) {
-    recomendacaoPrincipal = `<strong>🌅 RECOMENDAÇÃO PRINCIPAL (Região Sul/Altitude):</strong> Manhã e início de tarde são os períodos mais seguros. ⚠️ CUIDADO — ${noiteRisco}/${dados.length} noites com risco de geada ou inversão. Não aplique à noite.`;
-  } else {
-    recomendacaoPrincipal = `<strong>🌅 RECOMENDAÇÃO PRINCIPAL:</strong> Manhã = ${manhaAberta}/${dados.length} dias abertos | Tarde = ${tardeAberta}/${dados.length} | Noite = ${noiteAberta}/${dados.length}. A janela mais consistente é pela manhã, antes das 10h.`;
-  }
-  
-  if (altaAltitude) {
-    avisosRegiao = `<li>⛰️ <strong>Região de Alta Altitude (${geo.altitude}m):</strong> Maior amplitude térmica, inversão mais frequente e risco de geada prolongado. Aplicar preferencialmente entre 08h e 11h.</li>`;
-  }
-  if (regiaoSul) {
-    avisosRegiao += `<li>❄️ <strong>Região Sul:</strong> Risco de geada significativo entre abril e outubro. Sempre verifique a previsão de temperatura mínima para a madrugada seguinte.</li>`;
-  }
-  
-  return `
-    <ul style="margin-left:20px;line-height:2">
-      <li>${recomendacaoPrincipal}</li>
-      <li><strong>☀️ Tarde:</strong> ${tardeAberta} dias abertos | ${tardeAtencao} dias de atenção. Atenção: vento aumenta, umidade cai. Em regiões quentes, a tarde é quase sempre janela fechada por umidade < 50%.</li>
-      <li><strong>🌙 Noite:</strong> ⚠️ ${noiteRisco}/${dados.length} períodos com risco. Vento diminui, umidade sobe, temperatura cai — risco de inversão térmica e geada. Aplicar à noite SOMENTE com confirmação de vento > 5 km/h e temperatura > 15°C.</li>
-      <li><strong>💧 Regra de sobrevivência:</strong> Se umidade < 50% → NÃO APLIQUE. O dinheiro vai para o ar, não para a planta. Não importa se não vai chover.</li>
-      <li><strong>💨 Vento 10–15 km/h:</strong> ⚠️ Requer uso de bicos antideriva + adjuvantes redutores de deriva. Reduzir velocidade da aplicação. Acima de 15 km/h — NÃO APLIQUE.</li>
-      ${avisosRegiao}
-      <li><strong>📊 Confiabilidade por período:</strong> 🌅 Manhã = 90% | ☀️ Tarde = 75% | 🌙 Noite = 60% — baseado em padrões de comportamento climático.</li>
-    </ul>
-  `;
-}
-
-function gerarRelatorio() {
-  const cidade = document.getElementById('cidade-input').value.trim();
-  const cultura = document.getElementById('cultura').value;
-  
-  if (!cidade) { alert('Por favor, selecione um município.'); return; }
-  if (!cultura) { alert('Por favor, selecione uma cultura.'); return; }
-
-  const nomeCultura = nomesCulturas[cultura] || cultura;
-  const hoje = new Date().toLocaleDateString('pt-BR', {dateStyle:'full'});
-  const geo = dadosGeograficos[cidade] || {latitude: -20, altitude: 500};
-  const isMT = cidade.includes('MT') || cidade.includes('Sorriso');
-  const isSul = geo.latitude < -25;
-
-  const periodos = [
-    {chave: 'manha', nome: '🌅 MANHÃ', horario: '06h às 12h'},
-    {chave: 'tarde', nome: '☀️ TARDE', horario: '12h às 18h'},
-    {chave: 'noite', nome: '🌙 NOITE', horario: '18h às 06h'}
-  ];
-
-  let linhasJanela = '';
-  const medias = {};
-  const dadosDiarios = [];
-  
-  for (let d = 0; d < 7; d++) {
-    const manha = calcularJanela(
-      getVento(cidade,'manha',d), getUmidade(cidade,'manha',d), getTemp(cidade,'manha',d),
-      getChuva(cidade,'manha',d), false, calcularIndice(cidade,'manha',d).I, 'manha', cidade
-    );
-    const tarde = calcularJanela(
-      getVento(cidade,'tarde',d), getUmidade(cidade,'tarde',d), getTemp(cidade,'tarde',d),
-      getChuva(cidade,'tarde',d), false, calcularIndice(cidade,'tarde',d).I, 'tarde', cidade
-    );
-    const noite = calcularJanela(
-      getVento(cidade,'noite',d), getUmidade(cidade,'noite',d), getTemp(cidade,'noite',d),
-      getChuva(cidade,'noite',d), temInversao(cidade,'noite',d), calcularIndice(cidade,'noite',d).I, 'noite', cidade
-    );
-    dadosDiarios.push({manha, tarde, noite});
-  }
-
-  for (const p of periodos) {
-    const dados7dias = [];
-    for (let d = 0; d < 7; d++) {
-      const v = getVento(cidade, p.chave, d);
-      const u = getUmidade(cidade, p.chave, d);
-      const t = getTemp(cidade, p.chave, d);
-      const c = getChuva(cidade, p.chave, d);
-      const inv = temInversao(cidade, p.chave, d);
-      const { I } = calcularIndice(cidade, p.chave, d);
-      dados7dias.push({vento: v, umidade: u, temp: t, chuva: c, inversao: inv, I});
-    }
-    const ventoMed = Math.round(dados7dias.reduce((s,d)=>s+d.vento,0)/7);
-    const umidadeMed = Math.round(dados7dias.reduce((s,d)=>s+d.umidade,0)/7);
-    const tempMed = Math.round(dados7dias.reduce((s,d)=>s+d.temp,0)/7);
-    const chuvaMed = Math.round(dados7dias.reduce((s,d)=>s+d.chuva,0)/7);
-    const Imed = Math.round(dados7dias.reduce((s,d)=>s+d.I,0)/7);
-    const temInv = dados7dias.some(d => d.inversao);
-    const janela = calcularJanela(ventoMed, umidadeMed, tempMed, chuvaMed, temInv, Imed, p.chave, cidade);
-    medias[p.chave] = {vento: ventoMed, umidade: umidadeMed, temp: tempMed, chuva:
+  'Iporã - SP': {latitude: -21.61, altitude: 455},
+  'Ituverava - SP': {latitude: -20.33, altitude: 630},
+  'São José do Rio Preto - SP': {latitude: -20.82, altitude: 490},
+  'Araçatuba - SP': {latitude: -21.21, altitude: 390},
+  'Presidente Prudente - SP': {latitude: -22.12, altitude: 475},
+  'Jaú - SP': {latitude: -22.29, altitude: 550},
+  'Bebedouro - SP': {latitude: -20.94, altitude: 570},
+  'Mogi Mirim - SP': {latitude: -22.43, altitude: 620},
+  'Limeira - SP': {latitude: -22.56, altitude: 580},
+  'Araras - SP': {latitude: -22.57, altitude: 610},
+  'Rio Claro - SP': {latitude: -22.41, altitude: 600},
+  'São Carlos - SP': {latitude: -22.02, altitude: 850},
+  'Pirassununga - SP': {latitude: -21.99, altitude: 620},
+  'Itapetininga - SP': {latitude: -23.59, altitude: 680},
+  'Avaré - SP': {latitude: -23.10, altitude: 750},
+  'Ourinhos - SP': {latitude: -22.97, altitude: 480},
+  'Assis - SP': {latitude: -22.66, altitude: 520},
+  'Andradina - SP': {latitude: -20.90, altitude: 310},
+  'Mirassol - SP': {latitude: -20.73, altitude: 540},
+  'Jaboticabal - SP': {latitude: -21.26, altitude: 600},
+  'Taquaritinga - SP': {latitude: -21.41, altitude: 560},
+  'Catanduva - SP': {latitude: -21.13, altitude: 500},
+  'Votuporanga - SP': {latitude: -20.42, altitude: 450},
+  'Fernandópolis - SP': {latitude: -20.28, altitude: 480},
+  'Birigui - SP': {latitude: -21.27, altitude: 380},
+  'Penápolis - SP': {latitude: -21.42, altitude: 440},
+  'Lins - SP': {latitude: -21.67, altitude: 470},
+  'Bauru - SP': {latitude: -22.32, altitude: 520},
+  'Pederneiras - SP': {latitude: -22.35, altitude: 480},
+  'Barra Bonita - SP': {latitude: -22.48, altitude: 490},
+  'Jaú - SP': {latitude: -22.29, altitude: 550},
+  'Dois Córregos - SP': {latitude: -22.37, altitude: 530},
+  'Botucatu - SP': {latitude: -22.88, altitude: 800},
+  'Tatuí - SP': {latitude: -23.35, altitude: 640},
+  'Sorocaba - SP': {latitude: -23.50, altitude: 600},
+  'Itu - SP': {latitude: -23.26, altitude: 630},
+  'Salto - SP': {latitude: -23.20, altitude: 550},
+  'Indaiatuba - SP': {latitude: -23.09, altitude: 620},
+  'Campinas - SP': {latitude: -22.90, altitude: 685},
+  'Valinhos - SP': {latitude: -22.97, altitude: 660},
+  'Vinhedo - SP': {latitude: -23.03, altitude: 700},
+  'Jundiaí - SP': {latitude: -23.19, altitude: 750},
+  'Várzea Paulista - SP': {latitude: -23.21, altitude: 720},
+  'Franco da Rocha - SP': {latitude: -23.33, altitude: 750},
+  'Caieiras - SP': {latitude: -23.37, altitude: 780},
+  'Osasco - SP': {latitude: -23.53, altitude: 720},
+  'São Paulo - SP': {latitude: -23.55, altitude: 760},
+  'Guarulhos - SP': {latitude: -23.45, altitude: 750},
+  'São Bernardo do Campo - SP': {latitude: -23.70, altitude: 760},
+  'Santo André - SP': {latitude: -23.67, altitude: 780},
+  'Mauá - SP': {latitude: -23.67, altitude: 790},
+  'Diadema - SP': {latitude: -23.69, altitude: 780},
+  'São Caetano do Sul - SP': {latitude: -23.62, altitude: 750},
+  'São André - SP': {latitude: -23.67, altitude: 780},
+  'Campo Limpo Paulista - SP': {latitude: -23.21, altitude: 740},
+  'Jarinu - SP': {latitude: -23.26, altitude: 760},
+  'Louveira - SP': {latitude: -23.08, altitude: 680},
+  'Itatiba - SP': {latitude: -23.01, altitude: 750},
+  'Morungaba - SP': {latitude: -22.88, altitude: 780},
+  'Bragança Paulista - SP': {latitude: -22.95, altitude: 820},
+  'Atibaia - SP': {latitude: -23.05, altitude: 810},
+  'Nazaré Paulista - SP': {latitude: -23.18, altitude: 850},
+  'Piracaia - SP': {latitude: -23.05, altitude: 830},
+  'Joanópolis - SP': {latitude: -22.95, altitude: 800},
+  'Socorro - SP': {latitude: -22.62, altitude: 750},
+  'Serra Negra - SP': {latitude: -22.61, altitude: 920},
+  'Mogi Guaçu - SP': {latitude: -22.37, altitude: 590},
+  'Mogi Mirim - SP': {latitude: -22.43, altitude: 620},
+  'Estiva Gerbi - SP': {latitude: -22.45, altitude: 610},
+  'Santo Antônio de Posse - SP': {latitude: -22.61, altitude: 680},
+  'Holambra - SP': {latitude: -22.61, altitude: 600},
+  'Artur Nogueira - SP': {latitude: -22.58, altitude: 590},
+  'Cosmópolis - SP': {latitude: -22.64, altitude: 580},
+  'Engenheiro Coelho - SP': {latitude: -22.57, altitude: 600},
+  'Hortolândia - SP': {latitude: -22.86, altitude: 590},
+  'Sumaré - SP': {latitude: -22.82, altitude: 580},
+  'Nova Odessa - SP': {latitude: -22.78, altitude: 570},
+  'Santa Bárbara dOeste - SP': {latitude: -22.76, altitude: 570},
+  'Americana - SP': {latitude: -22.73, altitude: 560},
+  'Limeira - SP': {latitude: -22.56, altitude: 580},
+  'Cordeirópolis - SP': {latitude: -22.48, altitude: 590},
+  'Santa Gertrudes - SP': {latitude: -22.46, altitude: 600},
+  'Rio Claro - SP': {latitude: -22.41, altitude: 600},
+  'Araras - SP': {latitude: -22.57, altitude: 610},
+  'Conchal - SP': {latitude: -22.34, altitude: 620},
+  'Pirassununga - SP': {latitude: -21.99, altitude: 620},
+  'Porto Ferreira - SP': {latitude: -21.86, altitude: 550},
+  'Descalvado - SP': {latitude: -21.91, altitude: 680},
+  'São Carlos - SP': {latitude: -22.02, altitude: 850},
+  'Ibaté - SP': {latitude: -21.96, altitude: 780},
+  'Itirapina - SP': {latitude: -22.25, altitude: 760},
+  'Brotas - SP': {latitude: -22.47, altitude: 650},
+  'Torrinha - SP': {latitude: -22.43, altitude: 580},
+  'Itaju - SP': {latitude: -21.98, altitude: 520},
+  'Rincão - SP': {latitude: -21.97, altitude: 500},
+  'Guatapará - SP': {latitude: -21.85, altitude: 510},
+  'São Luís do Paraitinga - SP': {latitude: -23.23, altitude: 780},
+  'Ubatuba - SP': {latitude: -23.43, altitude: 5},
+  'Caraguatatuba - SP': {latitude: -23.62, altitude: 3},
+  'São Sebastião - SP': {latitude: -23.72, altitude: 4},
+  'Ilhabela - SP': {latitude: -23.78, altitude: 5},
+  'Bertioga - SP': {latitude: -23.85, altitude: 4},
+  'Guarujá - SP': {latitude: -23.99, altitude: 5},
+  'Santos - SP': {latitude: -23.96, altitude: 3},
+  'São Vicente - SP': {latitude: -23.96, altitude: 5},
+  'Praia Grande - SP': {latitude: -24.01, altitude: 6},
+  'Itanhaém - SP': {latitude: -24.18, altitude: 8},
+  'Peruíbe - SP': {latitude: -24.32, altitude: 10},
+  'Itariri - SP': {latitude: -24.28, altitude: 30},
+  'Registro - SP': {latitude: -24.49, altitude: 25},
+  'Sete Barras - SP': {latitude: -24.39, altitude: 35},
+  'Capão Bonito - SP': {latitude: -23.95, altitude: 650},
+  'Itapeva - SP': {latitude: -23.98, altitude: 680},
+  'Itapetininga - SP': {latitude: -23.59, altitude: 680},
+  'Tatuí - SP': {latitude: -23.35, altitude: 640},
+  'Pereiras - SP': {latitude: -23.08, altitude: 580},
+  'Cerqueira César - SP': {latitude: -23.04, altitude: 720},
+  'São Manuel - SP': {latitude: -22.73, altitude: 680},
+  'Avaré - SP': {latitude: -23.10, altitude: 750},
+  'Ourinhos - SP': {latitude: -22.97, altitude: 480},
+  'Assis - SP': {latitude: -22.66, altitude: 520},
+  'Paraguaçu Paulista - SP': {latitude: -22.42, altitude: 460},
+  'Tupã - SP': {latitude: -21.93, altitude: 520},
+  'Marília - SP': {latitude: -22.21, altitude: 660},
+  'Pompéia - SP': {latitude: -22.17, altitude: 590},
+  'Osvaldo Cruz - SP': {latitude: -21.79, altitude: 540},
+  'Adamantina - SP': {latitude: -21.68, altitude: 490},
+  'Lucélia - SP': {latitude: -21.71, altitude: 500},
+  'Presidente Prudente - SP': {latitude: -22.12, altitude: 475},
+  'Presidente Venceslau - SP': {latitude: -21.88, altitude: 420},
+  'Regente Feijó - SP': {latitude: -22.14, altitude: 450},
+  'Quatá - SP': {latitude: -22.24, altitude: 490},
+  'Novo Horizonte - SP': {latitude: -21.47, altitude: 580},
+  'Jales - SP': {latitude: -20.27, altitude: 480},
+  'Fernandópolis - SP': {latitude: -20.28, altitude: 480},
+  'Votuporanga - SP': {latitude: -20.42, altitude: 450},
+  'Catanduva - SP': {latitude: -21.13, altitude: 500},
+  'Mirassol - SP': {latitude: -20.73, altitude: 540},
+  'São José do Rio Preto - SP': {latitude: -20.82, altitude: 490},
+  'Bebedouro - SP': {latitude: -20.94, altitude: 570},
+  'Jaboticabal - SP': {latitude: -21.26, altitude: 600},
+  'Taquaritinga - SP': {latitude: -21.41, altitude: 560},
+  'Araraquara - SP': {latitude: -21.79, altitude: 660},
+  'Matão - SP': {latitude: -21.68, altitude: 585},
+  'Ribeirão Preto - SP': {latitude: -21.17, altitude: 540},
+  'Sertãozinho - SP': {latitude: -21.03, altitude: 550},
+  'Barrinha - SP': {latitude: -21.19, altitude: 500},
+  'Pontal - SP': {latitude: -20.94, altitude: 500},
+  'Orlândia - SP': {latitude: -21.72, altitude: 650},
+  'São Joaquim da Barra - SP': {latitude: -20.58, altitude: 620},
+  'Franca - SP': {latitude: -20.53, altitude: 1040},
+  'Batatais - SP': {latitude: -20.89, altitude: 850},
+  'Restinga - SP': {latitude: -20.75, altitude: 750},
+  'Igarapava - SP': {latitude: -20.04, altitude: 570},
+  'Ituverava - SP': {latitude: -20.33, altitude: 630},
+  'Guará - SP': {latitude: -20.42, altitude: 650},
+  'São Sebastião do Paraíso - MG': {latitude: -20.92, altitude: 970},
+  'Uberaba - MG': {latitude: -19.75, altitude: 790},
+  'Uberlândia - MG': {latitude: -18.92, altitude: 870},
+  'Araguari - MG': {latitude: -18.65, altitude: 920},
+  'Ituiutaba - MG': {latitude: -18.97, altitude: 580},
+  'Patos de Minas - MG': {latitude: -18.58, altitude: 920},
+  'Divinópolis - MG': {latitude: -20.14, altitude: 720},
+  'Belo Horizonte - MG': {latitude: -19.92, altitude: 920},
+  'Juiz de Fora - MG': {latitude: -21.76, altitude: 680},
+  'Viçosa - MG': {latitude: -20.75, altitude: 640},
+  'Lavras - MG': {latitude: -21.24, altitude: 910},
+  'Varginha - MG': {latitude: -21.56, altitude: 890},
+  'Poços de Caldas - MG': {latitude: -21.79, altitude: 1190},
+  'Campos do Jordão - SP': {latitude: -22.73, altitude: 1700},
+  'São Bento do Sapucaí - SP': {latitude: -22.68, altitude: 880},
+  'Eunápolis - BA': {latitude: -16.38, altitude: 180},
+  'Itabuna - BA': {latitude: -14.79, altitude: 60},
+  'Ilhéus - BA': {latitude: -14.79, altitude: 10},
+  'Vitória da Conquista - BA': {latitude: -14.87, altitude: 920},
+  'Barreiras - BA': {latitude: -12.15, altitude: 450},
+  'Luís Eduardo Magalhães - BA': {latitude: -12.09, altitude: 750},
+  'Camaçari - BA': {latitude: -12.70, altitude: 10},
+  'Salvador - BA': {latitude: -12.97, altitude: 30},
+  'Feira de Santana - BA': {latitude: -12.26, altitude: 220},
+  'Araçaju - SE': {latitude: -10.91, altitude: 5},
+  'Aracaju - SE': {latitude: -10.91, altitude: 5},
+  'Maceió - AL': {latitude: -9.67, altitude: 7},
+  'Recife - PE': {latitude: -8.05, altitude: 10},
+  'Caruaru - PE': {latitude: -8.27, altitude: 540},
+  'Campina Grande - PB': {latitude: -7.22, altitude: 550},
+  'João Pessoa - PB': {latitude: -7.12, altitude: 8},
+  'Natal - RN': {latitude: -5.79, altitude: 10},
+  'Caicó - RN': {latitude: -6.46, altitude: 160},
+  'Fortaleza - CE': {latitude: -3.72, altitude: 25},
+  'Sobral - CE': {latitude: -3.68, altitude: 70},
+  'Juazeiro do Norte - CE': {latitude: -7.20, altitude: 400},
+  'Teresina - PI': {latitude: -5.09, altitude: 70},
+  'Parnaíba - PI': {latitude: -2.90, altitude: 15},
+  'Florianópolis - SC': {latitude: -27.59, altitude: 15},
+  'Joinville - SC': {latitude: -26.30, altitude: 10},
+  'Blumenau - SC': {latitude: -26.91, altitude: 15},
+  'Chapecó - SC': {latitude: -27.10, altitude: 670},
+  'Lages - SC': {latitude: -27.81, altitude: 910},
+  'Capinzal - SC': {latitude: -27.35, altitude: 480},
+  'Concórdia - SC': {latitude: -27.23, altitude: 550},
+  'Rio do Sul - SC': {latitude: -27.22, altitude: 250},
+  'Criciúma - SC': {latitude: -28.68, altitude: 50},
+  'Tubarão - SC': {latitude: -28.48, altitude: 15},
+  'Porto Alegre - RS': {latitude: -30.03, altitude: 10},
+  'Pelotas - RS': {latitude: -31.77, altitude: 10},
+  'Santa Maria - RS': {latitude: -29.69, altitude: 115},
+  'Passo Fundo - RS': {latitude: -28.26, altitude: 680},
+  'Bagé - RS': {latitude: -31.33, altitude: 220},
+  'Santo Ângelo - RS': {latitude: -28.29, altitude: 320},
+  'Ijuí - RS': {latitude: -28.39, altitude: 420},
+  'Santa Cruz do Sul - RS': {latitude: -29.72, altitude: 190},
+  'Lajeado - RS': {latitude: -29.46, altitude: 30},
+  'Caxias do Sul - RS': {latitude: -29.16,
