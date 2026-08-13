@@ -112,7 +112,6 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 </head>
 <body>
 
-<!-- ==================== PÁGINA PÚBLICA — EXATAMENTE COMO ESTAVA + E-MAIL ADICIONADO ==================== -->
 <div id="tela-apresentacao" class="tela-apresentacao">
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
@@ -186,7 +185,6 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
   </div>
 </div>
 
-<!-- ==================== ÁREA DE RELATÓRIOS ==================== -->
 <div id="tela-sistema" class="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
@@ -237,17 +235,44 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 // ==================================================
 const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 
-// 📐 FÓRMULA — I = (64 × O ÷ R) × (P × E ÷ C)
-function calcularIntensidade(dados) {
-  const O = dados.ocorrencia || 50;
-  const R = dados.repeticao || 10;
-  const P = dados.padraoAtual || 1.2;
-  const E = dados.energia || 1.0;
+// ==================================================
+// 🔒 BASE FIXA — Padrão Histórico Mensal (IMUTÁVEL)
+// ==================================================
+const I_PRESA_MENSAL = {
+  1: 1.13, 2: 1.07, 3: 1.10, 4: 0.00,
+  5: -0.94, 6: -1.25, 7: -1.63, 8: -0.87,
+  9: -0.93, 10: 1.00, 11: 1.00, 12: 1.00
+};
+
+// ==================================================
+// 🫀 CORAÇÃO DE CÁLCULO — FÓRMULAS PROTEGIDAS
+// ==================================================
+function calcularCoracao(dados) {
+  const { mes, CH, N, G, O, R, P, E } = dados;
   const C = 64;
-  return (64 * O / R) * (P * E / C);
+  const I_PRESA = I_PRESA_MENSAL[mes];
+
+  // FÓRMULA 1 — Padrão Corrigido
+  const I_HOJE = (CH * 2 + N - G) / 1;
+  const DIFERENCA = I_HOJE - I_PRESA;
+  const I_30 = I_PRESA + (DIFERENCA / 3);
+
+  // FÓRMULA 2 — BuscaBoanerges (Confirmação)
+  const I_BUSCA = (64 * O / R) * (P * E / C);
+
+  // CONFIRMAÇÃO
+  let razao = 0, confirmado = false;
+  if (I_BUSCA !== 0) {
+    razao = Math.abs(I_30 / I_BUSCA);
+    confirmado = (razao >= 0.85 && razao <= 1.15);
+  }
+
+  return { I_30, I_BUSCA, razao, confirmado, I_PRESA, I_HOJE };
 }
 
-// ✅ REGRAS CORRIGIDAS — JANELA ABRE QUANDO DEVE!
+// ==================================================
+// ✅ REGRAS — JANELA DE APLICAÇÃO
+// ==================================================
 function classificarVento(km) {
   if (km < 3) return { texto: 'Fraco', classe: 'status-alerta', faixa: 'alerta' };
   if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', faixa: 'ideal' };
@@ -367,11 +392,21 @@ function gerarRelatorio() {
   if (!cidade) { alert('Por favor, digite o nome do município.'); return; }
   const regiao = identificarRegiao(cidade);
   const hoje = new Date();
+  const mesAtual = hoje.getMonth() + 1;
   const nomesCultura = {
     geral: 'Geral / Diversa', milho: '🌽 Milho', soja: '🫘 Soja', citros: '🍊 Citros / Laranja', cafe: '☕ Café',
     cana: '🍬 Cana-de-Açúcar', algodao: '☁️ Algodão', tomate: '🍅 Tomate', hortalicas: '🥬 Hortaliças', pastagem: '🌿 Pastagem'
   };
   const nomeCultura = nomesCultura[cultura] || cultura;
+
+  // LEITURA DO CORAÇÃO — valor base dos próximos 30 dias
+  const dadosBaseCoracao = {
+    mes: mesAtual,
+    CH: 0, N: 1, G: (mesAtual>=5&&mesAtual<=8)?1:0,
+    O: 60, R: 8, P: 1.013, E: 0.25
+  };
+  const coracao = calcularCoracao(dadosBaseCoracao);
+  const FATOR_PADRAO = coracao.I_30;
 
   let html = `
     <div class="relatorio">
@@ -414,29 +449,24 @@ function gerarRelatorio() {
     const diaMes = data.getDate();
     const mes = data.getMonth() + 1;
     
-    const dadosBase = {
-      ocorrencia: 45 + Math.sin(dia * 0.25 + mes) * 18 + Math.random() * 15,
-      repeticao: 7 + Math.cos(dia * 0.18 + mes * 0.5) * 5,
-      padraoAtual: 1.0 + Math.sin(dia * 0.12 + Date.now() * 0.00005) * 0.45,
-      energia: 0.75 + Math.random() * 0.7
-    };
-    const I = calcularIntensidade(dadosBase);
+    // CÁLCULO ALIMENTADO PELO CORAÇÃO — FÓRMULAS ATIVAS
+    const I_DIA = coracao.I_PRESA + (Math.sin(dia * 0.2 + mes) * 0.35 + FATOR_PADRAO) / 3;
     
-    const ventoManha = Math.max(1, Math.min(15, 5 + Math.sin(dia * 0.4 + 1) * 4 + I * 0.3));
-    const ventoTarde = Math.max(1, Math.min(15, 7 + Math.cos(dia * 0.35 + 2) * 5 + I * 0.35));
-    const ventoNoite = Math.max(1, Math.min(12, 4 + Math.sin(dia * 0.3 + 3) * 3 + I * 0.25));
+    const ventoManha = Math.max(1, Math.min(15, 5 + Math.sin(dia * 0.4 + 1) * 4 + I_DIA * 3));
+    const ventoTarde = Math.max(1, Math.min(15, 7 + Math.cos(dia * 0.35 + 2) * 5 + I_DIA * 3.5));
+    const ventoNoite = Math.max(1, Math.min(12, 4 + Math.sin(dia * 0.3 + 3) * 3 + I_DIA * 2.5));
     
-    const umidadeManha = Math.max(35, Math.min(95, 75 + Math.sin(dia * 0.25) * 12));
-    const umidadeTarde = Math.max(30, Math.min(90, 55 + Math.cos(dia * 0.3) * 15));
-    const umidadeNoite = Math.max(40, Math.min(95, 80 + Math.sin(dia * 0.2) * 10));
+    const umidadeManha = Math.max(35, Math.min(95, 75 + Math.sin(dia * 0.25) * 12 + I_DIA * 8));
+    const umidadeTarde = Math.max(30, Math.min(90, 55 + Math.cos(dia * 0.3) * 15 + I_DIA * 6));
+    const umidadeNoite = Math.max(40, Math.min(95, 80 + Math.sin(dia * 0.2) * 10 + I_DIA * 7));
     
-    const tempManha = Math.max(14, Math.min(34, 20 + Math.sin(dia * 0.2 + mes * 0.5) * 5));
-    const tempTarde = Math.max(20, Math.min(36, 28 + Math.cos(dia * 0.25 + mes * 0.3) * 6));
-    const tempNoite = Math.max(12, Math.min(30, 22 + Math.sin(dia * 0.18 + mes * 0.4) * 4));
+    const tempManha = Math.max(14, Math.min(34, 20 + Math.sin(dia * 0.2 + mes * 0.5) * 5 - I_DIA * 2));
+    const tempTarde = Math.max(20, Math.min(36, 28 + Math.cos(dia * 0.25 + mes * 0.3) * 6 - I_DIA * 1.5));
+    const tempNoite = Math.max(12, Math.min(30, 22 + Math.sin(dia * 0.18 + mes * 0.4) * 4 - I_DIA * 2));
     
-    const chuvaManha = Math.max(0, Math.min(100, I * 25 + Math.sin(dia * 0.5) * 20));
-    const chuvaTarde = Math.max(0, Math.min(100, I * 30 + Math.cos(dia * 0.4) * 25));
-    const chuvaNoite = Math.max(0, Math.min(100, I * 28 + Math.sin(dia * 0.6) * 22));
+    const chuvaManha = Math.max(0, Math.min(100, 20 + I_DIA * 25 + Math.sin(dia * 0.5) * 18));
+    const chuvaTarde = Math.max(0, Math.min(100, 15 + I_DIA * 30 + Math.cos(dia * 0.4) * 22));
+    const chuvaNoite = Math.max(0, Math.min(100, 25 + I_DIA * 28 + Math.sin(dia * 0.6) * 20));
     
     const janelaManha = verificarJanela(ventoManha, umidadeManha, tempManha, chuvaManha);
     const janelaTarde = verificarJanela(ventoTarde, umidadeTarde, tempTarde, chuvaTarde);
@@ -489,6 +519,13 @@ function gerarRelatorio() {
 
   document.getElementById('relatorio-resultado').innerHTML = html;
 }
+
+// BLOQUEIO DE PROTEÇÃO — impede cópia e inspeção
+document.addEventListener('contextmenu', e=>e.preventDefault());
+document.addEventListener('keydown', e=>{
+  if((e.ctrlKey||e.metaKey)&&['u','s','c','x','a'].includes(e.key.toLowerCase())) e.preventDefault();
+});
 </script>
+
 </body>
 </html>
