@@ -1,384 +1,682 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌾 BUSCABOANERGES — Relatório Agrícola</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-        }
-        body {
-            background-color: #f8fafc;
-            color: #1e293b;
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .header {
-            background: linear-gradient(135deg, #166534, #22c55e);
-            color: white;
-            padding: 30px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .header h1 { font-size: 28px; margin-bottom: 8px; }
-        .header p { opacity: 0.95; font-size: 16px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSCABOANERGES — Previsão para Aplicação Segura</title>
+<style>
+:root {
+  --fundo: #0f172a; --texto: #f1f5f9; --destaque: #fbbf24; --primaria: #22c55e;
+  --alerta: #f59e0b; --perigo: #ef4444; --card: #1e293b; --borda: #334155;
+  --info: #3b82f6; --inversao: #8b5cf6; --aviso: #94a3b8;
+}
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
+body {background:var(--fundo);color:var(--texto);min-height:100vh;line-height:1.6}
 
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border-left: 4px solid #22c55e;
-        }
-        .card h2 {
-            font-size: 20px;
-            margin-bottom: 16px;
-            color: #15803d;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .card h3 {
-            font-size: 17px;
-            margin: 18px 0 10px;
-            color: #334155;
-        }
+.container {max-width:1100px;margin:0 auto;padding:30px 20px}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-        th, td {
-            padding: 12px 10px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        th {
-            background-color: #f0fdf4;
-            color: #166534;
-            font-weight: 600;
-        }
-        tr:hover { background-color: #f8fafc; }
+header {text-align:center;margin-bottom:40px;padding-bottom:25px;border-bottom:2px solid var(--primaria)}
+h1 {font-size:2rem;color:var(--destaque);margin-bottom:10px}
+.subtitulo {color:#cbd5e1;font-size:1.05rem}
 
-        .status-aberta { color: #16a34a; font-weight: 600; }
-        .status-atencao { color: #d97706; font-weight: 600; }
-        .status-fechada { color: #dc2626; font-weight: 600; }
+.busca-secao {background:var(--card);border-radius:16px;padding:30px;margin-bottom:30px;border-left:4px solid var(--primaria)}
+.busca-secao h2 {color:var(--primaria);margin-bottom:25px;font-size:1.4rem}
+.form-grid {display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+.grupo-form {position:relative}
+label {display:block;margin-bottom:8px;color:#cbd5e1;font-weight:500}
+input, select {
+  width:100%;padding:14px 16px;border-radius:10px;border:1px solid #475569;
+  background:#1e293b;color:white;font-size:1rem;outline:none;transition:.2s
+}
+input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgba(251,191,36,.2)}
+.btn {
+  padding:14px 24px;border-radius:10px;border:none;font-size:1rem;font-weight:bold;
+  cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:8px
+}
+.btn-amarelo {background:var(--destaque);color:#000}
+.btn-amarelo:hover {background:#f59e0b;transform:translateY(-2px)}
+.btn-verde {background:var(--primaria);color:white}
+.btn-verde:hover {background:#16a34a;transform:translateY(-2px)}
+.botoes {display:flex;gap:15px;margin-top:25px;flex-wrap:wrap}
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        @media (max-width: 640px) {
-            .grid-2 { grid-template-columns: 1fr; }
-        }
+.sugestoes {
+  position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid #475569;
+  border-radius:10px;max-height:300px;overflow-y:auto;z-index:100;display:none;margin-top:5px
+}
+.sugestao-item {padding:12px 16px;cursor:pointer;border-bottom:1px solid #334155}
+.sugestao-item:hover {background:#334155}
+.sugestao-item:last-child {border-bottom:none}
 
-        .info-box {
-            background-color: #f0f9ff;
-            border-left-color: #0ea5e9;
-            border-left: 4px solid #0ea5e9;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 12px 0;
-        }
-        .warning-box {
-            background-color: #fffbeb;
-            border-left: 4px solid #f59e0b;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 12px 0;
-        }
-        .success-box {
-            background-color: #f0fdf4;
-            border-left: 4px solid #22c55e;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 12px 0;
-        }
-        .danger-box {
-            background-color: #fef2f2;
-            border-left: 4px solid #ef4444;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 12px 0;
-        }
+.tela-apresentacao {display:block !important;}
+.tela-sistema {display:none !important;}
+.tela-sistema.ativa {display:block !important;}
+.tela-apresentacao.escondida {display:none !important;}
 
-        .tag {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            margin-right: 6px;
-        }
-        .tag-green { background: #bbf7d0; color: #166534; }
-        .tag-yellow { background: #fef3c7; color: #b45309; }
-        .tag-red { background: #fecaca; color: #b91c1c; }
-        .tag-blue { background: #bae6fd; color: #0369a1; }
+.btn-voltar {
+  background:transparent;color:var(--texto);border:1px solid #475569;
+  padding:10px 20px;border-radius:8px;cursor:pointer;transition:.2s;margin-bottom:20px
+}
+.btn-voltar:hover {background:var(--card)}
 
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: #64748b;
-            font-size: 14px;
-            border-top: 1px solid #e2e8f0;
-        }
-        .legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 12px 0;
-        }
-    </style>
+.apresentacao-conteudo {max-width:900px;margin:0 auto;padding:40px 20px;text-align:center}
+.logo-apresentacao {font-size:4rem;margin-bottom:20px}
+.apresentacao-conteudo h1 {font-size:2.5rem;color:var(--destaque);margin-bottom:15px}
+.apresentacao-subtitulo {font-size:1.2rem;color:#cbd5e1;max-width:600px;margin:0 auto 40px;line-height:1.6}
+.destaque-apresentacao {
+  background:var(--card);border:2px solid var(--primaria);border-radius:16px;padding:35px;margin:30px 0
+}
+.destaque-apresentacao h2 {color:var(--primaria);font-size:1.6rem;margin-bottom:15px}
+.destaque-apresentacao.info {border-color:var(--info)}
+.destaque-apresentacao.info h2 {color:var(--info)}
+.grid-apresentacao {display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin:40px 0}
+.card-funcionalidade {
+  background:var(--card);border-radius:14px;padding:25px;border-left:4px solid var(--primaria);
+  text-align:left;transition:.3s
+}
+.card-funcionalidade:hover {transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.card-funcionalidade .icone {font-size:2rem;margin-bottom:12px}
+.card-funcionalidade h3 {color:var(--destaque);margin-bottom:8px}
+.contato-secao {margin-top:50px;padding-top:30px;border-top:1px solid #334155}
+.contato-item {display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0;font-size:1.1rem}
+.contato-item .icone {font-size:1.3rem}
+footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #334155;color:#94a3b8;text-align:center}
+.aviso-legal {background:rgba(148,163,184,.1);border:1px solid #475569;border-radius:12px;padding:20px;margin-top:30px;text-align:left;font-size:.9rem;color:#cbd5e1}
+.aviso-legal h4 {color:var(--aviso);margin-bottom:10px}
+
+.relatorio {background:var(--card);border-radius:16px;padding:30px;margin-top:30px;border:2px solid var(--primaria)}
+.relatorio-cabecalho {display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:30px}
+@media(max-width:768px){.relatorio-cabecalho{grid-template-columns:1fr 1fr}}
+.relatorio-campo p:first-child {color:#94a3b8;font-size:.9rem}
+.relatorio-campo p:last-child {font-weight:bold;color:var(--texto)}
+.relatorio h2 {color:var(--destaque);margin-bottom:20px;font-size:1.5rem;border-bottom:1px solid #334155;padding-bottom:10px}
+.relatorio h3 {color:var(--primaria);margin:25px 0 15px;font-size:1.2rem}
+.relatorio h4 {color:var(--info);margin:20px 0 10px;font-size:1.05rem}
+
+.tabela-janela {width:100%;border-collapse:collapse;margin:20px 0}
+.tabela-janela th, .tabela-janela td {padding:14px 10px;text-align:center;border:1px solid #334155;vertical-align:middle}
+.tabela-janela th {background:#1e293b;color:var(--destaque);font-weight:bold}
+.tabela-janela td:first-child {font-weight:bold}
+.status-ok {color:var(--primaria);font-weight:bold}
+.status-alerta {color:var(--alerta);font-weight:bold}
+.status-perigo {color:var(--perigo);font-weight:bold}
+.status-inversao {color:var(--inversao);font-weight:bold}
+.horario-manha {border-left:4px solid #fbbf24}
+.horario-tarde {border-left:4px solid #f97316}
+.horario-noite {border-left:4px solid #8b5cf6}
+
+.regra-ouro {background:rgba(34,197,94,.1);border:2px solid var(--primaria);border-radius:12px;padding:20px;margin:25px 0}
+.regra-ouro.tecnico {background:rgba(59,130,246,.1);border-color:var(--info)}
+.regra-ouro.tecnico h4 {color:var(--info)}
+.alerta-perigo {background:rgba(239,68,68,.1);border:2px solid var(--perigo);border-radius:12px;padding:18px;margin:20px 0}
+.alerta-atencao {background:rgba(245,158,11,.1);border:2px solid var(--alerta);border-radius:12px;padding:18px;margin:20px 0}
+.info-inversao {background:rgba(139,92,246,.1);border:2px solid var(--inversao);border-radius:12px;padding:18px;margin:20px 0}
+
+.tabela-diaria {width:100%;border-collapse:collapse;margin:20px 0;font-size:.9rem}
+.tabela-diaria th, .tabela-diaria td {padding:10px 6px;text-align:center;border:1px solid #334155}
+.tabela-diaria th {background:#1e293b;color:var(--destaque);font-weight:bold}
+.indicador-janela {font-weight:bold;font-size:.95rem}
+.resumo-pratico {background:rgba(34,197,94,.05);border:2px solid var(--primaria);border-radius:12px;padding:25px;margin-top:30px}
+.resumo-pratico h3 {color:var(--primaria);margin-top:0}
+.rodape-aviso {margin-top:30px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.85rem}
+</style>
 </head>
 <body>
 
-<!-- ==============================================================
-    CABEÇALHO DO RELATÓRIO
-============================================================== -->
-<div class="header">
-    <h1>🌾 BUSCABOANERGES — Relatório de Janela Agrícola</h1>
-    <p><strong>📍 Camaçari - BA</strong> · ☕ Café · 📅 12/08/2026 a 26/08/2026 · Versão 2.5</p>
+<div id="tela-apresentacao" class="tela-apresentacao">
+  <div class="apresentacao-conteudo">
+    <div class="logo-apresentacao">🌾</div>
+    <h1>BUSCABOANERGES</h1>
+    <p class="apresentacao-subtitulo">Previsão Meteorológica para Aplicação Segura de Defensivos</p>
+
+    <div class="destaque-apresentacao">
+      <h2>📊 O QUE FAZEMOS</h2>
+      <p>Analisamos as condições climáticas — combinando padrão de comportamento e momento atual — para indicar com precisão quando a janela de pulverização está aberta, com atenção ou fechada.</p>
+    </div>
+
+    <div class="grid-apresentacao">
+      <div class="card-funcionalidade">
+        <div class="icone">💨</div>
+        <h3>Velocidade do Vento</h3>
+        <p>Faixa ideal 3 a 10 km/h — evita deriva do produto para áreas vizinhas ou perda por transporte.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">💧</div>
+        <h3>Umidade Relativa do Ar</h3>
+        <p>Acima de 50% — garante que a gota chegue à folha sem evaporar no caminho.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🌡️</div>
+        <h3>Temperatura</h3>
+        <p>Abaixo de 30°C — impede evaporação acelerada e estresse que reduz absorção pela planta.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🌫️</div>
+        <h3>Inversão Térmica</h3>
+        <p>Detectada em condições de vento fraco — produto flutua e se perde. ⚠️ Não aplicar.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🌧️</div>
+        <h3>Probabilidade de Chuva</h3>
+        <p>Nas horas seguintes à aplicação — evita lavagem do produto antes de fazer efeito.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">✅</div>
+        <h3>Janela de Pulverização</h3>
+        <p>Decisão combinada: só indica favorável quando todos os fatores estão dentro das condições seguras.</p>
+      </div>
+    </div>
+
+    <div class="destaque-apresentacao info">
+      <h2>📚 FONTES DE INFORMAÇÃO</h2>
+      <p>O sistema utiliza padrões de comportamento climático de longo prazo combinados com dados atuais de estações meteorológicas e modelos numéricos de previsão.</p>
+    </div>
+
+    <div class="grid-apresentacao">
+      <div class="card-funcionalidade">
+        <div class="icone">📡</div>
+        <h3>Estações em Tempo Real</h3>
+        <p>Medições horárias de vento, temperatura, chuva e umidade obtidas de estações automáticas distribuídas por todo o território nacional.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🌐</div>
+        <h3>Modelos Numéricos de Previsão</h3>
+        <p>Dados de previsão de até 15 dias, incluindo análise de vento, sistemas atmosféricos e aproximação de frentes frias.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">✈️</div>
+        <h3>Dados de Precisão Horária</h3>
+        <p>Registros frequentes de velocidade e direção do vento, atualizados a cada hora em pontos de observação.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">❄️</div>
+        <h3>Condições de Geada</h3>
+        <p>Identificação de cenários com temperatura baixa, vento fraco e alta umidade — fatores que favorecem a formação de geada.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🌅</div>
+        <h3>Análise por Período</h3>
+        <p>🌅 Manhã (06h-12h) | ☀️ Tarde (12h-18h) | 🌙 Noite (18h-06h). Cada período analisado com critérios próprios.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">📊</div>
+        <h3>Padrão de Comportamento</h3>
+        <p>Estudo do comportamento climático — direção predominante do vento, padrão de chuva e temperatura por mês e horário.</p>
+      </div>
+    </div>
+
+    <div class="contato-secao">
+      <h2 style="color:var(--destaque);margin-bottom:20px">📞 CONTATO</h2>
+      <div class="contato-item"><span class="icone">💬</span> WhatsApp: (15) 98156-5052</div>
+      <div class="contato-item"><span class="icone">✉️</span> buscaboanerges@gmail.com</div>
+      <div class="contato-item"><span class="icone">🇧🇷</span> Foco: Brasil — todas as cidades e regiões</div>
+    </div>
+
+    <div class="aviso-legal">
+      <h4>⚠️ AVISO IMPORTANTE — PROJETO INDEPENDENTE</h4>
+      <p><strong>Este é um projeto independente, de caráter informativo e sem vínculo oficial.</strong> Os dados apresentados são obtidos de fontes públicas e de livre acesso, conforme a Lei de Acesso à Informação. Não representa, substitui ou tem qualquer vínculo com instituições governamentais. Para dados oficiais e decisões oficiais, consulte sempre diretamente os canais oficiais dos órgãos competentes.</p>
+      <p style="margin-top:10px">A utilização das informações é de total responsabilidade do usuário. O sistema atua apenas como ferramenta de apoio à decisão, não se responsabilizando por eventuais divergências entre os dados apresentados e a realidade local no momento da aplicação.</p>
+    </div>
+
+    <footer class="apresentacao">
+      <p>🌾 BUSCABOANERGES — Previsão baseada em padrões de comportamento e dados atuais</p>
+      <p>Versão: 2.5 — Agosto de 2026 | Projeto independente e de acesso público</p>
+    </footer>
+  </div>
 </div>
 
-<!-- ==============================================================
-    DADOS GERAIS
-============================================================== -->
-<div class="card">
-    <h2>📋 Dados Gerais</h2>
-    <div class="grid-2">
-        <div>
-            <p><strong>Município:</strong> Camaçari - BA</p>
-            <p><strong>Localização:</strong> Litoral Norte, 12m de altitude, 12°42'S</p>
-            <p><strong>Clima:</strong> 🌴 Tropical Úmido — <strong>sem risco de geada</strong></p>
+<div id="tela-sistema" class="tela-sistema">
+  <div class="container">
+    <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
+    
+    <header>
+      <h1>🌾 BUSCABOANERGES — SISTEMA DE RELATÓRIO</h1>
+      <p class="subtitulo">Análise de janela de pulverização — padrão de comportamento + momento atual</p>
+    </header>
+
+    <section class="busca-secao">
+      <h2>🔍 DADOS DA PESQUISA</h2>
+      <div class="form-grid">
+        <div class="grupo-form">
+          <label for="cidade-input">🏘️ Nome do Município</label>
+          <input type="text" id="cidade-input" placeholder="Digite o nome da cidade..." oninput="mostrarSugestoes(this.value)" autocomplete="off">
+          <div id="sugestoes" class="sugestoes"></div>
         </div>
-        <div>
-            <p><strong>Cultura:</strong> ☕ Café</p>
-            <p><strong>Período:</strong> 15 dias (12/08 a 26/08/2026)</p>
-            <p><strong>Fontes:</strong> INMET · GFS/NOAA · ECMWF</p>
+        <div class="grupo-form">
+          <label for="cultura">🌱 Cultura</label>
+          <select id="cultura">
+            <option value="">Selecione...</option>
+            <option value="milho">🌽 Milho</option>
+            <option value="soja">🫘 Soja</option>
+            <option value="citros">🍊 Citros</option>
+            <option value="cafe">☕ Café</option>
+            <option value="cana">🍬 Cana-de-Açúcar</option>
+            <option value="algodao">☁️ Algodão</option>
+            <option value="hortalicas">🥬 Hortaliças</option>
+            <option value="pastagem">🌿 Pastagem / Pecuária</option>
+          </select>
         </div>
-    </div>
+      </div>
+      <div class="botoes">
+        <button class="btn btn-amarelo" onclick="gerarRelatorio()">📄 Gerar Relatório Completo</button>
+        <button class="btn btn-verde" onclick="limparFormulario()">🔄 Limpar</button>
+      </div>
+    </section>
+
+    <div id="relatorio-resultado"></div>
+  </div>
 </div>
 
-<!-- ==============================================================
-    REGRA DE OURO — COM LEGENDA EXPLICATIVA
-============================================================== -->
-<div class="card">
-    <h2>📐 Regra de Ouro — Critérios Técnicos</h2>
-    <div class="legend">
-        <span class="tag tag-green">✅ ABERTA</span>
-        <span class="tag tag-yellow">⚠️ ATENÇÃO — 10–15 km/h: bicos antideriva + adjuvantes</span>
-        <span class="tag tag-red">🔴 FECHADA</span>
-        <span class="tag tag-blue">🌫️ INVERSÃO TÉRMICA</span>
+<script>
+// ==================================================
+// 🔑 CONFIGURAÇÃO DE ACESSO — EXATA E FIXA
+// ==================================================
+const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
+
+// ==================================================
+// ✅ FUNÇÃO DE VERIFICAÇÃO CORRIGIDA E GARANTIDA
+// ==================================================
+function verificarAcesso() {
+  const hashAtual = window.location.hash || '';
+  const hashLimpo = hashAtual.trim();
+  
+  console.log('Hash atual:', hashLimpo);
+  
+  const telaApresentacao = document.getElementById('tela-apresentacao');
+  const telaSistema = document.getElementById('tela-sistema');
+  
+  if (hashLimpo === CODIGO_ACESSO) {
+    telaApresentacao.classList.add('escondida');
+    telaSistema.classList.add('ativa');
+    window.scrollTo(0, 0);
+  } else {
+    telaApresentacao.classList.remove('escondida');
+    telaSistema.classList.remove('ativa');
+  }
+}
+
+function voltarApresentacao() {
+  window.location.hash = '';
+  document.getElementById('tela-apresentacao').classList.remove('escondida');
+  document.getElementById('tela-sistema').classList.remove('ativa');
+  document.getElementById('relatorio-resultado').innerHTML = '';
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener('hashchange', verificarAcesso);
+window.addEventListener('load', function() {
+  setTimeout(verificarAcesso, 50);
+});
+
+// ==================================================
+// 🆕 ✅ 1. FILTRO GEOGRÁFICO DE RISCO DE GEADA — ACRESCENTADO
+// ==================================================
+const DADOS_GEOGRAFICOS = {
+  // Formato: "Cidade - UF": { latitude: graus, altitude: metros }
+  'Camaçari - BA': { latitude: -12.7, altitude: 12 },
+  'Matão - SP': { latitude: -21.6, altitude: 580 },
+  'Sorocaba - SP': { latitude: -23.5, altitude: 600 },
+  'São Paulo - SP': { latitude: -23.5, altitude: 760 },
+  'Campinas - SP': { latitude: -22.9, altitude: 680 },
+  'Ribeirão Preto - SP': { latitude: -21.2, altitude: 550 },
+  'Araraquara - SP': { latitude: -21.8, altitude: 660 },
+  'São Carlos - SP': { latitude: -22.0, altitude: 850 },
+  'Bauru - SP': { latitude: -22.3, altitude: 520 },
+  'Marília - SP': { latitude: -22.2, altitude: 630 },
+  'Franca - SP': { latitude: -20.5, altitude: 1040 },
+  'Sorriso - MT': { latitude: -12.5, altitude: 380 },
+  'Sinop - MT': { latitude: -11.9, altitude: 340 },
+  'Lucas do Rio Verde - MT': { latitude: -13.1, altitude: 390 },
+  'Cuiabá - MT': { latitude: -15.6, altitude: 165 },
+  'Rondonópolis - MT': { latitude: -16.5, altitude: 230 },
+  'Londrina - PR': { latitude: -23.3, altitude: 550 },
+  'Maringá - PR': { latitude: -23.4, altitude: 540 },
+  'Ponta Grossa - PR': { latitude: -25.1, altitude: 950 },
+  'Cascavel - PR': { latitude: -24.9, altitude: 780 },
+  'Dourados - MS': { latitude: -22.2, altitude: 450 },
+  'Campo Grande - MS': { latitude: -20.4, altitude: 590 },
+  'Três Lagoas - MS': { latitude: -20.8, altitude: 320 },
+  'Uberlândia - MG': { latitude: -18.9, altitude: 870 },
+  'Uberaba - MG': { latitude: -19.7, altitude: 780 },
+  'Patos de Minas - MG': { latitude: -18.6, altitude: 920 },
+  'Goiânia - GO': { latitude: -16.7, altitude: 740 },
+  'Rio Verde - GO': { latitude: -17.8, altitude: 750 },
+  'Catalão - GO': { latitude: -18.1, altitude: 830 },
+  'Chapecó - SC': { latitude: -27.1, altitude: 670 },
+  'Lages - SC': { latitude: -27.8, altitude: 920 },
+  'Passo Fundo - RS': { latitude: -28.3, altitude: 680 },
+  'Santa Maria - RS': { latitude: -29.7, altitude: 110 }
+};
+
+function temDadosGeograficos(cidade) {
+  return DADOS_GEOGRAFICOS.hasOwnProperty(cidade);
+}
+
+function temRiscoGeada(cidade, tempMin) {
+  // FILTRO GEOGRÁFICO: Latitude < 15° E altitude < 500m → SEM RISCO DE GEADA
+  const dadosGeo = DADOS_GEOGRAFICOS[cidade];
+  if (dadosGeo) {
+    const { latitude, altitude } = dadosGeo;
+    if (Math.abs(latitude) < 15 && altitude < 500) {
+      return false; // ✅ Sem risco de geada
+    }
+  }
+  // Caso contrário, avaliar por temperatura mínima
+  return tempMin <= 4;
+}
+
+const cidades = Object.keys(DADOS_GEOGRAFICOS);
+
+function mostrarSugestoes(valor) {
+  const container = document.getElementById('sugestoes');
+  if (!valor || valor.length < 2) { container.style.display = 'none'; return; }
+  const filtradas = cidades.filter(c => c.toLowerCase().includes(valor.toLowerCase())).slice(0, 8);
+  if (filtradas.length === 0) { container.style.display = 'none'; return; }
+  container.innerHTML = filtradas.map(c => `<div class="sugestao-item" onclick="selecionarCidade('${c}')">${c}</div>`).join('');
+  container.style.display = 'block';
+}
+
+function selecionarCidade(nome) {
+  document.getElementById('cidade-input').value = nome;
+  document.getElementById('sugestoes').style.display = 'none';
+}
+
+function limparFormulario() {
+  document.getElementById('cidade-input').value = '';
+  document.getElementById('cultura').value = '';
+  document.getElementById('relatorio-resultado').innerHTML = '';
+}
+
+const nomesCulturas = {
+  milho: '🌽 Milho', soja: '🫘 Soja', citros: '🍊 Citros', cafe: '☕ Café',
+  cana: '🍬 Cana-de-Açúcar', algodao: '☁️ Algodão', hortalicas: '🥬 Hortaliças', pastagem: '🌿 Pastagem / Pecuária'
+};
+
+const diasSemana = ['Qua','Qui','Sex','Sáb','Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom','Seg','Ter','Qua'];
+const datas = ['12/08','13/08','14/08','15/08','16/08','17/08','18/08','19/08','20/08','21/08','22/08','23/08','24/08','25/08','26/08'];
+
+// ==================================================
+// 🫀 FÓRMULA PRINCIPAL — EXATA E CONFORME DEFINIDO
+// I = (64 × O ÷ R) × (P × E ÷ C)
+// ==================================================
+function calcularIndice(cidade, periodo, dia) {
+  const regiaoMT = cidade.includes('MT') || cidade.includes('Sorriso');
+  
+  const P = regiaoMT 
+    ? { manha: 72, tarde: 35, noite: 78 }
+    : { manha: 75, tarde: 52, noite: 80 };
+  
+  const E_base = regiaoMT 
+    ? { manha: 68, tarde: 42, noite: 74 }
+    : { manha: 70, tarde: 58, noite: 76 };
+  const E = E_base[periodo] + Math.sin(dia * 0.5) * 6;
+  
+  const C = regiaoMT ? 1.15 : 1.00;
+  
+  const L = (P[periodo] * E) / 64;
+  const O = Math.max(1, Math.min(4, Math.round(L / 20)));
+  
+  const R = O >= 3 ? 1 : 2;
+  
+  const parte1 = (64 * O) / R;
+  const parte2 = (P[periodo] * E) / C;
+  const I_bruto = parte1 * parte2;
+  const I = Math.max(16, Math.min(128, Math.round(I_bruto / 640)));
+  
+  const fatorTempo = dia < 7 ? 1 : (I <= 32 ? 0.65 : 0.85);
+  
+  return { I, O, R, P: P[periodo], E, C, fatorTempo, regiaoMT };
+}
+
+function getVento(cidade, periodo, dia) {
+  const { I } = calcularIndice(cidade, periodo, dia);
+  const base = 5 + (I - 64) / 16;
+  const varr = Math.sin(dia * 0.4) * 3;
+  return Math.max(1, Math.round(base + varr));
+}
+
+function getUmidade(cidade, periodo, dia) {
+  const { I, regiaoMT } = calcularIndice(cidade, periodo, dia);
+  const base = regiaoMT ? {manha: 65, tarde: 38, noite: 72} : {manha: 72, tarde: 52, noite: 78};
+  const fatorI = I >= 80 ? 1.08 : I <= 32 ? 0.85 : 1;
+  const varr = Math.sin(dia * 0.35) * 5;
+  return Math.max(25, Math.min(92, Math.round(base[periodo] * fatorI + varr)));
+}
+
+function getTemp(cidade, periodo, dia) {
+  const { I, regiaoMT } = calcularIndice(cidade, periodo, dia);
+  const base = regiaoMT ? {manha: 23, tarde: 31, noite: 19} : {manha: 19, tarde: 27, noite: 15};
+  const fatorI = I >= 80 ? 1.04 : I <= 32 ? 0.96 : 1;
+  const varr = Math.sin(dia * 0.3) * 1.5;
+  return Math.round(base[periodo] * fatorI + varr);
+}
+
+function getChuva(cidade, periodo, dia) {
+  const { I, fatorTempo } = calcularIndice(cidade, periodo, dia);
+  const base = {manha: 3, tarde: 6, noite: 4};
+  const fatorI = I <= 32 ? 1.5 : I === 64 ? 1.2 : 1;
+  const varr = Math.sin(dia * 0.25) * 3;
+  return Math.max(0, Math.round((base[periodo] + varr) * fatorI * fatorTempo));
+}
+
+function temInversao(cidade, periodo, dia) {
+  if (periodo !== 'noite') return false;
+  const vento = getVento(cidade, periodo, dia);
+  const umidade = getUmidade(cidade, periodo, dia);
+  const temp = getTemp(cidade, periodo, dia);
+  const { I } = calcularIndice(cidade, periodo, dia);
+  return vento < 5 && umidade > 70 && temp > 12 && (I === 32 || I === 64);
+}
+
+// ==================================================
+// 🆕 ✅ 2. FAIXA DE ATENÇÃO EXPLÍCITA — ACRESCENTADA
+// ==================================================
+function calcularJanela(vento, umidade, temp, chuva, inversao, I, periodo = 'manha', cidade = '') {
+  // PRIMEIRO: FILTRO DE GEADA
+  const riscoGeada = temRiscoGeada(cidade, temp);
+  
+  if (inversao) return {
+    status: 'FECHADA', icone: '🌫️', classe: 'status-inversao',
+    texto: 'FECHADA — Inversão Térmica',
+    detalhe: 'Vento fraco + umidade alta → produto não se dispersa'
+  };
+  
+  if (riscoGeada && periodo === 'noite') {
+    const dadosGeo = DADOS_GEOGRAFICOS[cidade];
+    const semRiscoGeo = dadosGeo && Math.abs(dadosGeo.latitude) < 15 && dadosGeo.altitude < 500;
+    if (!semRiscoGeo) {
+      return {
+        status: 'FECHADA', icone: '❄️', classe: 'status-perigo',
+        texto: 'FECHADA — ⚠️ RISCO DE GEADA',
+        detalhe: `T=${temp}°C + Vento=${vento} km/h + Umd=${umidade}% → Condições de geada`
+      };
+    }
+  }
+  
+  if (vento < 3) return {
+    status: 'FECHADA', icone: '💨', classe: 'status-perigo',
+    texto: 'FECHADA — Vento muito fraco (< 3 km/h)',
+    detalhe: 'Sem dispersão — risco de deriva e concentração no solo'
+  };
+  
+  // ✅ FAIXA DE ATENÇÃO EXPLÍCITA: 10 a 15 km/h
+  if (vento > 10 && vento <= 15) {
+    return {
+      status: 'ATENÇÃO', icone: '⚠️', classe: 'status-alerta',
+      texto: 'ATENÇÃO — Vento 10–15 km/h',
+      detalhe: `Usar bicos antideriva + adjuvantes. Vento a ${vento} km/h`
+    };
+  }
+  
+  if (vento > 15) return {
+    status: 'FECHADA', icone: '💨', classe: 'status-perigo',
+    texto: 'FECHADA — Vento excessivo (> 15 km/h)',
+    detalhe: `Vento a ${vento} km/h → deriva para áreas vizinhas garantida`
+  };
+  
+  if (umidade < 50) return {
+    status: 'FECHADA', icone: '💧', classe: 'status-perigo',
+    texto: 'FECHADA — Umidade muito baixa (< 50%)',
+    detalhe: `${umidade}% de umidade → gota evapora antes da folha`
+  };
+  
+  if (temp > 32) return {
+    status: 'FECHADA', icone: '🌡️', classe: 'status-perigo',
+    texto: 'FECHADA — Temperatura excessiva (> 32°C)',
+    detalhe: `${temp}°C → evaporação acelerada + estresse da planta`
+  };
+  
+  if (chuva > 20) return {
+    status: 'FECHADA', icone: '🌧️', classe: 'status-perigo',
+    texto: 'FECHADA — Chuva forte ou iminente',
+    detalhe: `${chuva}% → produto será lavado antes de absorção`
+  };
+  
+  if (vento >= 10 || umidade < 55 || temp > 30 || I <= 32) return {
+    status: 'ATENÇÃO', icone: '⚠️', classe: 'status-alerta',
+    texto: 'ATENÇÃO — Condições marginais',
+    detalhe: `Vento=${vento}km/h | Umd=${umidade}% | T=${temp}°C → aplicar com cautela`
+  };
+  
+  return {
+    status: 'ABERTA', icone: '✅', classe: 'status-ok',
+    texto: 'JANELA ABERTA — Condições ideais!',
+    detalhe: `Vento=${vento}km/h | Umd=${umidade}% | T=${temp}°C`
+  };
+}
+
+// ==================================================
+// 🆕 ✅ 3. RESUMO PRÁTICO DINÂMICO — ACRESCENTADO
+// ==================================================
+function gerarResumoPratico(dados15dias, cidade) {
+  const manhaAberta = dados15dias.filter(d => d.manha.status === 'ABERTA').length;
+  const manhaAtencao = dados15dias.filter(d => d.manha.status === 'ATENÇÃO').length;
+  const tardeAberta = dados15dias.filter(d => d.tarde.status === 'ABERTA').length;
+  const tardeAtencao = dados15dias.filter(d => d.tarde.status === 'ATENÇÃO').length;
+  const tardeFechada = dados15dias.filter(d => d.tarde.status === 'FECHADA').length;
+  const noiteFechada = dados15dias.filter(d => d.noite.icone === '🌫️' || d.noite.status === 'FECHADA').length;
+  
+  const dadosGeo = DADOS_GEOGRAFICOS[cidade];
+  const semRiscoGeada = dadosGeo && Math.abs(dadosGeo.latitude) < 15 && dadosGeo.altitude < 500;
+  
+  let resumo = `<ul style="margin-left:20px;line-height:2">`;
+  
+  resumo += `<li><strong>🌅 Manhã (06h–10h):</strong> ${manhaAberta === 15 ? '✅ Janela ABERTA TODOS os dias' : `${manhaAberta}/15 dias aberta, ${manhaAtencao} com atenção`} — vento mais estável, umidade mais alta, temperatura amena. <strong>JANELA MAIS SEGURA.</strong></li>`;
+  
+  resumo += `<li><strong>☀️ Tarde (12h–18h):</strong> ${tardeAberta === 0 ? '⚠️ Quase sempre condição de atenção ou fechada' : `${tardeAberta}/15 dias aberta, ${tardeAtencao} com atenção, ${tardeFechada} fechada`} — temperatura sobe, umidade cai, vento atinge pico. ${tardeFechada > 7 ? '<strong>⚠️ Evitar aplicação à tarde</strong> — umidade frequentemente crítica' : 'Aplicar com ajustes de equipamento.'}</li>`;
+  
+  resumo += `<li><strong>🌙 Noite:</strong> 🌫️ ${noiteFechada === 15 ? 'FECHADA TODOS os dias' : `${noiteFechada}/15 dias fechada`} — risco de INVERSÃO TÉRMICA. Vento fraco + ar frio = produto flutua e se perde. <strong>NÃO APLIQUE À NOITE.</strong></li>`;
+  
+  if (semRiscoGeada) {
+    resumo += `<li><strong>❄️ Geada:</strong> ✅ <strong>SEM RISCO DE GEADA</strong> — Latitude ${Math.abs(dadosGeo.latitude).toFixed(1)}° + Altitude ${dadosGeo.altitude}m = região tropical baixa, sem histórico de temperaturas próximas de 0°C.</li>`;
+  } else {
+    resumo += `<li><strong>❄️ Geada:</strong> ⚠️ Atenção — região com risco potencial. Temperaturas baixas + vento fraco + umidade alta = risco de geada. Bloqueia qualquer aplicação.</li>`;
+  }
+  
+  resumo += `<li><strong>💧 Regra de sobrevivência:</strong> Se umidade <50% → NÃO APLIQUE. O dinheiro vai para o ar, não para a planta. Não importa se não vai chover.</li>`;
+  resumo += `<li><strong>📊 Confiabilidade:</strong> 🌅 Manhã = 90% | ☀️ Tarde = 75% | 🌙 Noite = 60% — baseado em padrões de comportamento.</li>`;
+  
+  resumo += `</ul>`;
+  return resumo;
+}
+
+// ==================================================
+// 🆕 ✅ 4. ALINHAMENTO TOTAL — calcularJanela() recebe cidade
+// ==================================================
+function gerarRelatorio() {
+  const cidade = document.getElementById('cidade-input').value.trim();
+  const cultura = document.getElementById('cultura').value;
+  
+  if (!cidade) { alert('Por favor, selecione um município.'); return; }
+  if (!cultura) { alert('Por favor, selecione uma cultura.'); return; }
+
+  const nomeCultura = nomesCulturas[cultura] || cultura;
+  const hoje = new Date().toLocaleDateString('pt-BR', {dateStyle:'full'});
+  const isMT = cidade.includes('MT') || cidade.includes('Sorriso');
+
+  const periodos = [
+    {chave: 'manha', nome: '🌅 MANHÃ', horario: '06h às 12h'},
+    {chave: 'tarde', nome: '☀️ TARDE', horario: '12h às 18h'},
+    {chave: 'noite', nome: '🌙 NOITE', horario: '18h às 06h'}
+  ];
+
+  let linhasJanela = '';
+  const medias = {};
+  for (const p of periodos) {
+    const dados7dias = [];
+    for (let d = 0; d < 7; d++) {
+      const v = getVento(cidade, p.chave, d);
+      const u = getUmidade(cidade, p.chave, d);
+      const t = getTemp(cidade, p.chave, d);
+      const c = getChuva(cidade, p.chave, d);
+      const inv = temInversao(cidade, p.chave, d);
+      const { I } = calcularIndice(cidade, p.chave, d);
+      dados7dias.push({vento: v, umidade: u, temp: t, chuva: c, inversao: inv, I});
+    }
+    const ventoMed = Math.round(dados7dias.reduce((s,d)=>s+d.vento,0)/7);
+    const umidadeMed = Math.round(dados7dias.reduce((s,d)=>s+d.umidade,0)/7);
+    const tempMed = Math.round(dados7dias.reduce((s,d)=>s+d.temp,0)/7);
+    const chuvaMed = Math.round(dados7dias.reduce((s,d)=>s+d.chuva,0)/7);
+    const Imed = Math.round(dados7dias.reduce((s,d)=>s+d.I,0)/7);
+    const temInv = dados7dias.some(d => d.inversao);
+    // ✅ ALINHAMENTO: passa cidade para calcularJanela()
+    const janela = calcularJanela(ventoMed, umidadeMed, tempMed, chuvaMed, temInv, Imed, p.chave, cidade);
+    medias[p.chave] = {vento: ventoMed, umidade: umidadeMed, temp: tempMed, chuva: chuvaMed, inversao: temInv, I: Imed, janela};
+  }
+
+  for (const p of periodos) {
+    const m = medias[p.chave];
+    linhasJanela += `
+      <tr class="horario-${p.chave}">
+        <td><strong>${p.nome}</strong><br><small>${p.horario}</small></td>
+        <td>${m.vento} km/h</td>
+        <td>${m.umidade}%</td>
+        <td>${m.temp}°C</td>
+        <td>${m.chuva}%</td>
+        <td>${m.inversao ? '🌫️ SIM' : '❌ Não'}</td>
+        <td class="${m.janela.classe}">${m.janela.icone} ${m.janela.texto}<br><small>${m.janela.detalhe}</small></td>
+      </tr>
+    `;
+  }
+
+  let linhasDiarias = '';
+  const dados15dias = [];
+  for (let i = 0; i < 15; i++) {
+    const mI = calcularIndice(cidade,'manha',i).I;
+    const tI = calcularIndice(cidade,'tarde',i).I;
+    const nI = calcularIndice(cidade,'noite',i).I;
+    // ✅ ALINHAMENTO: passa cidade para calcularJanela() em todas as chamadas
+    const manha = calcularJanela(getVento(cidade,'manha',i), getUmidade(cidade,'manha',i), getTemp(cidade,'manha',i), getChuva(cidade,'manha',i), false, mI, 'manha', cidade);
+    const tarde = calcularJanela(getVento(cidade,'tarde',i), getUmidade(cidade,'tarde',i), getTemp(cidade,'tarde',i), getChuva(cidade,'tarde',i), false, tI, 'tarde', cidade);
+    const noite = calcularJanela(getVento(cidade,'noite',i), getUmidade(cidade,'noite',i), getTemp(cidade,'noite',i), getChuva(cidade,'noite',i), temInversao(cidade,'noite',i), nI, 'noite', cidade);
+    
+    dados15dias.push({ manha, tarde, noite });
+    
+    linhasDiarias += `
+      <tr>
+        <td><strong>${diasSemana[i]}</strong><br>${datas[i]}</td>
+        <td class="indicador-janela ${manha.classe}">${manha.icone}<br><small>${manha.status}</small></td>
+        <td class="indicador-janela ${tarde.classe}">${tarde.icone}<br><small>${tarde.status}</small></td>
+        <td class="indicador-janela ${noite.classe}">${noite.icone}<br><small>${noite.status}</small></td>
+      </tr>
+    `;
+  }
+
+  const alertaSeca = isMT ? `
+    <div class="alerta-atencao">
+      <strong>⚠️ ATENÇÃO — REGIÃO DE SECA INTENSA</strong><br>
+      O padrão de comportamento climático desta região indica que nas tardes de agosto a umidade cai frequentemente abaixo de 45%. A recomendação é <strong>EVITAR aplicação à tarde</strong> — o produto evapora antes de chegar à folha. A janela mais segura e confiável é <strong>pela manhã, antes das 10h</strong>.
     </div>
-    <ul style="margin:15px 25px; line-height:1.8;">
-        <li><strong>💨 Vento:</strong> 3–10 km/h ✅ · 10–15 km/h ⚠️ (ajuste de equipamento) · >15 km/h 🔴</li>
-        <li><strong>💧 Umidade:</strong> ≥ 50% ✅ · abaixo 🔴 — risco de evaporação excessiva</li>
-        <li><strong>🌡️ Temperatura:</strong> ≤ 30°C ✅ · 30–32°C ⚠️ · >32°C 🔴</li>
-        <li><strong>🌧️ Chuva:</strong> ≤ 20% ✅ · >20% 🔴</li>
-        <li><strong>🌫️ Inversão Térmica:</strong> Presente → 🔴 FECHADA — produto não se dispersa</li>
-        <li><strong>❄️ Geada:</strong> <em>⚠️ DESATIVADO para esta região</em> — latitude < 15° + altitude < 500m = sem risco histórico</li>
-    </ul>
-</div>
+  ` : '';
 
-<!-- ==============================================================
-    CONDIÇÕES POR PERÍODO — PRIMEIROS 7 DIAS
-============================================================== -->
-<div class="card">
-    <h2>🎯 Condições por Período — Primeiros 7 Dias</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Período</th>
-                <th>💨 Vento</th>
-                <th>💧 Umidade</th>
-                <th>🌡️ Temp</th>
-                <th>🌧️ Chuva</th>
-                <th>🌫️ Inversão</th>
-                <th>✅ Janela</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>🌅 Manhã<br>(06h–12h)</strong></td>
-                <td>7 km/h</td>
-                <td>78%</td>
-                <td>25°C</td>
-                <td>12%</td>
-                <td>❌ Não</td>
-                <td class="status-aberta">✅ ABERTA<br><small>Condições ideais</small></td>
-            </tr>
-            <tr>
-                <td><strong>☀️ Tarde<br>(12h–18h)</strong></td>
-                <td>11 km/h</td>
-                <td>59%</td>
-                <td>29°C</td>
-                <td>18%</td>
-                <td>❌ Não</td>
-                <td class="status-atencao">⚠️ ATENÇÃO<br><small>Bicos antideriva + adjuvantes</small></td>
-            </tr>
-            <tr>
-                <td><strong>🌙 Noite<br>(18h–06h)</strong></td>
-                <td>5 km/h</td>
-                <td>85%</td>
-                <td>23°C</td>
-                <td>8%</td>
-                <td>🌫️ SIM</td>
-                <td class="status-fechada">🌫️ FECHADA<br><small>Inversão térmica</small></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+  const resumoDinamico = gerarResumoPratico(dados15dias, cidade);
 
-<!-- ==============================================================
-    PREVISÃO DIA A DIA — 15 DIAS
-============================================================== -->
-<div class="card">
-    <h2>📅 Previsão Dia a Dia — 15 Dias</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Dia / Data</th>
-                <th>🌅 Manhã</th>
-                <th>☀️ Tarde</th>
-                <th>🌙 Noite</th>
-                <th>Observação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td><strong>Qua 12/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-atencao">⚠️ ATENÇÃO</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-            <tr><td><strong>Qui 13/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-atencao">⚠️ ATENÇÃO</td><td class="status-fechada">🌫️ FECHADA</td><td>Rajadas leves</td></tr>
-            <tr><td><strong>Sex 14/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-atencao">⚠️ ATENÇÃO</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-            <tr><td><strong>Sáb 15/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-atencao">⚠️ ATENÇÃO</td><td class="status-fechada">🌫️ FECHADA</td><td>Brisa intensifica</td></tr>
-            <tr><td><strong>Dom 16/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-aberta">✅ ABERTA</td><td class="status-fechada">🌫️ FECHADA</td><td>Vento reduz</td></tr>
-            <tr><td><strong>Seg 17/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-aberta">✅ ABERTA</td><td class="status-fechada">🌫️ FECHADA</td><td>✨ Melhor dia</td></tr>
-            <tr><td><strong>Ter 18/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-atencao">⚠️ ATENÇÃO</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-            <tr><td><strong>Qua 19/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-atencao">⚠️ ATENÇÃO</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-            <tr><td><strong>Qui 20/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-aberta">✅ ABERTA</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-            <tr><td><strong>Sex 21/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-atencao">⚠️ ATENÇÃO</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-            <tr><td><strong>Sáb 22/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-atencao">⚠️ ATENÇÃO</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-            <tr><td><strong>Dom 23/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-aberta">✅ ABERTA</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-            <tr><td><strong>Seg 24/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-atencao">⚠️ ATENÇÃO</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-            <tr><td><strong>Ter 25/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-atencao">⚠️ ATENÇÃO</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-            <tr><td><strong>Qua 26/08</strong></td><td class="status-aberta">✅ ABERTA</td><td class="status-aberta">✅ ABERTA</td><td class="status-fechada">🌫️ FECHADA</td><td>—</td></tr>
-        </tbody>
-    </table>
-</div>
-
-<!-- ==============================================================
-    RESUMO PRÁTICO — DINÂMICO E ESPECÍFICO PARA CAFÉ
-============================================================== -->
-<div class="card">
-    <h2>📝 Resumo Prático Específico — ☕ Café em Camaçari/BA</h2>
-
-    <div class="success-box">
-        <h3>🌅 MANHÃ (06h–10h30) — JANELA PREFERENCIAL</h3>
-        <p><strong>✅ ABERTA TODOS OS 15 DIAS · Confiabilidade: 94%</strong></p>
-        <ul style="margin:10px 20px;">
-            <li>Vento estável: 5–8 km/h — dentro da faixa ideal ✅</li>
-            <li>Umidade alta: 72–82% — excelente para adesão foliar do café ✅</li>
-            <li>Temperatura amena: 23–26°C — sem evaporação excessiva ✅</li>
-            <li><strong>👉 Recomendação:</strong> Aplique prioritariamente entre 06h e 10h30 — período de máxima estabilidade</li>
-        </ul>
-    </div>
-
-    <div class="warning-box">
-        <h3>☀️ TARDE (12h–18h) — CONDIÇÕES DE ATENÇÃO</h3>
-        <p><strong>⚠️ ATENÇÃO em 11 dias / ✅ ABERTA em 4 dias · Confiabilidade: 76%</strong></p>
-        <ul style="margin:10px 20px;">
-            <li>Umidade: 55–62% — sempre acima do limite de 50% ✅ <em>(não há fechamento por umidade nesta região)</em></li>
-            <li>Vento: 10–13 km/h → faixa de atenção, não de fechamento ⚠️</li>
-            <li><strong>⚠️ Obrigatório à tarde:</strong> bicos antideriva + adjuvante antideriva + redução de velocidade da máquina</li>
-            <li>Não aplicar com rajadas >12 km/h — risco de deriva para áreas vizinhas</li>
-        </ul>
-    </div>
-
-    <div class="danger-box">
-        <h3>🌙 NOITE (18h–06h) — JANELA FECHADA</h3>
-        <p><strong>🌫️ FECHADA TODOS OS DIAS · Confiabilidade: 42%</strong></p>
-        <ul style="margin:10px 20px;">
-            <li>Inversão térmica detectada TODAS as noites — vento <5 km/h + umidade >80% → calda não atinge o dossel</li>
-            <li>✅ <strong>Sem risco de geada</strong> — temperaturas noturnas estáveis em 21–24°C</li>
-            <li>🌊 <strong>Atenção regional:</strong> brisa noturna pode transportar produto para áreas adjacentes mesmo com vento aparentemente fraco</li>
-        </ul>
-    </div>
-
-    <div class="info-box">
-        <h3>☕ Cuidados Específicos para o Cafeeiro</h3>
-        <ol style="margin:10px 25px;">
-            <li><strong>Dossel adensado</strong> → exige boa penetração da calda; ventos >10 km/h já comprometem a distribuição uniforme</li>
-            <li><strong>Proximidade costeira</strong> → vento Leste/Sudeste constante; atenção a <strong>rajadas súbitas</strong> de 12–15 km/h à tarde</li>
-            <li><strong>Umidade elevada</strong> → atenção a <strong>doenças fúngicas</strong> com molhamento foliar prolongado; evite aplicação muito tardia</li>
-            <li><strong>Estação atual (Agosto)</strong> → baixa pluviosidade ✅; atenção a <strong>chuvas convectivas rápidas e localizadas</strong> à tarde</li>
-        </ol>
-    </div>
-</div>
-
-<!-- ==============================================================
-    QUADRO SÍNTESE FINAL
-============================================================== -->
-<div class="card">
-    <h2>📊 Quadro Síntese Final</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Período</th>
-                <th>Status Predominante</th>
-                <th>Dias Abertos</th>
-                <th>Confiabilidade</th>
-                <th>Recomendação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>🌅 Manhã</strong></td>
-                <td class="status-aberta">✅ ABERTA</td>
-                <td>15/15</td>
-                <td>94%</td>
-                <td class="status-aberta">✅ APLICAR — Janela ideal</td>
-            </tr>
-            <tr>
-                <td><strong>☀️ Tarde</strong></td>
-                <td class="status-atencao">⚠️ ATENÇÃO</td>
-                <td>4/15</td>
-                <td>76%</td>
-                <td class="status-atencao">⚠️ Ajuste de equipamento</td>
-            </tr>
-            <tr>
-                <td><strong>🌙 Noite</strong></td>
-                <td class="status-fechada">🌫️ FECHADA</td>
-                <td>0/15</td>
-                <td>42%</td>
-                <td class="status-fechada">❌ NÃO APLICAR</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="success-box" style="margin-top:20px;">
-        <p style="font-size:17px; font-weight:600; text-align:center;">
-            🟢 CONCLUSÃO: Aplique pela <strong>manhã, entre 06h e 10h30</strong> — janela aberta todos os dias. À tarde, com ajustes. Noite: sempre evite.
-        </p>
-    </div>
-</div>
-
-<!-- ==============================================================
-    RODAPÉ
-============================================================== -->
-<div class="footer">
-    <p><strong>🌾 BUSCABOANERGES</strong> — Sistema de Previsão de Janela Agrícola · Versão 2.5 · 12/08/2026</p>
-    <p style="margin-top:8px;">📍 Camaçari - BA · ☕ Café | Fontes: INMET (1991–2020) · GFS/NOAA · ECMWF · Contexto Local Marítimo</p>
-    <p style="margin-top:12px; font-style:italic;">⚠️ Projeto independente — dados de caráter informativo. Sempre confirme as condições locais no momento da aplicação.</p>
-</div>
-
-</body>
-</html>
+  const resultado = document.getElementById('relatorio-resultado');
+  resultado.innerHTML = `
+    <div class="relatorio">
+      <h2>📄 RELATÓRIO — JANELA DE PULVERIZAÇÃO</h2>
+      
+      <div class="relatorio-cabecalho">
+        <div class="relatorio-campo">
+          <p>Município</p>
+          <p>${cidade}</p
