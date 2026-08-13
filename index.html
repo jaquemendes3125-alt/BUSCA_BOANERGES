@@ -3,51 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BUSCABOANERGES — Confiança no Clima para o Produtor</title>
+<title>BUSCABOANERGES — Previsão para Aplicação Segura</title>
 <style>
 :root {
   --fundo: #0f172a; --texto: #f1f5f9; --destaque: #fbbf24; --primaria: #22c55e;
   --alerta: #f59e0b; --perigo: #ef4444; --card: #1e293b; --borda: #334155;
   --info: #3b82f6; --inversao: #8b5cf6; --aviso: #94a3b8;
-  --conf-muitoalta: #22c55e; --conf-alta: #84cc16; --conf-media: #f59e0b; --conf-baixa: #ef4444;
-  --chuva-sem: #64748b; --chuva-leve: #38bdf8; --chuva-mod: #3b82f6; --chuva-forte: #1d4ed8;
 }
 * {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
 body {background:var(--fundo);color:var(--texto);min-height:100vh;line-height:1.6;
   -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 
-.container {max-width:1100px;margin:0 auto;padding:20px 15px}
-header {text-align:center;margin-bottom:25px;padding-bottom:15px;border-bottom:2px solid var(--primaria)}
-h1 {font-size:1.7rem;color:var(--destaque);margin-bottom:5px}
-.subtitulo {color:#cbd5e1;font-size:.95rem}
+.container {max-width:1100px;margin:0 auto;padding:30px 20px}
 
-.busca-secao {background:var(--card);border-radius:16px;padding:22px;margin-bottom:22px;border-left:4px solid var(--primaria)}
-.busca-secao h2 {color:var(--primaria);margin-bottom:18px;font-size:1.25rem}
-.form-grid {display:grid;grid-template-columns:2fr 1fr;gap:12px}
-@media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+header {text-align:center;margin-bottom:40px;padding-bottom:25px;border-bottom:2px solid var(--primaria)}
+h1 {font-size:2rem;color:var(--destaque);margin-bottom:10px}
+.subtitulo {color:#cbd5e1;font-size:1.05rem}
+
+.busca-secao {background:var(--card);border-radius:16px;padding:30px;margin-bottom:30px;border-left:4px solid var(--primaria)}
+.busca-secao h2 {color:var(--primaria);margin-bottom:25px;font-size:1.4rem}
+.form-grid {display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
 .grupo-form {position:relative}
-label {display:block;margin-bottom:5px;color:#cbd5e1;font-weight:500;font-size:.9rem}
+label {display:block;margin-bottom:8px;color:#cbd5e1;font-weight:500}
 input, select {
-  width:100%;padding:11px 13px;border-radius:10px;border:1px solid #475569;
-  background:#1e293b;color:white;font-size:.95rem;outline:none;transition:.2s
+  width:100%;padding:14px 16px;border-radius:10px;border:1px solid #475569;
+  background:#1e293b;color:white;font-size:1rem;outline:none;transition:.2s
 }
 input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgba(251,191,36,.2)}
 .btn {
-  padding:11px 18px;border-radius:10px;border:none;font-size:.95rem;font-weight:bold;
+  padding:14px 24px;border-radius:10px;border:none;font-size:1rem;font-weight:bold;
   cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:8px
 }
 .btn-amarelo {background:var(--destaque);color:#000}
-.btn-amarelo:hover {background:#f59e0b;transform:translateY(-1px)}
+.btn-amarelo:hover {background:#f59e0b;transform:translateY(-2px)}
 .btn-verde {background:var(--primaria);color:white}
-.btn-verde:hover {background:#16a34a;transform:translateY(-1px)}
-.botoes {display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.btn-verde:hover {background:#16a34a;transform:translateY(-2px)}
+.botoes {display:flex;gap:15px;margin-top:25px;flex-wrap:wrap}
 
 .sugestoes {
   position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid #475569;
-  border-radius:10px;max-height:300px;overflow-y:auto;z-index:100;display:none;margin-top:4px;
-  box-shadow:0 10px 25px rgba(0,0,0,.3)
+  border-radius:10px;max-height:300px;overflow-y:auto;z-index:100;display:none;margin-top:5px
 }
-.sugestao-item {padding:11px 15px;cursor:pointer;border-bottom:1px solid #334155;font-size:.95rem}
+.sugestao-item {padding:12px 16px;cursor:pointer;border-bottom:1px solid #334155}
 .sugestao-item:hover {background:#334155}
 .sugestao-item:last-child {border-bottom:none}
 
@@ -58,190 +56,212 @@ input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgb
 
 .btn-voltar {
   background:transparent;color:var(--texto);border:1px solid #475569;
-  padding:8px 14px;border-radius:8px;cursor:pointer;transition:.2s;margin-bottom:15px;font-size:.9rem
+  padding:10px 20px;border-radius:8px;cursor:pointer;transition:.2s;margin-bottom:20px
 }
 .btn-voltar:hover {background:var(--card)}
 
-.apresentacao-conteudo {max-width:850px;margin:0 auto;padding:25px 15px;text-align:center}
-.logo-apresentacao {font-size:3.2rem;margin-bottom:12px}
-.apresentacao-conteudo h1 {font-size:2rem;color:var(--destaque);margin-bottom:8px}
-.apresentacao-subtitulo {font-size:1.05rem;color:#cbd5e1;max-width:650px;margin:0 auto 25px;line-height:1.6}
+.apresentacao-conteudo {max-width:900px;margin:0 auto;padding:40px 20px;text-align:center}
+.logo-apresentacao {font-size:4rem;margin-bottom:20px}
+.apresentacao-conteudo h1 {font-size:2.5rem;color:var(--destaque);margin-bottom:15px}
+.apresentacao-subtitulo {font-size:1.2rem;color:#cbd5e1;max-width:600px;margin:0 auto 40px;line-height:1.6}
 .destaque-apresentacao {
-  background:var(--card);border:2px solid var(--primaria);border-radius:16px;padding:22px;margin:22px 0
+  background:var(--card);border:2px solid var(--primaria);border-radius:16px;padding:35px;margin:30px 0
 }
-.destaque-apresentacao h2 {color:var(--primaria);font-size:1.3rem;margin-bottom:10px}
-.destaque-apresentacao.confianca {border-color:var(--destaque);background:rgba(251,191,36,.05)}
-.destaque-apresentacao.confianca h2 {color:var(--destaque)}
-.grid-apresentacao {display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:25px 0}
+.destaque-apresentacao h2 {color:var(--primaria);font-size:1.6rem;margin-bottom:15px}
+.destaque-apresentacao.info {border-color:var(--info)}
+.destaque-apresentacao.info h2 {color:var(--info)}
+.grid-apresentacao {display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin:40px 0}
 .card-funcionalidade {
-  background:var(--card);border-radius:14px;padding:18px;border-left:4px solid var(--primaria);
+  background:var(--card);border-radius:14px;padding:25px;border-left:4px solid var(--primaria);
   text-align:left;transition:.3s
 }
-.card-funcionalidade:hover {transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.25)}
-.card-funcionalidade .icone {font-size:1.7rem;margin-bottom:8px}
-.card-funcionalidade h3 {color:var(--destaque);margin-bottom:5px;font-size:1.05rem}
-.card-funcionalidade p {font-size:.9rem;color:#cbd5e1;line-height:1.5}
-.nivel-confianca {display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-weight:bold;font-size:.85rem}
-.conf-muitoalta {background:rgba(34,197,94,.15);color:var(--conf-muitoalta);border:1px solid var(--conf-muitoalta)}
-.conf-alta {background:rgba(132,204,22,.15);color:var(--conf-alta);border:1px solid var(--conf-alta)}
-.conf-media {background:rgba(245,158,11,.15);color:var(--conf-media);border:1px solid var(--conf-media)}
-.conf-baixa {background:rgba(239,68,68,.15);color:var(--conf-baixa);border:1px solid var(--conf-baixa)}
-.barra-confianca {height:6px;border-radius:3px;background:#1e293b;margin-top:4px;overflow:hidden}
-.preenchida {height:100%;border-radius:3px;transition:width .5s ease}
-.contato-secao {margin-top:35px;padding-top:20px;border-top:1px solid #334155}
-.contato-item {display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0;font-size:.95rem}
-footer.apresentacao {margin-top:40px;padding-top:20px;border-top:1px solid #334155;color:#94a3b8;text-align:center;font-size:.85rem}
-.aviso-legal {background:rgba(148,163,184,.1);border:1px solid #475569;border-radius:12px;padding:16px;margin-top:20px;text-align:left;font-size:.9rem;color:#cbd5e1}
-.aviso-legal h4 {color:var(--aviso);margin-bottom:8px}
+.card-funcionalidade:hover {transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.card-funcionalidade .icone {font-size:2rem;margin-bottom:12px}
+.card-funcionalidade h3 {color:var(--destaque);margin-bottom:8px}
+.contato-secao {margin-top:50px;padding-top:30px;border-top:1px solid #334155}
+.contato-item {display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0;font-size:1.1rem}
+.contato-item .icone {font-size:1.3rem}
+footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #334155;color:#94a3b8;text-align:center}
+.aviso-legal {background:rgba(148,163,184,.1);border:1px solid #475569;border-radius:12px;padding:20px;margin-top:30px;text-align:left;font-size:.9rem;color:#cbd5e1}
+.aviso-legal h4 {color:var(--aviso);margin-bottom:10px}
 
-.relatorio {background:var(--card);border-radius:16px;padding:18px;margin-top:22px;border:2px solid var(--primaria)}
-.relatorio-cabecalho {display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.relatorio {background:var(--card);border-radius:16px;padding:30px;margin-top:30px;border:2px solid var(--primaria)}
+.relatorio-cabecalho {display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:30px}
 @media(max-width:768px){.relatorio-cabecalho{grid-template-columns:1fr 1fr}}
-.relatorio-campo p:first-child {color:#94a3b8;font-size:.8rem}
+.relatorio-campo p:first-child {color:#94a3b8;font-size:.9rem}
 .relatorio-campo p:last-child {font-weight:bold;color:var(--texto)}
-.relatorio h2 {color:var(--destaque);margin-bottom:15px;font-size:1.3rem;border-bottom:1px solid #334155;padding-bottom:8px}
-.relatorio h3 {color:var(--primaria);margin:18px 0 10px;font-size:1.1rem}
-.relatorio h4 {color:var(--info);margin:15px 0 8px;font-size:.95rem}
+.relatorio h2 {color:var(--destaque);margin-bottom:20px;font-size:1.5rem;border-bottom:1px solid #334155;padding-bottom:10px}
+.relatorio h3 {color:var(--primaria);margin:25px 0 15px;font-size:1.2rem}
+.relatorio h4 {color:var(--info);margin:20px 0 10px;font-size:1.05rem}
 
-.janela-plantio {border-radius:12px;padding:15px;margin:18px 0}
-.janela-ok {background:rgba(34,197,94,.1);border:2px solid var(--primaria)}
-.janela-alerta {background:rgba(245,158,11,.1);border:2px solid var(--alerta)}
-.janela-proibida {background:rgba(239,68,68,.1);border:2px solid var(--perigo)}
-.janela-plantio h4 {margin-top:0;margin-bottom:8px;font-size:1rem}
-.janela-ok h4 {color:var(--primaria)}
-.janela-alerta h4 {color:var(--alerta)}
-.janela-proibida h4 {color:var(--perigo)}
-
-.tabela-chuva {width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
-.tabela-chuva th, .tabela-chuva td {padding:10px 6px;text-align:center;border:1px solid #334155;vertical-align:middle}
-.tabela-chuva th {background:#1e293b;color:var(--destaque);font-weight:bold;font-size:.85rem}
-.tabela-chuva td:first-child {font-weight:bold}
-.chuva-sem {color:var(--chuva-sem)}
-.chuva-leve {color:var(--chuva-leve);font-weight:bold}
-.chuva-mod {color:var(--chuva-mod);font-weight:bold}
-.chuva-forte {color:var(--chuva-forte);font-weight:bold}
-.horario-manha {border-left:4px solid #60a5fa}
+.tabela-janela {width:100%;border-collapse:collapse;margin:20px 0}
+.tabela-janela th, .tabela-janela td {padding:14px 10px;text-align:center;border:1px solid #334155;vertical-align:middle}
+.tabela-janela th {background:#1e293b;color:var(--destaque);font-weight:bold}
+.tabela-janela td:first-child {font-weight:bold}
+.status-ok {color:var(--primaria);font-weight:bold}
+.status-alerta {color:var(--alerta);font-weight:bold}
+.status-perigo {color:var(--perigo);font-weight:bold}
+.status-inversao {color:var(--inversao);font-weight:bold}
+.horario-manha {border-left:4px solid #fbbf24}
 .horario-tarde {border-left:4px solid #f97316}
-.horario-noite {border-left:4px solid #a855f7}
+.horario-noite {border-left:4px solid #8b5cf6}
 
-.resumo-pratico {background:rgba(34,197,94,.05);border:2px solid var(--primaria);border-radius:12px;padding:18px;margin-top:20px}
-.resumo-pratico h3 {color:var(--primaria);margin-top:0;margin-bottom:12px}
-.dica-produtor {background:rgba(251,191,36,.08);border-left:4px solid var(--destaque);padding:12px 15px;border-radius:0 10px 10px 0;margin:12px 0}
-.dica-produtor h4 {color:var(--destaque);margin-top:0 0 6px 0}
-.rodape-relatorio {margin-top:20px;padding-top:15px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.8rem}
-.fonte-dados {background:rgba(59,130,246,.08);border-radius:8px;padding:12px;margin-top:12px;font-size:.8rem;color:#93c5fd}
-.fonte-dados strong {color:var(--info)}
+.regra-ouro {background:rgba(34,197,94,.1);border:2px solid var(--primaria);border-radius:12px;padding:20px;margin:25px 0}
+.regra-ouro.tecnico {background:rgba(59,130,246,.1);border-color:var(--info)}
+.regra-ouro.tecnico h4 {color:var(--info)}
+.alerta-perigo {background:rgba(239,68,68,.1);border:2px solid var(--perigo);border-radius:12px;padding:18px;margin:20px 0}
+.alerta-atencao {background:rgba(245,158,11,.1);border:2px solid var(--alerta);border-radius:12px;padding:18px;margin:20px 0}
+.info-inversao {background:rgba(139,92,246,.1);border:2px solid var(--inversao);border-radius:12px;padding:18px;margin:20px 0}
+
+.tabela-diaria {width:100%;border-collapse:collapse;margin:20px 0;font-size:.9rem}
+.tabela-diaria th, .tabela-diaria td {padding:10px 6px;text-align:center;border:1px solid #334155}
+.tabela-diaria th {background:#1e293b;color:var(--destaque);font-weight:bold}
+.indicador-janela {font-weight:bold;font-size:.95rem}
+.resumo-pratico {background:rgba(34,197,94,.05);border:2px solid var(--primaria);border-radius:12px;padding:25px;margin-top:30px}
+.resumo-pratico h3 {color:var(--primaria);margin-top:0}
+.rodape-aviso {margin-top:30px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.85rem}
 </style>
 </head>
 <body>
 
-<!-- ==================== PÁGINA PÚBLICA ==================== -->
+<!-- ==================== PÁGINA PÚBLICA — APRESENTAÇÃO ==================== -->
 <div id="tela-apresentacao" class="tela-apresentacao">
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
     <h1>BUSCABOANERGES</h1>
-    <p class="apresentacao-subtitulo">Previsão Agroclimática com <strong>CONFIANÇA</strong> — porque o produtor precisa saber não apenas o que vai acontecer, mas <em>o quanto pode confiar</em>. Dados gratuitos, fontes oficiais, para o pequeno produtor de qualquer região do Brasil.</p>
+    <p class="apresentacao-subtitulo">Previsão Meteorológica para Aplicação Segura de Defensivos</p>
 
-    <div class="destaque-apresentacao confianca">
-      <h2>☁️ CONFIANÇA NA CHUVA — É O QUE MAIS VALE</h2>
-      <p>Não basta dizer "vai chover". O produtor precisa saber: <strong>quando, quanto e com que certeza</strong>. O BUSCABOANERGES cruza padrões históricos com dados de satélite e estações oficiais para entregar não apenas a previsão, mas o <strong>nível de confiança</strong> de cada informação.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:15px">
-        <span class="nivel-confianca conf-muitoalta">🟢 90-100% — Pode confiar</span>
-        <span class="nivel-confianca conf-alta">🟡 75-89% — Boa previsão</span>
-        <span class="nivel-confianca conf-media">🟠 55-74% — Atenção</span>
-        <span class="nivel-confianca conf-baixa">🔴 Abaixo de 55% — Incerto</span>
-      </div>
+    <div class="destaque-apresentacao">
+      <h2>📊 O QUE FAZEMOS</h2>
+      <p>Analisamos as condições climáticas — combinando padrão de comportamento e momento atual — para indicar com precisão quando a janela de pulverização está aberta, com atenção ou fechada.</p>
     </div>
 
     <div class="grid-apresentacao">
       <div class="card-funcionalidade">
+        <div class="icone">💨</div>
+        <h3>Velocidade do Vento</h3>
+        <p>Faixa ideal 3 a 10 km/h — evita deriva do produto para áreas vizinhas ou perda por transporte.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">💧</div>
+        <h3>Umidade Relativa do Ar</h3>
+        <p>Acima de 50% — garante que a gota chegue à folha sem evaporar no caminho.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🌡️</div>
+        <h3>Temperatura</h3>
+        <p>Abaixo de 30°C — impede evaporação acelerada e estresse que reduz absorção pela planta.</p>
+      </div>
+      <div class="card-funcionalidade">
+        <div class="icone">🌫️</div>
+        <h3>Inversão Térmica</h3>
+        <p>Detectada em condições de vento fraco — produto flutua e se perde. ⚠️ Não aplicar.</p>
+      </div>
+      <div class="card-funcionalidade">
         <div class="icone">🌧️</div>
-        <h3>Chuva por Período</h3>
-        <p>Probabilidade + volume + <strong>confiança</strong> — manhã, tarde e noite separados. Sabe exatamente quando aplicar.</p>
+        <h3>Probabilidade de Chuva</h3>
+        <p>Nas horas seguintes à aplicação — evita lavagem do produto antes de fazer efeito.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">🎯</div>
-        <h3>Nível de Confiança</h3>
-        <p>Em cada dia você vê: <strong>quanto pode confiar</strong> naquela previsão. Verde = seguro. Vermelho = espere mais um dia.</p>
+        <div class="icone">✅</div>
+        <h3>Janela de Pulverização</h3>
+        <p>Decisão combinada: só indica favorável quando todos os fatores estão dentro das condições seguras.</p>
+      </div>
+    </div>
+
+    <div class="destaque-apresentacao info">
+      <h2>📚 FONTES DE INFORMAÇÃO</h2>
+      <p>O sistema utiliza padrões de comportamento climático de longo prazo combinados com dados atuais de estações meteorológicas e modelos numéricos de previsão.</p>
+    </div>
+
+    <div class="grid-apresentacao">
+      <div class="card-funcionalidade">
+        <div class="icone">📡</div>
+        <h3>Estações em Tempo Real</h3>
+        <p>Medições horárias de vento, temperatura, chuva e umidade obtidas de estações automáticas distribuídas por todo o território nacional.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">📊</div>
-        <h3>Padrão Histórico</h3>
-        <p>Leitura do comportamento do tempo <strong>desde 1960</strong> na sua região — o costume se repete, nós lemos o costume.</p>
+        <div class="icone">🌐</div>
+        <h3>Modelos Numéricos de Previsão</h3>
+        <p>Dados de previsão de até 15 dias, incluindo análise de vento, sistemas atmosféricos e aproximação de frentes frias.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">🗓️</div>
-        <h3>Janelas de Plantio</h3>
-        <p>Baseado no <strong>ZARC/Embrapa</strong> — avisa se pode plantar aquela cultura naquela região e mês. Fora da janela = risco alto.</p>
+        <div class="icone">✈️</div>
+        <h3>Dados de Precisão Horária</h3>
+        <p>Registros frequentes de velocidade e direção do vento, atualizados a cada hora em pontos de observação.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">❄️</div>
-        <h3>Alerta de Geada</h3>
-        <p>Identifica até 10 dias antes as condições perfeitas para geada — avisa antes do frio chegar.</p>
+        <h3>Condições de Geada</h3>
+        <p>Identificação de cenários com temperatura baixa, vento fraco e alta umidade — fatores que favorecem a formação de geada.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">🛰️</div>
-        <h3>Dados Gratuitos</h3>
-        <p>INPE/CPTEC, INMET, IBGE, Copernicus — <strong>todos gratuitos e oficiais</strong>. Sem custo, sem assinatura, sem limite de uso.</p>
+        <div class="icone">🌅</div>
+        <h3>Análise por Período</h3>
+        <p>🌅 Manhã (06h-12h) | ☀️ Tarde (12h-18h) | 🌙 Noite (18h-06h). Cada período analisado com critérios próprios.</p>
       </div>
-    </div>
-
-    <div class="destaque-apresentacao">
-      <h2>📚 COMO FUNCIONA — SIMPLES E CONFIÁVEL</h2>
-      <p><strong>Fórmula de leitura:</strong> I = 64 × O ÷ R × (P × E ÷ C)<br>
-      Lê o <strong>padrão histórico</strong> (O) → mede a <strong>repetição</strong> (R) → observa o que está acontecendo <strong>agora</strong> (P) → avalia a <strong>força</strong> do sistema (E) → calcula a <strong>intensidade e a confiança</strong> (I) → projeta <strong>30 dias à frente</strong>, dividido em manhã, tarde e noite.</p>
+      <div class="card-funcionalidade">
+        <div class="icone">📊</div>
+        <h3>Padrão de Comportamento</h3>
+        <p>Estudo do comportamento climático — direção predominante do vento, padrão de chuva e temperatura por mês e horário.</p>
+      </div>
     </div>
 
     <div class="contato-secao">
-      <div class="contato-item">📍 Serviço Nacional — Todo o Brasil</div>
-      <div class="contato-item">🌾 Para o pequeno e médio produtor rural</div>
+      <h2 style="color:var(--destaque);margin-bottom:20px">📞 CONTATO</h2>
+      <div class="contato-item"><span class="icone">💬</span> WhatsApp: (15) 98156-5052</div>
+      <div class="contato-item"><span class="icone">✉️</span> buscaboanerges@gmail.com</div>
+      <div class="contato-item"><span class="icone">🇧🇷</span> Foco: Brasil — todas as cidades e regiões</div>
+    </div>
+
+    <div class="aviso-legal">
+      <h4>⚠️ AVISO IMPORTANTE — PROJETO INDEPENDENTE</h4>
+      <p><strong>Este é um projeto independente, de caráter informativo e sem vínculo oficial.</strong> Os dados apresentados são obtidos de fontes públicas e de livre acesso, conforme a Lei de Acesso à Informação. Não representa, substitui ou tem qualquer vínculo com instituições governamentais. Para dados oficiais e decisões oficiais, consulte sempre diretamente os canais oficiais dos órgãos competentes.</p>
+      <p style="margin-top:10px">A utilização das informações é de total responsabilidade do usuário. O sistema atua apenas como ferramenta de apoio à decisão, não se responsabilizando por eventuais divergências entre os dados apresentados e a realidade local no momento da aplicação.</p>
     </div>
 
     <footer class="apresentacao">
-      <p>BUSCABOANERGES — Sistema Independente de Previsão Agroclimática | Versão 3.0 — 2026</p>
-      <p>Base de dados: INMET • CPTEC/INPE • IBGE • Embrapa/ZARC • Open-Meteo — Todas fontes gratuitas e oficiais</p>
+      <p>🌾 BUSCABOANERGES — Previsão baseada em padrões de comportamento e dados atuais</p>
+      <p>Versão: 2.5 — Agosto de 2026 | Projeto independente e de acesso público</p>
     </footer>
   </div>
 </div>
 
-<!-- ==================== ÁREA DE RELATÓRIOS ==================== -->
+<!-- ==================== ÁREA DE RELATÓRIOS — ACESSO SÓ PELO HASH ==================== -->
 <div id="tela-sistema" class="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
     
     <header>
-      <h1>🌾 BUSCABOANERGES — RELATÓRIO DE PREVISÃO</h1>
-      <p class="subtitulo">Chuva • Vento • Umidade • Geada • Janela de Plantio — com Nível de Confiança</p>
+      <h1>🌾 BUSCABOANERGES — SISTEMA DE RELATÓRIO</h1>
+      <p class="subtitulo">Análise de janela de pulverização — padrão de comportamento + momento atual</p>
     </header>
 
     <section class="busca-secao">
-      <h2>🔍 DADOS PARA A PREVISÃO</h2>
+      <h2>🔍 DADOS DA PESQUISA</h2>
       <div class="form-grid">
         <div class="grupo-form">
-          <label for="cidade-input">🏙️ Seu Município</label>
-          <input type="text" id="cidade-input" placeholder="Digite o nome da sua cidade..." oninput="mostrarSugestoes(this.value)">
+          <label for="cidade-input">🏘️ Nome do Município</label>
+          <input type="text" id="cidade-input" placeholder="Digite o nome da cidade..." oninput="mostrarSugestoes(this.value)" autocomplete="off">
           <div id="sugestoes" class="sugestoes"></div>
         </div>
         <div class="grupo-form">
-          <label for="cultura-select">🌱 Cultura / Produto</label>
-          <select id="cultura-select">
-            <option value="geral">Geral / Diversa</option>
-            <option value="soja">🌱 Soja</option>
+          <label for="cultura">🌱 Cultura</label>
+          <select id="cultura">
+            <option value="">Selecione...</option>
             <option value="milho">🌽 Milho</option>
-            <option value="cana">🍬 Cana-de-Açúcar</option>
+            <option value="soja">🫘 Soja</option>
+            <option value="citros">🍊 Citros</option>
             <option value="cafe">☕ Café</option>
+            <option value="cana">🍬 Cana-de-Açúcar</option>
             <option value="algodao">☁️ Algodão</option>
-            <option value="feijao">🫘 Feijão</option>
-            <option value="mandioca">🥔 Mandioca</option>
-            <option value="citros">🍊 Citros / Laranja</option>
-            <option value="hortaliças">🥬 Hortaliças</option>
-            <option value="fruticultura">🍎 Fruticultura</option>
-            <option value="pastagem">🐄 Pastagem</option>
+            <option value="hortalicas">🥬 Hortaliças</option>
+            <option value="pastagem">🌿 Pastagem / Pecuária</option>
           </select>
         </div>
       </div>
       <div class="botoes">
-        <button class="btn btn-amarelo" onclick="gerarRelatorio()">📄 Gerar Relatório de 30 Dias</button>
+        <button class="btn btn-amarelo" onclick="gerarRelatorio()">📄 Gerar Relatório Completo</button>
         <button class="btn btn-verde" onclick="limparFormulario()">🔄 Limpar</button>
       </div>
     </section>
@@ -252,8 +272,8 @@ footer.apresentacao {margin-top:40px;padding-top:20px;border-top:1px solid #3341
 
 <script>
 // ==================================================
-// 🔑 ACESSO: #_area_de_relatorio_seguro
-// 📐 FÓRMULA: I = 64 × O ÷ R × (P × E ÷ C)
+// 🔑 ACESSO EXATO — NÃO ALTERAR
+// Link: jaquemendes3125-alt.github.io/BUSCA_BOANERGES/#_area_de_relatorio_seguro
 // ==================================================
 const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 
@@ -274,139 +294,165 @@ function verificarAcesso() {
 function voltarApresentacao() {
   window.location.hash = '';
   verificarAcesso();
+  document.getElementById('relatorio-resultado').innerHTML = '';
 }
 
 window.addEventListener('hashchange', verificarAcesso);
 window.addEventListener('load', verificarAcesso);
 
-// 📐 FÓRMULA PRINCIPAL — OCULTA — I = 64 × O ÷ R × (P × E ÷ C)
+// 📐 FÓRMULA — TOTALMENTE OCULTA, NÃO APARECE EM LUGAR NENHUM
 function calcularIntensidade(dados) {
-  const O = dados.ocorrencia || 50;      // Padrão histórico
-  const R = dados.repeticao || 10;        // Repetição do padrão
-  const P = dados.padraoAtual || 1.2;    // Dados atuais
-  const E = dados.energia || 1.0;         // Força do fenômeno
-  const C = 64;                           // Constante de calibração
-  
-  // ✅ EXATAMENTE COMO DEFINIDO
-  const I = 64 * O / R * (P * E / C);
-  
-  return I;
+  const O = dados.ocorrencia || 50;
+  const R = dados.repeticao || 10;
+  const P = dados.padraoAtual || 1.2;
+  const E = dados.energia || 1.0;
+  const C = 64;
+  return (64 * O / R) * (P * E / C);
 }
 
-// 📊 CALCULA O NÍVEL DE CONFIANÇA — baseado na estabilidade do padrão
-function calcularConfianca(dia, dadosBase) {
-  const estabilidade = Math.abs(Math.sin(dia * 0.3 + dadosBase)) * 40 + 50;
-  const fatorTempo = dia < 7 ? 1.15 : dia < 15 ? 1.0 : dia < 21 ? 0.9 : 0.8;
-  const confianca = Math.min(98, Math.round(estabilidade * fatorTempo));
-  
-  let classe, texto;
-  if (confianca >= 90) { classe = 'conf-muitoalta'; texto = '🟢 Muito Alta'; }
-  else if (confianca >= 75) { classe = 'conf-alta'; texto = '🟡 Alta'; }
-  else if (confianca >= 55) { classe = 'conf-media'; texto = '🟠 Média'; }
-  else { classe = 'conf-baixa'; texto = '🔴 Baixa'; }
-  
-  return { valor: confianca, classe: classe, texto: texto };
+function classificarVento(km) {
+  if (km < 3) return { texto: 'Muito fraco', classe: 'status-alerta', aviso: '⚠️ Risco de inversão térmica' };
+  if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Faixa ideal para aplicação' };
+  if (km <= 15) return { texto: 'Moderado', classe: 'status-alerta', aviso: '⚠️ Risco de deriva leve' };
+  return { texto: 'Forte', classe: 'status-perigo', aviso: '❌ Não aplicar — deriva severa' };
 }
 
-// 🌧️ CLASSIFICA A CHUVA POR INTENSIDADE E VOLUME
-function classificarChuva(probabilidade, intensidade) {
-  if (probabilidade < 20) return { texto: 'Sem chuva', classe: 'chuva-sem', mm: '0 mm' };
-  if (intensidade < 0.4) return { texto: 'Chuva leve', classe: 'chuva-leve', mm: '1-3 mm' };
-  if (intensidade < 0.7) return { texto: 'Chuva moderada', classe: 'chuva-mod', mm: '5-15 mm' };
-  return { texto: 'Chuva forte', classe: 'chuva-forte', mm: '15-30 mm' };
+function classificarUmidade(porcento) {
+  if (porcento < 50) return { texto: 'Baixa', classe: 'status-perigo', aviso: '❌ Evaporação excessiva' };
+  if (porcento <= 70) return { texto: 'Adequada', classe: 'status-ok', aviso: '✅ Condição favorável' };
+  return { texto: 'Alta', classe: 'status-ok', aviso: '✅ Excelente para aplicação' };
 }
 
-// 📍 IDENTIFICA A REGIÃO DO BRASIL POR MUNICÍPIO
+function classificarTemperatura(celsius) {
+  if (celsius < 10) return { texto: 'Fria', classe: 'status-alerta', aviso: '⚠️ Absorção reduzida' };
+  if (celsius <= 30) return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Faixa ideal' };
+  return { texto: 'Quente', classe: 'status-perigo', aviso: '❌ Evaporação acelerada' };
+}
+
+function classificarChuva(prob) {
+  if (prob < 20) return { texto: 'Sem chuva', classe: 'status-ok' };
+  if (prob < 40) return { texto: 'Baixa', classe: 'status-alerta' };
+  if (prob < 70) return { texto: 'Provável', classe: 'status-perigo' };
+  return { texto: 'Certa', classe: 'status-perigo' };
+}
+
+function verificarJanela(vento, umidade, temp, chuva) {
+  const v = classificarVento(vento);
+  const u = classificarUmidade(umidade);
+  const t = classificarTemperatura(temp);
+  const c = classificarChuva(chuva);
+  const aberta = vento >= 3 && vento <= 10 && umidade >= 50 && temp <= 30 && chuva < 40;
+  return { aberta, vento: v, umidade: u, temperatura: t, chuva: c };
+}
+
 function identificarRegiao(municipio) {
   const nome = municipio.toLowerCase();
-  const sul = ['porto alegre','caxias','pelotas','santa maria','florianopolis','joinville','blumenau','curitiba','londrina','maringa','ponta grossa','chapeco','cascavel','sao jose dos pinhais','pinhais','ararangua','criciuma','tubarao','rio do sul','blumenau','itajai','bento goncalves','caxias do sul','pelotas','santa maria','passo fundo','santana do livramento','uruguaiana','bagé','santa rosa','santo angelo','ijui','passo fundo','carazinho','novo hamburgo','viamao','gravatai','sao leopoldo','sapucaia','esteio','canoas','viamao','montenegro','sao borja','sao gabriel','bagé','dom pedrito','santana do livramento','arapira','sao jose','palhoca','biguacu','palmeira','rio negrinho','lages','caçador','videira','concordia','chapeco','xanxere','maravilha','sao miguel do oeste','pinhalzinho','capinzal','concordia','rio do sul','blumenau','itajai','jaragua do sul','joinville','ararangua','criciuma','tubarao','laguna','imbituba','garopaba','palhoca','florianopolis','sao jose','biguacu','paulo lopes','sao francisco do sul','matinhos','paranagua','guaratuba','matinhos','pontal do parana','itapoa','sao francisco','penha','balneario camboriu','camboriu','itajai','navegantes','porto belo','bombinhas','florianopolis','palhoca','sao jose','biguacu','paulo lopes','urussanga','criciuma','ararangua','laguna','imbituba','garopaba','praia grande','torres','tramandai','capao da canoa','torres','osorio','sao francisco','sao jose do norte','tramandai','imbe','capao da canoa','xangri la','palmar','torres','dom pedrito','santana do livramento','bagé','sao gabriel','sao borja','itapiranga','santo angelo','santa rosa','ijui','panambi','santa maria','sao pedro do sul','cruz alta','passo fundo','carazinho','soledade','lagoa vermelha','pelotas','rio grande','sao jose do norte','capao da canoa','tramandai','torres','viamao','gravatai','sao leopoldo','canoas','novo hamburgo','esteio','sapucaia','montenegro','sao sebastiao do cai','portao','sao jeronimo','butia','sao lourenco do sul','camaqua','pelotas','rio grande','santa vitoria do palmar','chui','sao jose do norte','capao da canoa','tramandai','torres','osorio','sao francisco','xangri la','imbe','arapira','sao jose','palhoca','biguacu','florianopolis','lages','caçador','videira','concordia','chapeco','xanxere','maravilha','sao miguel do oeste','pinhalzinho','capinzal','rio do sul','blumenau','itajai','jaragua do sul','joinville','ararangua','criciuma','tubarao','laguna','imbituba','garopaba','palhoca','florianopolis','sao jose','biguacu','paulo lopes','sao francisco do sul','penha','balneario camboriu','camboriu','navegantes','porto belo','bombinhas','itapoa','paranagua','guaratuba','matinhos','pontal do parana','matinhos','guaratuba','paranagua','morrinhos','pontal do parana','itapoa','sao francisco','penha','balneario camboriu','camboriu','itajai','navegantes','porto belo','bombinhas','florianopolis','palhoca','sao jose','biguacu','paulo lopes','urussanga','criciuma','ararangua','laguna','imbituba','garopaba','praia grande','torres','tramandai','capao da canoa','torres','osorio','sao francisco','sao jose do norte','tramandai','imbe','capao da canoa','xangri la','palmar','torres','dom pedrito','santana do livramento','bagé','sao gabriel','sao borja','itapiranga','santo angelo','santa rosa','ijui','panambi','santa maria','sao pedro do sul','cruz alta','passo fundo','carazinho','soledade','lagoa vermelha','pelotas','rio grande','sao jose do norte','capao da canoa','tramandai','torres','viamao','gravatai','sao leopoldo','canoas','novo hamburgo','esteio','sapucaia','montenegro','sao sebastiao do cai','portao','sao jeronimo','butia','sao lourenco do sul','camaqua','pelotas','rio grande','santa vitoria do palmar','chui'];
-  const nordeste = ['natal','joao pessoa','recife','maceio','aracaju','salvador','fortaleza','teresina','sao luis','campina grande','feira de santana','vitoria de santo antao','caruaru','patos','caico','crato','juazeiro do norte','quixada','sobral','tiangua','limoeiro','crato','barbalha','araripe','juazeiro','petrolina','paulo afonso','alagoinhas','itabuna','ilheus','porto seguro','teixeira de freitas','vitoria da conquista','barreiras','luis eduardo magalhaes','brumado','guanambi','jequie','vitria da conquista','itabuna','alagoinhas','feira de santana','santo antonio de jesus','cruz das almas','mata de sao joao','camacari','salvador','lauro de freitas','sao francisco do conde','entre rios','alagoinhas','aracaju','propria','itabaianinha','estancia','lagarto','itabaiana','aracaju','campo grande','dourados','tres lagoas','corumba','ponta pora','navirai','nova andradina','paranaiba','três lagoas','dourados','campo grande','sidrolandia','maracaju','navirai','ponta pora','corumba','miranda','anastacio','aquidauana','campo grande','tres lagoas','dourados','cuiaba','varzea grande','rondonopolis','sinop','caceres','tangara da serra','colider','alta floresta','peixoto de azevedo','barra do garcas','confresa','sinop','sorriso','lucas do rio verde','cuiaba','varzea grande','caceres','pontes e lacerda','araguaia','alta floresta','paranaíta','guaranta do norte','nova brasilandia','colniza','juina','sinop','claudia','porto dos gauchos','tapurah','cuiaba','varzea grande','rondonopolis','cuiaba','varzea grande','rondonopolis','primavera do leste','chapada dos guimaraes','cuiaba','varzea grande','sao jose dos quatro marcos','vila bela da santissima trindade','cuiaba','varzea grande','rondonopolis','sinop','caceres','tangara da serra','colider','alta floresta','peixoto de azevedo','barra do garcas','confresa','sorriso','lucas do rio verde','cuiaba','varzea grande','cuiaba','varzea grande','rondonopolis','sinop','caceres','tangara da serra','colider','alta floresta','peixoto de azevedo','barra do garcas','confresa','sorriso','lucas do rio verde','cuiaba','varzea grande','goiania','aparecida de goias','anapolis','rio verde','caldas novas','luziânia','formosa','itaquari','três lagoas','dourados','campo grande','sidrolandia','maracaju','navirai','ponta pora','corumba','miranda','anastacio','aquidauana','campo grande','tres lagoas','dourados','cuiaba','varzea grande','rondonopolis','sinop','caceres','tangara da serra','colider','alta floresta','peixoto de azevedo','barra do garcas','confresa','sorriso','lucas do rio verde','cuiaba','varzea grande','goiania','aparecida de goias','anapolis','rio verde','caldas novas','luziânia','formosa','itaquari','brasilia','planaltina','gama','taguatinga','ceilandia','samambaia','recanto das emas','brazlandia','sobradinho','paranoa','lago sul','lago norte','brasilia','planaltina','gama','taguatinga','ceilandia','samambaia','recanto das emas','brazlandia','sobradinho','paranoa','lago sul','lago norte'];
-  const centrooeste = ['brasilia','goiania','aparecida','anapolis','rio verde','cuiaba','varzea grande','rondonopolis','campo grande','dourados','tres lagoas','caldas novas','luziania','formosa','itaquari','caceres','sinop','tangara da serra','colider','alta floresta','barra do garcas','confresa','sorriso','lucas do rio verde','pontes e lacerda','araguaia','paranaita','guaranta do norte','nova brasilandia','colniza','juina','claudia','porto dos gauchos','tapurah','primavera do leste','chapada dos guimaraes','sao jose dos quatro marcos','vila bela'];
-  
-  if (nome.includes('sao paulo') || nome.includes('rio de janeiro') || nome.includes('belo horizonte') || nome.includes('espirito santo') || nome.includes('minas gerais') || nome.includes('vitoria') || nome.includes('campinas') || nome.includes('sorocaba') || nome.includes('itu') || nome.includes('jundiai') || nome.includes('sao jose dos campos') || nome.includes('taubate') || nome.includes('guarulhos') || nome.includes('osasco') || nome.includes('santo andre') || nome.includes('sao bernardo') || nome.includes('sao caetano') || nome.includes('diadema') || nome.includes('maua') || nome.includes('ribeirao preto') || nome.includes('araraquara') || nome.includes('sao carlos') || nome.includes('bauru') || nome.includes('marilia') || nome.includes('presidente prudente') || nome.includes('assis') || nome.includes('ourinhos') || nome.includes('campo grande') || nome.includes('dourados') || nome.includes('tres lagoas') || nome.includes('corumba') || nome.includes('ponta pora') || nome.includes('navirai') || nome.includes('nova andradina') || nome.includes('paranaiba') || nome.includes('três lagoas') || nome.includes('dourados') || nome.includes('campo grande') || nome.includes('sidrolandia') || nome.includes('maracaju') || nome.includes('navirai') || nome.includes('ponta pora') || nome.includes('corumba') || nome.includes('miranda') || nome.includes('anastacio') || nome.includes('aquidauana')) return 'Sudeste';
+  const sul = ['porto alegre','florianopolis','curitiba','joinville','blumenau','chapeco','caxias do sul','pelotas','londrina','maringá','capinzal','rio negro','mafra','criciúma','tubarão','itajaí','balneário camboriú','palhoça','são josé','biguaçu','tijucas','brusque','caxias do sul','bento gonçalves','passo fundo','uruguaiana','santa maria','santa rosa','santo ângelo','ijui','carazinho','são borja','são gabriel','são luiz gonzaga','bagé','santana do livramento','camaquã','santa vitória do palmar','chuí'];
+  const sudeste = ['são paulo','rio de janeiro','belo horizonte','vitória','campinas','sorocaba','são josé dos campos','taubaté','guarulhos','osasco','santo andré','são bernardo do campo','são caetano do sul','ribeirão preto','araraquara','são carlos','bauru','marília','presidente prudente','itú','jundiaí','valinhos','matão','iperó','iporã','salto','capivari','piracicaba','limeira','americana','mogi das cruzes','aracaju','camaçari','salvador','feira de santana','vitória da conquista','ilhéus','porto seguro','itabuna','alagoinhas','juiz de fora','uberaba','uberlândia','divinópolis','poços de caldas','campos do jordão','petrópolis','teresópolis','resende','volta redonda','barra mansa','macaé','cabo frio','angra dos reis','paraty','cachoeira paulista','são roque','itupeva','pindamonhangaba','cacapava','caraguatatuba','ubatuba','ilhabela','são sebastião','bertioga','guaruja','santos','são vicente','praia grande','itanhaém','peruíbe','registro','itapetininga','capivari','mogi mirim','mogi guaçu','pedreira','amparo','lindóia','serra negra','monte alegre do sul','caxambu','lambari','são lourenço','carmo de minas','passos','ituiutaba','araxá','patos de minas','são joão del rei','barbacena','ouro preto','mariana','viçosa','muriaé','manhuaçu','governador valadares','ipatinga','betim','contagem','nova lima','sete lagoas','lavras','itajubá','pouso alegre','extrema','camanducaia','monte sião','são bento do sapucaí','são sebastião da grama','cunha','aparecida','lorena','guaratinguetá','cruzeiro','são josé dos campos','jacareí','campos do jordão','santo antônio do pinhal','águas de lindóia','serra negra','monte alegre do sul','são pedro','itapira','mococa','são joão da boa vista','arraial do cabo','búzios','parati','angra dos reis','resende','itaipava','barra mansa','volta redonda','petrópolis','nova friburgo','teresópolis','macaé','cabo frio','campos dos goytacazes','itaperuna','barra do piraí','valença','mangaratiba','serra','cariacica','vila velha','viana','colatina','linhares','são mateus','cachoeiro de itapemirim','guará','castelo','alegre','divinópolis','ituiutaba','uberaba','uberlândia','araxá','patos de minas','montes claros','teófilo otoni','governador valadares','coronel fabriciano','santa luzia','ibirité','contagem','betim','belo horizonte','nova lima','caeté','sapucaí mirim','caxambu','lambari','são lourenço','carmo de minas','passos','poços de caldas','pouso alegre','itajubá','extrema','camanducaia','monte sião','são bento do sapucaí','são sebastião da grama','cunha','lavras','são joão del rei','barbacena','ouro preto','mariana','viçosa','muriaé','manhuaçu','resende','itaipava','barra mansa','volta redonda','petrópolis','nova friburgo','teresópolis','macaé','cabo frio','campos dos goytacazes','itaperuna','barra do piraí','valença','mangaratiba','arraial do cabo','búzios','parati','angra dos reis','são pedro da aldeia','niterói','são gonçalo','duque de caxias','nova iguaçu','são joão de meriti','nilópolis','mesquita','queimados','belford roxo','são pedro','itapira','mococa','são joão da boa vista','cachoeira paulista','são roque','itupeva','pindamonhangaba','cacapava','caraguatatuba','ubatuba','ilhabela','são sebastião','bertioga','guaruja','santos','são vicente','praia grande','itanhaém','peruíbe','registro','itapetininga','capivari','mogi mirim','mogi guaçu','pedreira','amparo','lindóia','serra negra','monte alegre do sul','caxambu','lambari','são lourenço','carmo de minas','passos','poços de caldas','pouso alegre','itajubá','extrema','camanducaia','monte sião','são bento do sapucaí','são sebastião da grama','cunha','lavras','são joão del rei','barbacena','ouro preto','mariana','viçosa','muriaé','manhuaçu','governador valadares','ipatinga','betim','contagem','nova lima','sete lagoas','lavras','itajubá','pouso alegre','extrema','camanducaia','monte sião','são bento do sapucaí','são sebastião da grama','cunha','arraial do cabo','búzios','parati','angra dos reis','resende','itaipava','barra mansa','volta redonda','petrópolis','nova friburgo','teresópolis','macaé','cabo frio','campos dos goytacazes','itaperuna','barra do piraí','valença','mangaratiba','são pedro da aldeia','niterói','são gonçalo','duque de caxias','nova iguaçu','são joão de meriti','nilópolis','mesquita','queimados','belford roxo'];
+  const nordeste = ['natal','joão pessoa','recife','maceió','aracaju','salvador','fortaleza','teresina','são luís','campina grande','feira de santana','vitória da conquista','ilhéus','porto seguro','teixeira de freitas','jequié','itabuna','alagoinhas','paulo afonso','barreiras','luís eduardo magalhães','mossoró','caicó','patos','campina grande','joão pessoa','campos sales','cajazeiras','sousa','areia','pombal','aracaju','lagarto','itabaiana','nossa senhora do socorro','estância','própria','capela','são cristóvão','laranjeiras','maruim','divina pastora','maceió','palmeira dos índios','arapiraca','penedo','porto calvo','são miguel dos campos','delmiro gouveia','girau do ponciano','união dos palmares','mata grande','recife','olinda','jaboatão dos guararapes','caruaru','petrolina','garanhuns','vitória de santo antão','pau dos ferros','goiana','timbaúba','carpina','limoeiro','surubim','palmares','escada','cabo de santo agostinho','ipojuca','porto de galinhas','tamandaré','barreiros','rio formoso','natal','mossoró','caicó','currais novos','patos','joão pessoa','campina grande','sousa','pombal','areia','campos sales','cajazeiras','fortaleza','caucaia','maracanaú','sobral','crato','juazeiro do norte','quixadá','canindé','tianguá','crateús','itapipoca','acaraú','camocim','são gonçalo do amarante','guaraciaba do norte','limoeiro','quixeramobim','teresina','parnaíba','picós','floriano','campo maior','oeiras','picos','são raimundo nonato','canto do buriti','batalha','barras','espera nova','regeneração','são luís','imperatriz','caxias','timon','são josé de ribamar','bacabal','buriticupu','cidelândia','codó','coroatá','graça araújo','duque de caxias','pedreiras','presidente dutra','são bento','são bernardo','são domingos do maranhão','são francisco do maranhão','são josé dos basílios','são mateus do maranhão','são raimundo das mangabeiras','são vicente ferrer','viana','zé doca','arari','axixá','bacuri','balsas','barra do corda','buriti','cidelândia','codó','coroatá','duque de caxias','graça araújo','imperatriz','pedreiras','presidente dutra','são bento','são bernardo','são domingos do maranhão','são francisco do maranhão','são josé de ribamar','são josé dos basílios','são mateus do maranhão','são raimundo das mangabeiras','são vicente ferrer','timon','viana','zé doca','arari','axixá','bacuri','balsas','barra do corda','buriti','caxias','cidelândia','codó','coroatá','duque de caxias','graça araújo','imperatriz','pedreiras','presidente dutra','são bento','são bernardo','são domingos do maranhão','são francisco do maranhão','são josé de ribamar','são josé dos basílios','são mateus do maranhão','são raimundo das mangabeiras','são vicente ferrer','timon','viana','zé doca'];
+  const centrooeste = ['brasília','goiânia','aparecida de goiás','anápolis','rio verde','caldas novas','luziânia','formosa','itaquari','cuiabá','várzea grande','rondonópolis','sinop','cáceres','tangará da serra','colíder','alta floresta','peixoto de azevedo','barra do garças','confresa','sorriso','lucas do rio verde','campo grande','dourados','três lagoas','corumbá','ponta porã','naviraí','nova andradina','paranaíba','cassilândia','maracaju','sidrolândia','aquidauana','miranda','água clara','bataguassu','bela vista','bonito','costa rica','coxim','guairá','itaquiaraí','ivinhema','jardim','mundo novo','paranaíba','ponta porã','porto murinho','ribas do rio pardo','são gabriel do oeste','são josé dos quatro marcos','selvíria','sidrolândia','três lagoas','vicentina','araguaina','palmas','gurupi','porto nacional','tocantinópolis','araguacema','colinas','guara','natividade','paraiso do tocantins','pedro afonso','miracema','araguatins','xambioá','ananas','filadélfia','wanderlândia','aguiarnópolis','palmeirópolis','formoso do araguaia','são miguel do araguaia','araguaina','palmas','gurupi','porto nacional','tocantinópolis','araguacema','colinas','guara','natividade','paraiso do tocantins','pedro afonso','miracema','araguatins','xambioá','ananas','filadélfia','wanderlândia','aguiarnópolis','palmeirópolis','formoso do araguaia','são miguel do araguaia'];
+  if (sudeste.some(c => nome.includes(c))) return 'Sudeste';
   if (sul.some(c => nome.includes(c))) return 'Sul';
   if (nordeste.some(c => nome.includes(c))) return 'Nordeste';
   if (centrooeste.some(c => nome.includes(c))) return 'Centro-Oeste';
-  return 'Sudeste'; // Padrão mais comum
+  return 'Sudeste';
 }
 
-// 🗓️ VERIFICA JANELA DE PLANTIO — baseado em ZARC/Embrapa
-function verificarJanelaPlantio(cultura, regiao, mes) {
-  const janelas = {
-    soja: { Sul: [9,10,11,12], Sudeste: [10,11,12,1], 'Centro-Oeste': [10,11,12,1], Nordeste: [2,3,4,5] },
-    milho: { Sul: [8,9,10,11], Sudeste: [8,9,10,11,12], 'Centro-Oeste': [9,10,11,12,1,2], Nordeste: [2,3,4,5,6] },
-    cana: { Sul: [2,3,4,9,10,11], Sudeste: [2,3,4,9,10,11], 'Centro-Oeste': [2,3,4,9,10,11], Nordeste: [1,2,3,4,5,6,7,8,9,10,11,12] },
-    cafe: { Sul: [11,12,1,2], Sudeste: [11,12,1,2], 'Centro-Oeste': [11,12,1,2], Nordeste: [3,4,5] },
-    algodao: { Sul: [9,10,11], Sudeste: [9,10,11], 'Centro-Oeste': [9,10,11], Nordeste: [2,3,4,5] },
-    feijao: { Sul: [8,9,10,11], Sudeste: [8,9,10,11], 'Centro-Oeste': [9,10,11,12], Nordeste: [2,3,4,5] },
-    mandioca: { Sul: [10,11,12,1,2,3], Sudeste: [10,11,12,1,2,3], 'Centro-Oeste': [10,11,12,1,2,3], Nordeste: [2,3,4,5,6,7,8,9,10] },
-    citros: { Sul: [2,3,4,8,9,10], Sudeste: [2,3,4,8,9,10], 'Centro-Oeste': [2,3,4,8,9,10], Nordeste: [2,3,4,9,10,11] }
-  };
-  
-  const janelaPermitida = janelas[cultura]?.[regiao] || [];
-  const estaNaJanela = janelaPermitida.includes(mes);
-  
-  return {
-    ok: estaNaJanela,
-    texto: estaNaJanela 
-      ? '✅ JANELA FAVORÁVEL — Pode plantar com segurança' 
-      : '⚠️ FORA DA JANELA — Não recomendado pela Embrapa/ZARC',
-    detalhe: estaNaJanela 
-      ? `Esta é a época certa para ${cultura} na região ${regiao}. Risco climático baixo.` 
-      : `Fora da época recomendada para ${cultura} no ${regiao}. Risco de perda elevado.`
-  };
+function mostrarSugestoes(valor) {
+  const div = document.getElementById('sugestoes');
+  if (!valor || valor.length < 3) { div.style.display = 'none'; return; }
+  const municipios = ['Sorocaba - SP','Itu - SP','Salto - SP','Capivari - SP','Piracicaba - SP','Campinas - SP','Valinhos - SP','Matão - SP','Iperó - SP','Iporã - SP','Camaçari - BA','São Paulo - SP','Rio de Janeiro - RJ','Belo Horizonte - MG','Curitiba - PR','Florianópolis - SC','Porto Alegre - RS','Brasília - DF','Goiânia - GO','Cuiabá - MT','Campo Grande - MS','Salvador - BA','Recife - PE','Fortaleza - CE','Manaus - AM','Belém - PA','Vitória - ES','Natal - RN','João Pessoa - PB','Maceió - AL','Aracaju - SE','Teresina - PI','São Luís - MA','Palmas - TO','Porto Velho - RO','Rio Branco - AC','Macapá - AP','Boa Vista - RR','Chapecó - SC','Blumenau - SC','Joinville - SC','Caxias do Sul - RS','Pelotas - RS','Santa Maria - RS','Londrina - PR','Maringá - PR','Ponta Grossa - PR','Cascavel - PR','Feira de Santana - BA','Vitória da Conquista - BA','Ilhéus - BA','Porto Seguro - BA','Caruaru - PE','Petrolina - PE','Campina Grande - PB','Mossoró - RN','Sobral - CE','Juazeiro do Norte - CE','Parnaíba - PI','Balsas - MA','Imperatriz - MA','Rondonópolis - MT','Sinop - MT','Cáceres - MT','Tangará da Serra - MT','Dourados - MS','Três Lagoas - MS','Corumbá - MS','Luziânia - GO','Formosa - GO','Anápolis - GO','Rio Verde - GO','Caldas Novas - GO','Araguaína - TO','Gurupi - TO','Porto Nacional - TO','Capinzal - SC','Rio Negro - SC','Mafra - SC','Criciúma - SC','Tubarão - SC','Itajaí - SC','Balneário Camboriú - SC','Palhoça - SC','São José - SC','Biguaçu - SC','Tijucas - SC','Brusque - SC'];
+  const filtrados = municipios.filter(m => m.toLowerCase().includes(valor.toLowerCase())).slice(0, 10);
+  if (filtrados.length === 0) { div.style.display = 'none'; return; }
+  div.innerHTML = filtrados.map(m => `<div class="sugestao-item" onclick="document.getElementById('cidade-input').value='${m}'; this.parentElement.style.display='none'">${m}</div>`).join('');
+  div.style.display = 'block';
 }
 
-// 📊 GERA DADOS CLIMÁTICOS COMPLETOS COM CONFIANÇA
-function gerarDadosClimaticos(dia, cidade, cultura) {
-  const dataBase = new Date();
-  dataBase.setDate(dataBase.getDate() + dia);
-  const mes = dataBase.getMonth() + 1;
+function limparFormulario() {
+  document.getElementById('cidade-input').value = '';
+  document.getElementById('cultura').value = '';
+  document.getElementById('relatorio-resultado').innerHTML = '';
+  document.getElementById('sugestoes').style.display = 'none';
+}
+
+function gerarRelatorio() {
+  const cidade = document.getElementById('cidade-input').value.trim();
+  const cultura = document.getElementById('cultura').value || 'geral';
+  if (!cidade) { alert('Por favor, digite o nome do município.'); return; }
   const regiao = identificarRegiao(cidade);
-  
-  // 🧠 APLICA A FÓRMULA — cruza histórico com atual → projeta à frente
-  const dadosBase = {
-    ocorrencia: 45 + Math.sin(dia * 0.25 + mes) * 18 + Math.random() * 15,
-    repeticao: 7 + Math.cos(dia * 0.18 + mes * 0.5) * 5,
-    padraoAtual: 1.0 + Math.sin(dia * 0.12 + Date.now() * 0.0005) * 0.45,
-    energia: 0.75 + Math.random() * 0.7
+  const hoje = new Date();
+  const nomesCultura = {
+    geral: 'Geral / Diversa', milho: '🌽 Milho', soja: '🫘 Soja', citros: '🍊 Citros / Laranja', cafe: '☕ Café',
+    cana: '🍬 Cana-de-Açúcar', algodao: '☁️ Algodão', hortalicas: '🥬 Hortaliças', pastagem: '🌿 Pastagem / Pecuária'
   };
-  
-  const intensidade = calcularIntensidade(dadosBase);
-  const confianca = calcularConfianca(dia, dadosBase.ocorrencia);
-  
-  // 🌧️ Calcula chuva, vento, umidade, temperatura
-  const chuvaProb = Math.max(0, Math.min(100, intensidade * 3 + Math.sin(dia * 0.4 + mes) * 25 + Math.random() * 20 - 10));
-  const ventoBase = 2.5 + Math.abs(Math.sin(dia * 0.35 + mes)) * 11 + Math.random() * 4;
-  const umidadeBase = 42 + Math.cos(dia * 0.22 + mes * 0.3) * 28 + Math.random() * 18;
-  const tempBase = 21 + Math.sin(dia * 0.15 + mes * 0.4) * 9 + Math.random() * 4;
-  const geadaRisco = tempBase <= 4 || (umidadeBase > 85 && tempBase < 8);
-  
-  // 🌅 Divide por períodos com características próprias
-  const periodos = ['Manhã', 'Tarde', 'Noite'].map((nome, idx) => {
-    const fator = idx === 0 ? 0.8 : idx === 1 ? 1.15 : 0.9;
-    const fatorChuva = idx === 0 ? 0.9 : idx === 1 ? 1.1 : 1.05;
+  const nomeCultura = nomesCultura[cultura] || cultura;
+
+  let html = `
+    <div class="relatorio">
+      <h2>📋 RELATÓRIO CLIMÁTICO — ${cidade}</h2>
+      <div class="relatorio-cabecalho">
+        <div class="relatorio-campo"><p>📍 Município</p><p>${cidade}</p></div>
+        <div class="relatorio-campo"><p>🌱 Cultura</p><p>${nomeCultura}</p></div>
+        <div class="relatorio-campo"><p>🗺️ Região</p><p>${regiao}</p></div>
+        <div class="relatorio-campo"><p>📅 Período</p><p>30 Dias</p></div>
+      </div>
+
+      <div class="regra-ouro">
+        <h4>📐 A REGRA DE OURO DA APLICAÇÃO — SÓ APLIQUE QUANDO TODOS ESTIVEREM OK:</h4>
+        <p>💨 <strong>Vento:</strong> entre 3 e 10 km/h — fora dessa faixa = deriva ou inversão térmica</p>
+        <p>💧 <strong>Umidade Relativa:</strong> ≥ 50% — abaixo disso, a gota EVAPORA no ar, antes de tocar a folha</p>
+        <p>🌡️ <strong>Temperatura:</strong> ≤ 30°C — acima disso, evaporação acelerada e planta não absorve</p>
+        <p>🌧️ <strong>Chuva nas 4h seguintes:</strong> ≤ 40% — senão o produto é lavado e se perde</p>
+      </div>
+
+      <h3>📅 PREVISÃO DIA A DIA — CHUVA POR PERÍODO</h3>
+      <table class="tabela-diaria">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th class="horario-manha">🌅 Manhã</th>
+            <th class="horario-tarde">☀️ Tarde</th>
+            <th class="horario-noite">🌙 Noite</th>
+            <th>Janela</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  for (let dia = 1; dia <= 30; dia++) {
+    const data = new Date(hoje);
+    data.setDate(hoje.getDate() + dia);
+    const diaSemana = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][data.getDay()];
+    const diaMes = data.getDate();
+    const mes = data.getMonth() + 1;
     
-    const chuvaP = Math.max(0, Math.min(100, chuvaProb * fatorChuva + Math.random() * 12 - 6));
-    const ventoP = Math.max(0.5, ventoBase * fator + Math.random() * 2.5 - 1.2);
-    const umidadeP = Math.max(25, Math.min(95, umidadeBase * (idx === 2 ? 1.12 : 0.92) + Math.random() * 8 - 4));
-    const tempP = tempBase + (idx === 0 ? -3.5 : idx === 1 ? 4.5 : -2.5) + Math.random() * 1.5 - 0.7;
-    const geadaPeriodo = tempP <= 4 || (umidadeP > 85 && tempP < 7);
+    const dadosBase = {
+      ocorrencia: 45 + Math.sin(dia * 0.25 + mes) * 18 + Math.random() * 15,
+      repeticao: 7 + Math.cos(dia * 0.18 + mes * 0.5) * 5,
+      padraoAtual: 1.0 + Math.sin(dia * 0.12 + Date.now() * 0.00005) * 0.45,
+      energia: 0.75 + Math.random() * 0.7
+    };
     
-    const chuvaInfo = classificarChuva(chuvaP, intensidade * fator);
+    const intensidade = calcularIntensidade(dadosBase);
     
-    // 🎯 Classificação da janela de aplicação
-    let status, texto, aviso = '';
-    const ventoOk = ventoP >= 3 && ventoP <= 10;
-    const umidadeOk = umidadeP >= 50;
-    const tempOk = tempP <= 30;
-    const chuvaOk = chuvaP <= 20;
+    const ventoManha = Math.max(1, Math.min(25, 5 + Math.sin(dia * 0.4 + 1) * 4 + intensidade * 0.3 + Math.random() * 4));
+    const ventoTarde = Math.max(1, Math.min(25, 7 + Math.cos(dia * 0.35 + 2) * 5 + intensidade * 0.35 + Math.random() * 5));
+    const ventoNoite = Math.max(1, Math.min(20, 4 + Math.sin(dia * 0.3 + 3) * 3 + intensidade * 0.25 + Math.random() * 3));
     
-    if (ventoOk && umidadeOk && tempOk && chuvaOk) {
-      status = 'status-ok'; texto = '✅ PODE APLICAR';
-    } else if (!ventoOk && ventoP < 3) {
-      status = 'status-inversao'; texto = '🌫️ INVERSÃO'; aviso = ' ⚠️ Vento muito fraco — risco de inversão térmica';
-    } else if (!ventoOk && ventoP > 12) {
-      status = 'status-perigo'; texto = '💨 DERIVA'; aviso = ' ⚠️ Vento muito forte — produto vai ser levado';
-    } else if (!umidadeOk) {
-      status = 'status-alerta'; texto = '💧 EVAPORA'; aviso
+    const umidadeManha = Math.max(30, Math.min(95, 75 + Math.sin(dia * 0.25) * 12 + Math.random() * 10));
+    const umidadeTarde = Math.max(25, Math.min(90, 55 + Math.cos(dia * 0.3) * 15 + Math.random() * 10));
+    const umidadeNoite = Math.max(40, Math.min(95, 80 + Math.sin(dia * 0.2) * 10 + Math.random() * 8));
+    
+    const tempManha = Math.max(12, Math.min(35, 20 + Math.sin(dia * 0.2 + mes * 0.5) * 5 + Math.random() * 4));
+    const tempTarde = Math.max(18, Math.min(40, 28 + Math.cos(dia * 0.25 + mes * 0.3) * 6 + Math.random() * 5));
+    const tempNoite = Math.max(10, Math.min(32, 22 + Math.sin(dia * 0.18 + mes * 0.4) * 4 + Math.random() * 3));
+    
+    const chuvaManha = Math.max(0, Math.min(100, intensidade * 25 + Math.sin(dia * 0.5) * 20 + Math.random() * 15));
+    const chuvaTarde = Math.max(0, Math.min(100, intensidade * 30 + Math.cos(dia * 0.4) * 25 + Math.random() * 18));
+    const chuvaNoite = Math.max(0, Math.min(100, intensidade * 28 + Math.sin(dia * 0.6) * 22 + Math.random() * 16));
+    
+    const janelaManha = verificarJanela(ventoManha, umidadeManha, tempManha, chuvaManha);
+    const janelaTarde = verificarJanela(ventoTarde, umidadeTarde, tempTarde, chuvaTarde);
+    const janelaNoite = verificarJanela(ventoNoite, umidadeNoite, tempNoite, chuvaNoite);
+    
+    const statusJanela = janelaManha.aberta ? '🌅' : janelaTarde.aberta ? '☀️' : janelaNoite.aberta ? '🌙'
