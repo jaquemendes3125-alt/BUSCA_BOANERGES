@@ -48,11 +48,11 @@ input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgb
 .sugestao-item:hover {background:#334155}
 .sugestao-item:last-child {border-bottom:none}
 
-/* ✅ TELAS — ORDEM CORRIGIDA */
+/* ✅ TELAS — CORRIGIDO E SIMPLES */
 #tela-apresentacao {display:block;}
 #tela-sistema {display:none;}
-#tela-apresentacao.escondida {display:none !important;}
-#tela-sistema.ativa {display:block !important;}
+body.sistema-ativo #tela-apresentacao {display:none !important;}
+body.sistema-ativo #tela-sistema {display:block !important;}
 
 .btn-voltar {
   background:transparent;color:var(--texto);border:1px solid #475569;
@@ -270,45 +270,32 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 
 <script>
 // ==================================================
-// ✅ CÓDIGO DE ACESSO — EXATO: #_area_de_relatorio_seguro
+// ✅ ACESSO EXATO — #_area_de_relatorio_seguro
 // ==================================================
 const HASH_CORRETO = '#_area_de_relatorio_seguro';
 
-// ==================================================
-// ✅ FUNÇÃO DE VERIFICAÇÃO — CORRIGIDA E SIMPLES
-// ==================================================
 function verificarAcesso() {
-  const hashAtual = window.location.hash;
-  const telaApresentacao = document.getElementById('tela-apresentacao');
-  const telaSistema = document.getElementById('tela-sistema');
-  
-  // Comparação EXATA — sem espaços, sem caracteres errados
-  if (hashAtual === HASH_CORRETO) {
-    telaApresentacao.classList.add('escondida');
-    telaSistema.classList.add('ativa');
-    console.log('✅ ÁREA DE RELATÓRIOS ABERTA!');
+  if (window.location.hash === HASH_CORRETO) {
+    document.body.classList.add('sistema-ativo');
   } else {
-    telaApresentacao.classList.remove('escondida');
-    telaSistema.classList.remove('ativa');
+    document.body.classList.remove('sistema-ativo');
   }
 }
 
 function voltarApresentacao() {
   window.location.hash = '';
-  document.getElementById('tela-apresentacao').classList.remove('escondida');
-  document.getElementById('tela-sistema').classList.remove('ativa');
+  document.body.classList.remove('sistema-ativo');
   document.getElementById('relatorio-resultado').innerHTML = '';
+  document.getElementById('cidade-input').value = '';
+  document.getElementById('cultura').value = '';
   window.scrollTo(0, 0);
 }
 
-// ==================================================
-// ✅ VERIFICA AO CARREGAR E SEMPRE QUE MUDAR O HASH
-// ==================================================
 window.addEventListener('hashchange', verificarAcesso);
 window.addEventListener('load', verificarAcesso);
 
 // ==================================================
-// 📍 DADOS GEOGRÁFICOS PARA FILTRO DE GEADA
+// 📍 DADOS GEOGRÁFICOS
 // ==================================================
 const DADOS_GEOGRAFICOS = {
   'Camaçari - BA': { latitude: -12.7, altitude: 12 },
@@ -671,6 +658,26 @@ function gerarRelatorio() {
 
       ${alertaSeca}
 
-      <h3>🎯 CONDIÇÕES POR PERÍODO — PRIMEIRA SEMANA</h3>
+      <h3>🎯 CONDIÇÕES POR PERÍODO — PRÓXIMOS 7 DIAS</h3>
       <table class="tabela-janela">
-        <tr><th>Período</th><th>Vento</th><th>Umidade</th
+        <thead>
+          <tr>
+            <th>Período</th>
+            <th>💨 Vento</th>
+            <th>💧 Umidade</th>
+            <th>🌡️ Temp</th>
+            <th>🌧️ Chuva</th>
+            <th>🌫️ Inv.</th>
+            <th>📊 Janela</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${linhasJanela}
+        </tbody>
+      </table>
+
+      <h3>📅 PREVISÃO DIA A DIA — 15 DIAS</h3>
+      <table class="tabela-diaria">
+        <thead>
+          <tr>
+            <th>Dia</th>
