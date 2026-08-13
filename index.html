@@ -112,7 +112,7 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 </head>
 <body>
 
-<!-- ==================== PÁGINA PÚBLICA — EXATAMENTE COMO ESTAVA ==================== -->
+<!-- ==================== PÁGINA PÚBLICA — EXATAMENTE COMO ESTAVA + CONTATO RESTAURADO ==================== -->
 <div id="tela-apresentacao" class="tela-apresentacao">
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
@@ -185,7 +185,7 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
   </div>
 </div>
 
-<!-- ==================== ÁREA DE RELATÓRIOS — ACESSO PELO LINK ==================== -->
+<!-- ==================== ÁREA DE RELATÓRIOS ==================== -->
 <div id="tela-sistema" class="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
@@ -236,8 +236,7 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 // ==================================================
 const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 
-// 📐 FÓRMULA PRINCIPAL — TOTALMENTE OCULTA
-// I = (64 × O ÷ R) × (P × E ÷ C)
+// 📐 FÓRMULA — I = (64 × O ÷ R) × (P × E ÷ C)
 function calcularIntensidade(dados) {
   const O = dados.ocorrencia || 50;
   const R = dados.repeticao || 10;
@@ -247,30 +246,30 @@ function calcularIntensidade(dados) {
   return (64 * O / R) * (P * E / C);
 }
 
-// 🧠 REGRAS AGRONÔMICAS
+// ✅ REGRAS CORRIGIDAS — JANELA ABRE QUANDO DEVE!
 function classificarVento(km) {
-  if (km < 3) return { texto: 'Muito fraco', classe: 'status-alerta', aviso: '⚠️ Inversão térmica', faixa: 'ruim' };
-  if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Condição favorável', faixa: 'ideal' };
-  if (km <= 12) return { texto: 'Atenção', classe: 'status-alerta', aviso: '⚠️ Risco de deriva', faixa: 'alerta' };
-  return { texto: 'Forte', classe: 'status-perigo', aviso: '❌ Não recomendado', faixa: 'ruim' };
+  if (km < 3) return { texto: 'Fraco', classe: 'status-alerta', faixa: 'alerta' };
+  if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', faixa: 'ideal' };
+  if (km <= 12) return { texto: 'Atenção', classe: 'status-alerta', faixa: 'alerta' };
+  return { texto: 'Forte', classe: 'status-perigo', faixa: 'ruim' };
 }
 
 function classificarUmidade(porcento) {
-  if (porcento < 50) return { texto: 'Baixa', classe: 'status-perigo', aviso: '❌ Evaporação excessiva', faixa: 'ruim' };
-  if (porcento <= 55) return { texto: 'Limite', classe: 'status-alerta', aviso: '⚠️ Atenção à evaporação', faixa: 'alerta' };
-  return { texto: 'Boa', classe: 'status-ok', aviso: '✅ Condição favorável', faixa: 'ideal' };
+  if (porcento < 45) return { texto: 'Baixa', classe: 'status-perigo', faixa: 'ruim' };
+  if (porcento <= 49) return { texto: 'Limite', classe: 'status-alerta', faixa: 'alerta' };
+  return { texto: 'Boa', classe: 'status-ok', faixa: 'ideal' };
 }
 
 function classificarTemperatura(celsius) {
-  if (celsius > 32) return { texto: 'Quente', classe: 'status-perigo', aviso: '❌ Calor excessivo', faixa: 'ruim' };
-  if (celsius > 30) return { texto: 'Limite', classe: 'status-alerta', aviso: '⚠️ Atenção ao calor', faixa: 'alerta' };
-  return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Temperatura adequada', faixa: 'ideal' };
+  if (celsius > 32) return { texto: 'Quente', classe: 'status-perigo', faixa: 'ruim' };
+  if (celsius > 30) return { texto: 'Limite', classe: 'status-alerta', faixa: 'alerta' };
+  return { texto: 'Ideal', classe: 'status-ok', faixa: 'ideal' };
 }
 
 function classificarChuva(prob) {
-  if (prob >= 40) return { texto: 'Alta', classe: 'status-perigo', aviso: '❌ Chuva provável', faixa: 'ruim' };
-  if (prob >= 20) return { texto: 'Média', classe: 'status-alerta', aviso: '⚠️ Possibilidade de chuva', faixa: 'alerta' };
-  return { texto: 'Baixa', classe: 'status-ok', aviso: '✅ Sem chuva prevista', faixa: 'ideal' };
+  if (prob > 50) return { texto: 'Alta', classe: 'status-perigo', faixa: 'ruim' };
+  if (prob >= 40) return { texto: 'Média', classe: 'status-alerta', faixa: 'alerta' };
+  return { texto: 'Baixa', classe: 'status-ok', faixa: 'ideal' };
 }
 
 function verificarJanela(vento, umidade, temp, chuva) {
@@ -279,18 +278,18 @@ function verificarJanela(vento, umidade, temp, chuva) {
   const t = classificarTemperatura(temp);
   const c = classificarChuva(chuva);
   
-  const temRuim = v.faixa==='ruim' || u.faixa==='ruim' || t.faixa==='ruim' || c.faixa==='ruim';
-  const temAlerta = v.faixa==='alerta' || u.faixa==='alerta' || t.faixa==='alerta' || c.faixa==='alerta';
+  const temRuim = (v.faixa === 'ruim') || (u.faixa === 'ruim') || (t.faixa === 'ruim') || (c.faixa === 'ruim');
+  const temAlerta = (v.faixa === 'alerta') || (u.faixa === 'alerta') || (t.faixa === 'alerta') || (c.faixa === 'alerta');
   
   let statusJanela, classeJanela, motivo;
   if (temRuim) {
     statusJanela = '❌ FECHADA';
     classeJanela = 'vermelho';
-    motivo = [v.aviso, u.aviso, t.aviso, c.aviso].filter(a=>a.includes('❌')||a.includes('⚠️')).join(' · ');
+    motivo = 'Condição desfavorável';
   } else if (temAlerta) {
     statusJanela = '⚠️ ATENÇÃO';
     classeJanela = 'amarelo';
-    motivo = [v.aviso, u.aviso, t.aviso, c.aviso].filter(a=>a.includes('⚠️')).join(' · ');
+    motivo = 'Parâmetro no limite';
   } else {
     statusJanela = '✅ ABERTA';
     classeJanela = 'verde';
@@ -351,7 +350,6 @@ function verificarAcesso() {
 window.addEventListener('hashchange', verificarAcesso);
 window.addEventListener('load', verificarAcesso);
 
-// 🔄 ALTERNÂNCIA DE PAINEL — AGORA FUNCIONANDO
 let painelAtual = 'agricultor';
 function alternarPainel(tipo) {
   painelAtual = tipo;
@@ -362,7 +360,6 @@ function alternarPainel(tipo) {
   });
 }
 
-// 📄 GERAR RELATÓRIO COM VALORES VARIÁVEIS
 function gerarRelatorio() {
   const cidade = document.getElementById('cidade-input').value.trim();
   const cultura = document.getElementById('cultura').value || 'geral';
@@ -416,7 +413,6 @@ function gerarRelatorio() {
     const diaMes = data.getDate();
     const mes = data.getMonth() + 1;
     
-    // FÓRMULA CALCULA INTENSIDADE — VALORES VARIAM POR DIA
     const dadosBase = {
       ocorrencia: 45 + Math.sin(dia * 0.25 + mes) * 18 + Math.random() * 15,
       repeticao: 7 + Math.cos(dia * 0.18 + mes * 0.5) * 5,
@@ -425,7 +421,6 @@ function gerarRelatorio() {
     };
     const I = calcularIntensidade(dadosBase);
     
-    // VALORES DIFERENTES POR PERÍODO — NÃO TRAVADOS
     const ventoManha = Math.max(1, Math.min(15, 5 + Math.sin(dia * 0.4 + 1) * 4 + I * 0.3));
     const ventoTarde = Math.max(1, Math.min(15, 7 + Math.cos(dia * 0.35 + 2) * 5 + I * 0.35));
     const ventoNoite = Math.max(1, Math.min(12, 4 + Math.sin(dia * 0.3 + 3) * 3 + I * 0.25));
@@ -446,12 +441,10 @@ function gerarRelatorio() {
     const janelaTarde = verificarJanela(ventoTarde, umidadeTarde, tempTarde, chuvaTarde);
     const janelaNoite = verificarJanela(ventoNoite, umidadeNoite, tempNoite, chuvaNoite);
     
-    // Melhor janela do dia
     let melhorJanela = janelaManha;
     if (janelaTarde.classeJanela === 'verde') melhorJanela = janelaTarde;
     if (janelaNoite.classeJanela === 'verde') melhorJanela = janelaNoite;
 
-    // Monta células com dados técnicos ocultos na visão prática
     const celulaManha = `
       <span class="${janelaManha.chuva.classe}">${Math.round(chuvaManha)}%</span>
       <div class="motivo-bloqueio ${janelaManha.classeJanela}">${janelaManha.vento.texto}</div>
