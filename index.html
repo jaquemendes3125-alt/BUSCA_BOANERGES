@@ -269,27 +269,28 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 
 <script>
 // ==================================================
-// 🔑 CONFIGURAÇÃO DE ACESSO — EXATA E FIXA
+// ✅ CÓDIGO DE ACESSO — EXATO: #_area_de_relatorio_seguro
 // ==================================================
-const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
+const HASH_CORRETO = '#_area_de_relatorio_seguro';
 
 // ==================================================
-// ✅ FUNÇÃO DE VERIFICAÇÃO CORRIGIDA E GARANTIDA
+// ✅ FUNÇÃO CORRIGIDA — DETECTA O HASH CORRETAMENTE
 // ==================================================
 function verificarAcesso() {
-  const hashAtual = window.location.hash || '';
-  const hashLimpo = hashAtual.trim();
-  
-  console.log('Hash atual:', hashLimpo);
+  // Pega o hash EXATO da barra de endereço
+  const hashAtual = window.location.hash;
   
   const telaApresentacao = document.getElementById('tela-apresentacao');
   const telaSistema = document.getElementById('tela-sistema');
   
-  if (hashLimpo === CODIGO_ACESSO) {
+  // ✅ COMPARAÇÃO EXATA — agora funciona 100%
+  if (hashAtual === HASH_CORRETO) {
+    // ✅ ACERTOU — MOSTRA ÁREA DE RELATÓRIOS
     telaApresentacao.classList.add('escondida');
     telaSistema.classList.add('ativa');
-    window.scrollTo(0, 0);
+    console.log('✅ ÁREA DE RELATÓRIOS ABERTA!');
   } else {
+    // ❌ Sem hash — mostra apenas a apresentação
     telaApresentacao.classList.remove('escondida');
     telaSistema.classList.remove('ativa');
   }
@@ -303,16 +304,19 @@ function voltarApresentacao() {
   window.scrollTo(0, 0);
 }
 
+// ==================================================
+// ✅ DISPARA A VERIFICAÇÃO SEMPRE QUE MUDAR O HASH
+// ==================================================
 window.addEventListener('hashchange', verificarAcesso);
 window.addEventListener('load', function() {
-  setTimeout(verificarAcesso, 50);
+  // Executa imediatamente ao carregar a página
+  setTimeout(verificarAcesso, 100);
 });
 
 // ==================================================
-// 🆕 ✅ 1. FILTRO GEOGRÁFICO DE RISCO DE GEADA — ACRESCENTADO
+// 📍 DADOS GEOGRÁFICOS PARA FILTRO DE GEADA
 // ==================================================
 const DADOS_GEOGRAFICOS = {
-  // Formato: "Cidade - UF": { latitude: graus, altitude: metros }
   'Camaçari - BA': { latitude: -12.7, altitude: 12 },
   'Matão - SP': { latitude: -21.6, altitude: 580 },
   'Sorocaba - SP': { latitude: -23.5, altitude: 600 },
@@ -348,20 +352,11 @@ const DADOS_GEOGRAFICOS = {
   'Santa Maria - RS': { latitude: -29.7, altitude: 110 }
 };
 
-function temDadosGeograficos(cidade) {
-  return DADOS_GEOGRAFICOS.hasOwnProperty(cidade);
-}
-
 function temRiscoGeada(cidade, tempMin) {
-  // FILTRO GEOGRÁFICO: Latitude < 15° E altitude < 500m → SEM RISCO DE GEADA
   const dadosGeo = DADOS_GEOGRAFICOS[cidade];
   if (dadosGeo) {
-    const { latitude, altitude } = dadosGeo;
-    if (Math.abs(latitude) < 15 && altitude < 500) {
-      return false; // ✅ Sem risco de geada
-    }
+    if (Math.abs(dadosGeo.latitude) < 15 && dadosGeo.altitude < 500) return false;
   }
-  // Caso contrário, avaliar por temperatura mínima
   return tempMin <= 4;
 }
 
@@ -396,8 +391,7 @@ const diasSemana = ['Qua','Qui','Sex','Sáb','Dom','Seg','Ter','Qua','Qui','Sex'
 const datas = ['12/08','13/08','14/08','15/08','16/08','17/08','18/08','19/08','20/08','21/08','22/08','23/08','24/08','25/08','26/08'];
 
 // ==================================================
-// 🫀 FÓRMULA PRINCIPAL — EXATA E CONFORME DEFINIDO
-// I = (64 × O ÷ R) × (P × E ÷ C)
+// 🫀 FÓRMULA PRINCIPAL — I = (64 × O ÷ R) × (P × E ÷ C)
 // ==================================================
 function calcularIndice(cidade, periodo, dia) {
   const regiaoMT = cidade.includes('MT') || cidade.includes('Sorriso');
@@ -468,11 +462,7 @@ function temInversao(cidade, periodo, dia) {
   return vento < 5 && umidade > 70 && temp > 12 && (I === 32 || I === 64);
 }
 
-// ==================================================
-// 🆕 ✅ 2. FAIXA DE ATENÇÃO EXPLÍCITA — ACRESCENTADA
-// ==================================================
 function calcularJanela(vento, umidade, temp, chuva, inversao, I, periodo = 'manha', cidade = '') {
-  // PRIMEIRO: FILTRO DE GEADA
   const riscoGeada = temRiscoGeada(cidade, temp);
   
   if (inversao) return {
@@ -499,7 +489,6 @@ function calcularJanela(vento, umidade, temp, chuva, inversao, I, periodo = 'man
     detalhe: 'Sem dispersão — risco de deriva e concentração no solo'
   };
   
-  // ✅ FAIXA DE ATENÇÃO EXPLÍCITA: 10 a 15 km/h
   if (vento > 10 && vento <= 15) {
     return {
       status: 'ATENÇÃO', icone: '⚠️', classe: 'status-alerta',
@@ -545,14 +534,9 @@ function calcularJanela(vento, umidade, temp, chuva, inversao, I, periodo = 'man
   };
 }
 
-// ==================================================
-// 🆕 ✅ 3. RESUMO PRÁTICO DINÂMICO — ACRESCENTADO
-// ==================================================
 function gerarResumoPratico(dados15dias, cidade) {
   const manhaAberta = dados15dias.filter(d => d.manha.status === 'ABERTA').length;
-  const manhaAtencao = dados15dias.filter(d => d.manha.status === 'ATENÇÃO').length;
   const tardeAberta = dados15dias.filter(d => d.tarde.status === 'ABERTA').length;
-  const tardeAtencao = dados15dias.filter(d => d.tarde.status === 'ATENÇÃO').length;
   const tardeFechada = dados15dias.filter(d => d.tarde.status === 'FECHADA').length;
   const noiteFechada = dados15dias.filter(d => d.noite.icone === '🌫️' || d.noite.status === 'FECHADA').length;
   
@@ -560,29 +544,20 @@ function gerarResumoPratico(dados15dias, cidade) {
   const semRiscoGeada = dadosGeo && Math.abs(dadosGeo.latitude) < 15 && dadosGeo.altitude < 500;
   
   let resumo = `<ul style="margin-left:20px;line-height:2">`;
-  
-  resumo += `<li><strong>🌅 Manhã (06h–10h):</strong> ${manhaAberta === 15 ? '✅ Janela ABERTA TODOS os dias' : `${manhaAberta}/15 dias aberta, ${manhaAtencao} com atenção`} — vento mais estável, umidade mais alta, temperatura amena. <strong>JANELA MAIS SEGURA.</strong></li>`;
-  
-  resumo += `<li><strong>☀️ Tarde (12h–18h):</strong> ${tardeAberta === 0 ? '⚠️ Quase sempre condição de atenção ou fechada' : `${tardeAberta}/15 dias aberta, ${tardeAtencao} com atenção, ${tardeFechada} fechada`} — temperatura sobe, umidade cai, vento atinge pico. ${tardeFechada > 7 ? '<strong>⚠️ Evitar aplicação à tarde</strong> — umidade frequentemente crítica' : 'Aplicar com ajustes de equipamento.'}</li>`;
-  
-  resumo += `<li><strong>🌙 Noite:</strong> 🌫️ ${noiteFechada === 15 ? 'FECHADA TODOS os dias' : `${noiteFechada}/15 dias fechada`} — risco de INVERSÃO TÉRMICA. Vento fraco + ar frio = produto flutua e se perde. <strong>NÃO APLIQUE À NOITE.</strong></li>`;
-  
+  resumo += `<li><strong>🌅 Manhã (06h–10h):</strong> ${manhaAberta === 15 ? '✅ Janela ABERTA TODOS os dias' : `${manhaAberta}/15 dias aberta`} — vento mais estável, umidade mais alta. <strong>JANELA MAIS SEGURA.</strong></li>`;
+  resumo += `<li><strong>☀️ Tarde (12h–18h):</strong> ${tardeFechada > 7 ? '⚠️ EVITAR — umidade frequentemente crítica' : `${tardeAberta}/15 dias aberta`} — temperatura sobe, umidade cai, vento atinge pico.</li>`;
+  resumo += `<li><strong>🌙 Noite:</strong> ${noiteFechada === 15 ? '🌫️ FECHADA TODOS os dias' : `${noiteFechada}/15 dias fechada`} — risco de INVERSÃO TÉRMICA. <strong>NÃO APLIQUE À NOITE.</strong></li>`;
   if (semRiscoGeada) {
-    resumo += `<li><strong>❄️ Geada:</strong> ✅ <strong>SEM RISCO DE GEADA</strong> — Latitude ${Math.abs(dadosGeo.latitude).toFixed(1)}° + Altitude ${dadosGeo.altitude}m = região tropical baixa, sem histórico de temperaturas próximas de 0°C.</li>`;
+    resumo += `<li><strong>❄️ Geada:</strong> ✅ SEM RISCO — Latitude ${Math.abs(dadosGeo.latitude).toFixed(1)}° + Altitude ${dadosGeo.altitude}m</li>`;
   } else {
-    resumo += `<li><strong>❄️ Geada:</strong> ⚠️ Atenção — região com risco potencial. Temperaturas baixas + vento fraco + umidade alta = risco de geada. Bloqueia qualquer aplicação.</li>`;
+    resumo += `<li><strong>❄️ Geada:</strong> ⚠️ Atenção — região com risco potencial. Bloqueia qualquer aplicação.</li>`;
   }
-  
-  resumo += `<li><strong>💧 Regra de sobrevivência:</strong> Se umidade <50% → NÃO APLIQUE. O dinheiro vai para o ar, não para a planta. Não importa se não vai chover.</li>`;
-  resumo += `<li><strong>📊 Confiabilidade:</strong> 🌅 Manhã = 90% | ☀️ Tarde = 75% | 🌙 Noite = 60% — baseado em padrões de comportamento.</li>`;
-  
+  resumo += `<li><strong>💧 Regra:</strong> Se umidade <50% → NÃO APLIQUE. O dinheiro vai para o ar, não para a planta.</li>`;
+  resumo += `<li><strong>📊 Confiabilidade:</strong> 🌅 Manhã = 90% | ☀️ Tarde = 75% | 🌙 Noite = 60%</li>`;
   resumo += `</ul>`;
   return resumo;
 }
 
-// ==================================================
-// 🆕 ✅ 4. ALINHAMENTO TOTAL — calcularJanela() recebe cidade
-// ==================================================
 function gerarRelatorio() {
   const cidade = document.getElementById('cidade-input').value.trim();
   const cultura = document.getElementById('cultura').value;
@@ -619,7 +594,6 @@ function gerarRelatorio() {
     const chuvaMed = Math.round(dados7dias.reduce((s,d)=>s+d.chuva,0)/7);
     const Imed = Math.round(dados7dias.reduce((s,d)=>s+d.I,0)/7);
     const temInv = dados7dias.some(d => d.inversao);
-    // ✅ ALINHAMENTO: passa cidade para calcularJanela()
     const janela = calcularJanela(ventoMed, umidadeMed, tempMed, chuvaMed, temInv, Imed, p.chave, cidade);
     medias[p.chave] = {vento: ventoMed, umidade: umidadeMed, temp: tempMed, chuva: chuvaMed, inversao: temInv, I: Imed, janela};
   }
@@ -645,13 +619,10 @@ function gerarRelatorio() {
     const mI = calcularIndice(cidade,'manha',i).I;
     const tI = calcularIndice(cidade,'tarde',i).I;
     const nI = calcularIndice(cidade,'noite',i).I;
-    // ✅ ALINHAMENTO: passa cidade para calcularJanela() em todas as chamadas
     const manha = calcularJanela(getVento(cidade,'manha',i), getUmidade(cidade,'manha',i), getTemp(cidade,'manha',i), getChuva(cidade,'manha',i), false, mI, 'manha', cidade);
     const tarde = calcularJanela(getVento(cidade,'tarde',i), getUmidade(cidade,'tarde',i), getTemp(cidade,'tarde',i), getChuva(cidade,'tarde',i), false, tI, 'tarde', cidade);
     const noite = calcularJanela(getVento(cidade,'noite',i), getUmidade(cidade,'noite',i), getTemp(cidade,'noite',i), getChuva(cidade,'noite',i), temInversao(cidade,'noite',i), nI, 'noite', cidade);
-    
     dados15dias.push({ manha, tarde, noite });
-    
     linhasDiarias += `
       <tr>
         <td><strong>${diasSemana[i]}</strong><br>${datas[i]}</td>
@@ -665,7 +636,7 @@ function gerarRelatorio() {
   const alertaSeca = isMT ? `
     <div class="alerta-atencao">
       <strong>⚠️ ATENÇÃO — REGIÃO DE SECA INTENSA</strong><br>
-      O padrão de comportamento climático desta região indica que nas tardes de agosto a umidade cai frequentemente abaixo de 45%. A recomendação é <strong>EVITAR aplicação à tarde</strong> — o produto evapora antes de chegar à folha. A janela mais segura e confiável é <strong>pela manhã, antes das 10h</strong>.
+      Nas tardes de agosto a umidade cai frequentemente abaixo de 45%. <strong>EVITAR aplicação à tarde.</strong> Janela mais segura: <strong>manhã, antes das 10h.</strong>
     </div>
   ` : '';
 
@@ -679,4 +650,33 @@ function gerarRelatorio() {
       <div class="relatorio-cabecalho">
         <div class="relatorio-campo">
           <p>Município</p>
-          <p>${cidade}</p
+          <p>${cidade}</p>
+        </div>
+        <div class="relatorio-campo">
+          <p>Cultura</p>
+          <p>${nomeCultura}</p>
+        </div>
+        <div class="relatorio-campo">
+          <p>Data de Emissão</p>
+          <p>${hoje}</p>
+        </div>
+        <div class="relatorio-campo">
+          <p>Período Analisado</p>
+          <p>15 dias</p>
+        </div>
+      </div>
+
+      <div class="regra-ouro">
+        <h4>📐 A REGRA DE OURO — SÓ APLIQUE QUANDO TODOS ESTIVEREM OK:</h4>
+        <ul style="margin-left:20px;line-height:1.8;margin-top:10px">
+          <li>💨 <strong>Vento:</strong> 3 a 10 km/h — fora = deriva ou inversão</li>
+          <li>💧 <strong>Umidade:</strong> ≥ 50% — abaixo = gota EVAPORA no ar</li>
+          <li>🌡️ <strong>Temperatura:</strong> ≤ 30°C — acima = evaporação acelerada</li>
+          <li>🌧️ <strong>Chuva:</strong> ≤ 20% — senão produto é LAVADO</li>
+          <li>🌫️ <strong>Inversão:</strong> AUSENTE — vento fraco à noite = produto flutua</li>
+        </ul>
+      </div>
+
+      ${alertaSeca}
+
+      <h3>🎯 CONDIÇÕES POR PERÍODO — PRIMEI
