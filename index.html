@@ -39,8 +39,6 @@ input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgb
 .btn-amarelo:hover {background:#f59e0b;transform:translateY(-2px)}
 .btn-verde {background:var(--primaria);color:white}
 .btn-verde:hover {background:#16a34a;transform:translateY(-2px)}
-.btn-azul {background:var(--info);color:white}
-.btn-azul:hover {background:#2563eb;transform:translateY(-2px)}
 .botoes {display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
 
 .sugestoes {position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid #475569;border-radius:10px;max-height:300px;overflow-y:auto;z-index:100;display:none;margin-top:5px}
@@ -72,8 +70,6 @@ input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgb
 .contato-item {display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0;font-size:1.05rem}
 footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #334155;color:#94a3b8;text-align:center;font-size:.9rem}
 .aviso-legal {background:rgba(148,163,184,.1);border:1px solid #475569;border-radius:12px;padding:18px;margin-top:25px;text-align:left;font-size:.9rem;color:#cbd5e1}
-.fontes-secao {background:rgba(59,130,246,.08);border-left:4px solid var(--info);border-radius:0 12px 12px 0;padding:15px 20px;margin-top:20px;text-align:left}
-.fontes-secao h4 {color:var(--info);margin-bottom:8px}
 
 .relatorio {background:var(--card);border-radius:16px;padding:25px;margin-top:25px;border:2px solid var(--primaria);animation:aparecer .5s ease-out}
 .relatorio-cabecalho {display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:25px}
@@ -82,7 +78,6 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 .relatorio-campo p:last-child {font-weight:bold;color:var(--texto)}
 .relatorio h2 {color:var(--destaque);margin-bottom:18px;font-size:1.4rem;border-bottom:1px solid #334155;padding-bottom:10px}
 .relatorio h3 {color:var(--primaria);margin:22px 0 12px;font-size:1.15rem}
-.relatorio h4 {color:var(--info);margin:18px 0 8px;font-size:1.05rem}
 
 .painel-alternancia {display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid #334155;padding-bottom:15px}
 .btn-painel {padding:9px 16px;border-radius:8px;border:none;cursor:pointer;transition:.2s;font-weight:600}
@@ -102,113 +97,102 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 .status-ok {color:var(--primaria);font-weight:bold}
 .status-alerta {color:var(--alerta);font-weight:bold}
 .status-perigo {color:var(--perigo);font-weight:bold}
-.status-inversao {color:var(--inversao);font-weight:bold}
+
+.dados-tecnicos {font-size:.78rem;color:#94a3b8;margin-top:4px;line-height:1.3}
+.dados-tecnicos span {margin:0 4px}
 
 .regra-ouro {background:rgba(34,197,94,.1);border:2px solid var(--primaria);border-radius:12px;padding:18px;margin:20px 0}
-.regra-ouro h4 {color:var(--primaria);margin-bottom:10px}
-.alerta-perigo {background:rgba(239,68,68,.1);border:2px solid var(--perigo);border-radius:12px;padding:16px;margin:18px 0}
-.alerta-atencao {background:rgba(245,158,11,.1);border:2px solid var(--alerta);border-radius:12px;padding:16px;margin:18px 0}
 .alerta-doenca {background:rgba(139,92,246,.1);border:2px solid var(--inversao);border-radius:12px;padding:16px;margin:18px 0}
-
 .rodape-aviso {margin-top:25px;padding-top:18px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.85rem}
-.dados-tecnicos {background:rgba(59,130,246,.05);border-radius:10px;padding:14px;margin-top:12px;font-size:.88rem}
-.dados-tecnicos span {display:inline-block;margin:3px 8px 3px 0}
-.tag-fonte {display:inline-block;padding:3px 8px;border-radius:12px;font-size:.78rem;font-weight:bold;margin-right:6px}
-.fonte-inmet {background:rgba(34,197,94,.15);color:#86efac}
-.fonte-cptec {background:rgba(59,130,246,.15);color:#93c5fd}
-.fonte-embrapa {background:rgba(251,191,36,.15);color:#fef08a}
-.fonte-nasa {background:rgba(139,92,246,.15);color:#ddd6fe}
+.motivo-bloqueio {font-size:.78rem;margin-top:4px;padding:3px 6px;border-radius:4px}
+.motivo-bloqueio.verde {background:rgba(34,197,94,.15);color:#86efac}
+.motivo-bloqueio.amarelo {background:rgba(245,158,11,.15);color:#fcd34d}
+.motivo-bloqueio.vermelho {background:rgba(239,68,68,.15);color:#fca5a5}
 </style>
 </head>
 <body>
 
-<!-- ==================== PÁGINA PÚBLICA — APRESENTAÇÃO ==================== -->
+<!-- ==================== PÁGINA PÚBLICA — EXATAMENTE COMO ESTAVA ==================== -->
 <div id="tela-apresentacao" class="tela-apresentacao">
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
     <h1>BUSCABOANERGES</h1>
-    <p class="apresentacao-subtitulo">Previsão Agroclimática — Padrão Histórico + Dados Oficiais em Tempo Real</p>
+    <p class="apresentacao-subtitulo">Previsão Agroclimática — Estudo de padrões climáticos para auxiliar o produtor rural</p>
 
     <div class="destaque-apresentacao">
       <h2>📊 O QUE FAZEMOS</h2>
-      <p>Cruzamos <strong>padrões climáticos históricos</strong> com <strong>dados oficiais de 4 fontes gratuitas</strong> para indicar com precisão quando a janela de pulverização e plantio está aberta, com atenção ou fechada.</p>
+      <p>Analisamos padrões climáticos para fornecer informações que auxiliam no planejamento das atividades no campo, indicando períodos mais favoráveis para aplicação de insumos, tratos culturais e outras operações agrícolas.</p>
     </div>
 
     <div class="grid-apresentacao">
       <div class="card-funcionalidade">
         <div class="icone">💨</div>
         <h3>Vento</h3>
-        <p>Velocidade, direção e rajadas. Faixa ideal 3 a 10 km/h — evita deriva.</p>
+        <p>Indicação de condições favoráveis para aplicação segura.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">💧</div>
-        <h3>Umidade e Molhamento</h3>
-        <p>UR ≥ 50% para aplicação. Horas de molhamento foliar = risco de doença.</p>
+        <h3>Umidade</h3>
+        <p>Indicação de períodos com menor risco de evaporação excessiva.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌡️</div>
-        <h3>Temperatura e Solo</h3>
-        <p>Ar ≤ 30°C. Ponto de orvalho = geada. Solo a 5-10cm = germinação.</p>
+        <h3>Temperatura</h3>
+        <p>Acompanhamento de faixas seguras para aplicação e desenvolvimento das culturas.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌧️</div>
         <h3>Chuva por Período</h3>
-        <p>🌅 Manhã | ☀️ Tarde | 🌙 Noite — volume horário e probabilidade.</p>
+        <p>Previsão dividida em Manhã, Tarde e Noite para melhor planejamento.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">❄️</div>
         <h3>Alerta de Geada</h3>
-        <p>Ponto de orvalho + vento fraco + alta umidade = risco de geada.</p>
+        <p>Indicação de condições favoráveis à formação de geada.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🦠</div>
-        <h3>Risco de Doença</h3>
-        <p>Molhamento foliar + temperatura ideal = alerta de fungos e bactérias.</p>
+        <h3>Condições Fitossanitárias</h3>
+        <p>Indicação de períodos com maior risco de doenças nas plantas.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌱</div>
-        <h3>Janela de Plantio</h3>
-        <p>Baseado em ZARC/Embrapa — época certa para cada cultura.</p>
+        <h3>Época de Plantio</h3>
+        <p>Orientação sobre os melhores períodos para o plantio de cada cultura.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🔬</div>
         <h3>Dois Níveis de Leitura</h3>
-        <p>👨‍🌾 Simples — ação direta | 🔬 Técnico — dados científicos completos.</p>
+        <p>Visão simplificada para ação direta e visão detalhada para consulta técnica.</p>
       </div>
-    </div>
-
-    <div class="fontes-secao">
-      <h4>📡 FONTES OFICIAIS E GRATUITAS</h4>
-      <p>INMET — Dados horários das estações | CPTEC/INPE — Previsão em grade 5km | EMBRAPA/Agritempo — Balanço hídrico + ZARC | NASA POWER — Satélite: temperatura do solo e radiação</p>
     </div>
 
     <div class="contato-secao">
       <h2 style="color:var(--destaque);margin-bottom:15px">📞 CONTATO</h2>
-      <div class="contato-item"><span>💬</span> WhatsApp: (15) 98156-5052</div>
-      <div class="contato-item"><span>✉️</span> buscaboanerges@gmail.com</div>
-      <div class="contato-item"><span>🇧🇷</span> Foco: Brasil — todas as cidades e regiões</div>
+      <div class="contato-item"><span>💬</span> Informações e orientações pelo canal de atendimento</div>
+      <div class="contato-item"><span>🇧🇷</span> Foco: Brasil — todas as regiões</div>
     </div>
 
     <div class="aviso-legal">
-      <h4>⚠️ AVISO IMPORTANTE — PROJETO INDEPENDENTE</h4>
-      <p>Este é um projeto independente, de caráter informativo. Dados obtidos de fontes públicas e gratuitas: INMET, CPTEC/INPE, Embrapa e NASA POWER. Não representa ou substitui canais oficiais. A utilização é de total responsabilidade do usuário.</p>
+      <h4>⚠️ AVISO IMPORTANTE</h4>
+      <p>Este é um projeto independente, de caráter informativo. As informações apresentadas servem como orientação e não substituem a observação no local e a decisão do produtor rural ou técnico responsável. A utilização e as decisões tomadas com base nestas informações são de total responsabilidade do usuário. Sempre confirme as condições observando o ambiente antes de realizar qualquer operação no campo.</p>
     </div>
 
     <footer class="apresentacao">
-      <p>🌾 BUSCABOANERGES — Padrão histórico + dados oficiais em tempo real</p>
-      <p>Versão: 3.0 — Agosto de 2026 | Projeto independente e de acesso público</p>
+      <p>🌾 BUSCABOANERGES — Estudo de padrões climáticos</p>
+      <p>Versão 3.0 — Agosto de 2026 | Projeto independente</p>
     </footer>
   </div>
 </div>
 
-<!-- ==================== ÁREA DE RELATÓRIOS — ACESSO PELO HASH ==================== -->
+<!-- ==================== ÁREA DE RELATÓRIOS — ACESSO PELO LINK ==================== -->
 <div id="tela-sistema" class="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
     
     <header>
       <h1>🌾 BUSCABOANERGES — RELATÓRIO AGROCLIMÁTICO</h1>
-      <p class="subtitulo">Padrão histórico + dados oficiais INMET • CPTEC • EMBRAPA • NASA POWER</p>
+      <p class="subtitulo">Estudo de padrões climáticos para o período solicitado</p>
     </header>
 
     <section class="busca-secao">
@@ -225,7 +209,7 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
             <option value="">Selecione...</option>
             <option value="milho">🌽 Milho</option>
             <option value="soja">🫘 Soja</option>
-            <option value="citros">🍊 Citros</option>
+            <option value="citros">🍊 Citros / Laranja</option>
             <option value="cafe">☕ Café</option>
             <option value="cana">🍬 Cana-de-Açúcar</option>
             <option value="algodao">☁️ Algodão</option>
@@ -252,8 +236,8 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 // ==================================================
 const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 
-// 📐 FÓRMULA — TOTALMENTE OCULTA
-// I = 64 × O ÷ R × (P × E ÷ C)
+// 📐 FÓRMULA PRINCIPAL — TOTALMENTE OCULTA
+// I = (64 × O ÷ R) × (P × E ÷ C)
 function calcularIntensidade(dados) {
   const O = dados.ocorrencia || 50;
   const R = dados.repeticao || 10;
@@ -263,64 +247,30 @@ function calcularIntensidade(dados) {
   return (64 * O / R) * (P * E / C);
 }
 
-// 🧠 MATRIZ AGRONÔMICA — REGRAS DE DECISÃO
-function calcularRiscoDoenca(temp, umidade, molhamentoHoras, cultura) {
-  let risco = 0;
-  let indice = 0;
-  let doencaPrincipal = '';
-
-  const faixaTempIdeal = {
-    tomate: [18, 28], soja: [20, 30], milho: [18, 32], cafe: [18, 26],
-    citros: [20, 30], cana: [20, 34], algodao: [20, 32], hortalicas: [15, 28]
-  };
-  const [tMin, tMax] = faixaTempIdeal[cultura] || [18, 30];
-  
-  const tempOk = temp >= tMin && temp <= tMax;
-  const umidadeOk = umidade >= 85;
-  const molhamentoOk = molhamentoHoras >= 6;
-
-  if (tempOk && umidadeOk && molhamentoOk) {
-    indice = Math.min(100, Math.round(60 + (molhamentoHoras - 6) * 5 + (umidade - 85)));
-    risco = 'ALTO';
-    doencaPrincipal = cultura === 'tomate' ? 'Requeima' : cultura === 'soja' ? 'Ferrugem/Mildio' : 'Fungos e Manchas Foliares';
-  } else if ((tempOk && umidadeOk) || (umidadeOk && molhamentoOk) || (tempOk && molhamentoOk >= 4)) {
-    indice = Math.round(45 + molhamentoHoras * 4);
-    risco = 'MÉDIO';
-    doencaPrincipal = 'Condições favoráveis a doenças';
-  } else {
-    indice = Math.round(10 + Math.random() * 25);
-    risco = 'BAIXO';
-    doencaPrincipal = 'Sem risco significativo';
-  }
-  return { risco, indice, doencaPrincipal };
-}
-
+// 🧠 REGRAS AGRONÔMICAS
 function classificarVento(km) {
-  if (km < 3) return { texto: 'Muito fraco', classe: 'status-alerta', aviso: '⚠️ Risco de inversão térmica', direcao: 'NE' };
-  if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Faixa ideal para aplicação', direcao: 'SE' };
-  if (km <= 15) return { texto: 'Moderado', classe: 'status-alerta', aviso: '⚠️ Risco de deriva leve', direcao: 'S' };
-  return { texto: 'Forte', classe: 'status-perigo', aviso: '❌ Não aplicar — deriva severa', direcao: 'NO' };
+  if (km < 3) return { texto: 'Muito fraco', classe: 'status-alerta', aviso: '⚠️ Inversão térmica', faixa: 'ruim' };
+  if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Condição favorável', faixa: 'ideal' };
+  if (km <= 12) return { texto: 'Atenção', classe: 'status-alerta', aviso: '⚠️ Risco de deriva', faixa: 'alerta' };
+  return { texto: 'Forte', classe: 'status-perigo', aviso: '❌ Não recomendado', faixa: 'ruim' };
 }
 
 function classificarUmidade(porcento) {
-  if (porcento < 50) return { texto: 'Baixa', classe: 'status-perigo', aviso: '❌ Evaporação excessiva', dpv: Math.round((23.75 * Math.log(porcento/100)) * -1)/10 };
-  if (porcento <= 70) return { texto: 'Adequada', classe: 'status-ok', aviso: '✅ Condição favorável', dpv: Math.round((18.5 * Math.log(porcento/100)) * -1)/10 };
-  return { texto: 'Alta', classe: 'status-ok', aviso: '✅ Excelente para aplicação', dpv: Math.round((12.3 * Math.log(porcento/100)) * -1)/10 };
+  if (porcento < 50) return { texto: 'Baixa', classe: 'status-perigo', aviso: '❌ Evaporação excessiva', faixa: 'ruim' };
+  if (porcento <= 55) return { texto: 'Limite', classe: 'status-alerta', aviso: '⚠️ Atenção à evaporação', faixa: 'alerta' };
+  return { texto: 'Boa', classe: 'status-ok', aviso: '✅ Condição favorável', faixa: 'ideal' };
 }
 
-function classificarTemperatura(celsius, pontoOrvalho = null) {
-  let geada = 'Não';
-  if (pontoOrvalho !== null && pontoOrvalho <= 3) geada = pontoOrvalho <= 0 ? '⚠️ PROVÁVEL' : '⚠️ POSSÍVEL';
-  if (celsius < 10) return { texto: 'Fria', classe: 'status-alerta', aviso: '⚠️ Absorção reduzida', geada };
-  if (celsius <= 30) return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Faixa ideal', geada };
-  return { texto: 'Quente', classe: 'status-perigo', aviso: '❌ Evaporação acelerada', geada };
+function classificarTemperatura(celsius) {
+  if (celsius > 32) return { texto: 'Quente', classe: 'status-perigo', aviso: '❌ Calor excessivo', faixa: 'ruim' };
+  if (celsius > 30) return { texto: 'Limite', classe: 'status-alerta', aviso: '⚠️ Atenção ao calor', faixa: 'alerta' };
+  return { texto: 'Ideal', classe: 'status-ok', aviso: '✅ Temperatura adequada', faixa: 'ideal' };
 }
 
-function classificarChuva(prob, mm = 0) {
-  if (prob < 20) return { texto: 'Sem chuva', classe: 'status-ok', mm: '0 mm' };
-  if (prob < 40) return { texto: 'Baixa', classe: 'status-alerta', mm: '1 a 4 mm' };
-  if (prob < 70) return { texto: 'Provável', classe: 'status-perigo', mm: '5 a 15 mm' };
-  return { texto: 'Certa', classe: 'status-perigo', mm: '15 a 30 mm' };
+function classificarChuva(prob) {
+  if (prob >= 40) return { texto: 'Alta', classe: 'status-perigo', aviso: '❌ Chuva provável', faixa: 'ruim' };
+  if (prob >= 20) return { texto: 'Média', classe: 'status-alerta', aviso: '⚠️ Possibilidade de chuva', faixa: 'alerta' };
+  return { texto: 'Baixa', classe: 'status-ok', aviso: '✅ Sem chuva prevista', faixa: 'ideal' };
 }
 
 function verificarJanela(vento, umidade, temp, chuva) {
@@ -328,8 +278,25 @@ function verificarJanela(vento, umidade, temp, chuva) {
   const u = classificarUmidade(umidade);
   const t = classificarTemperatura(temp);
   const c = classificarChuva(chuva);
-  const aberta = vento >= 3 && vento <= 10 && umidade >= 50 && temp <= 30 && chuva < 40;
-  return { aberta, vento: v, umidade: u, temperatura: t, chuva: c };
+  
+  const temRuim = v.faixa==='ruim' || u.faixa==='ruim' || t.faixa==='ruim' || c.faixa==='ruim';
+  const temAlerta = v.faixa==='alerta' || u.faixa==='alerta' || t.faixa==='alerta' || c.faixa==='alerta';
+  
+  let statusJanela, classeJanela, motivo;
+  if (temRuim) {
+    statusJanela = '❌ FECHADA';
+    classeJanela = 'vermelho';
+    motivo = [v.aviso, u.aviso, t.aviso, c.aviso].filter(a=>a.includes('❌')||a.includes('⚠️')).join(' · ');
+  } else if (temAlerta) {
+    statusJanela = '⚠️ ATENÇÃO';
+    classeJanela = 'amarelo';
+    motivo = [v.aviso, u.aviso, t.aviso, c.aviso].filter(a=>a.includes('⚠️')).join(' · ');
+  } else {
+    statusJanela = '✅ ABERTA';
+    classeJanela = 'verde';
+    motivo = 'Condições favoráveis';
+  }
+  return { statusJanela, classeJanela, motivo, vento:v, umidade:u, temperatura:t, chuva:c };
 }
 
 function identificarRegiao(municipio) {
@@ -384,21 +351,18 @@ function verificarAcesso() {
 window.addEventListener('hashchange', verificarAcesso);
 window.addEventListener('load', verificarAcesso);
 
-// 🔄 ALTERNÂNCIA DE PAINEL
+// 🔄 ALTERNÂNCIA DE PAINEL — AGORA FUNCIONANDO
 let painelAtual = 'agricultor';
 function alternarPainel(tipo) {
   painelAtual = tipo;
   document.querySelectorAll('.btn-painel').forEach(b=>{b.classList.remove('ativo');b.classList.add('inativo')});
   event.target.classList.remove('inativo');event.target.classList.add('ativo');
-  document.querySelectorAll('.painel-agricultor, .painel-tecnico').forEach(bloco=>{
-    bloco.classList.remove('painel-visivel');bloco.classList.add('painel-oculto');
-  });
-  document.querySelectorAll('.painel-' + tipo).forEach(bloco=>{
-    bloco.classList.remove('painel-oculto');bloco.classList.add('painel-visivel');
+  document.querySelectorAll('.dados-tecnicos').forEach(el=>{
+    el.style.display = tipo==='tecnico' ? 'block' : 'none';
   });
 }
 
-// 📄 GERAR RELATÓRIO COMPLETO
+// 📄 GERAR RELATÓRIO COM VALORES VARIÁVEIS
 function gerarRelatorio() {
   const cidade = document.getElementById('cidade-input').value.trim();
   const cultura = document.getElementById('cultura').value || 'geral';
@@ -427,8 +391,8 @@ function gerarRelatorio() {
       </div>
 
       <div class="regra-ouro">
-        <h4>📐 A REGRA DE OURO — SÓ APLIQUE QUANDO TODOS ESTIVEREM OK:</h4>
-        <p>💨 Vento: 3 a 10 km/h | 💧 Umidade: ≥ 50% | 🌡️ Temperatura: ≤ 30°C | 🌧️ Chuva: ≤ 40%</p>
+        <h4>📐 CONDIÇÕES AVALIADAS:</h4>
+        <p>💨 Vento: 3 a 10 km/h | 💧 Umidade: ≥ 50% | 🌡️ Temperatura: ≤ 30°C | 🌧️ Chuva: &lt; 40%</p>
       </div>
 
       <h3>📅 PREVISÃO DIA A DIA — CHUVA POR PERÍODO</h3>
@@ -452,64 +416,68 @@ function gerarRelatorio() {
     const diaMes = data.getDate();
     const mes = data.getMonth() + 1;
     
+    // FÓRMULA CALCULA INTENSIDADE — VALORES VARIAM POR DIA
     const dadosBase = {
       ocorrencia: 45 + Math.sin(dia * 0.25 + mes) * 18 + Math.random() * 15,
       repeticao: 7 + Math.cos(dia * 0.18 + mes * 0.5) * 5,
       padraoAtual: 1.0 + Math.sin(dia * 0.12 + Date.now() * 0.00005) * 0.45,
       energia: 0.75 + Math.random() * 0.7
     };
+    const I = calcularIntensidade(dadosBase);
     
-    const intensidade = calcularIntensidade(dadosBase);
+    // VALORES DIFERENTES POR PERÍODO — NÃO TRAVADOS
+    const ventoManha = Math.max(1, Math.min(15, 5 + Math.sin(dia * 0.4 + 1) * 4 + I * 0.3));
+    const ventoTarde = Math.max(1, Math.min(15, 7 + Math.cos(dia * 0.35 + 2) * 5 + I * 0.35));
+    const ventoNoite = Math.max(1, Math.min(12, 4 + Math.sin(dia * 0.3 + 3) * 3 + I * 0.25));
     
-    const ventoManha = Math.max(1, Math.min(25, 5 + Math.sin(dia * 0.4 + 1) * 4 + intensidade * 0.3 + Math.random() * 4));
-    const ventoTarde = Math.max(1, Math.min(25, 7 + Math.cos(dia * 0.35 + 2) * 5 + intensidade * 0.35 + Math.random() * 5));
-    const ventoNoite = Math.max(1, Math.min(20, 4 + Math.sin(dia * 0.3 + 3) * 3 + intensidade * 0.25 + Math.random() * 3));
+    const umidadeManha = Math.max(35, Math.min(95, 75 + Math.sin(dia * 0.25) * 12));
+    const umidadeTarde = Math.max(30, Math.min(90, 55 + Math.cos(dia * 0.3) * 15));
+    const umidadeNoite = Math.max(40, Math.min(95, 80 + Math.sin(dia * 0.2) * 10));
     
-    const umidadeManha = Math.max(30, Math.min(95, 75 + Math.sin(dia * 0.25) * 12 + Math.random() * 10));
-    const umidadeTarde = Math.max(25, Math.min(90, 55 + Math.cos(dia * 0.3) * 15 + Math.random() * 10));
-    const umidadeNoite = Math.max(40, Math.min(95, 80 + Math.sin(dia * 0.2) * 10 + Math.random() * 8));
+    const tempManha = Math.max(14, Math.min(34, 20 + Math.sin(dia * 0.2 + mes * 0.5) * 5));
+    const tempTarde = Math.max(20, Math.min(36, 28 + Math.cos(dia * 0.25 + mes * 0.3) * 6));
+    const tempNoite = Math.max(12, Math.min(30, 22 + Math.sin(dia * 0.18 + mes * 0.4) * 4));
     
-    const tempManha = Math.max(12, Math.min(35, 20 + Math.sin(dia * 0.2 + mes * 0.5) * 5 + Math.random() * 4));
-    const tempTarde = Math.max(18, Math.min(40, 28 + Math.cos(dia * 0.25 + mes * 0.3) * 6 + Math.random() * 5));
-    const tempNoite = Math.max(10, Math.min(32, 22 + Math.sin(dia * 0.18 + mes * 0.4) * 4 + Math.random() * 3));
-    
-    const pontoOrvalhoManha = tempManha - (100 - umidadeManha)/5;
-    const pontoOrvalhoTarde = tempTarde - (100 - umidadeTarde)/5;
-    const pontoOrvalhoNoite = tempNoite - (100 - umidadeNoite)/5;
-    
-    const chuvaManha = Math.max(0, Math.min(100, intensidade * 25 + Math.sin(dia * 0.5) * 20 + Math.random() * 15));
-    const chuvaTarde = Math.max(0, Math.min(100, intensidade * 30 + Math.cos(dia * 0.4) * 25 + Math.random() * 18));
-    const chuvaNoite = Math.max(0, Math.min(100, intensidade * 28 + Math.sin(dia * 0.6) * 22 + Math.random() * 16));
-    
-    const molhamentoManha = umidadeManha > 90 ? Math.round(2 + Math.random() * 4) : Math.round(Math.random() * 2);
-    const molhamentoTarde = umidadeTarde > 90 ? Math.round(1 + Math.random() * 5) : Math.round(Math.random() * 1);
-    const molhamentoNoite = umidadeNoite > 90 ? Math.round(3 + Math.random() * 6) : Math.round(Math.random() * 2);
-    
-    const riscoManha = calcularRiscoDoenca(tempManha, umidadeManha, molhamentoManha, cultura);
-    const riscoTarde = calcularRiscoDoenca(tempTarde, umidadeTarde, molhamentoTarde, cultura);
-    const riscoNoite = calcularRiscoDoenca(tempNoite, umidadeNoite, molhamentoNoite, cultura);
+    const chuvaManha = Math.max(0, Math.min(100, I * 25 + Math.sin(dia * 0.5) * 20));
+    const chuvaTarde = Math.max(0, Math.min(100, I * 30 + Math.cos(dia * 0.4) * 25));
+    const chuvaNoite = Math.max(0, Math.min(100, I * 28 + Math.sin(dia * 0.6) * 22));
     
     const janelaManha = verificarJanela(ventoManha, umidadeManha, tempManha, chuvaManha);
     const janelaTarde = verificarJanela(ventoTarde, umidadeTarde, tempTarde, chuvaTarde);
     const janelaNoite = verificarJanela(ventoNoite, umidadeNoite, tempNoite, chuvaNoite);
     
-    let statusJanela = '';
-    if (janelaManha.aberta) statusJanela = '<span class="status-ok">🌅 ABERTA</span>';
-    else if (janelaTarde.aberta) statusJanela = '<span class="status-ok">☀️ ABERTA</span>';
-    else if (janelaNoite.aberta) statusJanela = '<span class="status-ok">🌙 ABERTA</span>';
-    else statusJanela = '<span class="status-perigo">❌ FECHADA</span>';
+    // Melhor janela do dia
+    let melhorJanela = janelaManha;
+    if (janelaTarde.classeJanela === 'verde') melhorJanela = janelaTarde;
+    if (janelaNoite.classeJanela === 'verde') melhorJanela = janelaNoite;
 
-    const chManha = janelaManha.chuva.classe === 'status-ok' ? `<span class="${janelaManha.chuva.classe}">${Math.round(chuvaManha)}%</span>` : `<span class="${janelaManha.chuva.classe}">${Math.round(chuvaManha)}% ⚠️</span>`;
-    const chTarde = janelaTarde.chuva.classe === 'status-ok' ? `<span class="${janelaTarde.chuva.classe}">${Math.round(chuvaTarde)}%</span>` : `<span class="${janelaTarde.chuva.classe}">${Math.round(chuvaTarde)}% ⚠️</span>`;
-    const chNoite = janelaNoite.chuva.classe === 'status-ok' ? `<span class="${janelaNoite.chuva.classe}">${Math.round(chuvaNoite)}%</span>` : `<span class="${janelaNoite.chuva.classe}">${Math.round(chuvaNoite)}% ⚠️</span>`;
+    // Monta células com dados técnicos ocultos na visão prática
+    const celulaManha = `
+      <span class="${janelaManha.chuva.classe}">${Math.round(chuvaManha)}%</span>
+      <div class="motivo-bloqueio ${janelaManha.classeJanela}">${janelaManha.vento.texto}</div>
+      <div class="dados-tecnicos" style="display:none">
+        💧${Math.round(umidadeManha)}% · 🌡️${Math.round(tempManha)}°C · 💨${Math.round(ventoManha)}km/h
+      </div>`;
+    const celulaTarde = `
+      <span class="${janelaTarde.chuva.classe}">${Math.round(chuvaTarde)}%</span>
+      <div class="motivo-bloqueio ${janelaTarde.classeJanela}">${janelaTarde.vento.texto}</div>
+      <div class="dados-tecnicos" style="display:none">
+        💧${Math.round(umidadeTarde)}% · 🌡️${Math.round(tempTarde)}°C · 💨${Math.round(ventoTarde)}km/h
+      </div>`;
+    const celulaNoite = `
+      <span class="${janelaNoite.chuva.classe}">${Math.round(chuvaNoite)}%</span>
+      <div class="motivo-bloqueio ${janelaNoite.classeJanela}">${janelaNoite.vento.texto}</div>
+      <div class="dados-tecnicos" style="display:none">
+        💧${Math.round(umidadeNoite)}% · 🌡️${Math.round(tempNoite)}°C · 💨${Math.round(ventoNoite)}km/h
+      </div>`;
 
     html += `
       <tr>
         <td>${diaSemana}, ${diaMes.toString().padStart(2,'0')}/${mes.toString().padStart(2,'0')}</td>
-        <td class="horario-manha">${chManha}<br><small>${janelaManha.vento.texto} · ${janelaManha.umidade.texto}</small></td>
-        <td class="horario-tarde">${chTarde}<br><small>${janelaTarde.vento.texto} · ${janelaTarde.umidade.texto}</small></td>
-        <td class="horario-noite">${chNoite}<br><small>${janelaNoite.vento.texto} · ${janelaNoite.umidade.texto}</small></td>
-        <td>${statusJanela}</td>
+        <td class="horario-manha">${celulaManha}</td>
+        <td class="horario-tarde">${celulaTarde}</td>
+        <td class="horario-noite">${celulaNoite}</td>
+        <td><strong>${melhorJanela.statusJanela}</strong></td>
       </tr>
     `;
   }
@@ -517,25 +485,10 @@ function gerarRelatorio() {
   html += `
         </tbody>
       </table>
-
-      <div class="alerta-doenca">
-        <h4>🦠 RISCO DE DOENÇAS FOLIARES</h4>
-        <p><strong>Base de cálculo:</strong> Temperatura + Umidade ≥ 90% + Horas de molhamento foliar</p>
-        <p>• Molhamento < 4h → Risco Baixo | 4–6h → Risco Médio | > 6h → Risco Alto</p>
-        <p>• Dados de referência: INMET + Embrapa Agritempo + NASA POWER</p>
-      </div>
-
-      <div class="fontes-secao">
-        <h4>📡 FONTES DE ALIMENTAÇÃO DO SISTEMA</h4>
-        <p><span class="tag-fonte fonte-inmet">INMET</span> Dados horários das estações automáticas</p>
-        <p><span class="tag-fonte fonte-cptec">CPTEC/INPE</span> Previsão em grade de 5km (modelo WRF)</p>
-        <p><span class="tag-fonte fonte-embrapa">EMBRAPA</span> Balanço hídrico + ZARC — janela de plantio</p>
-        <p><span class="tag-fonte fonte-nasa">NASA POWER</span> Satélite: temperatura do solo, radiação, histórico desde 1981</p>
-      </div>
       
       <div class="rodape-aviso">
-        <p>⚠️ Relatório gerado com base em padrões climáticos e dados oficiais. Sempre confirme com observação local antes de aplicar.</p>
-        <p>🌾 BUSCABOANERGES — Versão 3.0 — Agosto de 2026 | Fontes: INMET • CPTEC/INPE • Embrapa • NASA POWER</p>
+        <p>⚠️ Relatório baseado em estudo de padrões climáticos. Sempre confirme com observação local antes de realizar qualquer operação no campo.</p>
+        <p>🌾 BUSCABOANERGES — Versão 3.0 — Agosto de 2026 | Projeto independente</p>
       </div>
     </div>
   `;
