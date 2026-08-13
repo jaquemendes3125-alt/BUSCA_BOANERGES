@@ -21,6 +21,29 @@ header {text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2
 h1 {font-size:1.9rem;color:var(--destaque);margin-bottom:8px}
 .subtitulo {color:#cbd5e1;font-size:1rem}
 
+/* ========== TELA DE SENHA ========== */
+.tela-senha {
+  position: fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999;
+}
+.caixa-senha {
+  background:var(--card);border:2px solid var(--destaque);border-radius:16px;padding:30px;max-width:400px;width:90%;
+  box-shadow:0 0 30px rgba(251,191,36,.2);animation:aparecer .4s ease-out;
+}
+.caixa-senha h2 {text-align:center;color:var(--destaque);margin-bottom:20px;font-size:1.3rem}
+.caixa-senha p {text-align:center;color:#cbd5e1;margin-bottom:15px;font-size:.9rem}
+.caixa-senha input {
+  width:100%;padding:14px;border-radius:10px;border:2px solid #475569;
+  background:#0f172a;color:white;font-size:1.1rem;text-align:center;outline:none;
+}
+.caixa-senha input:focus {border-color:var(--destaque);box-shadow:0 0 0 3px rgba(251,191,36,.2)}
+.caixa-senha button {
+  width:100%;padding:12px;margin-top:15px;border-radius:10px;border:none;
+  background:var(--primaria);color:white;font-weight:bold;font-size:1rem;cursor:pointer;transition:.2s
+}
+.caixa-senha button:hover {background:#16a34a}
+.erro-senha {color:var(--perigo);text-align:center;margin-top:12px;font-size:.9rem;display:none}
+.tela-senha.escondida {display:none}
+
 .busca-secao {background:var(--card);border-radius:16px;padding:28px;margin-bottom:28px;border-left:4px solid var(--primaria)}
 .busca-secao h2 {color:var(--primaria);margin-bottom:20px;font-size:1.3rem}
 .form-grid {display:grid;grid-template-columns:2fr 1fr;gap:18px}
@@ -112,6 +135,18 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 </head>
 <body>
 
+<!-- ==================== TELA DE SENHA ==================== -->
+<div id="tela-senha" class="tela-senha escondida">
+  <div class="caixa-senha">
+    <h2>🔒 ACESSO RESTRITO</h2>
+    <p>Digite a senha para acessar a área de relatórios</p>
+    <input type="password" id="senha-entrada" placeholder="Digite a senha..." onkeydown="if(event.key==='Enter')verificarSenha()">
+    <button onclick="verificarSenha()">🔑 Acessar</button>
+    <div id="erro-senha" class="erro-senha">Senha incorreta. Tente novamente.</div>
+  </div>
+</div>
+
+<!-- ==================== PÁGINA PÚBLICA — INALTERADA ==================== -->
 <div id="tela-apresentacao" class="tela-apresentacao">
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
@@ -185,6 +220,7 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
   </div>
 </div>
 
+<!-- ==================== ÁREA DE RELATÓRIOS ==================== -->
 <div id="tela-sistema" class="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
@@ -234,6 +270,12 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 // Link: jaquemendes3125-alt.github.io/BUSCA_BOANERGES/#_area_de_relatorio_seguro
 // ==================================================
 const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
+
+// ==================================================
+// 🔒 SENHA DE ACESSO — ALTERE AQUI SE QUISER
+// ==================================================
+const SENHA_AUTORIZADA = 'AutencOBR758'; // ← MUDE AQUI PARA SUA SENHA
+let acessoLiberado = false;
 
 // ==================================================
 // 🔒 BASE FIXA — Padrão Histórico Mensal (IMUTÁVEL)
@@ -356,20 +398,53 @@ function limparFormulario() {
 
 function voltarApresentacao() {
   window.location.hash = '';
+  acessoLiberado = false;
   verificarAcesso();
   document.getElementById('relatorio-resultado').innerHTML = '';
+}
+
+// ==================================================
+// 🔐 VERIFICAÇÃO DE SENHA
+// ==================================================
+function verificarSenha() {
+  const senhaDigitada = document.getElementById('senha-entrada').value;
+  if (senhaDigitada === SENHA_AUTORIZADA) {
+    acessoLiberado = true;
+    document.getElementById('tela-senha').classList.add('escondida');
+    document.getElementById('senha-entrada').value = '';
+    document.getElementById('erro-senha').style.display = 'none';
+    abrirAreaSistema();
+  } else {
+    document.getElementById('erro-senha').style.display = 'block';
+    document.getElementById('senha-entrada').value = '';
+    document.getElementById('senha-entrada').focus();
+  }
+}
+
+function abrirAreaSistema() {
+  document.getElementById('tela-apresentacao').classList.add('escondida');
+  document.getElementById('tela-sistema').classList.add('ativa');
 }
 
 function verificarAcesso() {
   const hashAtual = (window.location.hash || '').trim();
   const telaApresentacao = document.getElementById('tela-apresentacao');
   const telaSistema = document.getElementById('tela-sistema');
+  const telaSenha = document.getElementById('tela-senha');
+
   if (hashAtual === CODIGO_ACESSO) {
-    telaApresentacao.classList.add('escondida');
-    telaSistema.classList.add('ativa');
+    if (acessoLiberado) {
+      abrirAreaSistema();
+    } else {
+      telaApresentacao.classList.add('escondida');
+      telaSenha.classList.remove('escondida');
+      document.getElementById('senha-entrada').focus();
+    }
   } else {
     telaApresentacao.classList.remove('escondida');
     telaSistema.classList.remove('ativa');
+    telaSenha.classList.add('escondida');
+    acessoLiberado = false;
   }
 }
 
