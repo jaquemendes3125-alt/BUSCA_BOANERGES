@@ -48,10 +48,11 @@ input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgb
 .sugestao-item:hover {background:#334155}
 .sugestao-item:last-child {border-bottom:none}
 
-.tela-apresentacao {display:block !important;}
-.tela-sistema {display:none !important;}
-.tela-sistema.ativa {display:block !important;}
-.tela-apresentacao.escondida {display:none !important;}
+/* ✅ TELAS — ORDEM CORRIGIDA */
+#tela-apresentacao {display:block;}
+#tela-sistema {display:none;}
+#tela-apresentacao.escondida {display:none !important;}
+#tela-sistema.ativa {display:block !important;}
 
 .btn-voltar {
   background:transparent;color:var(--texto);border:1px solid #475569;
@@ -123,7 +124,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 </head>
 <body>
 
-<div id="tela-apresentacao" class="tela-apresentacao">
+<div id="tela-apresentacao">
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
     <h1>BUSCABOANERGES</h1>
@@ -225,7 +226,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
   </div>
 </div>
 
-<div id="tela-sistema" class="tela-sistema">
+<div id="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
     
@@ -274,23 +275,19 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 const HASH_CORRETO = '#_area_de_relatorio_seguro';
 
 // ==================================================
-// ✅ FUNÇÃO CORRIGIDA — DETECTA O HASH CORRETAMENTE
+// ✅ FUNÇÃO DE VERIFICAÇÃO — CORRIGIDA E SIMPLES
 // ==================================================
 function verificarAcesso() {
-  // Pega o hash EXATO da barra de endereço
   const hashAtual = window.location.hash;
-  
   const telaApresentacao = document.getElementById('tela-apresentacao');
   const telaSistema = document.getElementById('tela-sistema');
   
-  // ✅ COMPARAÇÃO EXATA — agora funciona 100%
+  // Comparação EXATA — sem espaços, sem caracteres errados
   if (hashAtual === HASH_CORRETO) {
-    // ✅ ACERTOU — MOSTRA ÁREA DE RELATÓRIOS
     telaApresentacao.classList.add('escondida');
     telaSistema.classList.add('ativa');
     console.log('✅ ÁREA DE RELATÓRIOS ABERTA!');
   } else {
-    // ❌ Sem hash — mostra apenas a apresentação
     telaApresentacao.classList.remove('escondida');
     telaSistema.classList.remove('ativa');
   }
@@ -305,13 +302,10 @@ function voltarApresentacao() {
 }
 
 // ==================================================
-// ✅ DISPARA A VERIFICAÇÃO SEMPRE QUE MUDAR O HASH
+// ✅ VERIFICA AO CARREGAR E SEMPRE QUE MUDAR O HASH
 // ==================================================
 window.addEventListener('hashchange', verificarAcesso);
-window.addEventListener('load', function() {
-  // Executa imediatamente ao carregar a página
-  setTimeout(verificarAcesso, 100);
-});
+window.addEventListener('load', verificarAcesso);
 
 // ==================================================
 // 📍 DADOS GEOGRÁFICOS PARA FILTRO DE GEADA
@@ -354,9 +348,7 @@ const DADOS_GEOGRAFICOS = {
 
 function temRiscoGeada(cidade, tempMin) {
   const dadosGeo = DADOS_GEOGRAFICOS[cidade];
-  if (dadosGeo) {
-    if (Math.abs(dadosGeo.latitude) < 15 && dadosGeo.altitude < 500) return false;
-  }
+  if (dadosGeo && Math.abs(dadosGeo.latitude) < 15 && dadosGeo.altitude < 500) return false;
   return tempMin <= 4;
 }
 
@@ -679,4 +671,6 @@ function gerarRelatorio() {
 
       ${alertaSeca}
 
-      <h3>🎯 CONDIÇÕES POR PERÍODO — PRIMEI
+      <h3>🎯 CONDIÇÕES POR PERÍODO — PRIMEIRA SEMANA</h3>
+      <table class="tabela-janela">
+        <tr><th>Período</th><th>Vento</th><th>Umidade</th
