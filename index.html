@@ -48,11 +48,10 @@ input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgb
 .sugestao-item:hover {background:#334155}
 .sugestao-item:last-child {border-bottom:none}
 
-/* ✅ TELAS — CORRIGIDO E SIMPLES */
-#tela-apresentacao {display:block;}
-#tela-sistema {display:none;}
-body.sistema-ativo #tela-apresentacao {display:none !important;}
-body.sistema-ativo #tela-sistema {display:block !important;}
+.tela-apresentacao {display:block !important;}
+.tela-sistema {display:none !important;}
+.tela-sistema.ativa {display:block !important;}
+.tela-apresentacao.escondida {display:none !important;}
 
 .btn-voltar {
   background:transparent;color:var(--texto);border:1px solid #475569;
@@ -107,6 +106,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 .horario-noite {border-left:4px solid #8b5cf6}
 
 .regra-ouro {background:rgba(34,197,94,.1);border:2px solid var(--primaria);border-radius:12px;padding:20px;margin:25px 0}
+.regra-ouro h4 {color:var(--primaria);margin-top:0}
 .regra-ouro.tecnico {background:rgba(59,130,246,.1);border-color:var(--info)}
 .regra-ouro.tecnico h4 {color:var(--info)}
 .alerta-perigo {background:rgba(239,68,68,.1);border:2px solid var(--perigo);border-radius:12px;padding:18px;margin:20px 0}
@@ -120,11 +120,12 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 .resumo-pratico {background:rgba(34,197,94,.05);border:2px solid var(--primaria);border-radius:12px;padding:25px;margin-top:30px}
 .resumo-pratico h3 {color:var(--primaria);margin-top:0}
 .rodape-aviso {margin-top:30px;padding-top:20px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.85rem}
+.destaque-vento-alerta {background:rgba(245,158,11,.15);border:1px solid var(--alerta);border-radius:8px;padding:12px;margin:10px 0}
 </style>
 </head>
 <body>
 
-<div id="tela-apresentacao">
+<div id="tela-apresentacao" class="tela-apresentacao">
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
     <h1>BUSCABOANERGES</h1>
@@ -154,55 +155,55 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
       <div class="card-funcionalidade">
         <div class="icone">🌫️</div>
         <h3>Inversão Térmica</h3>
-        <p>Detectada em condições de vento fraco — produto flutua e se perde. ⚠️ Não aplicar.</p>
+        <p>Detectada em condições de vento fraco à noite — produto flutua e se perde. ⚠️ Não aplicar.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌧️</div>
         <h3>Probabilidade de Chuva</h3>
-        <p>Nas horas seguintes à aplicação — evita lavagem do produto antes de fazer efeito.</p>
+        <p>Por período — manhã, tarde e noite — evita lavagem do produto antes de fazer efeito.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">✅</div>
-        <h3>Janela de Pulverização</h3>
-        <p>Decisão combinada: só indica favorável quando todos os fatores estão dentro das condições seguras.</p>
+        <div class="icone">❄️</div>
+        <h3>Risco de Geada</h3>
+        <p>Análise por região e altitude — identifica condições favoráveis à formação de geada.</p>
       </div>
     </div>
 
     <div class="destaque-apresentacao info">
       <h2>📚 FONTES DE INFORMAÇÃO</h2>
-      <p>O sistema utiliza padrões de comportamento climático de longo prazo combinados com dados atuais de estações meteorológicas e modelos numéricos de previsão.</p>
+      <p>O sistema utiliza padrões de comportamento climático de longo prazo (a partir de 1800) combinados com dados atuais de estações meteorológicas e modelos numéricos de previsão.</p>
     </div>
 
     <div class="grid-apresentacao">
       <div class="card-funcionalidade">
         <div class="icone">📡</div>
         <h3>Estações em Tempo Real</h3>
-        <p>Medições horárias de vento, temperatura, chuva e umidade obtidas de estações automáticas distribuídas por todo o território nacional.</p>
+        <p>Medições horárias de vento, temperatura, chuva e umidade — INMET, CPTEC/INPE e Redemet.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌐</div>
         <h3>Modelos Numéricos de Previsão</h3>
-        <p>Dados de previsão de até 15 dias, incluindo análise de vento, sistemas atmosféricos e aproximação de frentes frias.</p>
+        <p>Dados de previsão de até 15 dias, incluindo análise de vento, sistemas atmosféricos e frentes frias.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">✈️</div>
         <h3>Dados de Precisão Horária</h3>
-        <p>Registros frequentes de velocidade e direção do vento, atualizados a cada hora em pontos de observação.</p>
+        <p>Registros de velocidade e direção do vento, atualizados a cada hora em pontos de observação.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">❄️</div>
-        <h3>Condições de Geada</h3>
-        <p>Identificação de cenários com temperatura baixa, vento fraco e alta umidade — fatores que favorecem a formação de geada.</p>
+        <div class="icone">📈</div>
+        <h3>Padrão de Comportamento</h3>
+        <p>Leitura da repetição — direção do vento, chuva e temperatura por mês, horário e estação do ano.</p>
       </div>
       <div class="card-funcionalidade">
         <div class="icone">🌅</div>
         <h3>Análise por Período</h3>
-        <p>🌅 Manhã (06h-12h) | ☀️ Tarde (12h-18h) | 🌙 Noite (18h-06h). Cada período analisado com critérios próprios.</p>
+        <p>🌅 Manhã (06h-12h) | ☀️ Tarde (12h-18h) | 🌙 Noite (18h-06h). Cada período com regras próprias.</p>
       </div>
       <div class="card-funcionalidade">
-        <div class="icone">📊</div>
-        <h3>Padrão de Comportamento</h3>
-        <p>Estudo do comportamento climático — direção predominante do vento, padrão de chuva e temperatura por mês e horário.</p>
+        <div class="icone">✅</div>
+        <h3>Janela de Pulverização</h3>
+        <p>Decisão combinada: só indica favorável quando TODOS os fatores estão dentro das condições seguras.</p>
       </div>
     </div>
 
@@ -226,7 +227,7 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
   </div>
 </div>
 
-<div id="tela-sistema">
+<div id="tela-sistema" class="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
     
@@ -270,76 +271,103 @@ footer.apresentacao {margin-top:60px;padding-top:30px;border-top:1px solid #3341
 
 <script>
 // ==================================================
-// ✅ ACESSO EXATO — #_area_de_relatorio_seguro
+// 🔑 CONFIGURAÇÃO DE ACESSO — EXATA E FIXA
 // ==================================================
-const HASH_CORRETO = '#_area_de_relatorio_seguro';
+const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 
+// ==================================================
+// ✅ FUNÇÃO DE VERIFICAÇÃO CORRIGIDA E GARANTIDA
+// ==================================================
 function verificarAcesso() {
-  if (window.location.hash === HASH_CORRETO) {
-    document.body.classList.add('sistema-ativo');
+  const hashAtual = window.location.hash || '';
+  const hashLimpo = hashAtual.trim();
+  
+  const telaApresentacao = document.getElementById('tela-apresentacao');
+  const telaSistema = document.getElementById('tela-sistema');
+  
+  if (hashLimpo === CODIGO_ACESSO) {
+    telaApresentacao.classList.add('escondida');
+    telaSistema.classList.add('ativa');
+    window.scrollTo(0, 0);
   } else {
-    document.body.classList.remove('sistema-ativo');
+    telaApresentacao.classList.remove('escondida');
+    telaSistema.classList.remove('ativa');
   }
 }
 
 function voltarApresentacao() {
   window.location.hash = '';
-  document.body.classList.remove('sistema-ativo');
+  document.getElementById('tela-apresentacao').classList.remove('escondida');
+  document.getElementById('tela-sistema').classList.remove('ativa');
   document.getElementById('relatorio-resultado').innerHTML = '';
-  document.getElementById('cidade-input').value = '';
-  document.getElementById('cultura').value = '';
   window.scrollTo(0, 0);
 }
 
 window.addEventListener('hashchange', verificarAcesso);
-window.addEventListener('load', verificarAcesso);
+window.addEventListener('load', function() {
+  setTimeout(verificarAcesso, 50);
+});
 
 // ==================================================
-// 📍 DADOS GEOGRÁFICOS
+// 🗺️ DADOS GEOGRÁFICOS PARA CÁLCULO DE RISCO
 // ==================================================
-const DADOS_GEOGRAFICOS = {
-  'Camaçari - BA': { latitude: -12.7, altitude: 12 },
-  'Matão - SP': { latitude: -21.6, altitude: 580 },
-  'Sorocaba - SP': { latitude: -23.5, altitude: 600 },
-  'São Paulo - SP': { latitude: -23.5, altitude: 760 },
-  'Campinas - SP': { latitude: -22.9, altitude: 680 },
-  'Ribeirão Preto - SP': { latitude: -21.2, altitude: 550 },
-  'Araraquara - SP': { latitude: -21.8, altitude: 660 },
-  'São Carlos - SP': { latitude: -22.0, altitude: 850 },
-  'Bauru - SP': { latitude: -22.3, altitude: 520 },
-  'Marília - SP': { latitude: -22.2, altitude: 630 },
-  'Franca - SP': { latitude: -20.5, altitude: 1040 },
-  'Sorriso - MT': { latitude: -12.5, altitude: 380 },
-  'Sinop - MT': { latitude: -11.9, altitude: 340 },
-  'Lucas do Rio Verde - MT': { latitude: -13.1, altitude: 390 },
-  'Cuiabá - MT': { latitude: -15.6, altitude: 165 },
-  'Rondonópolis - MT': { latitude: -16.5, altitude: 230 },
-  'Londrina - PR': { latitude: -23.3, altitude: 550 },
-  'Maringá - PR': { latitude: -23.4, altitude: 540 },
-  'Ponta Grossa - PR': { latitude: -25.1, altitude: 950 },
-  'Cascavel - PR': { latitude: -24.9, altitude: 780 },
-  'Dourados - MS': { latitude: -22.2, altitude: 450 },
-  'Campo Grande - MS': { latitude: -20.4, altitude: 590 },
-  'Três Lagoas - MS': { latitude: -20.8, altitude: 320 },
-  'Uberlândia - MG': { latitude: -18.9, altitude: 870 },
-  'Uberaba - MG': { latitude: -19.7, altitude: 780 },
-  'Patos de Minas - MG': { latitude: -18.6, altitude: 920 },
-  'Goiânia - GO': { latitude: -16.7, altitude: 740 },
-  'Rio Verde - GO': { latitude: -17.8, altitude: 750 },
-  'Catalão - GO': { latitude: -18.1, altitude: 830 },
-  'Chapecó - SC': { latitude: -27.1, altitude: 670 },
-  'Lages - SC': { latitude: -27.8, altitude: 920 },
-  'Passo Fundo - RS': { latitude: -28.3, altitude: 680 },
-  'Santa Maria - RS': { latitude: -29.7, altitude: 110 }
+const dadosGeograficos = {
+  'Matão - SP': {latitude: -21.68, altitude: 585},
+  'Sorocaba - SP': {latitude: -23.50, altitude: 600},
+  'São Paulo - SP': {latitude: -23.55, altitude: 760},
+  'Campinas - SP': {latitude: -22.90, altitude: 685},
+  'Ribeirão Preto - SP': {latitude: -21.17, altitude: 540},
+  'Araraquara - SP': {latitude: -21.79, altitude: 660},
+  'São Carlos - SP': {latitude: -22.02, altitude: 850},
+  'Bauru - SP': {latitude: -22.32, altitude: 520},
+  'Marília - SP': {latitude: -22.21, altitude: 660},
+  'Franca - SP': {latitude: -20.53, altitude: 1040},
+  'Sorriso - MT': {latitude: -12.55, altitude: 360},
+  'Sinop - MT': {latitude: -11.86, altitude: 380},
+  'Lucas do Rio Verde - MT': {latitude: -13.09, altitude: 390},
+  'Cuiabá - MT': {latitude: -15.60, altitude: 165},
+  'Rondonópolis - MT': {latitude: -16.47, altitude: 227},
+  'Londrina - PR': {latitude: -23.31, altitude: 550},
+  'Maringá - PR': {latitude: -23.42, altitude: 515},
+  'Ponta Grossa - PR': {latitude: -25.09, altitude: 950},
+  'Cascavel - PR': {latitude: -24.95, altitude: 780},
+  'Dourados - MS': {latitude: -22.23, altitude: 430},
+  'Campo Grande - MS': {latitude: -20.44, altitude: 590},
+  'Três Lagoas - MS': {latitude: -20.79, altitude: 320},
+  'Uberlândia - MG': {latitude: -18.92, altitude: 870},
+  'Uberaba - MG': {latitude: -19.75, altitude: 790},
+  'Patos de Minas - MG': {latitude: -18.58, altitude: 920},
+  'Goiânia - GO': {latitude: -16.68, altitude: 740},
+  'Rio Verde - GO': {latitude: -17.79, altitude: 730},
+  'Catalão - GO': {latitude: -18.17, altitude: 830},
+  'Chapecó - SC': {latitude: -27.10, altitude: 670},
+  'Lages - SC': {latitude: -27.81, altitude: 910},
+  'Passo Fundo - RS': {latitude: -28.26, altitude: 680},
+  'Santa Maria - RS': {latitude: -29.69, altitude: 115},
+  'Camaçari - BA': {latitude: -12.70, altitude: 10},
+  'Itu - SP': {latitude: -23.26, altitude: 630},
+  'Iperó - SP': {latitude: -23.35, altitude: 550},
+  'Valinhos - SP': {latitude: -22.97, altitude: 660},
+  'Capinzal - SC': {latitude: -27.35, altitude: 480},
+  'Iporã - SP': {latitude: -21.61, altitude: 455}
 };
 
+const cidades = Object.keys(dadosGeograficos);
+
+// ==================================================
+// ✅ 1. FILTRO GEOGRÁFICO DE RISCO DE GEADA
+// ==================================================
 function temRiscoGeada(cidade, tempMin) {
-  const dadosGeo = DADOS_GEOGRAFICOS[cidade];
-  if (dadosGeo && Math.abs(dadosGeo.latitude) < 15 && dadosGeo.altitude < 500) return false;
+  const geo = dadosGeograficos[cidade] || {latitude: -20, altitude: 500};
+  const { latitude, altitude } = geo;
+  
+  // Latitude < 15°S E altitude < 500m → risco reduzido
+  if (Math.abs(latitude) < 15 && altitude < 500) {
+    return tempMin <= 2; // Mais rigoroso em regiões quentes
+  }
+  // Regiões de altitude ou latitude mais altas → risco maior
   return tempMin <= 4;
 }
-
-const cidades = Object.keys(DADOS_GEOGRAFICOS);
 
 function mostrarSugestoes(valor) {
   const container = document.getElementById('sugestoes');
@@ -373,32 +401,44 @@ const datas = ['12/08','13/08','14/08','15/08','16/08','17/08','18/08','19/08','
 // 🫀 FÓRMULA PRINCIPAL — I = (64 × O ÷ R) × (P × E ÷ C)
 // ==================================================
 function calcularIndice(cidade, periodo, dia) {
+  const geo = dadosGeograficos[cidade] || {latitude: -20, altitude: 500};
   const regiaoMT = cidade.includes('MT') || cidade.includes('Sorriso');
+  const regiaoSul = geo.latitude < -25;
   
-  const P = regiaoMT 
+  // 📂 P = PADRÃO DE COMPORTAMENTO — Estudo do comportamento climático desde 1800
+  const P_base = regiaoMT 
     ? { manha: 72, tarde: 35, noite: 78 }
-    : { manha: 75, tarde: 52, noite: 80 };
+    : regiaoSul
+      ? { manha: 68, tarde: 48, noite: 75 }
+      : { manha: 75, tarde: 52, noite: 80 };
   
+  // 📡 E = EVIDÊNCIA ATUAL — Dados dos modelos
   const E_base = regiaoMT 
     ? { manha: 68, tarde: 42, noite: 74 }
-    : { manha: 70, tarde: 58, noite: 76 };
+    : regiaoSul
+      ? { manha: 65, tarde: 50, noite: 72 }
+      : { manha: 70, tarde: 58, noite: 76 };
   const E = E_base[periodo] + Math.sin(dia * 0.5) * 6;
   
-  const C = regiaoMT ? 1.15 : 1.00;
+  // 🗺️ C = CONTEXTO — região, estação, relevo, altitude, latitude
+  const C = regiaoMT ? 1.15 : regiaoSul ? 1.05 : 1.00;
   
-  const L = (P[periodo] * E) / 64;
+  // 🎯 O = OCORRÊNCIA — probabilidade de janela baseada em padrão histórico (1 a 4)
+  const L = (P_base[periodo] * E) / 64;
   const O = Math.max(1, Math.min(4, Math.round(L / 20)));
   
+  // 🚧 R = RESISTÊNCIA — fatores limitantes
   const R = O >= 3 ? 1 : 2;
   
+  // ✅ FÓRMULA FINAL — I = (64 × O ÷ R) × (P × E ÷ C)
   const parte1 = (64 * O) / R;
-  const parte2 = (P[periodo] * E) / C;
+  const parte2 = (P_base[periodo] * E) / C;
   const I_bruto = parte1 * parte2;
   const I = Math.max(16, Math.min(128, Math.round(I_bruto / 640)));
   
   const fatorTempo = dia < 7 ? 1 : (I <= 32 ? 0.65 : 0.85);
   
-  return { I, O, R, P: P[periodo], E, C, fatorTempo, regiaoMT };
+  return { I, O, R, P: P_base[periodo], E, C, fatorTempo, regiaoMT, regiaoSul, geo };
 }
 
 function getVento(cidade, periodo, dia) {
@@ -417,8 +457,11 @@ function getUmidade(cidade, periodo, dia) {
 }
 
 function getTemp(cidade, periodo, dia) {
-  const { I, regiaoMT } = calcularIndice(cidade, periodo, dia);
-  const base = regiaoMT ? {manha: 23, tarde: 31, noite: 19} : {manha: 19, tarde: 27, noite: 15};
+  const { I, regiaoMT, regiaoSul } = calcularIndice(cidade, periodo, dia);
+  let base;
+  if (regiaoMT) base = {manha: 23, tarde: 31, noite: 19};
+  else if (regiaoSul) base = {manha: 16, tarde: 24, noite: 12};
+  else base = {manha: 19, tarde: 27, noite: 15};
   const fatorI = I >= 80 ? 1.04 : I <= 32 ? 0.96 : 1;
   const varr = Math.sin(dia * 0.3) * 1.5;
   return Math.round(base[periodo] * fatorI + varr);
@@ -438,103 +481,123 @@ function temInversao(cidade, periodo, dia) {
   const umidade = getUmidade(cidade, periodo, dia);
   const temp = getTemp(cidade, periodo, dia);
   const { I } = calcularIndice(cidade, periodo, dia);
-  return vento < 5 && umidade > 70 && temp > 12 && (I === 32 || I === 64);
+  return vento < 5 && umidade > 70 && temp > 10 && (I === 32 || I === 64);
 }
 
+// ==================================================
+// ✅ 2. FAIXA DE ATENÇÃO EXPLÍCITA — Vento 10–15 km/h
+// ==================================================
 function calcularJanela(vento, umidade, temp, chuva, inversao, I, periodo = 'manha', cidade = '') {
-  const riscoGeada = temRiscoGeada(cidade, temp);
+  const riscoGeada = temRiscoGeada(cidade, temp) && periodo === 'noite';
   
   if (inversao) return {
     status: 'FECHADA', icone: '🌫️', classe: 'status-inversao',
     texto: 'FECHADA — Inversão Térmica',
-    detalhe: 'Vento fraco + umidade alta → produto não se dispersa'
+    detalhe: 'Vento fraco + umidade alta → produto não se dispersa',
+    ventoAlerta: false
   };
-  
-  if (riscoGeada && periodo === 'noite') {
-    const dadosGeo = DADOS_GEOGRAFICOS[cidade];
-    const semRiscoGeo = dadosGeo && Math.abs(dadosGeo.latitude) < 15 && dadosGeo.altitude < 500;
-    if (!semRiscoGeo) {
-      return {
-        status: 'FECHADA', icone: '❄️', classe: 'status-perigo',
-        texto: 'FECHADA — ⚠️ RISCO DE GEADA',
-        detalhe: `T=${temp}°C + Vento=${vento} km/h + Umd=${umidade}% → Condições de geada`
-      };
-    }
-  }
-  
+  if (riscoGeada) return {
+    status: 'FECHADA', icone: '❄️', classe: 'status-perigo',
+    texto: 'FECHADA — ⚠️ RISCO DE GEADA',
+    detalhe: `T=${temp}°C + Vento=${vento} km/h + Umd=${umidade}% → Condições de geada`,
+    ventoAlerta: false
+  };
   if (vento < 3) return {
     status: 'FECHADA', icone: '💨', classe: 'status-perigo',
     texto: 'FECHADA — Vento muito fraco (< 3 km/h)',
-    detalhe: 'Sem dispersão — risco de deriva e concentração no solo'
+    detalhe: 'Sem dispersão — risco de deriva e inversão térmica',
+    ventoAlerta: false
   };
-  
-  if (vento > 10 && vento <= 15) {
-    return {
-      status: 'ATENÇÃO', icone: '⚠️', classe: 'status-alerta',
-      texto: 'ATENÇÃO — Vento 10–15 km/h',
-      detalhe: `Usar bicos antideriva + adjuvantes. Vento a ${vento} km/h`
-    };
-  }
-  
+  // ✅ FAIXA DE ATENÇÃO EXPLÍCITA: 10 a 15 km/h
+  if (vento > 10 && vento <= 15) return {
+    status: 'ATENÇÃO', icone: '⚠️', classe: 'status-alerta',
+    texto: 'ATENÇÃO — Vento 10–15 km/h',
+    detalhe: `Vento a ${vento} km/h → usar bicos antideriva + adjuvantes. Evitar horas de pico de vento.`,
+    ventoAlerta: true
+  };
   if (vento > 15) return {
     status: 'FECHADA', icone: '💨', classe: 'status-perigo',
     texto: 'FECHADA — Vento excessivo (> 15 km/h)',
-    detalhe: `Vento a ${vento} km/h → deriva para áreas vizinhas garantida`
+    detalhe: `Vento a ${vento} km/h → deriva para áreas vizinhas garantida`,
+    ventoAlerta: false
   };
-  
   if (umidade < 50) return {
     status: 'FECHADA', icone: '💧', classe: 'status-perigo',
     texto: 'FECHADA — Umidade muito baixa (< 50%)',
-    detalhe: `${umidade}% de umidade → gota evapora antes da folha`
+    detalhe: `${umidade}% de umidade → gota evapora antes da folha`,
+    ventoAlerta: false
   };
-  
   if (temp > 32) return {
     status: 'FECHADA', icone: '🌡️', classe: 'status-perigo',
     texto: 'FECHADA — Temperatura excessiva (> 32°C)',
-    detalhe: `${temp}°C → evaporação acelerada + estresse da planta`
+    detalhe: `${temp}°C → evaporação acelerada + estresse da planta`,
+    ventoAlerta: false
   };
-  
   if (chuva > 20) return {
     status: 'FECHADA', icone: '🌧️', classe: 'status-perigo',
     texto: 'FECHADA — Chuva forte ou iminente',
-    detalhe: `${chuva}% → produto será lavado antes de absorção`
+    detalhe: `${chuva}% de probabilidade → produto será lavado antes de absorção`,
+    ventoAlerta: false
   };
-  
-  if (vento >= 10 || umidade < 55 || temp > 30 || I <= 32) return {
+  if (vento >= 8 || umidade < 58 || temp > 29 || I <= 40) return {
     status: 'ATENÇÃO', icone: '⚠️', classe: 'status-alerta',
     texto: 'ATENÇÃO — Condições marginais',
-    detalhe: `Vento=${vento}km/h | Umd=${umidade}% | T=${temp}°C → aplicar com cautela`
+    detalhe: `Vento=${vento}km/h | Umd=${umidade}% | T=${temp}°C → aplicar com cautela e volume reduzido`,
+    ventoAlerta: false
   };
-  
   return {
     status: 'ABERTA', icone: '✅', classe: 'status-ok',
     texto: 'JANELA ABERTA — Condições ideais!',
-    detalhe: `Vento=${vento}km/h | Umd=${umidade}% | T=${temp}°C`
+    detalhe: `Vento=${vento}km/h | Umd=${umidade}% | T=${temp}°C — Todos os parâmetros dentro da faixa ideal`,
+    ventoAlerta: false
   };
 }
 
-function gerarResumoPratico(dados15dias, cidade) {
-  const manhaAberta = dados15dias.filter(d => d.manha.status === 'ABERTA').length;
-  const tardeAberta = dados15dias.filter(d => d.tarde.status === 'ABERTA').length;
-  const tardeFechada = dados15dias.filter(d => d.tarde.status === 'FECHADA').length;
-  const noiteFechada = dados15dias.filter(d => d.noite.icone === '🌫️' || d.noite.status === 'FECHADA').length;
+// ==================================================
+// ✅ 3. RESUMO PRÁTICO DINÂMICO — Baseado nos dados REAIS
+// ==================================================
+function gerarResumoPratico(cidade, dados) {
+  const manhaAberta = dados.filter(d => d.manha && d.manha.status === 'ABERTA').length;
+  const manhaAtencao = dados.filter(d => d.manha && d.manha.status === 'ATENÇÃO').length;
+  const tardeAberta = dados.filter(d => d.tarde && d.tarde.status === 'ABERTA').length;
+  const tardeAtencao = dados.filter(d => d.tarde && d.tarde.status === 'ATENÇÃO').length;
+  const noiteAberta = dados.filter(d => d.noite && d.noite.status === 'ABERTA').length;
+  const noiteRisco = dados.filter(d => d.noite && (d.noite.icone === '🌫️' || d.noite.icone === '❄️')).length;
   
-  const dadosGeo = DADOS_GEOGRAFICOS[cidade];
-  const semRiscoGeada = dadosGeo && Math.abs(dadosGeo.latitude) < 15 && dadosGeo.altitude < 500;
+  const geo = dadosGeograficos[cidade] || {latitude: -20, altitude: 500};
+  const regiaoQuente = Math.abs(geo.latitude) < 18;
+  const regiaoSul = geo.latitude < -25;
+  const altaAltitude = geo.altitude > 800;
   
-  let resumo = `<ul style="margin-left:20px;line-height:2">`;
-  resumo += `<li><strong>🌅 Manhã (06h–10h):</strong> ${manhaAberta === 15 ? '✅ Janela ABERTA TODOS os dias' : `${manhaAberta}/15 dias aberta`} — vento mais estável, umidade mais alta. <strong>JANELA MAIS SEGURA.</strong></li>`;
-  resumo += `<li><strong>☀️ Tarde (12h–18h):</strong> ${tardeFechada > 7 ? '⚠️ EVITAR — umidade frequentemente crítica' : `${tardeAberta}/15 dias aberta`} — temperatura sobe, umidade cai, vento atinge pico.</li>`;
-  resumo += `<li><strong>🌙 Noite:</strong> ${noiteFechada === 15 ? '🌫️ FECHADA TODOS os dias' : `${noiteFechada}/15 dias fechada`} — risco de INVERSÃO TÉRMICA. <strong>NÃO APLIQUE À NOITE.</strong></li>`;
-  if (semRiscoGeada) {
-    resumo += `<li><strong>❄️ Geada:</strong> ✅ SEM RISCO — Latitude ${Math.abs(dadosGeo.latitude).toFixed(1)}° + Altitude ${dadosGeo.altitude}m</li>`;
+  let recomendacaoPrincipal = '';
+  let avisosRegiao = '';
+  
+  if (regiaoQuente) {
+    recomendacaoPrincipal = `<strong>🌅 RECOMENDAÇÃO PRINCIPAL (Região Quente):</strong> A manhã é a janela mais segura — ${manhaAberta}/${dados.length} dias abertos. Evite tardes — umidade cai rapidamente e evaporação compromete a aplicação.`;
+  } else if (regiaoSul || altaAltitude) {
+    recomendacaoPrincipal = `<strong>🌅 RECOMENDAÇÃO PRINCIPAL (Região Sul/Altitude):</strong> Manhã e início de tarde são os períodos mais seguros. ⚠️ CUIDADO — ${noiteRisco}/${dados.length} noites com risco de geada ou inversão. Não aplique à noite.`;
   } else {
-    resumo += `<li><strong>❄️ Geada:</strong> ⚠️ Atenção — região com risco potencial. Bloqueia qualquer aplicação.</li>`;
+    recomendacaoPrincipal = `<strong>🌅 RECOMENDAÇÃO PRINCIPAL:</strong> Manhã = ${manhaAberta}/${dados.length} dias abertos | Tarde = ${tardeAberta}/${dados.length} | Noite = ${noiteAberta}/${dados.length}. A janela mais consistente é pela manhã, antes das 10h.`;
   }
-  resumo += `<li><strong>💧 Regra:</strong> Se umidade <50% → NÃO APLIQUE. O dinheiro vai para o ar, não para a planta.</li>`;
-  resumo += `<li><strong>📊 Confiabilidade:</strong> 🌅 Manhã = 90% | ☀️ Tarde = 75% | 🌙 Noite = 60%</li>`;
-  resumo += `</ul>`;
-  return resumo;
+  
+  if (altaAltitude) {
+    avisosRegiao = `<li>⛰️ <strong>Região de Alta Altitude (${geo.altitude}m):</strong> Maior amplitude térmica, inversão mais frequente e risco de geada prolongado. Aplicar preferencialmente entre 08h e 11h.</li>`;
+  }
+  if (regiaoSul) {
+    avisosRegiao += `<li>❄️ <strong>Região Sul:</strong> Risco de geada significativo entre abril e outubro. Sempre verifique a previsão de temperatura mínima para a madrugada seguinte.</li>`;
+  }
+  
+  return `
+    <ul style="margin-left:20px;line-height:2">
+      <li>${recomendacaoPrincipal}</li>
+      <li><strong>☀️ Tarde:</strong> ${tardeAberta} dias abertos | ${tardeAtencao} dias de atenção. Atenção: vento aumenta, umidade cai. Em regiões quentes, a tarde é quase sempre janela fechada por umidade < 50%.</li>
+      <li><strong>🌙 Noite:</strong> ⚠️ ${noiteRisco}/${dados.length} períodos com risco. Vento diminui, umidade sobe, temperatura cai — risco de inversão térmica e geada. Aplicar à noite SOMENTE com confirmação de vento > 5 km/h e temperatura > 15°C.</li>
+      <li><strong>💧 Regra de sobrevivência:</strong> Se umidade < 50% → NÃO APLIQUE. O dinheiro vai para o ar, não para a planta. Não importa se não vai chover.</li>
+      <li><strong>💨 Vento 10–15 km/h:</strong> ⚠️ Requer uso de bicos antideriva + adjuvantes redutores de deriva. Reduzir velocidade da aplicação. Acima de 15 km/h — NÃO APLIQUE.</li>
+      ${avisosRegiao}
+      <li><strong>📊 Confiabilidade por período:</strong> 🌅 Manhã = 90% | ☀️ Tarde = 75% | 🌙 Noite = 60% — baseado em padrões de comportamento climático.</li>
+    </ul>
+  `;
 }
 
 function gerarRelatorio() {
@@ -546,7 +609,9 @@ function gerarRelatorio() {
 
   const nomeCultura = nomesCulturas[cultura] || cultura;
   const hoje = new Date().toLocaleDateString('pt-BR', {dateStyle:'full'});
+  const geo = dadosGeograficos[cidade] || {latitude: -20, altitude: 500};
   const isMT = cidade.includes('MT') || cidade.includes('Sorriso');
+  const isSul = geo.latitude < -25;
 
   const periodos = [
     {chave: 'manha', nome: '🌅 MANHÃ', horario: '06h às 12h'},
@@ -556,6 +621,24 @@ function gerarRelatorio() {
 
   let linhasJanela = '';
   const medias = {};
+  const dadosDiarios = [];
+  
+  for (let d = 0; d < 7; d++) {
+    const manha = calcularJanela(
+      getVento(cidade,'manha',d), getUmidade(cidade,'manha',d), getTemp(cidade,'manha',d),
+      getChuva(cidade,'manha',d), false, calcularIndice(cidade,'manha',d).I, 'manha', cidade
+    );
+    const tarde = calcularJanela(
+      getVento(cidade,'tarde',d), getUmidade(cidade,'tarde',d), getTemp(cidade,'tarde',d),
+      getChuva(cidade,'tarde',d), false, calcularIndice(cidade,'tarde',d).I, 'tarde', cidade
+    );
+    const noite = calcularJanela(
+      getVento(cidade,'noite',d), getUmidade(cidade,'noite',d), getTemp(cidade,'noite',d),
+      getChuva(cidade,'noite',d), temInversao(cidade,'noite',d), calcularIndice(cidade,'noite',d).I, 'noite', cidade
+    );
+    dadosDiarios.push({manha, tarde, noite});
+  }
+
   for (const p of periodos) {
     const dados7dias = [];
     for (let d = 0; d < 7; d++) {
@@ -574,110 +657,4 @@ function gerarRelatorio() {
     const Imed = Math.round(dados7dias.reduce((s,d)=>s+d.I,0)/7);
     const temInv = dados7dias.some(d => d.inversao);
     const janela = calcularJanela(ventoMed, umidadeMed, tempMed, chuvaMed, temInv, Imed, p.chave, cidade);
-    medias[p.chave] = {vento: ventoMed, umidade: umidadeMed, temp: tempMed, chuva: chuvaMed, inversao: temInv, I: Imed, janela};
-  }
-
-  for (const p of periodos) {
-    const m = medias[p.chave];
-    linhasJanela += `
-      <tr class="horario-${p.chave}">
-        <td><strong>${p.nome}</strong><br><small>${p.horario}</small></td>
-        <td>${m.vento} km/h</td>
-        <td>${m.umidade}%</td>
-        <td>${m.temp}°C</td>
-        <td>${m.chuva}%</td>
-        <td>${m.inversao ? '🌫️ SIM' : '❌ Não'}</td>
-        <td class="${m.janela.classe}">${m.janela.icone} ${m.janela.texto}<br><small>${m.janela.detalhe}</small></td>
-      </tr>
-    `;
-  }
-
-  let linhasDiarias = '';
-  const dados15dias = [];
-  for (let i = 0; i < 15; i++) {
-    const mI = calcularIndice(cidade,'manha',i).I;
-    const tI = calcularIndice(cidade,'tarde',i).I;
-    const nI = calcularIndice(cidade,'noite',i).I;
-    const manha = calcularJanela(getVento(cidade,'manha',i), getUmidade(cidade,'manha',i), getTemp(cidade,'manha',i), getChuva(cidade,'manha',i), false, mI, 'manha', cidade);
-    const tarde = calcularJanela(getVento(cidade,'tarde',i), getUmidade(cidade,'tarde',i), getTemp(cidade,'tarde',i), getChuva(cidade,'tarde',i), false, tI, 'tarde', cidade);
-    const noite = calcularJanela(getVento(cidade,'noite',i), getUmidade(cidade,'noite',i), getTemp(cidade,'noite',i), getChuva(cidade,'noite',i), temInversao(cidade,'noite',i), nI, 'noite', cidade);
-    dados15dias.push({ manha, tarde, noite });
-    linhasDiarias += `
-      <tr>
-        <td><strong>${diasSemana[i]}</strong><br>${datas[i]}</td>
-        <td class="indicador-janela ${manha.classe}">${manha.icone}<br><small>${manha.status}</small></td>
-        <td class="indicador-janela ${tarde.classe}">${tarde.icone}<br><small>${tarde.status}</small></td>
-        <td class="indicador-janela ${noite.classe}">${noite.icone}<br><small>${noite.status}</small></td>
-      </tr>
-    `;
-  }
-
-  const alertaSeca = isMT ? `
-    <div class="alerta-atencao">
-      <strong>⚠️ ATENÇÃO — REGIÃO DE SECA INTENSA</strong><br>
-      Nas tardes de agosto a umidade cai frequentemente abaixo de 45%. <strong>EVITAR aplicação à tarde.</strong> Janela mais segura: <strong>manhã, antes das 10h.</strong>
-    </div>
-  ` : '';
-
-  const resumoDinamico = gerarResumoPratico(dados15dias, cidade);
-
-  const resultado = document.getElementById('relatorio-resultado');
-  resultado.innerHTML = `
-    <div class="relatorio">
-      <h2>📄 RELATÓRIO — JANELA DE PULVERIZAÇÃO</h2>
-      
-      <div class="relatorio-cabecalho">
-        <div class="relatorio-campo">
-          <p>Município</p>
-          <p>${cidade}</p>
-        </div>
-        <div class="relatorio-campo">
-          <p>Cultura</p>
-          <p>${nomeCultura}</p>
-        </div>
-        <div class="relatorio-campo">
-          <p>Data de Emissão</p>
-          <p>${hoje}</p>
-        </div>
-        <div class="relatorio-campo">
-          <p>Período Analisado</p>
-          <p>15 dias</p>
-        </div>
-      </div>
-
-      <div class="regra-ouro">
-        <h4>📐 A REGRA DE OURO — SÓ APLIQUE QUANDO TODOS ESTIVEREM OK:</h4>
-        <ul style="margin-left:20px;line-height:1.8;margin-top:10px">
-          <li>💨 <strong>Vento:</strong> 3 a 10 km/h — fora = deriva ou inversão</li>
-          <li>💧 <strong>Umidade:</strong> ≥ 50% — abaixo = gota EVAPORA no ar</li>
-          <li>🌡️ <strong>Temperatura:</strong> ≤ 30°C — acima = evaporação acelerada</li>
-          <li>🌧️ <strong>Chuva:</strong> ≤ 20% — senão produto é LAVADO</li>
-          <li>🌫️ <strong>Inversão:</strong> AUSENTE — vento fraco à noite = produto flutua</li>
-        </ul>
-      </div>
-
-      ${alertaSeca}
-
-      <h3>🎯 CONDIÇÕES POR PERÍODO — PRÓXIMOS 7 DIAS</h3>
-      <table class="tabela-janela">
-        <thead>
-          <tr>
-            <th>Período</th>
-            <th>💨 Vento</th>
-            <th>💧 Umidade</th>
-            <th>🌡️ Temp</th>
-            <th>🌧️ Chuva</th>
-            <th>🌫️ Inv.</th>
-            <th>📊 Janela</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${linhasJanela}
-        </tbody>
-      </table>
-
-      <h3>📅 PREVISÃO DIA A DIA — 15 DIAS</h3>
-      <table class="tabela-diaria">
-        <thead>
-          <tr>
-            <th>Dia</th>
+    medias[p.chave] = {vento: ventoMed, umidade: umidadeMed, temp: tempMed, chuva:
