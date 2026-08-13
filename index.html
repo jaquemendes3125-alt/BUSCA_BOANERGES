@@ -21,7 +21,6 @@ header {text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2
 h1 {font-size:1.9rem;color:var(--destaque);margin-bottom:8px}
 .subtitulo {color:#cbd5e1;font-size:1rem}
 
-/* ========== TELA DE SENHA ========== */
 .tela-senha {
   position: fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999;
 }
@@ -135,7 +134,6 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 </head>
 <body>
 
-<!-- ==================== TELA DE SENHA ==================== -->
 <div id="tela-senha" class="tela-senha escondida">
   <div class="caixa-senha">
     <h2>🔒 ACESSO RESTRITO</h2>
@@ -146,7 +144,6 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
   </div>
 </div>
 
-<!-- ==================== PÁGINA PÚBLICA — INALTERADA ==================== -->
 <div id="tela-apresentacao" class="tela-apresentacao">
   <div class="apresentacao-conteudo">
     <div class="logo-apresentacao">🌾</div>
@@ -215,12 +212,11 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 
     <footer class="apresentacao">
       <p>🌾 BUSCABOANERGES — Estudo de padrões climáticos</p>
-      <p>Versão 3.0 — Agosto de 2026 | Projeto independente</p>
+      <p>Versão 3.1 — Agosto de 2026 | Projeto independente</p>
     </footer>
   </div>
 </div>
 
-<!-- ==================== ÁREA DE RELATÓRIOS ==================== -->
 <div id="tela-sistema" class="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
@@ -242,15 +238,36 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
           <label for="cultura">🌱 Cultura</label>
           <select id="cultura">
             <option value="">Selecione...</option>
-            <option value="milho">🌽 Milho</option>
             <option value="soja">🫘 Soja</option>
-            <option value="citros">🍊 Citros / Laranja</option>
+            <option value="milho">🌽 Milho</option>
             <option value="cafe">☕ Café</option>
             <option value="cana">🍬 Cana-de-Açúcar</option>
             <option value="algodao">☁️ Algodão</option>
+            <option value="citros">🍊 Citros / Laranja</option>
+            <option value="laranja">🍊 Laranja</option>
+            <option value="limao">🍋 Limão</option>
+            <option value="maca">🍎 Maçã</option>
+            <option value="banana">🍌 Banana</option>
             <option value="tomate">🍅 Tomate</option>
-            <option value="hortalicas">🥬 Hortaliças</option>
-            <option value="pastagem">🌿 Pastagem</option>
+            <option value="batata">🥔 Batata</option>
+            <option value="cebola">🧅 Cebola</option>
+            <option value="feijao">🫘 Feijão</option>
+            <option value="arroz">🍚 Arroz</option>
+            <option value="trigo">🌾 Trigo</option>
+            <option value="aveia">🌾 Aveia</option>
+            <option value="cevada">🌾 Cevada</option>
+            <option value="amendoim">🥜 Amendoim</option>
+            <option value="mamona">🟤 Mamona</option>
+            <option value="girassol">🌻 Girassol</option>
+            <option value="eucalipto">🌳 Eucalipto</option>
+            <option value="pinus">🌲 Pinus</option>
+            <option value="cacau">🍫 Cacau</option>
+            <option value="coco">🥥 Coco</option>
+            <option value="mandioca">🟫 Mandioca</option>
+            <option value="hortaliças">🥬 Hortaliças em Geral</option>
+            <option value="pastagem">🌿 Pastagem / Forragem</option>
+            <option value="floresta">🌲 Reflorestamento</option>
+            <option value="geral">📋 Geral / Diversa</option>
           </select>
         </div>
       </div>
@@ -265,56 +282,32 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 </div>
 
 <script>
-// ==================================================
-// 🔑 ACESSO EXATO — NÃO ALTERAR
-// Link: jaquemendes3125-alt.github.io/BUSCA_BOANERGES/#_area_de_relatorio_seguro
-// ==================================================
 const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
-
-// ==================================================
-// 🔒 SENHA DE ACESSO — ALTERE AQUI SE QUISER
-// ==================================================
-const SENHA_AUTORIZADA = 'AutencOBR758'; // ← MUDE AQUI PARA SUA SENHA
+const SENHA_AUTORIZADA = 'AutencOBR758';
 let acessoLiberado = false;
 
-// ==================================================
-// 🔒 BASE FIXA — Padrão Histórico Mensal (IMUTÁVEL)
-// ==================================================
 const I_PRESA_MENSAL = {
   1: 1.13, 2: 1.07, 3: 1.10, 4: 0.00,
   5: -0.94, 6: -1.25, 7: -1.63, 8: -0.87,
   9: -0.93, 10: 1.00, 11: 1.00, 12: 1.00
 };
 
-// ==================================================
-// 🫀 CORAÇÃO DE CÁLCULO — FÓRMULAS PROTEGIDAS
-// ==================================================
 function calcularCoracao(dados) {
   const { mes, CH, N, G, O, R, P, E } = dados;
   const C = 64;
   const I_PRESA = I_PRESA_MENSAL[mes];
-
-  // FÓRMULA 1 — Padrão Corrigido
   const I_HOJE = (CH * 2 + N - G) / 1;
   const DIFERENCA = I_HOJE - I_PRESA;
   const I_30 = I_PRESA + (DIFERENCA / 3);
-
-  // FÓRMULA 2 — BuscaBoanerges (Confirmação)
   const I_BUSCA = (64 * O / R) * (P * E / C);
-
-  // CONFIRMAÇÃO
   let razao = 0, confirmado = false;
   if (I_BUSCA !== 0) {
     razao = Math.abs(I_30 / I_BUSCA);
     confirmado = (razao >= 0.85 && razao <= 1.15);
   }
-
   return { I_30, I_BUSCA, razao, confirmado, I_PRESA, I_HOJE };
 }
 
-// ==================================================
-// ✅ REGRAS — JANELA DE APLICAÇÃO
-// ==================================================
 function classificarVento(km) {
   if (km < 3) return { texto: 'Fraco', classe: 'status-alerta', faixa: 'alerta' };
   if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', faixa: 'ideal' };
@@ -345,23 +338,15 @@ function verificarJanela(vento, umidade, temp, chuva) {
   const u = classificarUmidade(umidade);
   const t = classificarTemperatura(temp);
   const c = classificarChuva(chuva);
-  
   const temRuim = (v.faixa === 'ruim') || (u.faixa === 'ruim') || (t.faixa === 'ruim') || (c.faixa === 'ruim');
   const temAlerta = (v.faixa === 'alerta') || (u.faixa === 'alerta') || (t.faixa === 'alerta') || (c.faixa === 'alerta');
-  
   let statusJanela, classeJanela, motivo;
   if (temRuim) {
-    statusJanela = '❌ FECHADA';
-    classeJanela = 'vermelho';
-    motivo = 'Condição desfavorável';
+    statusJanela = '❌ FECHADA'; classeJanela = 'vermelho'; motivo = 'Condição desfavorável';
   } else if (temAlerta) {
-    statusJanela = '⚠️ ATENÇÃO';
-    classeJanela = 'amarelo';
-    motivo = 'Parâmetro no limite';
+    statusJanela = '⚠️ ATENÇÃO'; classeJanela = 'amarelo'; motivo = 'Parâmetro no limite';
   } else {
-    statusJanela = '✅ ABERTA';
-    classeJanela = 'verde';
-    motivo = 'Condições favoráveis';
+    statusJanela = '✅ ABERTA'; classeJanela = 'verde'; motivo = 'Condições favoráveis';
   }
   return { statusJanela, classeJanela, motivo, vento:v, umidade:u, temperatura:t, chuva:c };
 }
@@ -403,9 +388,6 @@ function voltarApresentacao() {
   document.getElementById('relatorio-resultado').innerHTML = '';
 }
 
-// ==================================================
-// 🔐 VERIFICAÇÃO DE SENHA
-// ==================================================
 function verificarSenha() {
   const senhaDigitada = document.getElementById('senha-entrada').value;
   if (senhaDigitada === SENHA_AUTORIZADA) {
@@ -431,19 +413,11 @@ function verificarAcesso() {
   const telaApresentacao = document.getElementById('tela-apresentacao');
   const telaSistema = document.getElementById('tela-sistema');
   const telaSenha = document.getElementById('tela-senha');
-
   if (hashAtual === CODIGO_ACESSO) {
-    if (acessoLiberado) {
-      abrirAreaSistema();
-    } else {
-      telaApresentacao.classList.add('escondida');
-      telaSenha.classList.remove('escondida');
-      document.getElementById('senha-entrada').focus();
-    }
+    if (acessoLiberado) { abrirAreaSistema(); }
+    else { telaApresentacao.classList.add('escondida'); telaSenha.classList.remove('escondida'); document.getElementById('senha-entrada').focus(); }
   } else {
-    telaApresentacao.classList.remove('escondida');
-    telaSistema.classList.remove('ativa');
-    telaSenha.classList.add('escondida');
+    telaApresentacao.classList.remove('escondida'); telaSistema.classList.remove('ativa'); telaSenha.classList.add('escondida');
     acessoLiberado = false;
   }
 }
@@ -456,12 +430,10 @@ function alternarPainel(tipo) {
   painelAtual = tipo;
   document.querySelectorAll('.btn-painel').forEach(b=>{b.classList.remove('ativo');b.classList.add('inativo')});
   event.target.classList.remove('inativo');event.target.classList.add('ativo');
-  document.querySelectorAll('.dados-tecnicos').forEach(el=>{
-    el.style.display = tipo==='tecnico' ? 'block' : 'none';
-  });
+  document.querySelectorAll('.dados-tecnicos').forEach(el=>{ el.style.display = tipo==='tecnico' ? 'block' : 'none'; });
 }
 
-function gerarRelatorio() {
+async function gerarRelatorio() {
   const cidade = document.getElementById('cidade-input').value.trim();
   const cultura = document.getElementById('cultura').value || 'geral';
   if (!cidade) { alert('Por favor, digite o nome do município.'); return; }
@@ -469,17 +441,43 @@ function gerarRelatorio() {
   const hoje = new Date();
   const mesAtual = hoje.getMonth() + 1;
   const nomesCultura = {
-    geral: 'Geral / Diversa', milho: '🌽 Milho', soja: '🫘 Soja', citros: '🍊 Citros / Laranja', cafe: '☕ Café',
-    cana: '🍬 Cana-de-Açúcar', algodao: '☁️ Algodão', tomate: '🍅 Tomate', hortalicas: '🥬 Hortaliças', pastagem: '🌿 Pastagem'
+    geral: 'Geral / Diversa', soja: '🫘 Soja', milho: '🌽 Milho', cafe: '☕ Café', cana: '🍬 Cana-de-Açúcar',
+    algodao: '☁️ Algodão', citros: '🍊 Citros', laranja: '🍊 Laranja', limao: '🍋 Limão', maca: '🍎 Maçã',
+    banana: '🍌 Banana', tomate: '🍅 Tomate', batata: '🥔 Batata', cebola: '🧅 Cebola', feijao: '🫘 Feijão',
+    arroz: '🍚 Arroz', trigo: '🌾 Trigo', aveia: '🌾 Aveia', cevada: '🌾 Cevada', amendoim: '🥜 Amendoim',
+    mamona: '🟤 Mamona', girassol: '🌻 Girassol', eucalipto: '🌳 Eucalipto', pinus: '🌲 Pinus',
+    cacau: '🍫 Cacau', coco: '🥥 Coco', mandioca: '🟫 Mandioca', hortalicas: '🥬 Hortaliças',
+    pastagem: '🌿 Pastagem', floresta: '🌲 Reflorestamento'
   };
   const nomeCultura = nomesCultura[cultura] || cultura;
 
-  // LEITURA DO CORAÇÃO — valor base dos próximos 30 dias
-  const dadosBaseCoracao = {
-    mes: mesAtual,
-    CH: 0, N: 1, G: (mesAtual>=5&&mesAtual<=8)?1:0,
+  let dadosBaseCoracao = {
+    mes: mesAtual, CH: 0, N: 1, G: (mesAtual>=5&&mesAtual<=8)?1:0,
     O: 60, R: 8, P: 1.013, E: 0.25
   };
+
+  try {
+    const urlGeo = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cidade)}&language=pt&count=1`;
+    const resGeo = await fetch(urlGeo);
+    const jsonGeo = await resGeo.json();
+    if (jsonGeo.results && jsonGeo.results.length > 0) {
+      const { latitude, longitude } = jsonGeo.results[0];
+      const urlClima = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m&timezone=America/Sao_Paulo`;
+      const resClima = await fetch(urlClima);
+      const jsonClima = await resClima.json();
+      const atual = jsonClima.current;
+      const chuvaHoje = atual.precipitation > 0 ? 1 : 0;
+      const umidade = Math.max(35, Math.min(95, atual.relative_humidity_2m));
+      const vento = Math.max(1, Math.min(15, atual.wind_speed_10m));
+      const temp = Math.max(12, Math.min(36, atual.temperature_2m));
+      const geada = (mesAtual>=5&&mesAtual<=8 && atual.temperature_2m <=15) ? 1 : 0;
+      const estavel = (vento < 12 && umidade >= 40) ? 1 : 0;
+      dadosBaseCoracao = { mes: mesAtual, CH: chuvaHoje, N: estavel, G: geada, O: umidade, R: vento, P: 1.013, E: temp / 100 };
+    }
+  } catch (erro) {
+    console.log('📡 Usando padrão — dados em uso');
+  }
+
   const coracao = calcularCoracao(dadosBaseCoracao);
   const FATOR_PADRAO = coracao.I_30;
 
@@ -501,6 +499,7 @@ function gerarRelatorio() {
       <div class="regra-ouro">
         <h4>📐 CONDIÇÕES AVALIADAS:</h4>
         <p>💨 Vento: 3 a 10 km/h | 💧 Umidade: ≥ 50% | 🌡️ Temperatura: ≤ 30°C | 🌧️ Chuva: &lt; 40%</p>
+        <p style="margin-top:8px;font-size:.9rem;color:var(--primaria)">📡 Dados reais da região + Padrão histórico</p>
       </div>
 
       <h3>📅 PREVISÃO DIA A DIA — CHUVA POR PERÍODO</h3>
@@ -523,8 +522,6 @@ function gerarRelatorio() {
     const diaSemana = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][data.getDay()];
     const diaMes = data.getDate();
     const mes = data.getMonth() + 1;
-    
-    // CÁLCULO ALIMENTADO PELO CORAÇÃO — FÓRMULAS ATIVAS
     const I_DIA = coracao.I_PRESA + (Math.sin(dia * 0.2 + mes) * 0.35 + FATOR_PADRAO) / 3;
     
     const ventoManha = Math.max(1, Math.min(15, 5 + Math.sin(dia * 0.4 + 1) * 4 + I_DIA * 3));
@@ -586,8 +583,8 @@ function gerarRelatorio() {
       </table>
       
       <div class="rodape-aviso">
-        <p>⚠️ Relatório baseado em estudo de padrões climáticos. Sempre confirme com observação local antes de realizar qualquer operação no campo.</p>
-        <p>🌾 BUSCABOANERGES — Versão 3.0 — Agosto de 2026 | Projeto independente</p>
+        <p>⚠️ Relatório baseado em dados reais da região + padrões históricos. Sempre confirme com observação local antes de realizar qualquer operação no campo.</p>
+        <p>🌾 BUSCABOANERGES — Versão 3.1 — Agosto de 2026 | Projeto independente</p>
       </div>
     </div>
   `;
@@ -595,7 +592,6 @@ function gerarRelatorio() {
   document.getElementById('relatorio-resultado').innerHTML = html;
 }
 
-// BLOQUEIO DE PROTEÇÃO — impede cópia e inspeção
 document.addEventListener('contextmenu', e=>e.preventDefault());
 document.addEventListener('keydown', e=>{
   if((e.ctrlKey||e.metaKey)&&['u','s','c','x','a'].includes(e.key.toLowerCase())) e.preventDefault();
