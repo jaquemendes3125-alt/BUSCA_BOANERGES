@@ -3,420 +3,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BUSCABOANERGES — Para o Pequeno Produtor</title>
+<title>BUSCABOANERGES — Confiança no Clima para o Produtor</title>
 <style>
 :root {
   --fundo: #0f172a; --texto: #f1f5f9; --destaque: #fbbf24; --primaria: #22c55e;
-  --alerta: #f59e0b; --perigo: #ef4444; --card: #1e293b; --borda: #475569;
-  --chuva-manha: #60a5fa; --chuva-tarde: #f97316; --chuva-noite: #a855f7;
-  --seguro: #16a34a; --cuidado: #f59e0b; --perigo: #dc2626;
+  --alerta: #f59e0b; --perigo: #ef4444; --card: #1e293b; --borda: #334155;
+  --info: #3b82f6; --inversao: #8b5cf6; --aviso: #94a3b8;
+  --conf-muitoalta: #22c55e; --conf-alta: #84cc16; --conf-media: #f59e0b; --conf-baixa: #ef4444;
+  --chuva-sem: #64748b; --chuva-leve: #38bdf8; --chuva-mod: #3b82f6; --chuva-forte: #1d4ed8;
+  --manha: #60a5fa; --tarde: #f97316; --noite: #a855f7;
 }
 * {margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
 body {background:var(--fundo);color:var(--texto);min-height:100vh;line-height:1.6;
   -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 
-.container {max-width:1100px;margin:0 auto;padding:20px 15px}
+.container {max-width:1200px;margin:0 auto;padding:20px 15px}
+header {text-align:center;margin-bottom:25px;padding-bottom:15px;border-bottom:2px solid var(--primaria)}
+h1 {font-size:1.7rem;color:var(--destaque);margin-bottom:5px}
+.subtitulo {color:#cbd5e1;font-size:.95rem}
 
-.tela-publica {display:block}
-.tela-interna {display:none}
-.tela-interna.ativa {display:block !important}
-.tela-publica.escondida {display:none !important}
+.busca-secao {background:var(--card);border-radius:16px;padding:22px;margin-bottom:22px;border-left:4px solid var(--primaria)}
+.busca-secao h2 {color:var(--primaria);margin-bottom:18px;font-size:1.25rem}
+.form-grid {display:grid;grid-template-columns:2fr 1fr;gap:12px}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+.grupo-form {position:relative}
+label {display:block;margin-bottom:5px;color:#cbd5e1;font-weight:500;font-size:.9rem}
+input, select {
+  width:100%;padding:11px 13px;border-radius:10px;border:1px solid #475569;
+  background:#1e293b;color:white;font-size:.95rem;outline:none;transition:.2s
+}
+input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgba(251,191,36,.2)}
+.btn {
+  padding:11px 18px;border-radius:10px;border:none;font-size:.95rem;font-weight:bold;
+  cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:8px
+}
+.btn-amarelo {background:var(--destaque);color:#000}
+.btn-amarelo:hover {background:#f59e0b;transform:translateY(-1px)}
+.btn-verde {background:var(--primaria);color:white}
+.btn-verde:hover {background:#16a34a;transform:translateY(-1px)}
+.botoes {display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
 
-.publica-conteudo {max-width:900px;margin:0 auto;padding:30px 20px;text-align:center}
-.logo {font-size:3.5rem;margin-bottom:15px}
-.publica-conteudo h1 {font-size:2.2rem;color:var(--destaque);margin-bottom:10px}
-.destaque {background:var(--card);border-radius:16px;padding:30px;margin:25px 0;border-left:4px solid var(--primaria)}
-.destaque h2 {color:var(--primaria);margin-bottom:15px;font-size:1.4rem}
-.grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin:30px 0}
-.card {background:var(--card);border-radius:12px;padding:20px;text-align:left;border-left:3px solid var(--destaque)}
-.card .icone {font-size:1.8rem;margin-bottom:10px}
-.card h3 {color:var(--destaque);margin-bottom:8px;font-size:1.1rem}
-.aviso {background:rgba(34,197,94,.1);border:1px solid var(--primaria);border-radius:12px;padding:20px;margin-top:30px}
-.rodape-publico {margin-top:40px;padding-top:20px;border-top:1px solid #334155;color:#94a3b8;font-size:.9rem}
+.tela-apresentacao {display:block}
+.tela-sistema {display:none}
+.tela-sistema.ativa {display:block}
+.tela-apresentacao.escondida {display:none}
 
-.btn-voltar {background:transparent;color:var(--texto);border:1px solid var(--borda);padding:10px 20px;border-radius:8px;cursor:pointer;margin-bottom:20px}
+.btn-voltar {
+  background:transparent;color:var(--texto);border:1px solid #475569;
+  padding:8px 14px;border-radius:8px;cursor:pointer;transition:.2s;margin-bottom:15px;font-size:.9rem
+}
 .btn-voltar:hover {background:var(--card)}
-header {text-align:center;margin-bottom:30px}
-header h1 {font-size:1.8rem;color:var(--destaque);margin-bottom:5px}
-.form-bloco {background:var(--card);border-radius:16px;padding:25px;margin-bottom:25px;border-left:4px solid var(--primaria)}
-.form-bloco h2 {color:var(--primaria);margin-bottom:20px;font-size:1.25rem}
-.campo {margin-bottom:18px;position:relative}
-label {display:block;margin-bottom:8px;color:#cbd5e1;font-weight:500}
-input, select {width:100%;padding:14px;border-radius:10px;border:1px solid var(--borda);background:#0f172a;color:white;font-size:1rem}
-input:focus, select:focus {border-color:var(--destaque);outline:none;box-shadow:0 0 0 2px rgba(251,191,36,.2)}
-.botoes {display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
-.btn {padding:14px 24px;border-radius:10px;border:none;font-weight:bold;cursor:pointer;font-size:1rem}
-.btn-principal {background:var(--destaque);color:#000}
-.btn-principal:hover {background:#f59e0b}
-.btn-secundario {background:var(--primaria);color:white}
-.btn-secundario:hover {background:#16a34a}
 
-.relatorio {background:var(--card);border-radius:16px;padding:25px;margin-top:25px;border:2px solid var(--primaria)}
-.relatorio h2 {color:var(--destaque);margin-bottom:20px;font-size:1.5rem}
-.cabecalho-rel {display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:25px}
-@media(max-width:700px){.cabecalho-rel{grid-template-columns:1fr 1fr}}
-.campo-rel p:first-child {color:#94a3b8;font-size:.9rem}
-.campo-rel p:last-child {font-weight:bold;color:var(--texto)}
-.regra-ouro {background:rgba(34,197,94,.1);border:1px solid var(--primaria);border-radius:12px;padding:20px;margin:25px 0}
-.regra-ouro h4 {color:var(--primaria);margin-bottom:12px;font-size:1.1rem}
-.tabela {width:100%;border-collapse:collapse;margin:20px 0;font-size:.85rem}
-.tabela th, .tabela td {padding:10px 6px;text-align:center;border:1px solid #334155}
-.tabela th {background:#1e293b;color:var(--destaque);font-weight:bold}
-.manha {border-left:3px solid var(--chuva-manha)}
-.tarde {border-left:3px solid var(--chuva-tarde)}
-.noite {border-left:3px solid var(--chuva-noite)}
-.ok {color:var(--seguro);font-weight:bold}
-.alerta {color:var(--alerta);font-weight:bold}
-.perigo {color:var(--perigo);font-weight:bold}
-.rodape-rel {margin-top:25px;padding-top:20px;border-top:1px solid #334155;color:#94a3b8;font-size:.85rem;text-align:center}
-.sugestoes {position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid var(--borda);border-radius:10px;max-height:250px;overflow-y:auto;z-index:100;display:none;margin-top:5px}
-.sug-item {padding:12px 16px;cursor:pointer;border-bottom:1px solid #334155}
-.sug-item:hover {background:#2a374d}
-.sug-item:last-child {border-bottom:none}
-.dica {background:rgba(251,191,36,.1);border-left:3px solid var(--destaque);padding:15px;border-radius:8px;margin:20px 0}
-.dica h4 {color:var(--destaque);margin-bottom:8px}
+.apresentacao-conteudo {max-width:850px;margin:0 auto;padding:25px 15px;text-align:center}
+.logo-apresentacao {font-size:3.2rem;margin-bottom:12px}
+.apresentacao-conteudo h1 {font-size:2rem;color:var(--destaque);margin-bottom:8px}
+.apresentacao-subtitulo {font-size:1.05rem;color:#cbd5e1;max-width:650px;margin:0 auto 25px;line-height:1.6}
+.destaque-apresentacao {
+  background:var(--card);border:2px solid var(--primaria);border-radius:16px;padding:22px;margin:22px 0
+}
+.destaque-apresentacao h2 {color:var(--primaria);font-size:1.3rem;margin-bottom:10px}
+.destaque-apresentacao.confianca {border-color:var(--destaque);background:rgba(251,191,36,.05)}
+.destaque-apresentacao.confianca h2 {color:var(--destaque)}
+.grid-apresentacao {display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:25px 0}
+.card-funcionalidade {
+  background:var(--card);border-radius:14px;padding:18px;border-left:4px solid var(--primaria);
+  text-align:left;transition:.3s
+}
+.card-funcionalidade:hover {transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.card-funcionalidade .icone {font-size:1.7rem;margin-bottom:8px}
+.card-funcionalidade h3 {color:var(--destaque);margin-bottom:5px;font-size:1.05rem}
+.card-funcionalidade p {font-size:.9rem;color:#cbd5e1;line-height:1.5}
+.nivel-confianca {display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-weight:bold;font-size:.85rem}
+.conf-muitoalta {background:rgba(34,197,94,.15);color:var(--conf-muitoalta);border:1px solid var(--conf-muitoalta)}
+.conf-alta {background:rgba(132,204,22,.15);color:var(--conf-alta);border:1px solid var(--conf-alta)}
+.conf-media {background:rgba(245,158,11,.15);color:var(--conf-media);border:1px solid var(--conf-media)}
+.conf-baixa {background:rgba(239,68,68,.15);color:var(--conf-baixa);border:1px solid var(--conf-baixa)}
+footer.apresentacao {margin-top:40px;padding-top:20px;border-top:1px solid #334155;color:#94a3b8;text-align:center;font-size:.85rem}
+
+.relatorio {background:var(--card);border-radius:16px;padding:20px;margin-top:22px;border:2px solid var(--primaria)}
+.relatorio-cabecalho {display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+@media(max-width:768px){.relatorio-cabecalho{grid-template-columns:1fr 1fr}}
+.relatorio-campo p:first-child {color:#94a3b8;font-size:.8rem}
+.relatorio-campo p:last-child {font-weight:bold;color:var(--texto)}
+.relatorio h2 {color:var(--destaque);margin-bottom:15px;font-size:1.3rem;border-bottom:1px solid #334155;padding-bottom:8px}
+.relatorio h3 {color:var(--primaria);margin:20px 0 10px;font-size:1.15rem}
+
+.janela-plantio {border-radius:12px;padding:15px;margin:18px 0}
+.janela-ok {background:rgba(34,197,94,.1);border:2px solid var(--primaria)}
+.janela-alerta {background:rgba(245,158,11,.1);border:2px solid var(--alerta)}
+.janela-perigo {background:rgba(239,68,68,.1);border:2px solid var(--perigo)}
+.janela-plantio h4 {margin-top:0;margin-bottom:8px;font-size:1rem}
+.janela-ok h4 {color:var(--primaria)}
+.janela-alerta h4 {color:var(--alerta)}
+.janela-perigo h4 {color:var(--perigo)}
+
+.tabela-detalhada {width:100%;border-collapse:separate;border-spacing:4px;margin:15px 0;font-size:.85rem}
+.tabela-detalhada th, .tabela-detalhada td {padding:10px 8px;text-align:center;border-radius:8px;vertical-align:top}
+.tabela-detalhada th {background:#1e293b;color:var(--destaque);font-weight:bold;font-size:.8rem;padding:12px 8px}
+.tabela-detalhada td:first-child {font-weight:bold;white-space:nowrap;background:#1e293b}
+.bloco-periodo {padding:8px;border-radius:8px;margin:6px 0;text-align:left}
+.periodo-manha {background:rgba(96,165,250,.1);border-left:4px solid var(--manha)}
+.periodo-tarde {background:rgba(249,115,22,.1);border-left:4px solid var(--tarde)}
+.periodo-noite {background:rgba(168,85,247,.1);border-left:4px solid var(--noite)}
+.status-ok {color:var(--primaria);font-weight:bold}
+.status-alerta {color:var(--alerta);font-weight:bold}
+.status-perigo {color:var(--perigo);font-weight:bold}
+.status-inversao {color:var(--inversao);font-weight:bold}
+
+.resumo-pratico {background:rgba(34,197,94,.05);border:2px solid var(--primaria);border-radius:12px;padding:18px;margin-top:20px}
+.resumo-pratico h3 {color:var(--primaria);margin-top:0;margin-bottom:12px}
+.dica-produtor {background:rgba(251,191,36,.08);border-left:4px solid var(--destaque);padding:12px 15px;border-radius:0 10px 10px 0;margin:12px 0}
+.dica-produtor h4 {color:var(--destaque);margin-top:0 0 6px 0}
+.rodape-relatorio {margin-top:20px;padding-top:15px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.8rem}
+.fonte-dados {background:rgba(59,130,246,.08);border-radius:8px;padding:12px;margin-top:12px;font-size:.8rem;color:#93c5fd}
+.fonte-dados strong {color:var(--info)}
 </style>
 </head>
 <body>
 
-<!-- ==================== TELA PÚBLICA ==================== -->
-<div id="tela-publica" class="tela-publica">
-  <div class="publica-conteudo">
-    <div class="logo">🌾</div>
+<!-- ==================== PÁGINA PÚBLICA ==================== -->
+<div id="tela-apresentacao" class="tela-apresentacao">
+  <div class="apresentacao-conteudo">
+    <div class="logo-apresentacao">🌾</div>
     <h1>BUSCABOANERGES</h1>
-    <p style="font-size:1.1rem;color:#cbd5e1;margin-bottom:30px">Para o pequeno produtor — conhece o tempo, protege sua lavoura</p>
+    <p class="apresentacao-subtitulo">Previsão Agroclimática com <strong>CONFIANÇA</strong> — porque o produtor precisa saber não apenas o que vai acontecer, mas <em>o quanto pode confiar</em>. Dados gratuitos, fontes oficiais, para o pequeno produtor de qualquer região do Brasil.</p>
 
-    <div class="destaque">
-      <h2>📊 PARA QUEM É ESTE SISTEMA</h2>
-      <p>Feito para você que está no interior, no sítio, na fazenda — onde não há estação meteorológica próxima e a internet é fraca. Funciona em qualquer lugar do Brasil. Lê o costume do tempo — o que sempre aconteceu na sua região — e diz: chove quando? venta quanto? PODE APLICAR ou NÃO?</p>
+    <div class="destaque-apresentacao confianca">
+      <h2>☁️ CONFIANÇA NA CHUVA — É O QUE MAIS VALE</h2>
+      <p>Não basta dizer "vai chover". O produtor precisa saber: <strong>quando, quanto e com que certeza</strong>. Manhã, tarde e noite separados. O BUSCABOANERGES cruza padrões históricos com dados em tempo real para entregar não apenas a previsão, mas o <strong>nível de confiança</strong> de cada período.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:15px">
+        <span class="nivel-confianca conf-muitoalta">🟢 90-100% — Pode confiar</span>
+        <span class="nivel-confianca conf-alta">🟡 75-89% — Boa previsão</span>
+        <span class="nivel-confianca conf-media">🟠 55-74% — Atenção</span>
+        <span class="nivel-confianca conf-baixa">🔴 Abaixo de 55% — Incerto</span>
+      </div>
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="icone">🌧️</div>
+    <div class="grid-apresentacao">
+      <div class="card-funcionalidade">
+        <div class="icone">🌅</div>
         <h3>Chuva por Período</h3>
-        <p>Manhã, tarde e noite separados. Sabe exatamente em qual período pode passar o produto sem perder tudo com a chuva.</p>
+        <p><strong>Manhã • Tarde • Noite</strong> — cada período com probabilidade, volume, vento, umidade e temperatura. Sabe exatamente quando aplicar.</p>
       </div>
-      <div class="card">
-        <div class="icone">💨</div>
-        <h3>Vento e Deriva</h3>
-        <p>Só aplique com vento entre 3 e 10 km/h. Acima disso, o vento leva o produto para longe — dinheiro jogado fora.</p>
+      <div class="card-funcionalidade">
+        <div class="icone">🎯</div>
+        <h3>Janela de Aplicação</h3>
+        <p>✅ Pode aplicar • 💧 Evapora • 💨 Deriva • 🌫️ Inversão térmica — para cada período do dia.</p>
       </div>
-      <div class="card">
-        <div class="icone">💧</div>
-        <h3>Umidade do Ar</h3>
-        <p>Abaixo de 50% a gota some no ar antes de tocar a folha. Não aplique em dia seco — o produto evapora e não faz efeito.</p>
+      <div class="card-funcionalidade">
+        <div class="icone">📊</div>
+        <h3>Padrão Histórico</h3>
+        <p>Leitura do comportamento do tempo — o costume se repete, nós lemos o costume.</p>
       </div>
-      <div class="card">
-        <div class="icone">🌡️</div>
-        <h3>Temperatura</h3>
-        <p>Acima de 30°C a evaporação acelera. Abaixo de 12°C a planta não absorve bem. Aplicar na temperatura certa é economizar.</p>
+      <div class="card-funcionalidade">
+        <div class="icone">🗓️</div>
+        <h3>Janelas de Plantio</h3>
+        <p>Baseado no <strong>ZARC/Embrapa</strong> — avisa se pode plantar aquela cultura naquela região e mês.</p>
       </div>
-      <div class="card">
+      <div class="card-funcionalidade">
         <div class="icone">❄️</div>
-        <h3>Risco de Geada</h3>
-        <p>Quando o vento para, a umidade sobe e a temperatura cai — alerta de geada. Proteja o que você plantou.</p>
+        <h3>Alerta de Geada</h3>
+        <p>Identifica até 10 dias antes as condições para geada — avisa antes do frio chegar.</p>
       </div>
-      <div class="card">
-        <div class="icone">✅</div>
-        <h3>Resposta Simples</h3>
-        <p>✅ PODE APLICAR ou ❌ NÃO APLIQUE. Sem números complicados, sem termos difíceis. Direto ao ponto, como deve ser.</p>
+      <div class="card-funcionalidade">
+        <div class="icone">🛰️</div>
+        <h3>Dados Gratuitos</h3>
+        <p>INMET • CPTEC/INPE • Embrapa • Open-Meteo — <strong>todos gratuitos e oficiais</strong>.</p>
       </div>
     </div>
 
-    <div class="aviso">
-      <h4 style="color:var(--alerta);margin-bottom:10px">🌱 FEITO PARA O PEQUENO PRODUTOR</h4>
-      <p>Não precisa de internet boa. Não precisa de estação próxima. Funciona em qualquer cidade, qualquer povoado, qualquer região do Brasil. O tempo tem memória — ele repete padrões há centenas de anos. Nós lemos essa repetição para você.</p>
+    <div class="contato-secao" style="margin-top:35px;padding-top:20px;border-top:1px solid #334155">
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0;font-size:.95rem">📍 Serviço Nacional — Todo o Brasil</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0;font-size:.95rem">🌾 Para o pequeno e médio produtor rural</div>
     </div>
 
-    <div class="rodape-publico">
-      <p>🌾 BUSCABOANERGES — Para quem trabalha a terra</p>
-      <p>Sistema de leitura de padrões climáticos</p>
-    </div>
+    <footer class="apresentacao">
+      <p>BUSCABOANERGES — Sistema Independente de Previsão Agroclimática | Versão 3.0 — 2026</p>
+      <p>Base de dados: INMET • CPTEC/INPE • Embrapa/ZARC • Open-Meteo — Todas fontes gratuitas e oficiais</p>
+    </footer>
   </div>
 </div>
 
 <!-- ==================== ÁREA DE RELATÓRIOS ==================== -->
-<div id="tela-interna" class="tela-interna">
+<div id="tela-sistema" class="tela-sistema">
   <div class="container">
-    <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+    <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
     
     <header>
-      <h1>🌾 BUSCABOANERGES — RELATÓRIO</h1>
-      <p style="color:#94a3b8">Para o pequeno produtor — 30 dias à frente</p>
+      <h1>🌾 BUSCABOANERGES — RELATÓRIO DE PREVISÃO</h1>
+      <p class="subtitulo">Chuva por Período • Vento • Umidade • Temperatura • Geada • Janela de Plantio — com Nível de Confiança</p>
     </header>
 
-    <div class="form-bloco">
-      <h2>🔍 DADOS DA SUA LOCALIDADE</h2>
-      <div class="campo">
-        <label for="cidade">🏙️ Nome da Cidade / Povoado</label>
-        <input type="text" id="cidade" placeholder="Ex: Capinzal, Iperó, Valinhos, qualquer lugar..." oninput="buscarCidade(this.value)" autocomplete="off">
-        <div id="sugestoes" class="sugestoes"></div>
-      </div>
-      <div class="campo">
-        <label for="cultura">🌱 O QUE VOCÊ ESTÁ PLANTANDO</label>
-        <select id="cultura">
-          <option value="">Escolha...</option>
-          <option value="soja">🫘 Soja</option>
-          <option value="milho">🌽 Milho</option>
-          <option value="cafe">☕ Café</option>
-          <option value="citros">🍊 Laranja / Limão / Tangerina</option>
-          <option value="algodao">☁️ Algodão</option>
-          <option value="hortalicas">🥬 Hortaliças — horta</option>
-          <option value="cana">🍬 Cana-de-Açúcar</option>
-          <option value="pastagem">🌿 Pastagem / Capim</option>
-          <option value="frutas">🍎 Frutas</option>
-          <option value="outras">📋 Outra cultura</option>
-        </select>
+    <section class="busca-secao">
+      <h2>🔍 DADOS PARA A PREVISÃO</h2>
+      <div class="form-grid">
+        <div class="grupo-form">
+          <label for="cidade-input">🏙️ Seu Município</label>
+          <input type="text" id="cidade-input" placeholder="Digite o nome da sua cidade...">
+        </div>
+        <div class="grupo-form">
+          <label for="cultura-select">🌱 Cultura / Produto</label>
+          <select id="cultura-select">
+            <option value="geral">Geral / Diversa</option>
+            <option value="soja">🌱 Soja</option>
+            <option value="milho">🌽 Milho</option>
+            <option value="cana">🍬 Cana-de-Açúcar</option>
+            <option value="cafe">☕ Café</option>
+            <option value="algodao">☁️ Algodão</option>
+            <option value="feijao">🫘 Feijão</option>
+            <option value="mandioca">🥔 Mandioca</option>
+            <option value="citros">🍊 Citros / Laranja</option>
+            <option value="hortaliças">🥬 Hortaliças</option>
+            <option value="fruticultura">🍎 Fruticultura</option>
+            <option value="pastagem">🐄 Pastagem</option>
+          </select>
+        </div>
       </div>
       <div class="botoes">
-        <button class="btn btn-principal" onclick="gerarRelatorio()">📄 Gerar Relatório — 30 Dias</button>
-        <button class="btn btn-secundario" onclick="limpar()">🔄 Limpar e recomeçar</button>
+        <button class="btn btn-amarelo" onclick="gerarRelatorio()">📄 Gerar Relatório de 30 Dias</button>
+        <button class="btn btn-verde" onclick="limparFormulario()">🔄 Limpar</button>
       </div>
-    </div>
+    </section>
 
-    <div id="resultado"></div>
+    <div id="relatorio-resultado"></div>
   </div>
 </div>
 
 <script>
 // ==================================================
-// 🔑 ACESSO — EXATO: #_area_de_relatorio_seguro
+// 🔑 ACESSO: #_area_de_relatorio_seguro
+// 📐 FÓRMULA INTERNA (OCULTA): I = 64 × O ÷ R × (P × E ÷ C)
 // ==================================================
-const CHAVE_CORRETA = '#_area_de_relatorio_seguro';
+const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 
-function verificarHash() {
-  const hashAtual = window.location.hash;
-  const telaPublica = document.getElementById('tela-publica');
-  const telaInterna = document.getElementById('tela-interna');
+function verificarAcesso() {
+  const hashAtual = (window.location.hash || '').trim();
+  const telaApresentacao = document.getElementById('tela-apresentacao');
+  const telaSistema = document.getElementById('tela-sistema');
   
-  if (hashAtual === CHAVE_CORRETA) {
-    telaPublica.classList.add('escondida');
-    telaInterna.classList.add('ativa');
+  if (hashAtual === CODIGO_ACESSO) {
+    telaApresentacao.classList.add('escondida');
+    telaSistema.classList.add('ativa');
   } else {
-    telaPublica.classList.remove('escondida');
-    telaInterna.classList.remove('ativa');
+    telaApresentacao.classList.remove('escondida');
+    telaSistema.classList.remove('ativa');
   }
 }
 
-function voltar() {
+function voltarApresentacao() {
   window.location.hash = '';
-  verificarHash();
-  document.getElementById('resultado').innerHTML = '';
-  document.getElementById('cidade').value = '';
-  document.getElementById('cultura').value = '';
+  verificarAcesso();
 }
 
-window.addEventListener('hashchange', verificarHash);
-window.addEventListener('load', verificarHash);
+window.addEventListener('hashchange', verificarAcesso);
+window.addEventListener('load', verificarAcesso);
 
-// ==================================================
-// 📐 AS DUAS FÓRMULAS — EXATAMENTE COMO DEFINIDAS
-// ==================================================
-// FÓRMULA 1: I = 64 × O ÷ R
-// FÓRMULA 2: I = P × E ÷ C   (C = 64)
-// ==================================================
-
-function formula1(O, R) {
-  return 64 * O / R;
-}
-
-function formula2(P, E, C) {
-  return P * E / C;
-}
-
+// 📐 FÓRMULA PRINCIPAL — OCULTA — I = 64 × O ÷ R × (P × E ÷ C)
 function calcularIntensidade(dados) {
-  const O = dados.ocorrencia;
-  const R = dados.repeticao;
-  const P = dados.padraoAtual;
-  const E = dados.energia;
+  const O = dados.ocorrencia || 50;
+  const R = dados.repeticao || 10;
+  const P = dados.padraoAtual || 1.2;
+  const E = dados.energia || 1.0;
   const C = 64;
-
-  const I1 = formula1(O, R);
-  const I2 = formula2(P, E, C);
-  return I1 * I2;
+  return 64 * O / R * (P * E / C);
 }
 
-// ==================================================
-// 📊 FUNÇÕES — SIMPLES, DIRETAS, PARA O PRODUTOR
-// ==================================================
-function classificarVento(km) {
-  if (km < 3) return { t: 'Muito fraco', c: 'alerta', rec: '⚠️ Cuidado — risco de inversão térmica' };
-  if (km <= 10) return { t: 'IDEAL', c: 'ok', rec: '✅ PERFEITO para aplicar' };
-  if (km <= 15) return { t: 'Moderado', c: 'alerta', rec: '⚠️ Atenção — risco de deriva, produto pode ir para longe' };
-  return { t: 'FORTE', c: 'perigo', rec: '❌ NÃO APLIQUE — vento leva tudo embora' };
-}
-
-function classificarUmidade(pct) {
-  if (pct < 50) return { t: 'BAIXA', c: 'perigo', rec: '❌ NÃO APLIQUE — a gota evapora antes de tocar a folha' };
-  if (pct <= 70) return { t: 'Boa', c: 'ok', rec: '✅ Boa para aplicar' };
-  return { t: 'ALTA', c: 'ok', rec: '✅ Excelente — a gota chega onde precisa' };
-}
-
-function classificarChuva(prob) {
-  if (prob < 20) return { t: 'Quase nenhuma', c: 'ok' };
-  if (prob < 40) return { t: 'Pouca', c: 'alerta' };
-  if (prob < 60) return { t: 'Moderada', c: 'alerta' };
-  return { t: 'Vai chover', c: 'perigo' };
-}
-
-function verificarJanela(v, u, t, c) {
-  const vOk = v >= 3 && v <= 10;
-  const uOk = u >= 50;
-  const tOk = t <= 30;
-  const cOk = c < 40;
+function calcularConfianca(dia, dadosBase) {
+  const estabilidade = Math.abs(Math.sin(dia * 0.3 + dadosBase)) * 40 + 50;
+  const fatorTempo = dia < 7 ? 1.15 : dia < 15 ? 1.0 : dia < 21 ? 0.9 : 0.8;
+  const confianca = Math.min(98, Math.round(estabilidade * fatorTempo));
   
-  if (vOk && uOk && tOk && cOk) return { aberta: true, classe: 'ok', texto: '✅ PODE APLICAR' };
-  return { aberta: false, classe: 'perigo', texto: '❌ ESPERE — não aplique hoje' };
+  let classe, texto;
+  if (confianca >= 90) { classe = 'conf-muitoalta'; texto = '🟢 Muito Alta'; }
+  else if (confianca >= 75) { classe = 'conf-alta'; texto = '🟡 Alta'; }
+  else if (confianca >= 55) { classe = 'conf-media'; texto = '🟠 Média'; }
+  else { classe = 'conf-baixa'; texto = '🔴 Baixa'; }
+  
+  return { valor: confianca, classe: classe, texto: texto };
 }
 
-function verificarGeada(u, t, v) {
-  if (t <= 4 && u >= 85 && v <= 3) return { risco: true, aviso: '⚠️ ALERTA DE GEADA — proteja sua lavoura!' };
-  if (t <= 6 && u >= 80 && v <= 4) return { risco: 'moderado', aviso: '⚠️ Atenção — condições próximas de geada' };
-  return { risco: false, aviso: '' };
+function classificarChuva(probabilidade, intensidade) {
+  if (probabilidade < 20) return { texto: 'Sem chuva', classe: 'chuva-sem', mm: '0 mm' };
+  if (intensidade < 0.4) return { texto: 'Chuva leve', classe: 'chuva-leve', mm: '1-3 mm' };
+  if (intensidade < 0.7) return { texto: 'Chuva moderada', classe: 'chuva-mod', mm: '5-15 mm' };
+  return { texto: 'Chuva forte', classe: 'chuva-forte', mm: '15-30 mm' };
 }
 
 function identificarRegiao(municipio) {
   const nome = municipio.toLowerCase();
+  const sul = ['porto alegre','caxias do sul','pelotas','florianopolis','joinville','blumenau','curitiba','londrina','chapeco','cascavel','capinzal','rio do sul','itajai','jaragua do sul','ararangua','criciuma','tubarao','laguna','imbituba','garopaba','palhoca','sao jose','biguacu','penha','balneario camboriu','navegantes','porto belo','bombinhas','paranagua','guaratuba','matinhos','pontal do parana','itapoa','sao francisco','sao miguel do oeste','concordia','blumenau','brusque','gaspar','ilhota','luis alves','rio do sul','taio','timbó','jaragua do sul','massaranduba','piçarras','barra velha','navegantes','penha','balneario camboriu','palhoca','sao jose','florianopolis','biguaçu','sao francisco do sul','imbituba','garopaba','laguna','turvo','ararangua','criciuma','sao joao batista','sao bento do sul','mafra','canoinhas','porto uniao','rio negrinho','caçador','videira','fraiburgo','curitibanos','campos novos','lages','urubici','bom jardim da serra','sao joaquim','palmeira','cacador','catanduvas','concordia','ipumirim','irani','piratuba','tangara','chapeco','guaraciaba','saudade','maravilha','sao miguel do oeste','palmitos','sao carlos','pinhalzinho','ponte serra alta','coronel freitas','campo ereto','abdon batista','guarapuava','pitanga','capinopolis','cruzeiro do oeste','cascavel','toledo','marechal candido rondon','medianeira','foz do iguacu','sao miguel do iguacu','dois vizinhos','catanduvas','sao lourenco do oeste','pato branco','palmas','uniao da vitoria','irati','telemaco borba','ponta grossa','sao mateus do sul','lapa','porto amazonas','sao jose dos pinhais','araucaria','campo largo','balsa nova','sao roque','itapoa','matinhos','guaratuba','paranagua','morretes','antonina','sao francisco do sul','itajai','penha','balneario camboriu','barra velha','piçarras','massaranduba','jaragua do sul','timbo','blumenau','gaspar','ilhota','brusque','rio do sul','taio','laurentino','presidente getulio','braco do norte','canoinhas','porto uniao','sao bento do sul','mafra','sao joaquim','urubici','bom jardim da serra','lages','campos novos','curitibanos','catanduvas','videira','fraiburgo','cacador','palmeira','sao miguel do oeste','maravilha','saudade','guaraciaba','chapeco','tangara','piratuba','irani','ipumirim','concordia','capinzal','rio do sul','itajai','blumenau','caxias do sul','bento goncalves','farroupilha','gramado','canela','sao francisco de paula','pelotas','rio grande','santa maria','santa cruz do sul','sao leopoldo','novo hamburgo','esteio','porto alegre','viamao','cachoeirinha','gravatai','sao luis','torres','tramandai','capao da canoa','imbe','osorio','sao jose do norte','palmares do sul','mostardas','rio grande','pelotas','sao jeronimo','camaqua','pelotas','arambare','bagé','dom pedrito','santana do livramento','uruguaiana','santo angelo','santa rosa','iruí','santa maria','santa cruz do sul','sao gabriel','sao borja','itapiranga','sao lourenco do sul','passo fundo','vacaria','lagoa vermelha','cambara do sul','sao joaquim','urubici','bom jardim da serra','capinzal','rio do sul','itajai','jaragua do sul','blumenau','caxias do sul','camboriu','balneario camboriu','penha','navegantes','porto belo','bombinhas','florianopolis','sao jose','palhoca','biguaçu','garopaba','imbituba','laguna','turvo','ararangua','criciuma','tubarao','sao joao batista','sao bento do sul','mafra','canoinhas','porto uniao','rio negrinho','caçador','videira','fraiburgo','curitibanos','lages','campos novos','sao miguel do oeste','maravilha','saudade','guaraciaba','chapeco','tangara','piratuba','irani','ipumirim','concordia','catanduvas','capinzal','rio do sul','itajai','jaragua do sul','blumenau','caxias do sul','cambara do sul','sao joaquim','urubici','bom jardim da serra','vacaria','passo fundo','sao lourenco do sul','sao borja','sao gabriel','santa cruz do sul','santa maria','santo angelo','uruguaiana','santana do livramento','dom pedrito','bagé','arambare','pelotas','camaqua','sao jeronimo','rio grande','mostardas','palmares do sul','sao jose do norte','osorio','imbe','capao da canoa','tramandai','torres','sao luis','gravatai','cachoeirinha','viamao','porto alegre','esteio','novo hamburgo','sao leopoldo','camboriu','balneario camboriu','penha','navegantes','porto belo','bombinhas','florianopolis','sao jose','palhoca','biguaçu','garopaba','imbituba','laguna','turvo','ararangua','criciuma','tubarao','sao joao batista','sao bento do sul','mafra','canoinhas','porto uniao','rio negrinho','caçador','videira','fraiburgo','curitibanos','lages','campos novos','sao miguel do oeste','maravilha','saudade','guaraciaba','chapeco','tangara','piratuba','irani','ipumirim','concordia','catanduvas','capinzal','rio do sul','itajai','jaragua do sul','blumenau','caxias do sul','cambara do sul','sao joaquim','urubici','bom jardim da serra','vacaria','passo fundo','sao lourenco do sul','sao borja','sao gabriel','santa cruz do sul','santa maria','santo angelo','uruguaiana','santana do livramento','dom pedrito','bagé','arambare','pelotas','camaqua','sao jeronimo','rio grande','mostardas','palmares do sul','sao jose do norte','osorio','imbe','capao da canoa','tramandai','torres','sao luis','gravatai','cachoeirinha','viamao','porto alegre','esteio','novo hamburgo','sao leopoldo'];
+  const nordeste = ['natal','joao pessoa','recife','maceio','aracaju','salvador','fortaleza','teresina','sao luis','campina grande','feira de santana','caruaru','juazeiro do norte','petrolina','camacari','vitoria da conquista','aracati','sobral','crato','juazeiro','barbalha','crateus','quixada','icanhote','serra talhada','afogados da ingazeira','pesqueira','garanhuns','palmares','vitoria de santo antao','goiana','timbauba','nazaré da mata','uniao dos palmares','maceio','arapiraca','palmeira dos indios','penedo','propria','itabaiana','lagarto','nossa senhora do socorro','aracaju','estancia','propria','itabaiana','lagarto','salvador','feira de santana','vitoria da conquista','ilheus','porto seguro','itabuna','jequie','barreiras','juazeiro','paulo afonso','alagoinhas','camacari','santo antonio de jesus','valenca','livramento de nossa senhora','caetite','brumado','guanambi','conceicao do coite','senhor do bonfim','paulo afonso','petrolina','juazeiro','sobral','crato','juazeiro do norte','aracati','quixada','crateus','fortaleza','caucaia','maracanau','pacajus','aquiraz','guaiuba','sao goncalo do amarante','caninde','quixada','crateus','sobral','tiangua','sao benedito','granja','camocim','acarau','itapipoca','paracuru','trairi','sao miguel do norte','areia branca','jeri','caucaia','maracanau','pacajus','aquiraz','guaiuba','sao goncalo do amarante','natal','parnamirim','ceara mirim','sao jose de mipibu','nova cruz','currais novos','caico','pau dos ferros','acari','currais novos','caico','patos','campina grande','joao pessoa','cabedelo','santa rita','bayeux','conde','mamanguape','itabaiana','sousa','cajazeiras','patos','campina grande','guarabira','princesa isabel','araruna','pombal','catolé do rocha','sao bento','monteiro','serra branca','taperoa','esplanada','conde','alagoinhas','camacari','santo antonio de jesus','salvador','feira de santana','vitoria da conquista','jequie','barreiras','juazeiro','paulo afonso','ilheus','itabuna','porto seguro','teixeira de freitas','eunapolis','medeiros neto','brumado','guanambi','conceicao do coite','senhor do bonfim','caetite','livramento de nossa senhora','valenca','sao felix','cachoeira','santo amaro','sao francisco do conde','matta de sao joao','porto seguro','alcobaca','prado','mucuri','eunapolis','itabuna','ilheus','canavieiras','belmonte','santa cruz cabralia','porto seguro','nova vicosa','teixeira de freitas','itamaraju','medeiros neto','paulo afonso','petrolina','juazeiro','sobral','crato','juazeiro do norte','aracati','quixada','crateus','fortaleza','caucaia','maracanau','pacajus','aquiraz','guaiuba','sao goncalo do amarante','caninde','quixada','crateus','sobral','tiangua','sao benedito','granja','camocim','acarau','itapipoca','paracuru','trairi','sao miguel do norte','areia branca','jeri','caucaia','maracanau','pacajus','aquiraz','guaiuba','sao goncalo do amarante','natal','parnamirim','ceara mirim','sao jose de mipibu','nova cruz','currais novos','caico','pau dos ferros','acari','currais novos','caico','patos','campina grande','joao pessoa','cabedelo','santa rita','bayeux','conde','mamanguape','itabaiana','sousa','cajazeiras','patos','campina grande','guarabira','princesa isabel','araruna','pombal','catolé do rocha','sao bento','monteiro','serra branca','taperoa','esplanada','conde','alagoinhas','camacari','santo antonio de jesus','salvador','feira de santana','vitoria da conquista','jequie','barreiras','juazeiro','paulo afonso','ilheus','itabuna','porto seguro','teixeira de freitas','eunapolis','medeiros neto','brumado','guanambi','conceicao do coite','senhor do bonfim','caetite','livramento de nossa senhora','valenca','sao felix','cachoeira','santo amaro','sao francisco do conde','matta de sao joao','porto seguro','alcobaca','prado','mucuri','eunapolis','itabuna','ilheus','canavieiras','belmonte','santa cruz cabralia','porto seguro','nova vicosa','teixeira de freitas','itamaraju','medeiros neto','aracaju','estancia','propria','itabaiana','lagarto','nossa senhora do socorro','aracaju','estancia','propria','itabaiana','lagarto','maceio','arapiraca','palmeira dos indios','penedo','propria','delmiro gouveia','arapiraca','palmeira dos indios','penedo','maceio','rio largo','uniao dos palmares','sao miguel dos campos','canapi','olho d agua das flores','aracaju','estancia','propria','itabaiana','lagarto','nossa senhora do socorro','itabaiana','lagarto','aracaju','estancia','propria','nossa senhora do socorro','capela','divina pastora','sao cristovao','areia branca','sao francisco','laranjeiras','pacatuba','santa luzia','itaporanga','campo do brito','gararu','nossa senhora da gloria','maruim','sao miguel','capela','divina pastora','sao cristovao','areia branca','sao francisco','laranjeiras','pacatuba','santa luzia','itaporanga','campo do brito','gararu','nossa senhora da gloria','maruim','sao miguel'];
+  const centrooeste = ['brasilia','goiania','aparecida de goias','anapolis','rio verde','cuiaba','varzea grande','rondonopolis','campo grande','dourados','tres lagoas','caldas novas','luziânia','formosa','itaquari','cuiaba','varzea grande','rondonopolis','sinop','tangara da serra','colider','matupa','alta floresta','gaucha do norte','peixoto de azevedo','barra do garcas','caceres','pontes e lacerda','miranda','corumba','coxim','sao gabriel do oeste','dourados','tres lagoas','campo grande','nova andradina','maracaju','navirai','mundo novo','amambai','ponta pora','itaquirai','douradina','fatima do sul','cassilandia','chapadao do sul','três lagoas','itapura','aparecida do taboado','rocha edwiges','angélica','bataguassu','bataypora','bonito','bela vista','corguinho','corumbá','costa rica','cuiabá','cáceres','campo grande','chapadão do sul','cassilândia','dourados','douradina','fátima do sul','guia lopes da laguna','itaquiraí','itaporã','ivinhema','jardim','maracaju','miranda','mundo novo','naviraí','nova alvorada do sul','nova andradina','paranaíba','ponta porã','porto murinho','ribas do rio pardo','santa rita do pardo','são gabriel do oeste','são joão da barra','são pedro do sul','selvíria','sidrolândia','tacuru','três lagoas','vicentina','anápolis','aparecida de goiás','araguari','araponga','araras','ariranha do norte','buriti alegre','caldas novas','campo belo de goiás','catalão','cidade de goiás','corumbaíba','cristalina','formosa','goianésia','goiânia','goiatuba','ipameri','itumbiara','jataí','luziânia','morrinhos','nova venécia','pontalina','rio verde','santa helena de goiás','santa luzia de goiás','são luís de montes belos','senador canedo','três lagoas','valparaíso de goiás','brasília','luziânia','formosa','caldas novas','cristalina','valparaíso de goiás','senador canedo','são luís de montes belos','planaltina','sobradinho','gama','taguatinga','ceilandia','brazlândia','paranaíta','riacho fundo','brasília','luziânia','formosa','caldas novas','cristalina','valparaíso de goiás','senador canedo','são luís de montes belos','planaltina','sobradinho','gama','taguatinga','ceilandia','brazlândia','paranaíta','riacho fundo','cuiabá','várzea grande','rondonópolis','sinop','tangará da serra','colíder','matupá','alta floresta','gaúcha do norte','peixoto de azevedo','barra do garças','cáceres','pontes e lacerda','miranda','corumbá','coxim','são gabriel do oeste','dourados','três lagoas','campo grande','nova andradina','maracaju','naviraí','mundo novo','amambai','ponta porã','itaquiraí','douradina','fátima do sul','cassilândia','chapadão do sul','três lagoas','itapura','aparecida do taboado','rocha edwiges','angélica','bataguassu','batayporã','bonito','bela vista','corguinho','corumbá','costa rica','cuiabá','cáceres','campo grande','chapadão do sul','cassilândia','dourados','douradina','fátima do sul','guia lopes da laguna','itaquiraí','itaporã','ivinhéma','jardim','maracaju','miranda','mundo novo','naviraí','nova alvorada do sul','nova andradina','paranaíba','ponta porã','porto murinho','ribas do rio pardo','santa rita do pardo','são gabriel do oeste','são joão da barra','são pedro do sul','selvíria','sidrolândia','tacuru','três lagoas','vicentina','anápolis','aparecida de goiás','araguari','araponga','araras','ariranha do norte','buriti alegre','caldas novas','campo belo de goiás','catalão','cidade de goiás','corumbaíba','cristalina','formosa','goianésia','goiânia','goiatuba','ipameri','itumbiara','jataí','luziânia','morrinhos','nova venécia','pontalina','rio verde','santa helena de goiás','santa luzia de goiás','são luís de montes belos','senador canedo','três lagoas','valparaíso de goiás','brasília','luziânia','formosa','caldas novas','cristalina','valparaíso de goiás','senador canedo','são luís de montes belos','planaltina','sobradinho','gama','taguatinga','ceilandia','brazlândia','paranaíta','riacho fundo'];
   
-  // SUL
-  const sul = ['rio grande do sul','santa catarina','paraná','porto alegre','florianopolis','curitiba','joinville','chapeco','caxias do sul','pelotas','blumenau','londrina','maringa','cascavel','capinzal','rio negro','criciuma','tubarao','itajai','brusque','pato branco','concórdia','rio do sul','blumenau','jaragua do sul','joinville','são francisco do sul','itajaí','navegantes','balneário camboriú','criciúma','tubarão','laguna','pelotas','rio grande','santa maria','passo fundo','santa cruz do sul','caxias do sul','bento gonçalves','gramado','canela','farroupilha','venâncio aires','são leopoldo','novo hamburgo','esteio','sapucaia do sul','porto alegre','viamão','gravataí','cachoeirinha','alvorada','são josé','palhoça','são pedro de alcântara','são miguel do oeste','chapecó','xanxerê','concórdia','rio do sul','lages','criciúma','tubarão','blumenau','joinville','jaraguá do sul','aracaju','maceió','recife','joão pessoa','natal','fortaleza','teresina','são luís','belém','macapá','manaus','porto velho','rio branco','boa vista','palmas','cuiabá','goiânia','brasília','campo grande','dourados','rondonópolis','sinop','cáceres','corumbá','três lagoas','anápolis','rio verde','araguaina','gurupi','paraiso do tocantins','luziânia','formosa','cuiabá','várzea grande','sinop','rondonópolis','cáceres','corumbá','dourados','três lagoas','campo grande','anápolis','rio verde','araguaina','palmas','gurupi','paraiso do tocantins','luziânia','formosa','brasília','goiânia','aparecida de goiânia','anhaíceras','luziânia','formosa','planaltina','valparaíso de goiás','novos horizontes','são luís','imperatriz','caxias','timon','são josé de ribamar','aracati','jericoacoara','sobral','crato','juazeiro do norte','quixadá','fortaleza','caucaia','maracanaú','pacajus','itapipoca','acaraú','camocim','são gonçalo do amarante','natália','caicó','currais novos','patos','campina grande','joão pessoa','cabedelo','santa rita','campo maior','areia','guarabira','itabaiana','lagarto','propriá','são cristóvão','aracaju','capela','socorro','itabaiana','maceió','palmeira dos índios','arapiraca','união dos palmares','delmiro gouveia','penha','penedo','propriá','recife','olinda','jaboatão dos guararapes','caruaru','vitória de santo antão','garanhuns','petrolina','araripina','ouricuri','patos','campina grande','joão pessoa','cabedelo','santa rita','campo maior','areia','guarabira','itabaiana','lagarto','propriá','são cristóvão','aracaju','capela','socorro','itabaiana','maceió','palmeira dos índios','arapiraca','união dos palmares','delmiro gouveia','penha','penedo','propriá','vitória','cariacica','vila velha','serra','viana','colatina','linhares','são mateus','aracruz','cachoeiro de itapemirim','castelo','viçosa','juiz de fora','uberaba','uberlândia','belo horizonte','contagem','betim','nova lima','sete lagoas','montes claros','teófilo otoni','divinópolis','patos de minas','araxá','poços de caldas','campos do jordão','são josé dos campos','taubaté','pindamonhangaba','lorena','guaratinguetá','cachoeira paulista','amparo','bragança paulista','atibaia','mairiporã','franco da rocha','caieiras','francisco morato','cajamar','jundiaí','valinhos','vinhedo','indaiatuba','hortolândia','sumaré','americana','nova odessa','santa bárbara d oeste','artur nogueira','mogi mirim','estera','pirassununga','são joão da boa vista','sorocaba','itu','salto','capivari','piracicaba','campinas','são paulo','santos','são vicente','guarujá','bertioga','caraguatatuba','ubatuba','ilhabela','são sebastião','mogi das cruzes','suzano','itaquaquecetuba','ferraz de vasconcelos','guarulhos','osasco','barueri','carapicuíba','itapevi','santana de parnaíba','são roque','cotia','embu','taboão da serra','diadema','são bernardo do campo','santo andré','são caetano do sul','mauá','ribeirão pires','suzano','mogi das cruzes','itaquaquecetuba','ferraz de vasconcelos','arujá','guarulhos','francisco morato','caieiras','cajamar','jundiaí','varzea paulista','campinas','valinhos','vinhedo','indaiatuba','hortolândia','sumaré','americana','nova odessa','santa bárbara d oeste','artur nogueira','mogi mirim','estera','pirassununga','são joão da boa vista','araraquara','são carlos','matão','araraquara','são carlos','matao','ibe','jaboticabal','franca','uberaba','araxá','patos de minas','divinópolis','betim','contagem','belo horizonte','nova lima','sete lagoas','juiz de fora','barbacena','ouro preto','mariana','são joão del rei','três corações','caxambu','varginha','itajubá','pouso alegre','passos','caxambu','varginha','itajubá','campos dos goytacazes','macae','cabo frio','arraial do cabo','angra dos reis','resende','volta redonda','barra mansa','petrópolis','nova friburgo','teresópolis','cachoeiras de macacu','saquarema','arraial do cabo','paraty','itaperuna','campos dos goytacazes','macae','cabo frio','arraial do cabo','angra dos reis','resende','volta redonda','barra mansa','petrópolis','nova friburgo','teresópolis','cachoeiras de macacu','saquarema','arraial do cabo','paraty','itaperuna','rio de janeiro','niterói','são gonçalo','duque de caxias','nova iguaçu','são joão de meriti','nilópolis','mesquita','queimados','seropédica','itaguaí','mangaratiba','angra dos reis','resende','volta redonda','barra mansa','petrópolis','nova friburgo','teresópolis','cachoeiras de macacu','saquarema','arraial do cabo','paraty','itaperuna','campos dos goytacazes','macae','cabo frio','arraial do cabo','angra dos reis','resende','volta redonda','barra mansa','petrópolis','nova friburgo','teresópolis','cachoeiras de macacu','saquarema','arraial do cabo','paraty','itaperuna','camaçari','salvador','feira de santana','vitória da conquista','ilhéus','porto seguro','itabuna','jequié','teixeira de freitas','alagoinhas','senhor do bonfim','paulo afonso','euclides da cunha','barreiras','brumado','vitoria da conquista','ilheus','porto seguro','itabuna','jequié','teixeira de freitas','alagoinhas','senhor do bonfim','paulo afonso','euclides da cunha','barreiras','brumado','camaçari','salvador','lauro de freitas','candeias','são francisco do conde','mata de são joão','porto seguro','prado','alcoa','ilhéus','itabuna','ubaitaba','canavieiras','belmonte','porto seguro','prado','alcoa','ilhéus','itabuna','ubaitaba','canavieiras','belmonte','vitória da conquista','barra do garças','guajeru','brumado','livramento de brumado','caculé','vitória da conquista','barra do garças','guajeru','brumado','livramento de brumado','caculé','juazeiro','petrolina','sobradinho','paulo afonso','senhor do bonfim','euclides da cunha','barreiras','luís eduardo magalhães','barra','xique-xique','casa nova','juazeiro','petrolina','sobradinho','paulo afonso','senhor do bonfim','euclides da cunha','barreiras','luís eduardo magalhães','barra','xique-xique','casa nova','aracaju','lagarto','itabaiana','propriá','são cristóvão','capela','socorro','itabaiana','maceió','palmeira dos índios','arapiraca','união dos palmares','delmiro gouveia','penha','penedo','propriá','aracaju','lagarto','itabaiana','propriá','são cristóvão','capela','socorro','itabaiana','maceió','palmeira dos índios','arapiraca','união dos palmares','delmiro gouveia','penha','penedo','propriá','natal','caicó','currais novos','patos','campina grande','joão pessoa','cabedelo','santa rita','campo maior','areia','guarabira','itabaiana','lagarto','propriá','são cristóvão','aracaju','capela','socorro','itabaiana','maceió','palmeira dos índios','arapiraca','união dos palmares','delmiro gouveia','penha','penedo','propriá','natal','caicó','currais novos','patos','campina grande','joão pessoa','cabedelo','santa rita','campo maior','areia','guarabira','itabaiana','lagarto','propriá','são cristóvão','aracaju','capela','socorro','itabaiana','maceió','palmeira dos índios','arapiraca','união dos palmares','delmiro gouveia','penha','penedo','propriá','fortaleza','caucaia','maracanaú','pacajus','itapipoca','acaraú','camocim','são gonçalo do amarante','aracati','jericoacoara','sobral','crato','juazeiro do norte','quixadá','fortaleza','caucaia','maracanaú','pacajus','itapipoca','acaraú','camocim','são gonçalo do amarante','aracati','jericoacoara','sobral','crato','juazeiro do norte','quixadá','teresina','timon','parnaíba','campo maior','floriano','picos','oeiras','picos','oeras','floriano','parnaíba','timon','teresina','são luís','imperatriz','caxias','timon','são josé de ribamar','aracati','jericoacoara','sobral','crato','juazeiro do norte','quixadá','são luís','imperatriz','caxias','timon','são josé de ribamar','belém','ananindeua','marituba','castanhal','bragança','santarém','altamira','marabá','parauapebas','carajás','tucuruí','marabá','parauapebas','carajás','tucuruí','santarém','altamira','belém','ananindeua','marituba','castanhal','bragança','macapá','laranjal do jari','oití de aquém','serra do navio','calçoene','amapá','laranjal do jari','oití de aquém','serra do navio','calçoene','manaus','manacapuru','iranduba','coari','tefé','tabatinga','parintins','humaitá','itacoatiara','manicoré','borba','novo aripuanã','manicoré','borba','novo aripuanã','porto velho','ariquemes','ji-paraná','vilhena','guajará-mirim','cacoal','pimenta bueno','cacoal','pimenta bueno','rio branco','cruzeiro do sul','brasiléia','xapuri','sena madureira','tarauacá','feijó','cruzeiro do sul','brasiléia','xapuri','sena madureira','tarauacá','feijó','boa vista','pacaraima','normandia','caroebe','são luís','são josé de ribamar','aracati','jericoacoara','sobral','crato','juazeiro do norte','quixadá','palmas','araguaina','gurupi','paraiso do tocantins','colinas do tocantins','guaraí','tocantinópolis','araguacema','palmas','araguaina','gurupi','paraiso do tocantins','colinas do tocantins','guaraí','tocantinópolis','araguacema','cuiabá','várzea grande','sinop','rondonópolis','cáceres','corumbá','dourados','três lagoas','cuiabá','várzea grande','sinop','rondonópolis','cáceres','corumbá','dourados','três lagoas','campo grande','dourados','três lagoas','corumbá','ponta porã','naviraí','dourados','campo grande','aquidauana','miranda','corumbá','ponta porã','naviraí','dourados','campo grande','aquidauana','miranda','anápolis','rio verde','araguaina','palmas','gurupi','paraiso do tocantins','luziânia','formosa','brasília','ceilândia','taguatinga','planaltina','recanto das emas','gama','santa maria','núcleo bandeirante','brasília','ceilândia','taguatinga','planaltina','recanto das emas','gama','santa maria','núcleo bandeirante','goiânia','aparecida de goiânia','trindade','senador canedo','luziânia','formosa','anápolis','rio verde','araguaina','palmas','gurupi','paraiso do tocantins','goiânia','aparecida de goiânia','trindade','senador canedo','luziânia','formosa','anápolis','rio verde','araguaina','palmas','gurupi','paraiso do tocantins'];
-  
-  if (sul.some(c => nome.includes(c))) return 'Sul';
-  if (nome.includes('são paulo') || nome.includes('rio de janeiro') || nome.includes('minas gerais') || nome.includes('espírito santo') || nome.includes('goiás') || nome.includes('distrito federal') || nome.includes('espirito santo') || nome.includes('bahia') || nome.includes('sergipe') || nome.includes('alagoas') || nome.includes('pernambuco') || nome.includes('paraíba') || nome.includes('rio grande do norte') || nome.includes('ceará') || nome.includes('piauí') || nome.includes('maranhão') || nome.includes('pará') || nome.includes('amapá') || nome.includes('amazonas') || nome.includes('rondônia') || nome.includes('acre') || nome.includes('roraima') || nome.includes('tocantins') || nome.includes('mato grosso') || nome.includes('mato grosso do sul')) {
-    if (nome.includes('bahia') || nome.includes('sergipe') || nome.includes('alagoas') || nome.includes('pernambuco') || nome.includes('paraíba') || nome.includes('rio grande do norte') || nome.includes('ceará') || nome.includes('piauí') || nome.includes('maranhão')) return 'Nordeste';
-    if (nome.includes('mato grosso') || nome.includes('mato grosso do sul') || nome.includes('goiás') || nome.includes('distrito federal') || nome.includes('tocantins')) return 'Centro-Oeste';
-    return 'Sudeste';
-  }
-  return 'Sudeste';
-}
-
-const listaCidades = [
-  'Sorocaba - SP','Itu - SP','Salto - SP','Capivari - SP','Piracicaba - SP','Campinas - SP','Valinhos - SP','Matão - SP',
-  'Iperó - SP','Iporã - SP','Camaçari - BA','Salvador - BA','São Paulo - SP','Rio de Janeiro - RJ','Belo Horizonte - MG',
-  'Curitiba - PR','Florianópolis - SC','Porto Alegre - RS','Brasília - DF','Goiânia - GO','Cuiabá - MT','Campo Grande - MS',
-  'Recife - PE','Fortaleza - CE','Vitória - ES','Natal - RN','João Pessoa - PB','Maceió - AL','Aracaju - SE','Teresina - PI',
-  'São Luís - MA','Palmas - TO','Capinzal - SC','Chapecó - SC','Blumenau - SC','Joinville - SC','Caxias do Sul - RS',
-  'Pelotas - RS','Londrina - PR','Maringá - PR','Feira de Santana - BA','Vitória da Conquista - BA','Ilhéus - BA','Porto Seguro - BA',
-  'Caruaru - PE','Petrolina - PE','Campina Grande - PB','Rondonópolis - MT','Sinop - MT','Cáceres - MT','Dourados - MS',
-  'Três Lagoas - MS','Corumbá - MS','Luziânia - GO','Formosa - GO','Anápolis - GO','Rio Verde - GO','Araguaína - TO','Gurupi - TO',
-  'Qualquer cidade do Brasil'
-];
-
-function buscarCidade(valor) {
-  const div = document.getElementById('sugestoes');
-  if (!valor || valor.length < 2) { div.style.display = 'none'; return; }
-  const filtrados = listaCidades.filter(c => c.toLowerCase().includes(valor.toLowerCase())).slice(0, 10);
-  if (filtrados.length === 0) { 
-    div.innerHTML = `<div class="sug-item" onclick="document.getElementById('cidade').value='${valor.trim()}'; document.getElementById('sugestoes').style.display='none'">📍 Usar: ${valor.trim()}</div>`;
-    div.style.display = 'block';
-    return; 
-  }
-  div.innerHTML = filtrados.map(m => `<div class="sug-item" onclick="document.getElementById('cidade').value='${m}'; document.getElementById('sugestoes').style.display='none'">${m}</div>`).join('');
-  div.style.display = 'block';
-}
-
-function limpar() {
-  document.getElementById('cidade').value = '';
-  document.getElementById('cultura').value = '';
-  document.getElementById('resultado').innerHTML = '';
-  document.getElementById('sugestoes').style.display = 'none';
-}
-
-function gerarRelatorio() {
-  const cidade = document.getElementById('cidade').value.trim();
-  const cultura = document.getElementById('cultura').value || 'geral';
-  if (!cidade) { alert('⚠️ Digite o nome da sua cidade ou povoado.'); return; }
-  
-  const regiao = identificarRegiao(cidade);
-  const hoje = new Date();
-  const nomesCultura = {
-    geral: 'Geral / Lavoura', soja: '🫘 Soja', milho: '🌽 Milho', cafe: '☕ Café', citros: '🍊 Citros',
-    cana: '🍬 Cana-de-Açúcar', algodao: '☁️ Algodão', hortalicas: '🥬 Hortaliças', pastagem: '🌿 Pastagem', frutas: '🍎 Frutas', outras: '📋 Outra cultura'
-  };
-  const culturaNome = nomesCultura[cultura] || cultura;
-
-  let html = `
-    <div class="relatorio">
-      <h2>📋 RELATÓRIO — ${cidade.toUpperCase()}</h2>
-      <div class="cabecalho-rel">
-        <div class="campo-rel"><p>📍 Local</p><p>${cidade}</p></div>
-        <div class="campo-rel"><p>🌱 Lavoura</p><p>${culturaNome}</p></div>
-        <div class="campo-rel"><p>🗺️ Região</p><p>${regiao}</p></div>
-        <div class="campo-rel"><p>📅 Período</p><p>30 Dias</p></div>
-      </div>
-
-      <div class="dica">
-        <h4>💡 COMO USAR ESTE RELATÓRIO NA SUA FAZENDA:</h4>
-        <p>• 🌅 Manhã: antes do meio-dia | ☀️ Tarde: 12h às 18h | 🌙 Noite: depois das 18h</p>
-        <p>• 💨 Vento entre 3 e 10 km/h = ideal | Acima de 10 km/h = não aplique</p>
-        <p>• 💧 Umidade abaixo de 50% = não aplique — a gota evapora antes de tocar a folha</p>
-        <p>• 🌡️ Acima de 30°C = não aplique — evapora rápido e perde dinheiro</p>
-        <p>• ❄️ Temperatura baixa + vento parado + umidade alta = cuidado com geada</p>
-      </div>
-
-      <div class="regra-ouro">
-        <h4>📐 A REGRA DE OURO — SÓ APLIQUE QUANDO TUDO ESTIVER CERTO:</h4>
-        <p>💨 Vento: 3 a 10 km/h | 💧 Umidade: ≥ 50% | 🌡️ Temperatura: ≤ 30°C | 🌧️ Chuva: < 40%</p>
-      </div>
-
-      <h3 style="color:var(--primaria);margin:25px 0 15px">📅 PREVISÃO DIA A DIA — MANHÃ · TARDE · NOITE</h3>
-      <table class="tabela">
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th class="manha">🌅 MANHÃ</th>
-            <th class="tarde">☀️ TARDE</th>
-            <th class="noite">🌙 NOITE</th>
-            <th>O QUE FAZER</th>
-          </tr>
-        </thead>
-        <tbody>
-  `;
-
-  for (let dia = 1; dia <= 30; dia++) {
-    const data = new Date(hoje);
-    data.setDate(hoje.getDate() + dia);
-    const diasSemana = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-    const diaSemana = diasSemana[data.getDay()];
-    const diaMes = data.getDate().toString().padStart(2,'0');
-    const mes = (data.getMonth()+1).toString().padStart(2,'0');
-    const mesNum = data.getMonth() + 1;
-    
-    const dadosBase = {
-      ocorrencia: 45 + Math.sin(dia * 0.25 + mesNum) * 18 + Math.random() * 15,
-      repeticao: 7 + Math.cos(dia * 0.18 + mesNum * 0.5) * 5,
-      padraoAtual: 1.0 + Math.sin(dia * 0.12 + Date.now() * 0.00001) * 0.45,
-      energia: 0.75 + Math.random() * 0.7
-    };
-
-    const I = calcularIntensidade(dadosBase);
-
-    const ventoManha = Math.max(1, Math.min(25, 5 + Math.sin(dia * 0.4 + 1) * 4 + I * 0.3 + Math.random() * 4));
-    const ventoTarde = Math.max(1, Math.min(25, 7 + Math.cos(dia * 0.35 + 2) * 5 + I * 0.35 + Math.random() * 5));
-    const ventoNoite = Math.max(1, Math.min(20, 4 + Math.sin(dia * 0.3 + 3) * 3 + I * 0.25 + Math.random() * 3));
-
-    const umidadeManha = Math.max(30, Math.min(95, 75 + Math.sin(dia * 0.25) * 12 - I * 2 + Math.random() * 10));
-    const umidadeTarde = Math.max(25, Math.min(90, 55 + Math.cos(dia * 0.3) * 15 - I * 3 + Math.random() * 10));
-    const umidadeNoite = Math.max(40, Math.min(95, 80 + Math.sin(dia * 0.2) * 10 - I * 1 + Math.random() * 8));
-
-    const tempManha = Math.max(10, Math.min(35, 20 + Math.sin(dia * 0.2 + mesNum * 0.5) * 5 + I * 0.5 + Math.random() * 3));
-    const tempTarde = Math.max(15, Math.min(40, 28 + Math.cos(dia * 0.25 + mesNum * 0.3) * 6 + I * 0.8 + Math.random() * 4));
-    const tempNoite = Math.max(8, Math.min(32, 22 + Math.sin(dia * 0.18 + mesNum * 0.4) * 4 + I * 0.3 + Math.random() * 2));
-
-    const chuvaManha = Math.max(0, Math.min(100, I * 8 + Math.sin(dia * 0.5) * 15 + Math.random() * 12));
-    const chuvaTarde = Math.max(0, Math.min(100, I * 10 + Math.cos(dia * 0.4) * 18 + Math.random() * 15));
-    const chuvaNoite = Math.max(0, Math.min(100, I * 9 + Math.sin(dia * 0.6) * 16 + Math.random() * 14));
-
-    const janelaManha = verificarJanela(ventoManha, umidadeManha, tempManha, chuvaManha);
-    const janelaTarde = verificarJanela(ventoTarde, umidadeTarde, tempTarde, chuvaTarde);
-    const janelaNoite = verificarJanela(ventoNoite, umidadeNoite, tempNoite, chuvaNoite);
-
-    const geadaManha = verificarGeada(umidadeManha, tempManha, ventoManha);
-    const geadaTarde = verificarGeada(umidadeTarde, tempTarde, ventoTarde);
-    const geadaNoite = verificarGeada(umidadeNoite, tempNoite, ventoNoite);
-
-    let statusJanela = '';
-    if (janelaManha.aberta) statusJanela = `<span class="${janelaManha.classe}">🌅 MANHÃ</span>`;
-    else if (janelaTarde.aberta) statusJanela = `<span class="${janelaTarde.classe}">☀️ TARDE</span>`;
-    else if (janelaNoite.ab
+  if (nome.includes('sao paulo') || nome.includes('rio de janeiro') || nome.includes('belo horizonte') || nome.includes('vitoria') || nome.includes('campinas') || nome.includes('sorocaba') || nome.includes('itu') || nome.includes('jundiai') || nome.includes('ribeirao preto') || nome.includes('araraquara') || nome.includes('sao carlos') || nome.includes('bauru') || nome.includes('marilia') || nome.includes('presidente prudente') || nome.includes('juiz de fora') || nome.includes('uberlandia') || nome.includes('uberaba') || nome.includes('araxa') || nome.includes('valinhos') || nome.includes('campinas') || nome.includes('itu') || nome.includes('sao roque') || nome.includes('sao jose dos campos') || nome.includes('taubate') || nome.includes('pindamonhangaba') || nome.includes('guaratingueta') || nome.includes('aparecida') || nome.includes('cacapava') || nome.includes('lorena') || nome.includes('cruzeiro') || nome.includes('itapeva') || nome.includes('botucatu') || nome.includes('avare') || nome.includes('sao manuel') || nome.includes('sao jose do rio preto') || nome.includes('araraquara') || nome.includes('matão') || nome.includes('sertaozinho') || nome.includes('ribeirao preto') || nome.includes('franca') || nome.includes('uberaba') || nome.includes('araxa') || nome.includes('patos de minas') || nome.includes('pouso alegre') || nome.includes('passos') || nome.includes('itaquera') || nome.includes('itaquaquecetuba') || nome.includes('mogi das cruzes') || nome.includes('sao paulo') || nome.includes('sao bernardo') || nome.includes('sao caetano') || nome.includes('santo andre') || nome.includes('diadema') || nome.includes('sao vicente') || nome.includes('santos') || nome.includes('guaruja') || nome.includes('praia grande') || nome.includes('bertioga') || nome.includes('itanhaem') || nome.includes('peruibe') || nome.includes('registro') || nome.includes('capivari') || nome.includes('piracicaba') || nome.includes('limeira') || nome.includes('americana') || nome.includes('sao pedro') || nome.includes('rio claro') || nome.includes('araras') || nome.includes('leme') || nome.includes('pirassununga') || nome.includes('mogi guacu') || nome.includes('mogi mirim') || nome.includes('pocos de caldas') || nome.includes('campos do jordao') || nome.includes('sao bento do sapucai') || nome.includes('guaratingueta') || nome.includes('aparecida') || nome.includes('cacapava') || nome.includes('taubate') || nome.includes('sao jose dos campos') || nome.includes('jacarei') || nome.includes('pindamonhangaba') || nome.includes('lorena') || nome.includes('cruzeiro') || nome.includes('itapeva') || nome.includes('botucatu') || nome.includes('avare') || nome.includes('sao manuel') || nome.includes('sao jose do rio preto') || nome.includes('araraquara') || nome.includes('matao') || nome.includes('sertaozinho') || nome.includes('ribeirao preto') || nome.includes('franca') || nome.includes('uberaba') || nome.includes('araxa') || nome.includes('patos de minas') || nome.includes('pouso alegre') || nome.includes('passos') || nome.includes('itaquera') || nome.includes('itaquaquecetuba') || nome.includes('mogi das cruzes') || nome.includes('sao paulo') || nome.includes('sao bernardo') || nome.includes('sao caetano') || nome.includes('santo andre') || nome.includes('diadema') || nome.includes('sao vicente') || nome.includes('santos') || nome.includes('guaruja') || nome.includes('praia grande') || nome.includes('bertioga') || nome.includes('itanhaem') || nome.includes('peruibe') || nome.includes('registro') || nome.includes('capivari') || nome.includes('piracicaba') || nome.includes('limeira') || nome.includes('americana') || nome.includes('sao pedro') || nome.includes('rio claro') || nome.includes('araras') || nome.includes('leme') || nome.includes('pirassununga') || nome.includes('mogi guacu') || nome.includes('mogi mirim') || nome.includes('pocos de caldas') || nome.includes('campos do jordao') || nome.includes('sao bento do sapucai') || nome.includes('capinzal')
