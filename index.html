@@ -428,12 +428,26 @@ function limparFormulario() {
 let painelAtual = 'agricultor';
 function alternarPainel(tipo) {
   painelAtual = tipo;
+  //    BOTÃO CERTO FICA ATIVO, O OUTRO INATIVO
+
   document.querySelectorAll('.btn-painel').forEach(b => {
     b.classList.remove('ativo','inativo');
-    b.classList.add(b.textContent.includes('Ação Prática') ? (tipo==='agricultor'?'ativo':'inativo') : (tipo==='tecnico'?'ativo':'inativo'));
+    
+    let ehBotaoPratica =
+    b.textContent.incudes('Ação Prática');
+      let deveFicarAtivo = (ehBotaoPratica 
+&&  tipo === 'agricultor') ||
+                          (!ehBotaoPratica 
+&&  tipo === 'tecnico');
+
+      b.classList.add(deveFicarAtivo ?
+'ativo':'inativo');
   });
-  document.querySelectorAll('.dados-tecnicos').forEach(el => el.style.display = tipo==='tecnico'?'block':'none');
-} //
+  //      MOSTRA/ESCONDE A ÁREA TÉCNICA
+
+  document.querySelectorAll('.dados-tecnicos').forEach(el => {el.style.display = tipo==='tecnico'?'block':'none';
+});
+}
 function aplicarEstadoPainel() {
   alternarPainel(painelAtual);
 }
