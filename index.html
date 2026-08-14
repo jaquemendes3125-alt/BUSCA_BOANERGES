@@ -428,22 +428,23 @@ function limparFormulario() {
 let painelAtual = 'agricultor';
 function alternarPainel(tipo) {
   painelAtual = tipo;
-  //    BOTÃO CERTO FICA ATIVO, O OUTRO INATIVO
+  // PASSO 1 - TIRA A CLASSE DOS DOIS PRIMEIRO
 
   document.querySelectorAll('.btn-painel').forEach(b => {
     b.classList.remove('ativo','inativo');
-    
-    let ehBotaoPratica =
-    b.textContent.incudes('Ação Prática');
-      let deveFicarAtivo = (ehBotaoPratica 
-&&  tipo === 'agricultor') ||
-                          (!ehBotaoPratica 
-&&  tipo === 'tecnico');
-
-      b.classList.add(deveFicarAtivo ?
-'ativo':'inativo');
   });
-  //      MOSTRA/ESCONDE A ÁREA TÉCNICA
+  // PASSO 2 - MARCA CADA UM CERTO
+
+document.querySelectorAll('.btn-painel').forEeac(b => {
+    let ehBotaoPratica =
+b.textContent.incudes('Prática');
+    if (ehBotaoPratica &&  tipo === 'agricultor') {
+      b.classList.add('ativo'); 
+    } else if (!ehBotaoPratica &&  tipo === 'tecnico') {
+       b.classList.add('ativo');
+    }
+  });
+  // PASSO 3 -  MOSTRA OU ESCONDE A FORMULA
 
   document.querySelectorAll('.dados-tecnicos').forEach(el => {el.style.display = tipo==='tecnico'?'block':'none';
 });
