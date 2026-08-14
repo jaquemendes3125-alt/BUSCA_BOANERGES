@@ -20,6 +20,14 @@ body {background:var(--fundo);color:var(--texto);min-height:100vh;line-height:1.
 header {text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid var(--primaria)}
 h1 {font-size:1.9rem;color:var(--destaque);margin-bottom:8px}
 .subtitulo {color:#cbd5e1;font-size:1rem}
+.dados-tecnicos {
+display:none;
+margin-top: 15px
+padding-top: 10px;
+border-top: 1px solid #334155;
+font-size: 0.9rem;
+color: #94a3b8;
+}
 
 .tela-senha {position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999;}
 .caixa-senha {background:var(--card);border:2px solid var(--destaque);border-radius:16px;padding:30px;max-width:400px;width:90%;box-shadow:0 0 30px rgba(251,191,36,.2);animation:aparecer .4s ease-out;}
@@ -425,7 +433,7 @@ function alternarPainel(tipo) {
     b.classList.add(b.textContent.includes('Ação Prática') ? (tipo==='agricultor'?'ativo':'inativo') : (tipo==='tecnico'?'ativo':'inativo'));
   });
   document.querySelectorAll('.dados-tecnicos').forEach(el => el.style.display = tipo==='tecnico'?'block':'none');
-}
+} //
 function aplicarEstadoPainel() {
   alternarPainel(painelAtual);
 }
