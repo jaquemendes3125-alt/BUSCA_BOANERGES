@@ -426,6 +426,9 @@ function alternarPainel(tipo) {
   });
   document.querySelectorAll('.dados-tecnicos').forEach(el => el.style.display = tipo==='tecnico'?'block':'none');
 }
+function aplicarEstadoPainel() {
+  alternarPainel(painelAtual);
+}
 
 async function gerarRelatorio() {
   const cidadeCompleta = document.getElementById('cidade-input').value.trim();
@@ -530,9 +533,9 @@ async function gerarRelatorio() {
       <p>📊 Dados Técnicos</p>
       <p>Índice Base: ${res.I_PRESA.toFixed(4)} | Hoje: ${res.I_HOJE.toFixed(4)} | 30d: ${res.I_30.toFixed(4)}</p>
       <p>I_BUSCA: ${res.I_BUSCA.toFixed(4)} | Confronto: ${res.CONFRONTO.toFixed(4)} | Confiança: ${res.CONFIANCA.toFixed(2)}%</p>
+      <p>📐 Fórmula: I = (CH×2 + N − G) ÷ 365 | I_BUSCA = (64×O÷R) × (P×E÷64)</p>
     </div>
     <div class="rodape-aviso">
-      <p>📐 Fórmula: I = (CH×2 + N − G) ÷ 365 | I_BUSCA = (64×O÷R) × (P×E÷64)</p>
       <p>Padrão: ${nomeMes} — ${nomeRegiao} · Dados ${dadosObtidos?'reais':'estimados por padrão'}</p>
       <p>⚠️ Este relatório é orientação. Sempre confirme as condições no local antes de qualquer operação.</p>
     </div>
