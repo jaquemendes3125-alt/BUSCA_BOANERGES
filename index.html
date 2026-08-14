@@ -21,24 +21,13 @@ header {text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2
 h1 {font-size:1.9rem;color:var(--destaque);margin-bottom:8px}
 .subtitulo {color:#cbd5e1;font-size:1rem}
 
-.tela-senha {
-  position: fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999;
-}
-.caixa-senha {
-  background:var(--card);border:2px solid var(--destaque);border-radius:16px;padding:30px;max-width:400px;width:90%;
-  box-shadow:0 0 30px rgba(251,191,36,.2);animation:aparecer .4s ease-out;
-}
+.tela-senha {position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999;}
+.caixa-senha {background:var(--card);border:2px solid var(--destaque);border-radius:16px;padding:30px;max-width:400px;width:90%;box-shadow:0 0 30px rgba(251,191,36,.2);animation:aparecer .4s ease-out;}
 .caixa-senha h2 {text-align:center;color:var(--destaque);margin-bottom:20px;font-size:1.3rem}
 .caixa-senha p {text-align:center;color:#cbd5e1;margin-bottom:15px;font-size:.9rem}
-.caixa-senha input {
-  width:100%;padding:14px;border-radius:10px;border:2px solid #475569;
-  background:#0f172a;color:white;font-size:1.1rem;text-align:center;outline:none;
-}
+.caixa-senha input {width:100%;padding:14px;border-radius:10px;border:2px solid #475569;background:#0f172a;color:white;font-size:1.1rem;text-align:center;outline:none;}
 .caixa-senha input:focus {border-color:var(--destaque);box-shadow:0 0 0 3px rgba(251,191,36,.2)}
-.caixa-senha button {
-  width:100%;padding:12px;margin-top:15px;border-radius:10px;border:none;
-  background:var(--primaria);color:white;font-weight:bold;font-size:1rem;cursor:pointer;transition:.2s
-}
+.caixa-senha button {width:100%;padding:12px;margin-top:15px;border-radius:10px;border:none;background:var(--primaria);color:white;font-weight:bold;font-size:1rem;cursor:pointer;transition:.2s}
 .caixa-senha button:hover {background:#16a34a}
 .erro-senha {color:var(--perigo);text-align:center;margin-top:12px;font-size:.9rem;display:none}
 .tela-senha.escondida {display:none}
@@ -48,15 +37,9 @@ h1 {font-size:1.9rem;color:var(--destaque);margin-bottom:8px}
 .form-grid {display:grid;grid-template-columns:2fr 1fr;gap:18px}
 @media(max-width:640px){.form-grid{grid-template-columns:1fr}}
 label {display:block;margin-bottom:6px;color:#cbd5e1;font-weight:500}
-input, select {
-  width:100%;padding:13px 15px;border-radius:10px;border:1px solid #475569;
-  background:#1e293b;color:white;font-size:1rem;outline:none;transition:.2s
-}
+input, select {width:100%;padding:13px 15px;border-radius:10px;border:1px solid #475569;background:#1e293b;color:white;font-size:1rem;outline:none;transition:.2s}
 input:focus, select:focus {border-color:var(--destaque);box-shadow:0 0 0 2px rgba(251,191,36,.2)}
-.btn {
-  padding:13px 22px;border-radius:10px;border:none;font-size:1rem;font-weight:bold;
-  cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:8px
-}
+.btn {padding:13px 22px;border-radius:10px;border:none;font-size:1rem;font-weight:bold;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:8px}
 .btn-amarelo {background:var(--destaque);color:#000}
 .btn-amarelo:hover {background:#f59e0b;transform:translateY(-2px)}
 .btn-verde {background:var(--primaria);color:white}
@@ -157,46 +140,14 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
     </div>
 
     <div class="grid-apresentacao">
-      <div class="card-funcionalidade">
-        <div class="icone">💨</div>
-        <h3>Vento</h3>
-        <p>Indicação de condições favoráveis para aplicação segura.</p>
-      </div>
-      <div class="card-funcionalidade">
-        <div class="icone">💧</div>
-        <h3>Umidade</h3>
-        <p>Indicação de períodos com menor risco de evaporação excessiva.</p>
-      </div>
-      <div class="card-funcionalidade">
-        <div class="icone">🌡️</div>
-        <h3>Temperatura</h3>
-        <p>Acompanhamento de faixas seguras para aplicação e desenvolvimento das culturas.</p>
-      </div>
-      <div class="card-funcionalidade">
-        <div class="icone">🌧️</div>
-        <h3>Chuva por Período</h3>
-        <p>Previsão dividida em Manhã, Tarde e Noite para melhor planejamento.</p>
-      </div>
-      <div class="card-funcionalidade">
-        <div class="icone">❄️</div>
-        <h3>Alerta de Geada</h3>
-        <p>Indicação de condições favoráveis à formação de geada.</p>
-      </div>
-      <div class="card-funcionalidade">
-        <div class="icone">🦠</div>
-        <h3>Condições Fitossanitárias</h3>
-        <p>Indicação de períodos com maior risco de doenças nas plantas.</p>
-      </div>
-      <div class="card-funcionalidade">
-        <div class="icone">🌱</div>
-        <h3>Época de Plantio</h3>
-        <p>Orientação sobre os melhores períodos para o plantio de cada cultura.</p>
-      </div>
-      <div class="card-funcionalidade">
-        <div class="icone">🔬</div>
-        <h3>Dois Níveis de Leitura</h3>
-        <p>Visão simplificada para ação direta e visão detalhada para consulta técnica.</p>
-      </div>
+      <div class="card-funcionalidade"><div class="icone">💨</div><h3>Vento</h3><p>Indicação de condições favoráveis para aplicação segura.</p></div>
+      <div class="card-funcionalidade"><div class="icone">💧</div><h3>Umidade</h3><p>Indicação de períodos com menor risco de evaporação excessiva.</p></div>
+      <div class="card-funcionalidade"><div class="icone">🌡️</div><h3>Temperatura</h3><p>Acompanhamento de faixas seguras para aplicação e desenvolvimento das culturas.</p></div>
+      <div class="card-funcionalidade"><div class="icone">🌧️</div><h3>Chuva por Período</h3><p>Previsão dividida em Manhã, Tarde e Noite para melhor planejamento.</p></div>
+      <div class="card-funcionalidade"><div class="icone">❄️</div><h3>Alerta de Geada</h3><p>Indicação de condições favoráveis à formação de geada.</p></div>
+      <div class="card-funcionalidade"><div class="icone">🦠</div><h3>Condições Fitossanitárias</h3><p>Indicação de períodos com maior risco de doenças nas plantas.</p></div>
+      <div class="card-funcionalidade"><div class="icone">🌱</div><h3>Época de Plantio</h3><p>Orientação sobre os melhores períodos para o plantio de cada cultura.</p></div>
+      <div class="card-funcionalidade"><div class="icone">🔬</div><h3>Dois Níveis de Leitura</h3><p>Visão simplificada para ação direta e visão detalhada para consulta técnica.</p></div>
     </div>
 
     <div class="contato-secao">
@@ -221,7 +172,6 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 <div id="tela-sistema" class="tela-sistema">
   <div class="container">
     <button class="btn-voltar" onclick="voltarApresentacao()">← Voltar</button>
-    
     <header>
       <h1>🌾 BUSCABOANERGES — RELATÓRIO AGROCLIMÁTICO</h1>
       <p class="subtitulo">Estudo de padrões climáticos para o período solicitado</p>
@@ -283,13 +233,10 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 </div>
 
 <script>
-const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
+const CODIGO_ACESSO = '_area_de_relatorio_seguro';
 const SENHA_AUTORIZADA = 'AutencOBR758';
 let acessoLiberado = false;
 
-// =====================================================
-// 🏛️ BASE CONSOLIDADA — 5 RÉGUAS POR REGIÃO
-// =====================================================
 const BASE_REGIAO = {
   NORTE:      [+1.13, +1.07, +1.10, +0.95, +0.85, +0.80, +0.78, +0.82, +0.90, +1.00, +1.08, +1.12],
   NORDESTE:   [+0.60, +0.55, +0.50, +0.30, +0.10, +0.00, -0.10, +0.40, +0.70, +0.85, +0.75, +0.65],
@@ -298,18 +245,12 @@ const BASE_REGIAO = {
   SUL:        [+0.40, +0.35, +0.00, -0.40, -0.94, -1.25, -1.63, -0.87, -0.93, +0.00, +0.20, +0.30]
 };
 
-// =====================================================
-// 💾 ARMAZENAMENTO
-// =====================================================
 let bancoResumo = JSON.parse(localStorage.getItem('buscaboanerges_resumo') || '[]');
 function salvarResumo(dados) {
   bancoResumo.push(dados);
   localStorage.setItem('buscaboanerges_resumo', JSON.stringify(bancoResumo));
 }
 
-// =====================================================
-// 🌍 IDENTIFICAÇÃO DE REGIÃO — POR UF (CORRETA)
-// =====================================================
 function identificarRegiaoPorUF(uf) {
   const mapa = {
     'AC':'NORTE','AM':'NORTE','AP':'NORTE','PA':'NORTE','RO':'NORTE','RR':'NORTE','TO':'NORTE',
@@ -321,9 +262,6 @@ function identificarRegiaoPorUF(uf) {
   return mapa[uf?.toUpperCase()] || null;
 }
 
-// =====================================================
-// 🔍 BUSCA POR NOME (APOIO) — SEM VÍCIO DE SUDESTE!
-// =====================================================
 function identificarRegiao(cidade) {
   const nome = cidade.toLowerCase();
   const sul = ['porto alegre','florianopolis','curitiba','joinville','chapeco','caxias do sul','capinzal','rio negro','criciuma','tubarao','itajai','brusque','blumenau','ituporanga'];
@@ -336,46 +274,29 @@ function identificarRegiao(cidade) {
   if (nordeste.some(c => nome.includes(c))) return 'NORDESTE';
   if (centrooeste.some(c => nome.includes(c))) return 'CENTRO_OESTE';
   if (norte.some(c => nome.includes(c))) return 'NORTE';
-  return null; // ✅ NÃO FORÇA SUDESTE! Retorna NULO se não achar
+  return null;
 }
 
-// =====================================================
-// 🫀 CÁLCULO PRINCIPAL — FÓRMULA ATIVA
-// =====================================================
 function calcularCoracao(dados, regiaoChave) {
   const { mes, CH, N, G, O, R, P, E } = dados;
   const I_PRESA = BASE_REGIAO[regiaoChave][mes - 1];
-  
-  // Fórmula 1 — Padrão da região
   const I_HOJE = (CH * 2 + N - G) / 1;
   const DIFERENCA = I_HOJE - I_PRESA;
   const I_30 = I_PRESA + (DIFERENCA / 3);
-  
-  // ✅ Fórmula 2 — CONFIRMAÇÃO (mantida oculta no código)
   const I_BUSCA = (64 * O / R) * (P * E / 64);
-  
-  // Avaliação e Confiança
   let CONFRONTO = 0;
-  if (I_BUSCA !== 0) {
-    CONFRONTO = Math.abs(I_30 / I_BUSCA);
-  }
-  
+  if (I_BUSCA !== 0) CONFRONTO = Math.abs(I_30 / I_BUSCA);
   let CONFIANCA = 100 - (Math.abs(1.00 - CONFRONTO) * 100);
   CONFIANCA = Math.min(95, Math.max(0, CONFIANCA));
   const ERRO = 100 - CONFIANCA;
-  
   let classificacao, classeConf;
   if      (CONFRONTO >= 0.95 && CONFRONTO <= 1.05) { classificacao='CONFIRMADO'; classeConf='status-ok'; }
   else if (CONFRONTO >= 0.70 && CONFRONTO < 0.95)  { classificacao='ATENÇÃO';   classeConf='status-alerta'; }
   else if (CONFRONTO >= 0.50 && CONFRONTO < 0.70)  { classificacao='ATENÇÃO';   classeConf='status-alerta'; }
   else                                                { classificacao='IMPREVISTO'; classeConf='status-perigo'; }
-
   return { I_30, I_BUSCA, CONFRONTO, CONFIANCA, ERRO, classificacao, classeConf, I_PRESA, I_HOJE };
 }
 
-// =====================================================
-// CLASSIFICAÇÕES
-// =====================================================
 function classificarVento(km) {
   if (km < 3) return { texto: 'Fraco', classe: 'status-alerta', faixa: 'alerta' };
   if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', faixa: 'ideal' };
@@ -411,9 +332,6 @@ function verificarJanela(vento, umidade, temp, chuva) {
   return { statusJanela, classeJanela, motivo, vento:v, umidade:u, temperatura:t, chuva:c };
 }
 
-// =====================================================
-// 🔐 SISTEMA DE ACESSO
-// =====================================================
 function verificarSenha() {
   const senhaDigitada = document.getElementById('senha-entrada').value;
   if (senhaDigitada === SENHA_AUTORIZADA) {
@@ -436,14 +354,10 @@ function abrirAreaSistema() {
 
 function verificarAcesso() {
   let hashAtual = (window.location.hash || '').trim();
-  if (hashAtual.charAt(0) === '#') {
-    hashAtual = hashAtual.slice(1);
-  }
-  
+  if (hashAtual.charAt(0) === '#') hashAtual = hashAtual.slice(1);
   const telaApresentacao = document.getElementById('tela-apresentacao');
   const telaSistema = document.getElementById('tela-sistema');
   const telaSenha = document.getElementById('tela-senha');
-
   if (hashAtual === CODIGO_ACESSO) {
     if (acessoLiberado) {
       telaApresentacao.classList.add('escondida');
@@ -473,9 +387,6 @@ function voltarApresentacao() {
   document.getElementById('relatorio-resultado').innerHTML = '';
 }
 
-// =====================================================
-// UTILITÁRIOS
-// =====================================================
 function mostrarSugestoes(valor) {
   const div = document.getElementById('sugestoes');
   if (!valor || valor.length < 3) { div.style.display = 'none'; return; }
@@ -501,9 +412,6 @@ function alternarPainel(tipo) {
   document.querySelectorAll('.dados-tecnicos').forEach(el=>{ el.style.display = tipo==='tecnico' ? 'block' : 'none'; });
 }
 
-// =====================================================
-// 📄 GERAR RELATÓRIO COM PROTEÇÃO
-// =====================================================
 async function gerarRelatorio() {
   const cidadeCompleta = document.getElementById('cidade-input').value.trim();
   const cultura = document.getElementById('cultura').value || 'geral';
@@ -513,13 +421,10 @@ async function gerarRelatorio() {
   const nomeCidade = partes[0];
   const uf = partes[1] || '';
   
-  // ✅ PRIMEIRO tenta pela UF (mais confiável)
   let regiaoChave = identificarRegiaoPorUF(uf) || identificarRegiao(nomeCidade);
-
-  // ✅ SE NÃO ACHAR EM NENHUM DOS DOIS → AVISA E PARA!
   if (!regiaoChave) {
     alert("❌ Cidade não identificada com certeza!\nDigite com a UF, exemplo: Ituporanga - SC");
-    return; // NÃO GERA RELATÓRIO ERRADO!
+    return;
   }
 
   const hoje = new Date();
@@ -536,7 +441,6 @@ async function gerarRelatorio() {
   };
   const nomeCultura = nomesCultura[cultura] || cultura;
 
-  // 🛰️ Busca dados reais
   let dadosCorrentes = {
     mes: mesAtual, CH: 0, N: 1, G: (mesAtual>=5&&mesAtual<=8 && regiaoChave==='SUL')?1:0,
     O: 65, R: 7, P: 1.013, E: 0.22
@@ -565,11 +469,9 @@ async function gerarRelatorio() {
     console.log('Usando padrão da região');
   }
 
-  // 🫀 EXECUTA A FÓRMULA
   const resultado = calcularCoracao(dadosCorrentes, regiaoChave);
   salvarResumo({municipio:cidadeCompleta, regiao:nomeRegiao, mes:nomeMes, ...resultado, data:hoje.toLocaleDateString('pt-BR')});
 
-  // 📅 CONSTRÓI RELATÓRIO
   let html = `
     <div class="relatorio">
       <h2>📋 RELATÓRIO — ${cidadeCompleta}</h2>
@@ -611,7 +513,6 @@ async function gerarRelatorio() {
         <tbody>
   `;
 
-  // Gera 30 dias
   for (let dia = 1; dia <= 30; dia++) {
     const data = new Date(hoje);
     data.setDate(hoje.getDate() + dia);
@@ -628,4 +529,39 @@ async function gerarRelatorio() {
     
     const janela = verificarJanela(vento, umidade, temp, probTarde);
     
-    const manhaTxt = probManha < 40 ? '✅ Seco' : probManha < 6
+    const manhaTxt = probManha < 40 ? '✅ Seco' : probManha < 60 ? '⚠️ Úmido' : '🌧️ Chuva';
+    const tardeTxt = probTarde < 40 ? '✅ Seco' : probTarde < 60 ? '⚠️ Úmido' : '🌧️ Chuva';
+    const noiteTxt = probNoite < 40 ? '✅ Seco' : probNoite < 60 ? '⚠️ Úmido' : '🌧️ Chuva';
+
+    html += `
+          <tr>
+            <td>${diaSemana}, ${diaMes}/${mesAtual}</td>
+            <td class="horario-manha">${manhaTxt}<br><small>${probManha.toFixed(0)}%</small></td>
+            <td class="horario-tarde">${tardeTxt}<br><small>${probTarde.toFixed(0)}%</small></td>
+            <td class="horario-noite">${noiteTxt}<br><small>${probNoite.toFixed(0)}%</small></td>
+            <td><span class="motivo-bloqueio ${janela.classeJanela}">${janela.statusJanela}</span><br><small>${janela.motivo}</small></td>
+          </tr>
+    `;
+  }
+
+  html += `
+        </tbody>
+      </table>
+
+      <div class="dados-tecnicos">
+        <p>📊 Dados Técnicos — Visão Detalhada</p>
+        <p>Índice Base (Região): ${resultado.I_PRESA.toFixed(4)} | Índice Hoje: ${resultado.I_HOJE.toFixed(4)} | Índice 30d: ${resultado.I_30.toFixed(4)}</p>
+        <p>Confirmação (I_BUSCA): ${resultado.I_BUSCA.toFixed(4)} | Confronto: ${resultado.CONFRONTO.toFixed(4)} | Confiança: ${resultado.CONFIANCA.toFixed(2)}%</p>
+      </div>
+
+      <div class="rodape-aviso">
+        <p>⚠️ Dados estimados com base em padrões climáticos e API externa. Confirme sempre no local antes de qualquer operação.</p>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('relatorio-resultado').innerHTML = html;
+}
+</script>
+</body>
+</html>
