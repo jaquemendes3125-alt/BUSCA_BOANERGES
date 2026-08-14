@@ -318,18 +318,41 @@ function classificarChuva(prob) {
   if (prob >= 40) return { texto: 'Média', classe: 'status-alerta', faixa: 'alerta' };
   return { texto: 'Baixa', classe: 'status-ok', faixa: 'ideal' };
 }
-function verificarJanela(vento, umidade, temp, chuva) {
-  const v = classificarVento(vento);
-  const u = classificarUmidade(umidade);
-  const t = classificarTemperatura(temp);
-  const c = classificarChuva(chuva);
-  const temRuim = (v.faixa === 'ruim') || (u.faixa === 'ruim') || (t.faixa === 'ruim') || (c.faixa === 'ruim');
-  const temAlerta = (v.faixa === 'alerta') || (u.faixa === 'alerta') || (t.faixa === 'alerta') || (c.faixa === 'alerta');
+
+function verificarJanela(manhaPct, tardePct, noitePct, vento, umidade, temp) {
+  const manhaEstado = manhaPct < 40 ? 'seco' : manhaPct <= 50 ? 'limite' : 'chuva';
+  const tardeEstado = tardePct < 40 ? 'seco' : tardePct <= 50 ? 'limite' : 'chuva';
+  const noiteEstado = noitePct < 40 ? 'seco' : noitePct <= 50 ? 'limite' : 'chuva';
+
+  const temChuva = manhaEstado==='chuva' || tardeEstado==='chuva' || noiteEstado==='chuva';
+  const temLimite = manhaEstado==='limite' || tardeEstado==='limite' || noiteEstado==='limite';
+  const todosSecos = manhaEstado==='seco' && tardeEstado==='seco' && noiteEstado==='seco';
+
+  const ventoRuim = vento > 12;
+  const umidadeRuim = umidade < 40 || umidade > 85;
+  const tempRuim = temp > 32;
+
   let statusJanela, classeJanela, motivo;
-  if (temRuim) { statusJanela = '❌ FECHADA'; classeJanela = 'vermelho'; motivo = 'Condição desfavorável'; }
-  else if (temAlerta) { statusJanela = '⚠️ ATENÇÃO'; classeJanela = 'amarelo'; motivo = 'Parâmetro no limite'; }
-  else { statusJanela = '✅ ABERTA'; classeJanela = 'verde'; motivo = 'Condições favoráveis'; }
-  return { statusJanela, classeJanela, motivo, vento:v, umidade:u, temperatura:t, chuva:c };
+
+  if (temChuva || ventoRuim || umidadeRuim || tempRuim) {
+    statusJanela = '❌ FECHADA';
+    classeJanela = 'vermelho';
+    motivo = temChuva ? 'Chuva prevista' : 'Condição desfavorável';
+  } else if (temLimite) {
+    statusJanela = '⚠️ ATENÇÃO';
+    classeJanela = 'amarelo';
+    motivo = 'Parâmetro no limite';
+  } else if (todosSecos) {
+    statusJanela = '✅ ABERTA';
+    classeJanela = 'verde';
+    motivo = 'Condições favoráveis';
+  } else {
+    statusJanela = '⚠️ ATENÇÃO';
+    classeJanela = 'amarelo';
+    motivo = 'Parâmetro no limite';
+  }
+
+  return { statusJanela, classeJanela, motivo };
 }
 
 function verificarSenha() {
@@ -404,12 +427,23 @@ function limparFormulario() {
   document.getElementById('sugestoes').style.display = 'none';
 }
 
+// ✅ FUNÇÃO CORRIGIDA — troca de visão funciona!
 let painelAtual = 'agricultor';
 function alternarPainel(tipo) {
   painelAtual = tipo;
-  document.querySelectorAll('.btn-painel').forEach(b=>{b.classList.remove('ativo');b.classList.add('inativo')});
-  event.target.classList.remove('inativo');event.target.classList.add('ativo');
-  document.querySelectorAll('.dados-tecnicos').forEach(el=>{ el.style.display = tipo==='tecnico' ? 'block' : 'none'; });
+  const botoes = document.querySelectorAll('.btn-painel');
+  botoes.forEach(b => {
+    b.classList.remove('ativo', 'inativo');
+    if (b.textContent.includes('Ação Prática')) {
+      b.classList.add(tipo === 'agricultor' ? 'ativo' : 'inativo');
+    } else {
+      b.classList.add(tipo === 'tecnico' ? 'ativo' : 'inativo');
+    }
+  });
+  const dadosTecnicos = document.querySelectorAll('.dados-tecnicos');
+  dadosTecnicos.forEach(el => {
+    el.style.display = (tipo === 'tecnico') ? 'block' : 'none';
+  });
 }
 
 async function gerarRelatorio() {
@@ -527,11 +561,11 @@ async function gerarRelatorio() {
     const umidade = Math.max(30, Math.min(95, 55 + Math.cos(dia * 0.5) * 12));
     const temp = Math.max(12, Math.min(34, 24 + Math.sin(dia * 0.4) * 4));
     
-    const janela = verificarJanela(vento, umidade, temp, probTarde);
+    const janela = verificarJanela(probManha, probTarde, probNoite, vento, umidade, temp);
     
-    const manhaTxt = probManha < 40 ? '✅ Seco' : probManha < 60 ? '⚠️ Úmido' : '🌧️ Chuva';
-    const tardeTxt = probTarde < 40 ? '✅ Seco' : probTarde < 60 ? '⚠️ Úmido' : '🌧️ Chuva';
-    const noiteTxt = probNoite < 40 ? '✅ Seco' : probNoite < 60 ? '⚠️ Úmido' : '🌧️ Chuva';
+    const manhaTxt = probManha < 40 ? '✅ Seco' : probManha <= 50 ? '⚠️ Úmido' : '🌧️ Chuva';
+    const tardeTxt = probTarde < 40 ? '✅ Seco' : probTarde <= 50 ? '⚠️ Úmido' : '🌧️ Chuva';
+    const noiteTxt = probNoite < 40 ? '✅ Seco' : probNoite <= 50 ? '⚠️ Úmido' : '🌧️ Chuva';
 
     html += `
           <tr>
