@@ -285,7 +285,7 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 </div>
 
 <script>
-const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
+const CODIGO_ACESSO = '_area_de_relatorio_seguro';
 const SENHA_AUTORIZADA = 'AutencOBR758';
 let acessoLiberado = false;
 
@@ -446,15 +446,33 @@ function abrirAreaSistema() {
 }
 
 function verificarAcesso() {
-  const hashAtual = (window.location.hash || '').trim();
+  let hashAtual = (window.location.hash || '').trim();
+  
+  // Remove o # se vier junto — garante que funciona
+  if (hashAtual.charAt(0) === '#') {
+    hashAtual = hashAtual.slice(1);
+  }
+  
   const telaApresentacao = document.getElementById('tela-apresentacao');
   const telaSistema = document.getElementById('tela-sistema');
   const telaSenha = document.getElementById('tela-senha');
+
   if (hashAtual === CODIGO_ACESSO) {
-    if (acessoLiberado) { abrirAreaSistema(); }
-    else { telaApresentacao.classList.add('escondida'); telaSenha.classList.remove('escondida'); document.getElementById('senha-entrada').focus(); }
+    if (acessoLiberado) {
+      telaApresentacao.classList.add('escondida');
+      telaSenha.classList.add('escondida');
+      telaSistema.classList.add('ativa');
+    } else {
+      // ✅ AGORA VAI APARECER A TELA DE SENHA!
+      telaApresentacao.classList.add('escondida');
+      telaSistema.classList.remove('ativa');
+      telaSenha.classList.remove('escondida');
+      document.getElementById('senha-entrada').focus();
+    }
   } else {
-    telaApresentacao.classList.remove('escondida'); telaSistema.classList.remove('ativa'); telaSenha.classList.add('escondida');
+    telaApresentacao.classList.remove('escondida');
+    telaSistema.classList.remove('ativa');
+    telaSenha.classList.add('escondida');
     acessoLiberado = false;
   }
 }
@@ -629,7 +647,4 @@ async function gerarRelatorio() {
   for (let dia = 1; dia <= 30; dia++) {
     const data = new Date(hoje);
     data.setDate(hoje.getDate() + dia);
-    const diaSemana = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][data.getDay()];
-    const diaMes = data.getDate();
-    const mes = data.getMonth() + 1;
-    const I_DIA = resultado.I_PRESA + (Math.sin(dia *
+    const diaSemana =
