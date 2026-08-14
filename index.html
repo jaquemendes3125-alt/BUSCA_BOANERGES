@@ -130,6 +130,9 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 .motivo-bloqueio.verde {background:rgba(34,197,94,.15);color:#86efac}
 .motivo-bloqueio.amarelo {background:rgba(245,158,11,.15);color:#fcd34d}
 .motivo-bloqueio.vermelho {background:rgba(239,68,68,.15);color:#fca5a5}
+
+.destaque-confianca {margin-top:15px;padding:12px;border-radius:8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3)}
+.confianca-maxima {color:var(--info);font-weight:600}
 </style>
 </head>
 <body>
@@ -212,7 +215,7 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 
     <footer class="apresentacao">
       <p>🌾 BUSCABOANERGES — Estudo de padrões climáticos</p>
-      <p>Versão 3.1 — Agosto de 2026 | Projeto independente</p>
+      <p>Versão 3.2 — Agosto de 2026 | Projeto independente</p>
     </footer>
   </div>
 </div>
@@ -286,28 +289,96 @@ const CODIGO_ACESSO = '#_area_de_relatorio_seguro';
 const SENHA_AUTORIZADA = 'AutencOBR758';
 let acessoLiberado = false;
 
-const I_PRESA_MENSAL = {
-  1: 1.13, 2: 1.07, 3: 1.10, 4: 0.00,
-  5: -0.94, 6: -1.25, 7: -1.63, 8: -0.87,
-  9: -0.93, 10: 1.00, 11: 1.00, 12: 1.00
+// =====================================================
+// 🏛️ BASE CONSOLIDADA — 5 RÉGUAS POR REGIÃO
+// Valores de referência por mês (Janeiro a Dezembro)
+// =====================================================
+const BASE_REGIAO = {
+  NORTE:      [+1.13, +1.07, +1.10, +0.95, +0.85, +0.80, +0.78, +0.82, +0.90, +1.00, +1.08, +1.12],
+  NORDESTE:   [+0.60, +0.55, +0.50, +0.30, +0.10, +0.00, -0.10, +0.40, +0.70, +0.85, +0.75, +0.65],
+  CENTRO_OESTE: [+0.90, +0.85, +0.70, +0.30, -0.20, -0.40, -0.50, -0.30, +0.20, +0.60, +0.80, +0.88],
+  SUDESTE:    [+0.80, +0.75, +0.60, +0.20, -0.40, -0.55, -0.70, -0.60, -0.20, +0.30, +0.60, +0.75],
+  SUL:        [+0.40, +0.35, +0.00, -0.40, -0.94, -1.25, -1.63, -0.87, -0.93, +0.00, +0.20, +0.30]
 };
 
-function calcularCoracao(dados) {
+// =====================================================
+// 💾 ARMAZENAMENTO INTELIGENTE — guarda só o sumo
+// =====================================================
+let bancoResumo = JSON.parse(localStorage.getItem('buscaboanerges_resumo') || '[]');
+function salvarResumo(dados) {
+  bancoResumo.push(dados);
+  localStorage.setItem('buscaboanerges_resumo', JSON.stringify(bancoResumo));
+}
+
+// =====================================================
+// 🌍 IDENTIFICAÇÃO DE REGIÃO POR UF
+// =====================================================
+function identificarRegiaoPorUF(uf) {
+  const mapa = {
+    'AC':'NORTE','AM':'NORTE','AP':'NORTE','PA':'NORTE','RO':'NORTE','RR':'NORTE','TO':'NORTE',
+    'AL':'NORDESTE','BA':'NORDESTE','CE':'NORDESTE','MA':'NORDESTE','PB':'NORDESTE','PE':'NORDESTE','PI':'NORDESTE','RN':'NORDESTE','SE':'NORDESTE',
+    'GO':'CENTRO_OESTE','MT':'CENTRO_OESTE','MS':'CENTRO_OESTE','DF':'CENTRO_OESTE',
+    'ES':'SUDESTE','MG':'SUDESTE','RJ':'SUDESTE','SP':'SUDESTE',
+    'PR':'SUL','RS':'SUL','SC':'SUL'
+  };
+  return mapa[uf.toUpperCase()] || null;
+}
+
+// =====================================================
+// 🌍 IDENTIFICAÇÃO DE REGIÃO POR NOME DA CIDADE
+// =====================================================
+function identificarRegiao(cidade) {
+  const nome = cidade.toLowerCase();
+  const sul = ['porto alegre','florianopolis','curitiba','joinville','chapeco','caxias do sul','capinzal','rio negro','criciuma','tubarao','itajai','brusque','blumenau'];
+  const sudeste = ['sao paulo','rio de janeiro','belo horizonte','campinas','sorocaba','itu','valinhos','matao','ipero','ipora','salto','piracicaba','camaçari','salvador','juiz de fora','uberaba','uberlandia','poços de caldas','petropolis','teresopolis','campos do jordao'];
+  const nordeste = ['natal','joao pessoa','recife','maceio','aracaju','fortaleza','teresina','sao luis','feira de santana','vitoria da conquista','ilheus','porto seguro'];
+  const centrooeste = ['brasilia','goiania','cuiaba','campo grande','rondonopolis','sinop','dourados','caldas novas','araguaina','palmas'];
+  const norte = ['manaus','belem','porto velho','rio branco','macapa','boa vista','palmas'];
+  if (sul.some(c => nome.includes(c))) return 'SUL';
+  if (sudeste.some(c => nome.includes(c))) return 'SUDESTE';
+  if (nordeste.some(c => nome.includes(c))) return 'NORDESTE';
+  if (centrooeste.some(c => nome.includes(c))) return 'CENTRO_OESTE';
+  if (norte.some(c => nome.includes(c))) return 'NORTE';
+  return 'SUDESTE';
+}
+
+// =====================================================
+// 🫀 CÁLCULO PRINCIPAL — CAMINHO DEFINITIVO
+// =====================================================
+function calcularCoracao(dados, regiaoChave) {
   const { mes, CH, N, G, O, R, P, E } = dados;
-  const C = 64;
-  const I_PRESA = I_PRESA_MENSAL[mes];
+  const I_PRESA = BASE_REGIAO[regiaoChave][mes - 1];
+  
+  // Fórmula 1 — Condição atual vs Padrão da região
   const I_HOJE = (CH * 2 + N - G) / 1;
   const DIFERENCA = I_HOJE - I_PRESA;
   const I_30 = I_PRESA + (DIFERENCA / 3);
-  const I_BUSCA = (64 * O / R) * (P * E / C);
-  let razao = 0, confirmado = false;
+  
+  // Fórmula 2 — Confirmação
+  const I_BUSCA = (64 * O / R) * (P * E / 64);
+  
+  // Avaliação e Confiança — Máxima 95%
+  let CONFRONTO = 0;
   if (I_BUSCA !== 0) {
-    razao = Math.abs(I_30 / I_BUSCA);
-    confirmado = (razao >= 0.85 && razao <= 1.15);
+    CONFRONTO = Math.abs(I_30 / I_BUSCA);
   }
-  return { I_30, I_BUSCA, razao, confirmado, I_PRESA, I_HOJE };
+  
+  let CONFIANCA = 100 - (Math.abs(1.00 - CONFRONTO) * 100);
+  CONFIANCA = Math.min(95, Math.max(0, CONFIANCA)); // NUNCA EXCEDE 95%
+  const ERRO = 100 - CONFIANCA;
+  
+  let classificacao, classeConf;
+  if      (CONFRONTO >= 0.95 && CONFRONTO <= 1.05) { classificacao='CONFIRMADO'; classeConf='status-ok'; }
+  else if (CONFRONTO >= 0.70 && CONFRONTO < 0.95)  { classificacao='ATENÇÃO';   classeConf='status-alerta'; }
+  else if (CONFRONTO >= 0.50 && CONFRONTO < 0.70)  { classificacao='ATENÇÃO';   classeConf='status-alerta'; }
+  else                                                { classificacao='IMPREVISTO'; classeConf='status-perigo'; }
+
+  return { I_30, I_BUSCA, CONFRONTO, CONFIANCA, ERRO, classificacao, classeConf, I_PRESA, I_HOJE, regiaoUsada: regiaoChave };
 }
 
+// =====================================================
+// CLASSIFICAÇÕES DE PARÂMETROS
+// =====================================================
 function classificarVento(km) {
   if (km < 3) return { texto: 'Fraco', classe: 'status-alerta', faixa: 'alerta' };
   if (km <= 10) return { texto: 'Ideal', classe: 'status-ok', faixa: 'ideal' };
@@ -351,43 +422,9 @@ function verificarJanela(vento, umidade, temp, chuva) {
   return { statusJanela, classeJanela, motivo, vento:v, umidade:u, temperatura:t, chuva:c };
 }
 
-function identificarRegiao(municipio) {
-  const nome = municipio.toLowerCase();
-  const sul = ['porto alegre','florianopolis','curitiba','joinville','chapeco','caxias do sul','capinzal','rio negro','criciuma','tubarao','itajai','brusque'];
-  const sudeste = ['sao paulo','rio de janeiro','belo horizonte','campinas','sorocaba','itu','valinhos','matao','ipero','ipora','salto','piracicaba','camaçari','salvador','juiz de fora','uberaba','uberlandia','poços de caldas','petropolis','teresopolis','campos do jordao'];
-  const nordeste = ['natal','joao pessoa','recife','maceio','aracaju','fortaleza','teresina','sao luis','feira de santana','vitoria da conquista','ilheus','porto seguro'];
-  const centrooeste = ['brasilia','goiania','cuiaba','campo grande','rondonopolis','sinop','dourados','caldas novas','araguaina','palmas'];
-  if (sudeste.some(c => nome.includes(c))) return 'Sudeste';
-  if (sul.some(c => nome.includes(c))) return 'Sul';
-  if (nordeste.some(c => nome.includes(c))) return 'Nordeste';
-  if (centrooeste.some(c => nome.includes(c))) return 'Centro-Oeste';
-  return 'Sudeste';
-}
-
-function mostrarSugestoes(valor) {
-  const div = document.getElementById('sugestoes');
-  if (!valor || valor.length < 3) { div.style.display = 'none'; return; }
-  const municipios = ['Sorocaba - SP','Itu - SP','Salto - SP','Capivari - SP','Piracicaba - SP','Campinas - SP','Valinhos - SP','Matão - SP','Iperó - SP','Iporã - SP','Camaçari - BA','São Paulo - SP','Rio de Janeiro - RJ','Belo Horizonte - MG','Curitiba - PR','Florianópolis - SC','Porto Alegre - RS','Brasília - DF','Goiânia - GO','Cuiabá - MT','Campo Grande - MS','Salvador - BA','Recife - PE','Fortaleza - CE','Vitória - ES','Natal - RN','João Pessoa - PB','Maceió - AL','Aracaju - SE','Teresina - PI','São Luís - MA','Palmas - TO','Capinzal - SC','Chapecó - SC','Blumenau - SC','Joinville - SC','Caxias do Sul - RS','Pelotas - RS','Londrina - PR','Maringá - PR','Feira de Santana - BA','Vitória da Conquista - BA','Ilhéus - BA','Porto Seguro - BA','Caruaru - PE','Petrolina - PE','Campina Grande - PB','Rondonópolis - MT','Sinop - MT','Cáceres - MT','Dourados - MS','Três Lagoas - MS','Corumbá - MS','Luziânia - GO','Formosa - GO','Anápolis - GO','Rio Verde - GO','Araguaína - TO','Gurupi - TO','Porto Nacional - TO'];
-  const filtrados = municipios.filter(m => m.toLowerCase().includes(valor.toLowerCase())).slice(0, 10);
-  if (filtrados.length === 0) { div.style.display = 'none'; return; }
-  div.innerHTML = filtrados.map(m => `<div class="sugestao-item" onclick="document.getElementById('cidade-input').value='${m}'; this.parentElement.style.display='none'">${m}</div>`).join('');
-  div.style.display = 'block';
-}
-
-function limparFormulario() {
-  document.getElementById('cidade-input').value = '';
-  document.getElementById('cultura').value = '';
-  document.getElementById('relatorio-resultado').innerHTML = '';
-  document.getElementById('sugestoes').style.display = 'none';
-}
-
-function voltarApresentacao() {
-  window.location.hash = '';
-  acessoLiberado = false;
-  verificarAcesso();
-  document.getElementById('relatorio-resultado').innerHTML = '';
-}
-
+// =====================================================
+// SISTEMA DE ACESSO
+// =====================================================
 function verificarSenha() {
   const senhaDigitada = document.getElementById('senha-entrada').value;
   if (senhaDigitada === SENHA_AUTORIZADA) {
@@ -425,6 +462,33 @@ function verificarAcesso() {
 window.addEventListener('hashchange', verificarAcesso);
 window.addEventListener('load', verificarAcesso);
 
+function voltarApresentacao() {
+  window.location.hash = '';
+  acessoLiberado = false;
+  verificarAcesso();
+  document.getElementById('relatorio-resultado').innerHTML = '';
+}
+
+// =====================================================
+// UTILITÁRIOS DA INTERFACE
+// =====================================================
+function mostrarSugestoes(valor) {
+  const div = document.getElementById('sugestoes');
+  if (!valor || valor.length < 3) { div.style.display = 'none'; return; }
+  const municipios = ['Sorocaba - SP','Itu - SP','Salto - SP','Capivari - SP','Piracicaba - SP','Campinas - SP','Valinhos - SP','Matão - SP','Iperó - SP','Iporã - SP','Camaçari - BA','São Paulo - SP','Rio de Janeiro - RJ','Belo Horizonte - MG','Curitiba - PR','Florianópolis - SC','Porto Alegre - RS','Brasília - DF','Goiânia - GO','Cuiabá - MT','Campo Grande - MS','Salvador - BA','Recife - PE','Fortaleza - CE','Vitória - ES','Natal - RN','João Pessoa - PB','Maceió - AL','Aracaju - SE','Teresina - PI','São Luís - MA','Palmas - TO','Capinzal - SC','Chapecó - SC','Blumenau - SC','Joinville - SC','Caxias do Sul - RS','Pelotas - RS','Londrina - PR','Maringá - PR','Feira de Santana - BA','Vitória da Conquista - BA','Ilhéus - BA','Porto Seguro - BA','Caruaru - PE','Petrolina - PE','Campina Grande - PB','Rondonópolis - MT','Sinop - MT','Cáceres - MT','Dourados - MS','Três Lagoas - MS','Corumbá - MS','Luziânia - GO','Formosa - GO','Anápolis - GO','Rio Verde - GO','Araguaína - TO','Gurupi - TO','Porto Nacional - TO','Manaus - AM','Belém - PA','Porto Velho - RO'];
+  const filtrados = municipios.filter(m => m.toLowerCase().includes(valor.toLowerCase())).slice(0, 10);
+  if (filtrados.length === 0) { div.style.display = 'none'; return; }
+  div.innerHTML = filtrados.map(m => `<div class="sugestao-item" onclick="document.getElementById('cidade-input').value='${m}'; this.parentElement.style.display='none'">${m}</div>`).join('');
+  div.style.display = 'block';
+}
+
+function limparFormulario() {
+  document.getElementById('cidade-input').value = '';
+  document.getElementById('cultura').value = '';
+  document.getElementById('relatorio-resultado').innerHTML = '';
+  document.getElementById('sugestoes').style.display = 'none';
+}
+
 let painelAtual = 'agricultor';
 function alternarPainel(tipo) {
   painelAtual = tipo;
@@ -433,13 +497,27 @@ function alternarPainel(tipo) {
   document.querySelectorAll('.dados-tecnicos').forEach(el=>{ el.style.display = tipo==='tecnico' ? 'block' : 'none'; });
 }
 
+// =====================================================
+// 📄 GERAR RELATÓRIO — INTEGRADO COM O CAMINHO DEFINITIVO
+// =====================================================
 async function gerarRelatorio() {
-  const cidade = document.getElementById('cidade-input').value.trim();
+  const cidadeCompleta = document.getElementById('cidade-input').value.trim();
   const cultura = document.getElementById('cultura').value || 'geral';
-  if (!cidade) { alert('Por favor, digite o nome do município.'); return; }
-  const regiao = identificarRegiao(cidade);
+  if (!cidadeCompleta) { alert('Por favor, digite o nome do município. Ex: Sorocaba - SP'); return; }
+
+  // Extrai cidade e UF, identifica região correta
+  const partes = cidadeCompleta.split('-').map(p=>p.trim());
+  const nomeCidade = partes[0];
+  const uf = partes[1] || '';
+  let regiaoChave = identificarRegiaoPorUF(uf);
+  if (!regiaoChave) { regiaoChave = identificarRegiao(nomeCidade); }
+
   const hoje = new Date();
-  const mesAtual = hoje.getMonth() + 1;
+  const mesAtual = hoje.getMonth() + 1; // 1 a 12
+  const nomesMeses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const nomeMes = nomesMeses[mesAtual - 1];
+  const nomeRegiao = {NORTE:'Norte', NORDESTE:'Nordeste', CENTRO_OESTE:'Centro-Oeste', SUDESTE:'Sudeste', SUL:'Sul'}[regiaoChave];
+
   const nomesCultura = {
     geral: 'Geral / Diversa', soja: '🫘 Soja', milho: '🌽 Milho', cafe: '☕ Café', cana: '🍬 Cana-de-Açúcar',
     algodao: '☁️ Algodão', citros: '🍊 Citros', laranja: '🍊 Laranja', limao: '🍋 Limão', maca: '🍎 Maçã',
@@ -451,44 +529,75 @@ async function gerarRelatorio() {
   };
   const nomeCultura = nomesCultura[cultura] || cultura;
 
-  let dadosBaseCoracao = {
-    mes: mesAtual, CH: 0, N: 1, G: (mesAtual>=5&&mesAtual<=8)?1:0,
-    O: 60, R: 8, P: 1.013, E: 0.25
+  // =====================================================
+  // 🛰️ BUSCA DADOS REAIS — Open-Meteo
+  // =====================================================
+  let dadosCorrentes = {
+    mes: mesAtual, CH: 0, N: 1, G: (mesAtual>=5&&mesAtual<=8 && regiaoChave==='SUL')?1:0,
+    O: 65, R: 7, P: 1.013, E: 0.22
   };
+  let dadosObtidos = false;
 
   try {
-    const urlGeo = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cidade)}&language=pt&count=1`;
+    const urlGeo = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(nomeCidade)}&country=BR&language=pt&count=1`;
     const resGeo = await fetch(urlGeo);
     const jsonGeo = await resGeo.json();
     if (jsonGeo.results && jsonGeo.results.length > 0) {
-      const { latitude, longitude } = jsonGeo.results[0];
-      const urlClima = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m&timezone=America/Sao_Paulo`;
+      const { latitude, longitude, name } = jsonGeo.results[0];
+      const urlClima = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,precipitation_probability,wind_speed_10m&timezone=America/Sao_Paulo&forecast_days=1`;
       const resClima = await fetch(urlClima);
       const jsonClima = await resClima.json();
       const atual = jsonClima.current;
-      const chuvaHoje = atual.precipitation > 0 ? 1 : 0;
-      const umidade = Math.max(35, Math.min(95, atual.relative_humidity_2m));
-      const vento = Math.max(1, Math.min(15, atual.wind_speed_10m));
-      const temp = Math.max(12, Math.min(36, atual.temperature_2m));
-      const geada = (mesAtual>=5&&mesAtual<=8 && atual.temperature_2m <=15) ? 1 : 0;
-      const estavel = (vento < 12 && umidade >= 40) ? 1 : 0;
-      dadosBaseCoracao = { mes: mesAtual, CH: chuvaHoje, N: estavel, G: geada, O: umidade, R: vento, P: 1.013, E: temp / 100 };
+
+      // Traduz dados reais para os parâmetros da fórmula
+      const CH = atual.precipitation_probability >= 40 ? 1 : 0;
+      const N = (atual.wind_speed_10m < 15 && atual.relative_humidity_2m >= 40) ? 1 : 0;
+      const G = (atual.temperature_2m <= 5) ? 1 : 0;
+      const O = Math.max(35, Math.min(98, atual.relative_humidity_2m));
+      const R = Math.max(1, Math.min(20, atual.wind_speed_10m));
+      const P = 1.013;
+      const E = Math.max(0.01, Math.min(0.40, atual.temperature_2m / 100));
+
+      dadosCorrentes = { mes: mesAtual, CH, N, G, O, R, P, E };
+      dadosObtidos = true;
     }
   } catch (erro) {
-    console.log('📡 Usando padrão — dados em uso');
+    console.log('📡 Usando padrão da região — sem dados em tempo real');
   }
 
-  const coracao = calcularCoracao(dadosBaseCoracao);
-  const FATOR_PADRAO = coracao.I_30;
+  // =====================================================
+  // 🫀 EXECUTA O CÁLCULO COM A RÉGUA DAQUELA REGIÃO
+  // =====================================================
+  const resultado = calcularCoracao(dadosCorrentes, regiaoChave);
+  const FATOR_PADRAO = resultado.I_30;
 
+  // =====================================================
+  // 💾 GUARDA SÓ O SUMO — SEM PESO
+  // =====================================================
+  salvarResumo({
+    municipio: cidadeCompleta, regiao: nomeRegiao, mes: nomeMes,
+    I_PRESA: resultado.I_PRESA.toFixed(2), I_HOJE: resultado.I_HOJE.toFixed(2),
+    I_30: resultado.I_30.toFixed(2), CONFIANCA: resultado.CONFIANCA.toFixed(1),
+    data: hoje.toLocaleDateString('pt-BR')
+  });
+
+  // =====================================================
+  // 📅 CONSTRÓI RELATÓRIO DIA A DIA
+  // =====================================================
   let html = `
     <div class="relatorio">
-      <h2>📋 RELATÓRIO — ${cidade}</h2>
+      <h2>📋 RELATÓRIO — ${cidadeCompleta}</h2>
       <div class="relatorio-cabecalho">
-        <div class="relatorio-campo"><p>📍 Município</p><p>${cidade}</p></div>
+        <div class="relatorio-campo"><p>📍 Município</p><p>${cidadeCompleta}</p></div>
         <div class="relatorio-campo"><p>🌱 Cultura</p><p>${nomeCultura}</p></div>
-        <div class="relatorio-campo"><p>🗺️ Região</p><p>${regiao}</p></div>
+        <div class="relatorio-campo"><p>🗺️ Região</p><p>${nomeRegiao}</p></div>
         <div class="relatorio-campo"><p>📅 Período</p><p>30 Dias</p></div>
+      </div>
+
+      <div class="destaque-confianca">
+        <p><strong>📐 Base de referência:</strong> ${nomeMes} — valor consolidado da região ${nomeRegiao}: <strong>${resultado.I_PRESA.toFixed(2)}</strong></p>
+        <p class="confianca-maxima">✅ Confiança máxima de 95%. Sempre existe 5% de incerteza natural.</p>
+        <p><strong>Resultado:</strong> <span class="${resultado.classeConf}">${resultado.classificacao}</span> · Confiança: ${resultado.CONFIANCA.toFixed(1)}% · Margem de Erro: ${resultado.ERRO.toFixed(1)}%</p>
       </div>
 
       <div class="painel-alternancia">
@@ -499,7 +608,7 @@ async function gerarRelatorio() {
       <div class="regra-ouro">
         <h4>📐 CONDIÇÕES AVALIADAS:</h4>
         <p>💨 Vento: 3 a 10 km/h | 💧 Umidade: ≥ 50% | 🌡️ Temperatura: ≤ 30°C | 🌧️ Chuva: &lt; 40%</p>
-        <p style="margin-top:8px;font-size:.9rem;color:var(--primaria)">📡 Dados reais da região + Padrão histórico</p>
+        <p style="margin-top:8px;font-size:.9rem;color:var(--primaria)">📡 Dados ${dadosObtidos?'reais da região':'estimados'} · Padrão histórico exclusivo: ${nomeRegiao}</p>
       </div>
 
       <h3>📅 PREVISÃO DIA A DIA — CHUVA POR PERÍODO</h3>
@@ -516,87 +625,11 @@ async function gerarRelatorio() {
         <tbody>
   `;
 
+  // Gera 30 dias com base no resultado do coração
   for (let dia = 1; dia <= 30; dia++) {
     const data = new Date(hoje);
     data.setDate(hoje.getDate() + dia);
     const diaSemana = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][data.getDay()];
     const diaMes = data.getDate();
     const mes = data.getMonth() + 1;
-    const I_DIA = coracao.I_PRESA + (Math.sin(dia * 0.2 + mes) * 0.35 + FATOR_PADRAO) / 3;
-    
-    const ventoManha = Math.max(1, Math.min(15, 5 + Math.sin(dia * 0.4 + 1) * 4 + I_DIA * 3));
-    const ventoTarde = Math.max(1, Math.min(15, 7 + Math.cos(dia * 0.35 + 2) * 5 + I_DIA * 3.5));
-    const ventoNoite = Math.max(1, Math.min(12, 4 + Math.sin(dia * 0.3 + 3) * 3 + I_DIA * 2.5));
-    
-    const umidadeManha = Math.max(35, Math.min(95, 75 + Math.sin(dia * 0.25) * 12 + I_DIA * 8));
-    const umidadeTarde = Math.max(30, Math.min(90, 55 + Math.cos(dia * 0.3) * 15 + I_DIA * 6));
-    const umidadeNoite = Math.max(40, Math.min(95, 80 + Math.sin(dia * 0.2) * 10 + I_DIA * 7));
-    
-    const tempManha = Math.max(14, Math.min(34, 20 + Math.sin(dia * 0.2 + mes * 0.5) * 5 - I_DIA * 2));
-    const tempTarde = Math.max(20, Math.min(36, 28 + Math.cos(dia * 0.25 + mes * 0.3) * 6 - I_DIA * 1.5));
-    const tempNoite = Math.max(12, Math.min(30, 22 + Math.sin(dia * 0.18 + mes * 0.4) * 4 - I_DIA * 2));
-    
-    const chuvaManha = Math.max(0, Math.min(100, 20 + I_DIA * 25 + Math.sin(dia * 0.5) * 18));
-    const chuvaTarde = Math.max(0, Math.min(100, 15 + I_DIA * 30 + Math.cos(dia * 0.4) * 22));
-    const chuvaNoite = Math.max(0, Math.min(100, 25 + I_DIA * 28 + Math.sin(dia * 0.6) * 20));
-    
-    const janelaManha = verificarJanela(ventoManha, umidadeManha, tempManha, chuvaManha);
-    const janelaTarde = verificarJanela(ventoTarde, umidadeTarde, tempTarde, chuvaTarde);
-    const janelaNoite = verificarJanela(ventoNoite, umidadeNoite, tempNoite, chuvaNoite);
-    
-    let melhorJanela = janelaManha;
-    if (janelaTarde.classeJanela === 'verde') melhorJanela = janelaTarde;
-    if (janelaNoite.classeJanela === 'verde') melhorJanela = janelaNoite;
-
-    const celulaManha = `
-      <span class="${janelaManha.chuva.classe}">${Math.round(chuvaManha)}%</span>
-      <div class="motivo-bloqueio ${janelaManha.classeJanela}">${janelaManha.vento.texto}</div>
-      <div class="dados-tecnicos" style="display:none">
-        💧${Math.round(umidadeManha)}% · 🌡️${Math.round(tempManha)}°C · 💨${Math.round(ventoManha)}km/h
-      </div>`;
-    const celulaTarde = `
-      <span class="${janelaTarde.chuva.classe}">${Math.round(chuvaTarde)}%</span>
-      <div class="motivo-bloqueio ${janelaTarde.classeJanela}">${janelaTarde.vento.texto}</div>
-      <div class="dados-tecnicos" style="display:none">
-        💧${Math.round(umidadeTarde)}% · 🌡️${Math.round(tempTarde)}°C · 💨${Math.round(ventoTarde)}km/h
-      </div>`;
-    const celulaNoite = `
-      <span class="${janelaNoite.chuva.classe}">${Math.round(chuvaNoite)}%</span>
-      <div class="motivo-bloqueio ${janelaNoite.classeJanela}">${janelaNoite.vento.texto}</div>
-      <div class="dados-tecnicos" style="display:none">
-        💧${Math.round(umidadeNoite)}% · 🌡️${Math.round(tempNoite)}°C · 💨${Math.round(ventoNoite)}km/h
-      </div>`;
-
-    html += `
-      <tr>
-        <td>${diaSemana}, ${diaMes.toString().padStart(2,'0')}/${mes.toString().padStart(2,'0')}</td>
-        <td class="horario-manha">${celulaManha}</td>
-        <td class="horario-tarde">${celulaTarde}</td>
-        <td class="horario-noite">${celulaNoite}</td>
-        <td><strong>${melhorJanela.statusJanela}</strong></td>
-      </tr>
-    `;
-  }
-
-  html += `
-        </tbody>
-      </table>
-      
-      <div class="rodape-aviso">
-        <p>⚠️ Relatório baseado em dados reais da região + padrões históricos. Sempre confirme com observação local antes de realizar qualquer operação no campo.</p>
-        <p>🌾 BUSCABOANERGES — Versão 3.1 — Agosto de 2026 | Projeto independente</p>
-      </div>
-    </div>
-  `;
-
-  document.getElementById('relatorio-resultado').innerHTML = html;
-}
-
-document.addEventListener('contextmenu', e=>e.preventDefault());
-document.addEventListener('keydown', e=>{
-  if((e.ctrlKey||e.metaKey)&&['u','s','c','x','a'].includes(e.key.toLowerCase())) e.preventDefault();
-});
-</script>
-
-</body>
-</html>
+    const I_DIA = resultado.I_PRESA + (Math.sin(dia *
