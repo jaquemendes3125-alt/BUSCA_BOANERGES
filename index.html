@@ -101,13 +101,13 @@ footer.apresentacao {margin-top:50px;padding-top:25px;border-top:1px solid #3341
 .status-alerta {color:var(--alerta);font-weight:bold}
 .status-perigo {color:var(--perigo);font-weight:bold}
 
-.dados-tecnicos {font-size:.78rem;color:#94a3b8;margin-top:4px;line-height:1.3;display:none}
+.dados-tecnicos {font-size:.78rem;color:#94a3b8;margin-top:12px;line-height:1.4;display:none}
 .dados-tecnicos span {margin:0 4px}
 
 .regra-ouro {background:rgba(34,197,94,.1);border:2px solid var(--primaria);border-radius:12px;padding:18px;margin:20px 0}
 .alerta-doenca {background:rgba(139,92,246,.1);border:2px solid var(--inversao);border-radius:12px;padding:16px;margin:18px 0}
 .rodape-aviso {margin-top:25px;padding-top:18px;border-top:1px solid #334155;text-align:center;color:#94a3b8;font-size:.85rem}
-.motivo-bloqueio {font-size:.78rem;margin-top:4px;padding:3px 6px;border-radius:4px}
+.motivo-bloqueio {font-size:.78rem;margin-top:4px;padding:3px 6px;border-radius:4px;display:inline-block;}
 .motivo-bloqueio.verde {background:rgba(34,197,94,.15);color:#86efac}
 .motivo-bloqueio.amarelo {background:rgba(245,158,11,.15);color:#fcd34d}
 .motivo-bloqueio.vermelho {background:rgba(239,68,68,.15);color:#fca5a5}
@@ -333,25 +333,15 @@ function verificarJanela(manhaPct, tardePct, noitePct, vento, umidade, temp) {
   const tempRuim = temp > 32;
 
   let statusJanela, classeJanela, motivo;
-
   if (temChuva || ventoRuim || umidadeRuim || tempRuim) {
-    statusJanela = '❌ FECHADA';
-    classeJanela = 'vermelho';
-    motivo = temChuva ? 'Chuva prevista' : 'Condição desfavorável';
+    statusJanela = '❌ FECHADA'; classeJanela = 'vermelho'; motivo = temChuva ? 'Chuva prevista' : 'Condição desfavorável';
   } else if (temLimite) {
-    statusJanela = '⚠️ ATENÇÃO';
-    classeJanela = 'amarelo';
-    motivo = 'Parâmetro no limite';
+    statusJanela = '⚠️ ATENÇÃO'; classeJanela = 'amarelo'; motivo = 'Parâmetro no limite';
   } else if (todosSecos) {
-    statusJanela = '✅ ABERTA';
-    classeJanela = 'verde';
-    motivo = 'Condições favoráveis';
+    statusJanela = '✅ ABERTA'; classeJanela = 'verde'; motivo = 'Condições favoráveis';
   } else {
-    statusJanela = '⚠️ ATENÇÃO';
-    classeJanela = 'amarelo';
-    motivo = 'Parâmetro no limite';
+    statusJanela = '⚠️ ATENÇÃO'; classeJanela = 'amarelo'; motivo = 'Parâmetro no limite';
   }
-
   return { statusJanela, classeJanela, motivo };
 }
 
@@ -427,174 +417,129 @@ function limparFormulario() {
   document.getElementById('sugestoes').style.display = 'none';
 }
 
-// ✅ FUNÇÃO CORRIGIDA — troca de visão funciona!
 let painelAtual = 'agricultor';
 function alternarPainel(tipo) {
   painelAtual = tipo;
-  const botoes = document.querySelectorAll('.btn-painel');
-  botoes.forEach(b => {
-    b.classList.remove('ativo', 'inativo');
-    if (b.textContent.includes('Ação Prática')) {
-      b.classList.add(tipo === 'agricultor' ? 'ativo' : 'inativo');
-    } else {
-      b.classList.add(tipo === 'tecnico' ? 'ativo' : 'inativo');
-    }
+  document.querySelectorAll('.btn-painel').forEach(b => {
+    b.classList.remove('ativo','inativo');
+    b.classList.add(b.textContent.includes('Ação Prática') ? (tipo==='agricultor'?'ativo':'inativo') : (tipo==='tecnico'?'ativo':'inativo'));
   });
-  const dadosTecnicos = document.querySelectorAll('.dados-tecnicos');
-  dadosTecnicos.forEach(el => {
-    el.style.display = (tipo === 'tecnico') ? 'block' : 'none';
-  });
+  document.querySelectorAll('.dados-tecnicos').forEach(el => el.style.display = tipo==='tecnico'?'block':'none');
 }
 
 async function gerarRelatorio() {
   const cidadeCompleta = document.getElementById('cidade-input').value.trim();
   const cultura = document.getElementById('cultura').value || 'geral';
-  if (!cidadeCompleta) { alert('Digite o município. Ex: Ituporanga - SC'); return; }
+  if (!cidadeCompleta) { alert('Digite: Ituporanga - SC'); return; }
 
   const partes = cidadeCompleta.split('-').map(p=>p.trim());
-  const nomeCidade = partes[0];
-  const uf = partes[1] || '';
-  
+  const nomeCidade = partes[0], uf = partes[1] || '';
   let regiaoChave = identificarRegiaoPorUF(uf) || identificarRegiao(nomeCidade);
-  if (!regiaoChave) {
-    alert("❌ Cidade não identificada com certeza!\nDigite com a UF, exemplo: Ituporanga - SC");
-    return;
-  }
+  if (!regiaoChave) { alert("❌ Digite com UF: Cidade - SC"); return; }
 
-  const hoje = new Date();
-  const mesAtual = hoje.getMonth() + 1;
+  const hoje = new Date(), mesAtual = hoje.getMonth() + 1;
   const nomesMeses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-  const nomeMes = nomesMeses[mesAtual - 1];
-  const nomeRegiao = {NORTE:'Norte', NORDESTE:'Nordeste', CENTRO_OESTE:'Centro-Oeste', SUDESTE:'Sudeste', SUL:'Sul'}[regiaoChave];
-
-  const nomesCultura = {
-    geral:'Geral / Diversa', soja:'🫘 Soja', milho:'🌽 Milho', cafe:'☕ Café', cana:'🍬 Cana-de-Açúcar',
-    algodao:'☁️ Algodão', citros:'🍊 Citros', laranja:'🍊 Laranja', limao:'🍋 Limão', maca:'🍎 Maçã',
-    banana:'🍌 Banana', tomate:'🍅 Tomate', batata:'🥔 Batata', cebola:'🧅 Cebola', feijao:'🫘 Feijão',
-    arroz:'🍚 Arroz', trigo:'🌾 Trigo', aveia:'🌾 Aveia', cevada:'🌾 Cevada', mandioca:'🟫 Mandioca'
-  };
+  const nomeMes = nomesMeses[mesAtual-1];
+  const nomeRegiao = {NORTE:'Norte',NORDESTE:'Nordeste',CENTRO_OESTE:'Centro-Oeste',SUDESTE:'Sudeste',SUL:'Sul'}[regiaoChave];
+  const nomesCultura = {geral:'Geral / Diversa',soja:'🫘 Soja',milho:'🌽 Milho',cafe:'☕ Café',cana:'🍬 Cana-de-Açúcar',laranja:'🍊 Laranja',feijao:'🫘 Feijão',arroz:'🍚 Arroz',mandioca:'🟫 Mandioca'};
   const nomeCultura = nomesCultura[cultura] || cultura;
 
-  let dadosCorrentes = {
-    mes: mesAtual, CH: 0, N: 1, G: (mesAtual>=5&&mesAtual<=8 && regiaoChave==='SUL')?1:0,
-    O: 65, R: 7, P: 1.013, E: 0.22
-  };
+  let dadosCorrentes = {mes:mesAtual,CH:0,N:1,G:(mesAtual>=5&&mesAtual<=8&&regiaoChave==='SUL')?1:0,O:65,R:7,P:1.013,E:0.22};
   let dadosObtidos = false;
 
   try {
     const resGeo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(nomeCidade)}&country=BR&count=1`);
     const jsonGeo = await resGeo.json();
-    if (jsonGeo.results?.length > 0) {
-      const { latitude, longitude } = jsonGeo.results[0];
+    if (jsonGeo.results?.length>0) {
+      const {latitude,longitude} = jsonGeo.results[0];
       const resClima = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,precipitation_probability,wind_speed_10m&timezone=America/Sao_Paulo&forecast_days=1`);
       const jsonClima = await resClima.json();
       if (jsonClima.current) {
-        const atual = jsonClima.current;
-        const CH = atual.precipitation_probability >= 40 ? 1 : 0;
-        const N = (atual.wind_speed_10m < 15 && atual.relative_humidity_2m >= 40) ? 1 : 0;
-        const G = (atual.temperature_2m <= 5) ? 1 : 0;
-        const O = Math.max(35, Math.min(98, atual.relative_humidity_2m));
-        const R = Math.max(1, Math.min(20, atual.wind_speed_10m));
-        dadosCorrentes = { mes: mesAtual, CH, N, G, O, R, P:1.013, E:Math.max(0.01, Math.min(0.40, atual.temperature_2m/100)) };
+        const a = jsonClima.current;
+        const CH = a.precipitation_probability>=40?1:0;
+        const N = (a.wind_speed_10m<15 && a.relative_humidity_2m>=40)?1:0;
+        const G = a.temperature_2m<=5?1:0;
+        const O = Math.max(35,Math.min(98,a.relative_humidity_2m));
+        const R = Math.max(1,Math.min(20,a.wind_speed_10m));
+        dadosCorrentes = {mes:mesAtual,CH,N,G,O,R,P:1.013,E:Math.max(0.01,Math.min(0.40,a.temperature_2m/100))};
         dadosObtidos = true;
       }
     }
-  } catch {
-    console.log('Usando padrão da região');
-  }
+  } catch { console.log('Padrão da região'); }
 
-  const resultado = calcularCoracao(dadosCorrentes, regiaoChave);
-  salvarResumo({municipio:cidadeCompleta, regiao:nomeRegiao, mes:nomeMes, ...resultado, data:hoje.toLocaleDateString('pt-BR')});
+  const res = calcularCoracao(dadosCorrentes, regiaoChave);
+  salvarResumo({municipio:cidadeCompleta,regiao:nomeRegiao,mes:nomeMes,...res,data:hoje.toLocaleDateString('pt-BR')});
 
-  let html = `
-    <div class="relatorio">
-      <h2>📋 RELATÓRIO — ${cidadeCompleta}</h2>
-      <div class="relatorio-cabecalho">
-        <div class="relatorio-campo"><p>📍 Município</p><p>${cidadeCompleta}</p></div>
-        <div class="relatorio-campo"><p>🌱 Cultura</p><p>${nomeCultura}</p></div>
-        <div class="relatorio-campo"><p>🗺️ Região</p><p>${nomeRegiao}</p></div>
-        <div class="relatorio-campo"><p>📅 Período</p><p>30 Dias</p></div>
-      </div>
+  let html = `<div class="relatorio">
+    <h2>📋 RELATÓRIO — ${cidadeCompleta}</h2>
+    <div class="relatorio-cabecalho">
+      <div class="relatorio-campo"><p>📍 Município</p><p>${cidadeCompleta}</p></div>
+      <div class="relatorio-campo"><p>🌱 Cultura</p><p>${nomeCultura}</p></div>
+      <div class="relatorio-campo"><p>🗺️ Região</p><p>${nomeRegiao}</p></div>
+      <div class="relatorio-campo"><p>📅 Período</p><p>30 Dias</p></div>
+    </div>
+    <div class="destaque-confianca">
+      <p><strong>📐 Base:</strong> ${nomeMes} · ${nomeRegiao}: <strong>${res.I_PRESA.toFixed(2)}</strong></p>
+      <p class="confianca-maxima">✅ Confiança máxima de 95% — 5% de incerteza natural</p>
+      <p><strong>Resultado:</strong> <span class="${res.classeConf}">${res.classificacao}</span> · Confiança: ${res.CONFIANCA.toFixed(1)}%</p>
+    </div>
+    <div class="painel-alternancia">
+      <button class="btn-painel ativo" onclick="alternarPainel('agricultor')">👨‍🌾 Visão Prática</button>
+      <button class="btn-painel inativo" onclick="alternarPainel('tecnico')">🔬 Visão Técnica</button>
+    </div>
+    <div class="regra-ouro">
+      <h4>📐 CONDIÇÕES AVALIADAS:</h4>
+      <p>💨 Vento: 3 a 10 km/h | 💧 Umidade: ≥ 50% | 🌡️ Temperatura: ≤ 30°C | 🌧️ Chuva: &lt; 40%</p>
+      <p style="margin-top:8px;font-size:.9rem;color:var(--primaria)">📡 Dados ${dadosObtidos?'reais da região':'estimados'} · Padrão histórico: ${nomeRegiao}</p>
+    </div>
+    <h3>📅 PREVISÃO DIA A DIA — CHUVA POR PERÍODO</h3>
+    <table class="tabela-diaria"><thead><tr>
+      <th>Data</th>
+      <th class="horario-manha">🌅 Manhã</th>
+      <th class="horario-tarde">☀️ Tarde</th>
+      <th class="horario-noite">🌙 Noite</th>
+      <th>Janela</th>
+    </tr></thead><tbody>`;
 
-      <div class="destaque-confianca">
-        <p><strong>📐 Base de referência:</strong> ${nomeMes} · Região ${nomeRegiao}: <strong>${resultado.I_PRESA.toFixed(2)}</strong></p>
-        <p class="confianca-maxima">✅ Confiança máxima de 95%. Sempre existe 5% de incerteza natural.</p>
-        <p><strong>Resultado:</strong> <span class="${resultado.classeConf}">${resultado.classificacao}</span> · Confiança: ${resultado.CONFIANCA.toFixed(1)}% · Erro: ${resultado.ERRO.toFixed(1)}%</p>
-      </div>
-
-      <div class="painel-alternancia">
-        <button class="btn-painel ativo" onclick="alternarPainel('agricultor')">👨‍🌾 Visão — Ação Prática</button>
-        <button class="btn-painel inativo" onclick="alternarPainel('tecnico')">🔬 Visão — Dados Técnicos</button>
-      </div>
-
-      <div class="regra-ouro">
-        <h4>📐 CONDIÇÕES AVALIADAS:</h4>
-        <p>💨 Vento: 3 a 10 km/h | 💧 Umidade: ≥ 50% | 🌡️ Temperatura: ≤ 30°C | 🌧️ Chuva: &lt; 40%</p>
-        <p style="margin-top:8px;font-size:.9rem;color:var(--primaria)">📡 Dados ${dadosObtidos?'reais da região':'estimados'} · Padrão histórico: ${nomeRegiao}</p>
-      </div>
-
-      <h3>📅 PREVISÃO DIA A DIA — CHUVA POR PERÍODO</h3>
-      <table class="tabela-diaria">
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th class="horario-manha">🌅 Manhã</th>
-            <th class="horario-tarde">☀️ Tarde</th>
-            <th class="horario-noite">🌙 Noite</th>
-            <th>Janela</th>
-          </tr>
-        </thead>
-        <tbody>
-  `;
-
-  for (let dia = 1; dia <= 30; dia++) {
-    const data = new Date(hoje);
-    data.setDate(hoje.getDate() + dia);
+  for (let dia=1; dia<=30; dia++) {
+    const data = new Date(hoje); data.setDate(hoje.getDate()+dia);
     const diaSemana = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][data.getDay()];
     const diaMes = data.getDate();
-    const fase = Math.sin(dia / 4.5) * resultado.I_30;
-    const probManha = Math.max(5, Math.min(95, 35 + fase * 12 + Math.sin(dia * 1.2) * 18));
-    const probTarde = Math.max(5, Math.min(95, 30 + fase * 15 + Math.cos(dia * 0.9) * 22));
-    const probNoite = Math.max(5, Math.min(95, 40 + fase * 10 + Math.sin(dia * 1.5) * 15));
-    
-    const vento = Math.max(1, Math.min(18, 6 + Math.sin(dia * 0.7) * 4 + resultado.I_30 * 2));
-    const umidade = Math.max(30, Math.min(95, 55 + Math.cos(dia * 0.5) * 12));
-    const temp = Math.max(12, Math.min(34, 24 + Math.sin(dia * 0.4) * 4));
-    
-    const janela = verificarJanela(probManha, probTarde, probNoite, vento, umidade, temp);
-    
-    const manhaTxt = probManha < 40 ? '✅ Seco' : probManha <= 50 ? '⚠️ Úmido' : '🌧️ Chuva';
-    const tardeTxt = probTarde < 40 ? '✅ Seco' : probTarde <= 50 ? '⚠️ Úmido' : '🌧️ Chuva';
-    const noiteTxt = probNoite < 40 ? '✅ Seco' : probNoite <= 50 ? '⚠️ Úmido' : '🌧️ Chuva';
-
-    html += `
-          <tr>
-            <td>${diaSemana}, ${diaMes}/${mesAtual}</td>
-            <td class="horario-manha">${manhaTxt}<br><small>${probManha.toFixed(0)}%</small></td>
-            <td class="horario-tarde">${tardeTxt}<br><small>${probTarde.toFixed(0)}%</small></td>
-            <td class="horario-noite">${noiteTxt}<br><small>${probNoite.toFixed(0)}%</small></td>
-            <td><span class="motivo-bloqueio ${janela.classeJanela}">${janela.statusJanela}</span><br><small>${janela.motivo}</small></td>
-          </tr>
-    `;
+    const fase = Math.sin(dia/4.5)*res.I_30;
+    const probManha = Math.max(5,Math.min(95,35+fase*12+Math.sin(dia*1.2)*18));
+    const probTarde = Math.max(5,Math.min(95,30+fase*15+Math.cos(dia*0.9)*22));
+    const probNoite = Math.max(5,Math.min(95,40+fase*10+Math.sin(dia*1.5)*15));
+    const vento = Math.max(1,Math.min(18,6+Math.sin(dia*0.7)*4+res.I_30*2));
+    const umidade = Math.max(30,Math.min(95,55+Math.cos(dia*0.5)*12));
+    const temp = Math.max(12,Math.min(34,24+Math.sin(dia*0.4)*4));
+    const janela = verificarJanela(probManha,probTarde,probNoite,vento,umidade,temp);
+    const manhaTxt = probManha<40?'✅ Seco':probManha<=50?'⚠️ Úmido':'🌧️ Chuva';
+    const tardeTxt = probTarde<40?'✅ Seco':probTarde<=50?'⚠️ Úmido':'🌧️ Chuva';
+    const noiteTxt = probNoite<40?'✅ Seco':probNoite<=50?'⚠️ Úmido':'🌧️ Chuva';
+    html += `<tr>
+      <td>${diaSemana}, ${diaMes}/${mesAtual}</td>
+      <td class="horario-manha">${manhaTxt}<br><small>${probManha.toFixed(0)}%</small></td>
+      <td class="horario-tarde">${tardeTxt}<br><small>${probTarde.toFixed(0)}%</small></td>
+      <td class="horario-noite">${noiteTxt}<br><small>${probNoite.toFixed(0)}%</small></td>
+      <td><span class="motivo-bloqueio ${janela.classeJanela}">${janela.statusJanela}</span><br><small>${janela.motivo}</small></td>
+    </tr>`;
   }
 
-  html += `
-        </tbody>
-      </table>
-
-      <div class="dados-tecnicos">
-        <p>📊 Dados Técnicos — Visão Detalhada</p>
-        <p>Índice Base (Região): ${resultado.I_PRESA.toFixed(4)} | Índice Hoje: ${resultado.I_HOJE.toFixed(4)} | Índice 30d: ${resultado.I_30.toFixed(4)}</p>
-        <p>Confirmação (I_BUSCA): ${resultado.I_BUSCA.toFixed(4)} | Confronto: ${resultado.CONFRONTO.toFixed(4)} | Confiança: ${resultado.CONFIANCA.toFixed(2)}%</p>
-      </div>
-
-      <div class="rodape-aviso">
-        <p>⚠️ Dados estimados com base em padrões climáticos e API externa. Confirme sempre no local antes de qualquer operação.</p>
-      </div>
+  html += `</tbody></table>
+    <div class="dados-tecnicos">
+      <p>📊 Dados Técnicos</p>
+      <p>Índice Base: ${res.I_PRESA.toFixed(4)} | Hoje: ${res.I_HOJE.toFixed(4)} | 30d: ${res.I_30.toFixed(4)}</p>
+      <p>I_BUSCA: ${res.I_BUSCA.toFixed(4)} | Confronto: ${res.CONFRONTO.toFixed(4)} | Confiança: ${res.CONFIANCA.toFixed(2)}%</p>
     </div>
-  `;
+    <div class="rodape-aviso">
+      <p>📐 Fórmula: I = (CH×2 + N − G) ÷ 365 | I_BUSCA = (64×O÷R) × (P×E÷64)</p>
+      <p>Padrão: ${nomeMes} — ${nomeRegiao} · Dados ${dadosObtidos?'reais':'estimados por padrão'}</p>
+      <p>⚠️ Este relatório é orientação. Sempre confirme as condições no local antes de qualquer operação.</p>
+    </div>
+  </div>`;
 
   document.getElementById('relatorio-resultado').innerHTML = html;
+  aplicarEstadoPainel();
 }
 </script>
 </body>
